@@ -1,18 +1,21 @@
-import { Marcellus, Poppins } from "next/font/google";
+
+import { Italiana, Jost } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Script from "next/script";
 
-const marcellus = Marcellus({
+const italiana = Italiana({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400"],
+  weight: "400",
+  display: "swap",
 });
 
-const poppins = Poppins({
+const jost = Jost({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -57,16 +60,11 @@ export const metadata = {
 
   openGraph: {
     title: "Living Space Decor | Interior Designers in Noida & Greater Noida",
-
     description:
       "Premium interior design company offering modular kitchens, wardrobes, luxury home interiors, and turnkey solutions across Noida and Delhi NCR.",
-
     url: "https://livingspacedecor.in",
-
     siteName: "Living Space Decor",
-
     locale: "en_IN",
-
     type: "website",
   },
 };
@@ -75,7 +73,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${marcellus.variable} ${poppins.variable} h-full antialiased`}
+      className={`${italiana.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col">
         <LayoutWrapper>{children}</LayoutWrapper>
