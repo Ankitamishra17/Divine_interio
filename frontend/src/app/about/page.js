@@ -1,8 +1,8 @@
-
 import AboutHero from "@/components/about/About_Hero";
 import CompanyStats from "@/components/about/CompanyStats";
 import OurMissionVision from "@/components/about/OurMissionVision";
 import OurStory from "@/components/about/OurStory";
+import OurProcess from "@/components/about/OurProcess";
 
 export const metadata = {
   title: "About Divine Interiors | Luxury Interior Design Studio",
@@ -29,10 +29,10 @@ export default function AboutPage() {
   return (
     <main>
       <AboutHero />
-      <OurStory/>
-      <CompanyStats/>
-      <OurMissionVision/>
-      
+      <OurStory />
+      <CompanyStats />
+      <OurMissionVision />
+      <OurProcess />
     </main>
   );
 }
