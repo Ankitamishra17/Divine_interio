@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -11,22 +10,43 @@ import ConsultationModal from "@/components/common/ConsultationModal";
 import { AnimatedSearchBar } from "@/components/common/AnimatedSearchBar";
 
 const navLinks = [
-
-
   {
-    
     name: "Design Ideas",
     href: "/services/design-ideas",
     submenu: [
-      { name: "Living Room Designs", href: "/services/design-ideas/living-room-design" },
-      { name: "Kids Room Designs", href: "/services/design-ideas/kids-room-design" },
-      { name: "Modular Kitchen Designs", href: "/services/design-ideas/kitchen-design-ideas" },
+      {
+        name: "Living Room Designs",
+        href: "/services/design-ideas/living-room-design",
+      },
+      {
+        name: "Kids Room Designs",
+        href: "/services/design-ideas/kids-room-design",
+      },
+      {
+        name: "Modular Kitchen Designs",
+        href: "/services/design-ideas/kitchen-design-ideas",
+      },
       { name: "Mandir Designs", href: "/services/design-ideas/mandir-design" },
-      { name: "Dining Room Designs", href: "/services/design-ideas/dining-room-design" },
-      { name: "Bedroom Designs", href: "/services/design-ideas/bedroom-design" },
-      { name: "Bathroom Designs", href: "/services/design-ideas/bathroom-design" },
-      { name: "Home Office Design", href: "/services/design-ideas/home-office-design" },
-      { name: "Balcony & Terrace Designs", href: "/services/design-ideas/balcony-terrace-design" },
+      {
+        name: "Dining Room Designs",
+        href: "/services/design-ideas/dining-room-design",
+      },
+      {
+        name: "Bedroom Designs",
+        href: "/services/design-ideas/bedroom-design",
+      },
+      {
+        name: "Bathroom Designs",
+        href: "/services/design-ideas/bathroom-design",
+      },
+      {
+        name: "Home Office Design",
+        href: "/services/design-ideas/home-office-design",
+      },
+      {
+        name: "Balcony & Terrace Designs",
+        href: "/services/design-ideas/balcony-terrace-design",
+      },
     ],
   },
   {
@@ -47,8 +67,8 @@ const navLinks = [
   },
   { name: "Portfolio", href: "/portfolio" },
   { name: "Contact", href: "/contact" },
-    {  name: "Blog", href: "/blog" },
-
+  { name: "Blog", href: "/blog" },
+  { name: "About", href: "/about" },
 ];
 
 export default function Navbar() {
@@ -58,25 +78,21 @@ export default function Navbar() {
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState({});
   const [activeDropdown, setActiveDropdown] = useState(null);
 
-
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-
   // Open Free Consultation popup 5 seconds after website loads
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setShowConsultationModal(true);
-  }, 2000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowConsultationModal(true);
+    }, 2000);
 
-  return () => clearTimeout(timer);
-}, []);
+    return () => clearTimeout(timer);
+  }, []);
 
- 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -116,19 +132,19 @@ useEffect(() => {
           <div className="flex items-center justify-between gap-4 py-3 xl:py-3.5">
             {/* LEFT - LOGO */}
             <div className="justify-self-start w-full sm:w-auto h-18">
-                <Link
-                  href="/"
-                  className="flex items-center -mt-8 flex-shrink-0 group hover:opacity-80 transition-opacity"
-                >
-                  <Image
-                    src="/logo.png"
-                    alt="Living Space Decor"
-                    width={300}
-                    height={80}
-                    priority
-                    className="h-18 xl:h-30 2xl:h-28 w-auto object-contain"
-                  />
-                </Link>
+              <Link
+                href="/"
+                className="flex items-center -mt-8 flex-shrink-0 group hover:opacity-80 transition-opacity"
+              >
+                <Image
+                  src="/divine_logo.png"
+                  alt="Divine"
+                  width={300}
+                  height={80}
+                  priority
+                  className="h-18 xl:h-30 2xl:h-28 w-auto object-contain"
+                />
+              </Link>
             </div>
 
             {/* CENTER - SEARCH BAR */}
@@ -258,7 +274,10 @@ useEffect(() => {
             </nav>
 
             {/* ── DESKTOP RIGHT SPACER (keeps nav visually centered against logo width) ── */}
-            <div className="hidden lg:block flex-shrink-0 w-px" aria-hidden="true" />
+            <div
+              className="hidden lg:block flex-shrink-0 w-px"
+              aria-hidden="true"
+            />
 
             {/* ── MOBILE & TABLET HAMBURGER ── */}
             <div className="lg:hidden flex items-center gap-2 flex-shrink-0">
@@ -363,7 +382,9 @@ useEffect(() => {
                               >
                                 <motion.div
                                   animate={{
-                                    rotate: mobileSubmenuOpen[item.name] ? 180 : 0,
+                                    rotate: mobileSubmenuOpen[item.name]
+                                      ? 180
+                                      : 0,
                                   }}
                                   transition={{ duration: 0.2 }}
                                 >
