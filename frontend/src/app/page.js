@@ -7,6 +7,7 @@ import CTASection from "@/components/home/CTASection";
 import WhyChoose from "@/components/home/WhyChoose";
 import UpcomingProjects from "@/components/home/UpcomingProjects";
 import { getProjects } from "@/lib/serverApi";
+import Contact from "@/components/home/Contact";
 
 export default async function Home() {
 
@@ -17,13 +18,15 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      <Services />
+  
       <UpcomingProjects/>
        <Portfolio portfolio={projects} />
+           <Services />
       <WhyChoose />
       <TrustStrip />
       <CTASection />
       <Testimonials />
+      <Contact/>
     </>
   );
 }

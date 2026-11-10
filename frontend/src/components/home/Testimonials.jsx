@@ -1,21 +1,32 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Phone,
   MessageCircle,
   Clock,
 } from "lucide-react";
 
-const testimonials = [
-  // {
-  //   name: "Rohan Singh",
+/*
+  Palette (same as StatsMarquee)
+  Charcoal #292622 (wall) | Espresso #593719 (card) | Warm Gold #C18A35 (accents, hairlines)
+  Ivory #F7F3ED (text)    | Beige #E8DED0
 
-  //   review:`Had my full turnkey home interior done by them in Greater Noida West. On-time delivery and stayed within budget. Best interior designer company experience I’ve had.`,
-  // },
+  Why this was redesigned (the old version had real UX problems):
+  - Reviews are ~200 words, but the old carousel changed every 5 seconds, so nobody could finish one.
+    Autoplay is gone. People pick a review, or use Prev / Next, or swipe.
+  - 10px text on phones. Reviews are now 16-17px with a comfortable line length.
+  - A wall of text in one card. Each review now shows its first paragraph, with "Read full review" to expand.
+  - 13 tiny dots are hard to tap. They are replaced by a list of reviewers (a swipeable row on phones)
+    plus a "4 of 13" counter.
+  - The "Admit One" ticket is replaced by a plain contact panel with big tap targets.
+*/
+
+const testimonials = [
   {
     name: "Rohan Singh",
     review: `We recently got our home interiors done by Living Space Decor and had a really good experience with their team. From the initial discussion, they listened carefully to what we wanted and suggested designs that suited our space, style, and budget.
@@ -26,16 +37,8 @@ The work was completed professionally, and the team kept us updated during the p
 
 Overall, we are happy with how our home turned out. Living Space Decor did a great job of creating a modern and practical interior that works well for our family. We would recommend them to anyone looking for reliable home interior designers and interior design services.`,
   },
-
-  // {
-  //   name: "Aditi Kaptiyal",
-
-  //   review: `I had a wonderful experience with Living Space Decor. From start to finish, the team was professional, friendly, and very attentive to what I wanted. They really listened to my ideas and gave helpful suggestions that made the design even better.`,
-  // },
-
   {
     name: "Aditi Kaptiyal",
-
     review: `I had a wonderful experience with Living Space Decor, and I am extremely happy with the final outcome of my home interior project. From the very beginning, the team was professional, friendly, and genuinely interested in understanding my ideas and requirements. They patiently listened to my preferences and provided practical suggestions that enhanced the overall design while keeping everything functional and elegant. Their experience and attention to detail gave me complete confidence throughout the project.
 
 The planning process was smooth and well organised. Every area of my home was thoughtfully designed to maximise space and create a comfortable, modern living environment. The quality of materials, finishing, and craftsmanship was excellent, and every detail reflected their commitment to delivering high standards. The team worked efficiently and ensured that each stage of the project was completed with precision and care.
@@ -44,13 +47,6 @@ What impressed me the most was their transparency, communication, and dedication
 
 The final result has completely transformed my home into a stylish, functional, and welcoming space that my family truly enjoys. Friends and relatives have appreciated the beautiful interiors and excellent finish whenever they visit. I highly recommend Living Space Decor to anyone looking for reliable and experienced home interior professionals. Their creativity, quality workmanship, and customer-first approach make them a trusted choice, and I would happily choose their services again for future projects.`,
   },
-
-  // {
-  //   name: "Aakanksha Singh",
-
-  //   review:
-  //     "This company did a wonderful job, beyond my expectation, you can choose this company without having a second thought.",
-  // },
   {
     name: "Aakanksha Singh",
     review: `I recently chose Living Space Decor for my home interior project, and I am genuinely impressed with the quality of their work. From the very first meeting, the team listened carefully to my ideas, understood my requirements, and suggested practical solutions that perfectly suited my home and budget. They were professional, polite, and always willing to answer my questions throughout the project.
@@ -61,62 +57,24 @@ One thing I appreciated the most was their transparency and timely communication
 
 Now that the project is complete, my home looks modern, stylish, and much more functional than before. Friends and family have appreciated the beautiful interiors, and I am delighted with the transformation. Living Space Decor truly exceeded my expectations with their professionalism, creativity, and dedication. I would confidently recommend them to anyone looking for reliable home interior services. If you are planning to renovate or design your home, you can choose this company without a second thought because they genuinely care about delivering quality and customer satisfaction.`,
   },
-  // {
-  //   name: "SHOURYA",
-
-  //   review: "Wonderful services and great designs. Timely services provided!!",
-  // },
   {
     name: "SHOURYA",
-
     review: `I recently got my home interiors completed by Living Space Decor, and I am extremely happy with the overall experience. From the beginning, the team was professional, organised, and committed to delivering quality work. They carefully understood my requirements and provided creative ideas that perfectly matched my expectations while making the best use of the available space.
 
 The entire project was completed in a systematic manner, and every detail was executed with precision. The finishing quality, material selection, and overall craftsmanship were excellent. Every area of my home now looks modern, elegant, and well planned. It is clear that the team pays close attention to detail and focuses on delivering high-quality results.
 
 What impressed me the most was their punctuality and commitment to deadlines. They completed the project on time and kept me informed throughout every stage of the process. Their communication was clear, and they responded to all my queries with patience and professionalism. There were no surprises during the project, and everything was completed exactly as promised. The final outcome has completely transformed my home into a beautiful and comfortable living space. I appreciate the team's dedication, creativity, and customer-first approach. If anyone is looking for reliable interior designers who deliver excellent quality, modern designs, and timely service, I would highly recommend Living Space Decor. It was truly a wonderful experience, and I would happily choose them again for future projects.`,
   },
-  // {
-  //   name: "Dipanshu Rawat",
-
-  //   review: "Wonderful services and great designs. Timely services provided!!",
-  // },
   {
     name: "Dipanshu Rawat",
-
     review: `My experience with Living Space Decor has been excellent from start to finish. I hired them for my home interior project after hearing positive feedback, and they completely lived up to my expectations. The team was professional, experienced, and always ready to provide useful suggestions that improved both the appearance and functionality of my home.
 
 From the planning stage to the final execution, every step was handled with care and professionalism. They understood my preferences, respected my budget, and created a design that perfectly suited my lifestyle. The finishing quality, craftsmanship, and attention to detail were outstanding. Every room now looks elegant, organised, and thoughtfully designed.
 
-Another aspect that impressed me was their commitment to completing the project on schedule. They maintained excellent communication throughout the work, provided regular updates, and ensured that everything progressed smoothly. The installation and finishing work were completed neatly without compromising on quality. `,
+Another aspect that impressed me was their commitment to completing the project on schedule. They maintained excellent communication throughout the work, provided regular updates, and ensured that everything progressed smoothly. The installation and finishing work were completed neatly without compromising on quality.`,
   },
-  // {
-  //   name: "Aman Haldar",
-
-  //   review:
-  //     "My experience was very good, and good service provided by Living Space Decor.",
-  // },
-
-  // {
-  //   name: "Deepak Bainsla",
-
-  //   review:
-  //     "Awesome work done by their team at my home. #bestinteriordesigner in Noida",
-  // },
-  // {
-  //   name: "Grisha Bhardwaj",
-
-  //   review:
-  //     "I really liked the collection at this shop. Prices are reasonable and the service is friendly.",
-  // },
-  // {
-  //   name: "Vanz",
-
-  //   review: "Amazing experience! Worth trying!",
-  // },
-
   {
     name: "Aman Haldar",
-
     review: `I recently completed my home interior project with Living Space Decor, and the overall experience was excellent. From the initial consultation to the final handover, the team was professional, supportive, and highly experienced. They carefully listened to my ideas, understood my requirements, and suggested practical design solutions that perfectly suited my home. Every discussion was handled with patience, and they ensured that my preferences were included throughout the project.
 
 The work was completed with impressive attention to detail and high-quality craftsmanship. Every area of my home was planned efficiently, making the space feel more organised, functional, and elegant. The materials, finishing, and installation quality exceeded my expectations, and every stage of the project reflected their commitment to excellence.
@@ -125,10 +83,8 @@ What impressed me the most was their professionalism and timely execution. The t
 
 Now that the project is complete, my home looks modern, comfortable, and beautifully designed. Friends and family have appreciated the transformation, and I am extremely satisfied with the outcome. I highly recommend Living Space Decor to anyone looking for reliable home interior services. Their dedication, quality workmanship, and customer-focused approach truly make them a trusted choice. I would happily work with them again for future projects and confidently recommend them to anyone planning to renovate or design their home interiors.`,
   },
-
   {
     name: "Deepak Bainsla",
-
     review: `Living Space Decor transformed my home into a beautiful and functional living space, and I couldn't be happier with the results. From the beginning, the team demonstrated professionalism, creativity, and a clear understanding of my expectations. They carefully planned every area of the house and provided practical suggestions that enhanced both the appearance and usability of the space.
 
 The execution was smooth, and every detail was completed with precision and care. The finishing quality, craftsmanship, and overall design exceeded my expectations. Every room now feels more spacious, organised, and elegant. The team maintained high standards throughout the project and ensured that every aspect of the work reflected quality and attention to detail.
@@ -137,10 +93,8 @@ One of the things I appreciated most was their commitment to completing the proj
 
 The final outcome has received many compliments from friends and family, and I am delighted with the transformation. Living Space Decor truly delivers exceptional home interior solutions with excellent craftsmanship and reliable service. I highly recommend them to anyone looking for professional interior designers who focus on quality, timely delivery, and customer satisfaction. Without a doubt, they are one of the best interior design companies in Noida, and I would gladly choose them again for future home improvement projects.`,
   },
-
   {
     name: "Grisha Bhardwaj",
-
     review: `I had a wonderful experience with Living Space Decor while planning my home interiors. From the first consultation, the team was friendly, knowledgeable, and genuinely interested in understanding my requirements. They carefully explained different design options, materials, and finishes, helping me make informed decisions without any pressure.
 
 What impressed me most was the wide range of modern designs and thoughtful ideas they offered. Every recommendation was practical and tailored to my preferences, making the entire planning process enjoyable. The team maintained excellent communication throughout the project and ensured that every detail was executed with care and precision.
@@ -149,10 +103,8 @@ The quality of workmanship and finishing was outstanding. Every corner of my hom
 
 The overall value for money was excellent, considering the quality of work and level of service provided. The team remained approachable throughout the project and handled every request with professionalism and patience. I am extremely happy with the final outcome, and my family loves the transformation. I highly recommend Living Space Decor to anyone looking for stylish, practical, and high-quality home interiors. Their creativity, attention to detail, and customer-first approach make them a reliable choice for anyone planning to redesign or renovate their home.`,
   },
-
   {
     name: "Vanz",
-
     review: `Working with Living Space Decor was an amazing experience from beginning to end. The team was professional, organised, and committed to delivering high-quality home interiors that perfectly matched my expectations. They took the time to understand my ideas, budget, and lifestyle before creating a design that was both functional and visually appealing.
 
 Throughout the project, the team maintained excellent communication and kept me informed about every stage of the work. They completed each task with great attention to detail and ensured that the quality of workmanship remained consistently high. The finishing, materials, and overall execution exceeded my expectations, giving my home a fresh, modern, and elegant appearance.
@@ -161,26 +113,8 @@ One of the biggest advantages of working with them was their punctuality and ded
 
 The final result completely transformed my home into a comfortable and stylish living space that my family truly enjoys. I have received many compliments from visitors, and I am extremely satisfied with the quality of work delivered. I highly recommend Living Space Decor to anyone looking for reliable, experienced, and creative interior designers. Their commitment to quality, customer satisfaction, and timely delivery makes them an excellent choice for any home interior project. It was truly an amazing experience and definitely worth choosing their services.`,
   },
-
-  // {
-  //   name: "Mohmd Shehwaz",
-
-  //   review: "Best in terms of everything in their work.",
-  // },
-  // {
-  //   name: "Paras Pandey",
-
-  //   review: "This is a very good work. He has made my house very beautiful.",
-  // },
-  // {
-  //   name: "SHIVAM MISHRA",
-
-  //   review: "It's one of the best places for interior works.👍🏻",
-  // },
-
   {
     name: "Mohmd Shehwaz",
-
     review: `I recently completed my home interior project with Living Space Decor, and I am extremely satisfied with the entire experience. From the initial consultation to the final handover, the team demonstrated professionalism, creativity, and a strong commitment to quality. They carefully understood my requirements and suggested practical design ideas that perfectly suited my home and lifestyle. Every detail was planned thoughtfully, ensuring that each space was both functional and visually appealing.
 
 The quality of workmanship was outstanding. Every room was finished with great attention to detail, and the materials used reflected their high standards. The entire project was completed neatly and efficiently, giving my home a modern, elegant, and well-organised look. Throughout the process, the team maintained clear communication and kept me updated on the progress. They completed the work within the promised timeline and handled every request with patience and professionalism.
@@ -189,10 +123,8 @@ What impressed me the most was their dedication to customer satisfaction. They p
 
 I highly recommend Living Space Decor to anyone looking for reliable and experienced home interior professionals. Their excellent craftsmanship, timely execution, and customer-first approach truly make them stand out. In every aspect of their work, they maintain high standards of quality and professionalism. I would happily choose them again for future interior projects and confidently recommend their services to others.`,
   },
-
   {
     name: "Paras Pandey",
-
     review: `Living Space Decor has completely transformed my home, and I am delighted with the final outcome. From the first meeting, the team was friendly, professional, and focused on understanding my ideas and requirements. They suggested practical solutions that enhanced both the appearance and functionality of every room while ensuring that the design suited my lifestyle and budget.
 
 The project was executed with excellent planning and attention to detail. Every stage of the work reflected their dedication and experience. The quality of materials, finishing, and craftsmanship exceeded my expectations, and every corner of my home now looks elegant, organised, and modern. The team worked efficiently, maintained cleanliness during the project, and ensured that everything was completed according to the agreed timeline.
@@ -201,10 +133,8 @@ One of the things I appreciated most was their transparency and commitment to cu
 
 Now my home feels brighter, more comfortable, and beautifully designed. My family and friends have appreciated the transformation and often compliment the interiors whenever they visit. I highly recommend Living Space Decor to anyone planning a home interior project. Their professionalism, creativity, and high-quality workmanship make them a trusted choice. I am extremely happy with the results and would gladly recommend them to anyone looking for reliable and experienced interior designers who truly care about delivering exceptional work.`,
   },
-
   {
     name: "SHIVAM MISHRA",
-
     review: `I had an excellent experience with Living Space Decor for my home interior project. From the beginning, the team impressed me with their professionalism, creativity, and attention to detail. They carefully listened to my requirements, understood my vision, and provided practical suggestions that improved both the functionality and appearance of my home. Their planning process was organised, and they ensured that every design decision matched my expectations.
 
 The execution of the project was smooth and well managed. Every room was completed with outstanding craftsmanship and premium-quality finishing. The materials used were durable, and the final result gave my home a stylish, modern, and elegant look. The team maintained excellent communication throughout the project and regularly updated me on the progress. They respected the agreed timeline and completed the work without unnecessary delays.
@@ -215,256 +145,295 @@ I highly recommend Living Space Decor to anyone looking for professional home in
   },
 ];
 
-const AUTOPLAY_MS = 5000;
+const EASE = [0.22, 1, 0.36, 1];
+
+// "SHIVAM MISHRA" -> "Shivam Mishra"
+const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+
+// First sentence, used as the one-line preview in the reviewer list
+const firstSentence = (s) => {
+  const m = s.match(/^.*?[.!?](\s|$)/);
+  return (m ? m[0] : s).trim();
+};
 
 export default function Testimonials() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const reduce = useReducedMotion();
 
-  const dragStartX = useRef(0);
-  const dragging = useRef(false);
+  const itemRefs = useRef([]);
+  const mounted = useRef(false);
 
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setDirection(1);
-      setActive((prev) => (prev + 1) % testimonials.length);
-    }, AUTOPLAY_MS);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const goTo = (index) => {
-    setDirection(index > active ? 1 : -1);
-    setActive(index);
-  };
-
-  const goNext = () => {
-    setDirection(1);
-    setActive((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const goPrev = () => {
-    setDirection(-1);
-    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const handleDragStart = (e) => {
-    dragging.current = true;
-    dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX;
-    setIsPaused(true);
-  };
-
-  const handleDragEnd = (e) => {
-    if (!dragging.current) return;
-    dragging.current = false;
-    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const delta = endX - dragStartX.current;
-    if (delta > 50) goPrev();
-    else if (delta < -50) goNext();
-  };
-
-  const handleMouseLeave = () => {
-    if (dragging.current) {
-      handleDragEnd({ clientX: dragStartX.current });
-    }
-    setIsPaused(false);
-  };
-
+  const total = testimonials.length;
   const current = testimonials[active];
+  const paragraphs = current.review.split("\n\n");
+  const lead = paragraphs[0];
+  const rest = paragraphs.slice(1);
+  const pull = firstSentence(lead); // big pull-quote
+  const leadBody = lead.slice(pull.length).trim(); // remainder of the first paragraph
+
+  const select = (i) => {
+    if (i === active) return;
+    setDirection(i > active ? 1 : -1);
+    setActive(i);
+    setExpanded(false);
+  };
+  const next = () => {
+    setDirection(1);
+    setActive((p) => (p + 1) % total);
+    setExpanded(false);
+  };
+  const prev = () => {
+    setDirection(-1);
+    setActive((p) => (p - 1 + total) % total);
+    setExpanded(false);
+  };
+
+  // Keep the selected reviewer visible in the list / row (skip first render so the page doesn't jump)
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    itemRefs.current[active]?.scrollIntoView({
+      block: "nearest",
+      inline: "center",
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }, [active, reduce]);
 
   const variants = {
-    enter: (dir) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    enter: (dir) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir > 0 ? 40 : -40 }),
     center: { opacity: 1, x: 0 },
-    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
+    exit: (dir) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir > 0 ? -40 : 40 }),
   };
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-[#F7F2EB] overflow-hidden">
-      {/* HEADER */}
-      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center mb-10 md:mb-14">
-        <p className="flex items-center justify-center gap-3 text-[10px] tracking-[.28em] uppercase text-[#C8972B] font-medium mb-3">
-          <span className="w-6 h-px bg-[#C8972B]" />
-          Client Stories
-          <span className="w-6 h-px bg-[#C8972B]" />
-        </p>
-        <h2 className="font-heading text-4xl md:text-[46px] font-medium leading-[1.1] text-[#2A1506]">
-          Loved by Homeowners{" "}
-          <em className="text-[#C8972B] not-italic">Across NCR</em>
-        </h2>
-      </div>
-
-      {/* SINGLE BIG CARD */}
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div
-          className="relative select-none"
-          onMouseDown={handleDragStart}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={handleDragStart}
-          onTouchEnd={handleDragEnd}
-          onMouseEnter={() => setIsPaused(true)}
-        >
-          {/* Prev / Next arrows — desktop */}
-          <button
-            type="button"
-            aria-label="Previous testimonial"
-            onClick={goPrev}
-            className="hidden sm:flex items-center justify-center absolute -left-5 md:-left-14 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white border border-[#3D1F0D]/15 text-[#3D1F0D] shadow-sm hover:bg-[#3D1F0D] hover:text-white transition-colors duration-300"
+    <section
+      className="bg-[#292622] py-16 md:py-20 lg:py-24"
+      aria-labelledby="testimonials-heading"
+    >
+      <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
+        {/* ── Heading ── */}
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <h2
+            id="testimonials-heading"
+            className="max-w-2xl font-heading text-4xl font-medium leading-[1.08] text-[#F7F3ED] sm:text-5xl lg:text-6xl"
           >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            type="button"
-            aria-label="Next testimonial"
-            onClick={goNext}
-            className="hidden sm:flex items-center justify-center absolute -right-5 md:-right-14 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white border border-[#3D1F0D]/15 text-[#3D1F0D] shadow-sm hover:bg-[#3D1F0D] hover:text-white transition-colors duration-300"
-          >
-            <ChevronRight size={18} />
-          </button>
+            Loved by homeowners across NCR
+          </h2>
+          <div className="flex items-center gap-3 md:pb-2">
+            <span className="flex gap-0.5 text-lg text-[#C18A35]" aria-hidden="true">
+              ★★★★★
+            </span>
+            <p className="text-sm text-[#F7F3ED]/70">{total} client reviews</p>
+          </div>
+        </div>
 
-          <div className="relative overflow-hidden bg-white border border-[#C8972B]/15 shadow-md rounded-xl px-6 py-10 sm:px-10 sm:py-12 md:px-16 md:py-14 min-h-[360px] sm:min-h-[340px] flex items-center">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
+        {/* ── Reviewer list + review ── */}
+        <div className="mt-10 grid gap-5 lg:mt-14 lg:grid-cols-[340px_1fr] lg:gap-10">
+          {/* Reviewers: swipeable row on phones, list that matches the panel height on desktop */}
+          <div className="relative lg:min-h-[560px]">
+          <div
+            aria-label="Choose a review"
+            className="-mx-5 flex snap-x gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:absolute lg:inset-0 lg:flex-col lg:gap-1 lg:overflow-y-auto lg:overflow-x-hidden lg:px-0 lg:pb-0 lg:pr-2 lg:[scrollbar-color:#C18A35_transparent] lg:[scrollbar-width:thin]"
+          >
+            {testimonials.map((t, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={t.name}
+                  ref={(el) => (itemRefs.current[i] = el)}
+                  type="button"
+                  onClick={() => select(i)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`shrink-0 snap-start rounded-sm border px-3.5 py-2.5 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] lg:w-full lg:py-3.5 ${
+                    isActive
+                      ? "border-[#C18A35] bg-[#593719]"
+                      : "border-[#C18A35]/20 bg-transparent hover:border-[#C18A35]/60 hover:bg-[#593719]/40 lg:border-transparent"
+                  }`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-heading text-base font-semibold transition-colors duration-300 ${
+                        isActive ? "bg-[#C18A35] text-[#292622]" : "bg-[#593719] text-[#C18A35]"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {t.name.charAt(0)}
+                    </span>
+                    <span className="whitespace-nowrap text-sm font-medium text-[#F7F3ED] lg:whitespace-normal">
+                      {titleCase(t.name)}
+                    </span>
+                  </span>
+                  <span className="mt-1.5 hidden pl-11 text-[13px] leading-snug text-[#F7F3ED]/60 line-clamp-1 lg:block">
+                    {firstSentence(t.review)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          </div>
+
+          {/* Review panel */}
+          <div className="relative flex flex-col overflow-hidden rounded-sm border border-[#C18A35]/25 bg-[#593719] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.6)] lg:min-h-[560px]">
+            {/* gold top edge + oversized quote mark (decoration) */}
+            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute right-4 top-2 select-none font-heading text-[160px] leading-none text-[#C18A35]/10 sm:right-8 sm:text-[220px]"
+            >
+              “
+            </span>
+
+            <AnimatePresence mode="wait" custom={direction} initial={false}>
+              <motion.article
                 key={active}
                 custom={direction}
                 variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="w-full text-center"
+                transition={{ duration: 0.35, ease: EASE }}
+                drag="x"
+                dragDirectionLock
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x > 80) prev();
+                  else if (info.offset.x < -80) next();
+                }}
+                className="relative flex flex-1 flex-col px-6 pb-8 pt-9 sm:px-10 sm:pt-11 lg:px-14"
+                aria-live="polite"
               >
-                {/* Quote mark */}
-                <div className="mx-auto mb-5 w-14 h-14 rounded-full bg-[#C8972B]/10 border border-[#C8972B]/20 flex items-center justify-center">
-                  <span className="text-[#C8972B] text-3xl leading-none">
-                    ❝
-                  </span>
-                </div>
-
-                {/* Stars — every review is 5-star */}
-                <div className="flex justify-center gap-1 mb-6">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className="text-[#C8972B] text-base">
-                      ★
-                    </span>
-                  ))}
-                </div>
-
-                {/* Review */}
-                <p className="font-heading italic text-[#2A1506]/85 text-[10px] sm:text-[10px] md:text-xl lg:text-base leading-relaxed max-w-6xl mx-auto">
-                  "{current.review}"
-                </p>
-
-                {/* Author */}
-                <div className="flex flex-col items-center gap-3 mt-8 pt-6 border-t border-[#C8972B]/10 max-w-xs mx-auto">
-                  <div className="w-12 h-12 rounded-full bg-[#C8972B] text-white flex items-center justify-center font-heading text-lg font-semibold">
+                {/* Who said it */}
+                <header className="flex items-center gap-4">
+                  <span
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C18A35] font-heading text-xl font-semibold text-[#292622]"
+                    aria-hidden="true"
+                  >
                     {current.name.charAt(0)}
-                  </div>
+                  </span>
                   <div>
-                    <h3 className="font-medium text-[#2A1506] text-sm sm:text-base">
-                      {current.name}
-                    </h3>
+                    <p className="text-base font-medium text-[#F7F3ED]">{titleCase(current.name)}</p>
+                    <p className="mt-0.5 text-sm text-[#C18A35]" aria-label="5 out of 5 stars">
+                      <span aria-hidden="true">★★★★★</span>
+                    </p>
                   </div>
+                </header>
+
+                {/* Pull-quote: the first sentence, big */}
+                <blockquote className="mt-8 max-w-[34ch] font-heading text-[26px] font-medium leading-[1.2] text-[#F7F3ED] sm:max-w-[40ch] sm:text-[30px] lg:text-[34px]">
+                  “{pull}”
+                </blockquote>
+
+                {/* The rest of the review */}
+                <div className="mt-7 max-w-[64ch] space-y-4 border-l border-[#C18A35]/40 pl-5 text-base leading-[1.8] text-[#F7F3ED]/85 sm:text-[17px]">
+                  {leadBody && <p>{leadBody}</p>}
+
+                  <AnimatePresence initial={false}>
+                    {expanded && (
+                      <motion.div
+                        key="rest"
+                        initial={reduce ? false : { height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: EASE }}
+                        className="space-y-4 overflow-hidden"
+                      >
+                        {rest.map((para, i) => (
+                          <p key={i}>{para}</p>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
+
+                {rest.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setExpanded((v) => !v)}
+                    aria-expanded={expanded}
+                    className="mt-3 inline-flex min-h-11 items-center gap-1.5 self-start text-sm font-semibold text-[#C18A35] transition-colors hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
+                  >
+                    {expanded ? "Show less" : "Read full review"}
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                )}
+              </motion.article>
             </AnimatePresence>
+
+            {/* Controls + progress line */}
+            <div className="relative mt-auto border-t border-[#C18A35]/25">
+              <span
+                aria-hidden="true"
+                className="absolute -top-px left-0 h-[2px] bg-[#C18A35] transition-all duration-500"
+                style={{ width: `${((active + 1) / total) * 100}%` }}
+              />
+              <div className="flex items-center justify-between px-6 py-4 sm:px-10 lg:px-14">
+                <p className="text-sm tabular-nums text-[#F7F3ED]/70">
+                  {active + 1} of {total}
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    aria-label="Previous review"
+                    onClick={prev}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next review"
+                    onClick={next}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-8 flex-wrap px-4">
-          {testimonials.map((t, index) => (
-            <button
-              key={t.name}
-              type="button"
-              aria-label={`Show testimonial from ${t.name}`}
-              onClick={() => {
-                goTo(index);
-                setIsPaused(true);
-              }}
-              className={`h-[6px] rounded-full transition-all duration-300 ${
-                active === index
-                  ? "w-6 bg-[#C8972B]"
-                  : "w-[6px] bg-[#3D1F0D]/20 hover:bg-[#3D1F0D]/40"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* CTA — "consultation ticket" */}
-      <div className="mt-16 md:mt-20 px-5">
-        <div className="max-w-3xl mx-auto">
-          <div className="relative flex flex-col sm:flex-row bg-white rounded-2xl shadow-[0_8px_30px_rgba(61,31,13,0.08)] border border-[#3D1F0D]/10">
-            {/* Main stub */}
-            <div className="flex-1 px-8 py-10 sm:px-10 sm:py-12 text-center sm:text-left">
-              <p className="flex items-center justify-center sm:justify-start gap-3 text-[10px] tracking-[.28em] uppercase text-[#C8972B] font-medium mb-4">
-                <span className="w-6 h-px bg-[#C8972B]" />
-                Free Consultation
-              </p>
-              <h2 className="font-heading text-3xl sm:text-[34px] font-medium text-[#2A1506] leading-[1.15]">
-                Looking for Interior Designers in Noida?
-              </h2>
-              <p className="mt-4 text-[#2A1506]/55 text-[15px] leading-relaxed max-w-sm mx-auto sm:mx-0">
-                Book a free consultation today and transform your dream home
-                with Living Space Decor.
-              </p>
-
-              <div className="mt-8 flex items-center justify-center sm:justify-start gap-2 text-[#6E6258] text-[11px] tracking-[0.08em] uppercase">
-                <Clock size={13} className="text-[#C8972B]" />
-                <span>Mon – Sun · 10 AM – 7 PM</span>
-              </div>
-            </div>
-
-            {/* Perforated divider with punch-hole notches */}
-            <div className="relative hidden sm:flex flex-col items-center justify-center w-0">
-              <span className="absolute -top-3 w-6 h-6 rounded-full bg-[#F7F2EB]" />
-              <span className="absolute -bottom-3 w-6 h-6 rounded-full bg-[#F7F2EB]" />
-              <span className="h-full w-px border-l-2 border-dashed border-[#3D1F0D]/15" />
-            </div>
-            <div className="sm:hidden relative flex items-center justify-center h-0">
-              <span className="absolute -left-3 w-6 h-6 rounded-full bg-[#F7F2EB]" />
-              <span className="absolute -right-3 w-6 h-6 rounded-full bg-[#F7F2EB]" />
-              <span className="w-full h-px border-t-2 border-dashed border-[#3D1F0D]/15" />
-            </div>
-
-            {/* Ticket stub — call action */}
-            <div className="relative flex flex-col items-center justify-center gap-3 px-8 py-10 sm:py-12 sm:w-[240px] bg-[#F5EBE0] rounded-b-2xl sm:rounded-r-2xl sm:rounded-bl-none">
-              <span className="flex items-center justify-center w-12 h-12 rounded-full bg-[#3D1F0D] text-[#C8972B]">
-                <Phone size={18} />
-              </span>
-              <div className="text-center">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#6E6258]">
-                  Admit One Enquiry
-                </p>
-                <p className="font-heading text-lg font-medium text-[#2A1506] mt-1">
-                  +91 88266 06869
-                </p>
-              </div>
-              <a
-                href="tel:+918826606869"
-                className="mt-1 inline-flex items-center gap-2 bg-[#3D1F0D] text-white px-6 py-3 rounded text-[12px] tracking-[0.1em] uppercase font-medium hover:bg-[#B8851F] transition-colors duration-300"
-              >
-                Call Now
-                <ChevronRight size={14} />
-              </a>
-            </div>
+        {/* ── Contact panel ── */}
+        <div className="mt-16 grid gap-8 rounded-sm border border-[#C18A35]/25 bg-[#593719]/35 px-6 py-8 sm:px-10 sm:py-10 md:mt-20 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-14">
+          <div>
+            <h3 className="max-w-xl font-heading text-3xl font-medium leading-[1.15] text-[#F7F3ED] sm:text-4xl">
+              Looking for interior designers in Noida?
+            </h3>
+            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#F7F3ED]/70">
+              Book a free consultation today and transform your dream home with Living Space Decor.
+            </p>
+            <p className="mt-5 flex items-center gap-2 text-sm text-[#F7F3ED]/65">
+              <Clock size={15} className="text-[#C18A35]" aria-hidden="true" />
+              Open every day, 10 AM – 7 PM
+            </p>
           </div>
 
-          {/* Secondary link */}
-          <p className="text-center mt-6 text-[13px] text-[#6E6258]">
-            Prefer messaging?{" "}
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+            <a
+              href="tel:+918826606869"
+              className="group inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#C18A35] px-7 text-[15px] font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+            >
+              <Phone size={17} aria-hidden="true" />
+              Call +91 88266 06869
+            </a>
             <a
               href="https://wa.me/918826606869"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[#C8972B] font-medium hover:underline"
+              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm border border-[#F7F3ED]/40 px-7 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
             >
-              <MessageCircle size={13} />
-              WhatsApp us instead
+              <MessageCircle size={17} aria-hidden="true" />
+              WhatsApp us
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </section>

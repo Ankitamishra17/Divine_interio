@@ -1,74 +1,45 @@
-// "use client";
-
-// /**
-//  * LATEST / UPCOMING PROJECTS — 4-card row section
-//  * Stack: Next.js (App Router) + Tailwind + JS
-//  *
-//  * Palette:
-//  * Espresso Brown #3D1F0D  – primary brand / dark text
-//  * Warm Gold      #C8972B  – luxury accent
-//  * Warm Cream     #F5EBE0  – page background
-//  * Pure White     #FFFFFF  – card surface
-//  * Charcoal       #2C2C2C  – paragraph text
-//  *
-//  * Fonts:
-//  * Marcellus (display/headings) + Poppins (body/labels)
-//  */
-
-// const PROJECTS = [
-//   {
-//     id: "01",
-//     title: "Modular Kitchen Design",
-//     img: "/image/kitchen_design12.webp",
-//     alt: "Premium modular kitchen with under-cabinet accent lighting",
-//   },
-//   {
-//     id: "02",
-//     title: "Kids Room Design",
-//     img: "/image/kids_room4.webp",
-//     alt: "Warmly lit modern kids room interior",
-//   },
-//   {
-//     id: "03",
-//     title: "Dining Room Design",
-//     img: "/image/dining_room1.webp",
-//     alt: "Elegant dining room with warm cove accent lighting",
-//   },
-//   {
-//     id: "04",
-//     title: "Wardrobe Design",
-//     img: "/image/wardrobe_design.webp",
-//     alt: "Luxury wardrobe room with LED profile lighting",
-//   },
-// ];
-
-
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const BACKEND_URL = API_URL?.replace(/\/api\/?$/, "");
+/*
+  Palette
+  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
+
+  Layout: clean SPLIT. Text on the left, one photo on the right (a soft beige block sits
+  behind it for depth). Compact, no heavy frame. Works with 1 project (your data now)
+  and up to 4 (arrows, dots, swipe, arrow keys).
+*/
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const BACKEND_URL = API_URL.replace(/\/api\/?$/, "");
+const PLACEHOLDER = "/image/placeholder.webp";
+
+// Swap to the placeholder once; stops an endless error loop if the placeholder is missing too
+const handleImageError = (e) => {
+  e.currentTarget.onerror = null;
+  e.currentTarget.src = PLACEHOLDER;
+};
+
+const arrowBtn =
+  "flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[#593719]/30 text-[#593719] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]";
 
 export default function ProjectsSection() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(0);
+  const touchX = useRef(null);
 
   useEffect(() => {
     const fetchUpcomingProjects = async () => {
       try {
-        const response = await fetch(
-          `${API_URL}/upcoming-projects/latest`,
-          {
-            cache: "no-store",
-          }
-        );
-
+        const response = await fetch(`${API_URL}/upcoming-projects/latest`, {
+          cache: "no-store",
+        });
         const data = await response.json();
-
-        console.log("Upcoming Projects API Response:", data);
-
         if (response.ok && data.success) {
           setProjects(data.projects || []);
         } else {
@@ -81,110 +52,151 @@ export default function ProjectsSection() {
         setLoading(false);
       }
     };
-
     fetchUpcomingProjects();
   }, []);
 
   const getImageUrl = (imagePath) => {
-    if (!imagePath) {
-      return "/image/placeholder.webp";
-    }
-
-    if (imagePath.startsWith("http")) {
-      return imagePath;
-    }
-
+    if (!imagePath) return PLACEHOLDER;
+    if (imagePath.startsWith("http")) return imagePath;
     return `${BACKEND_URL}${imagePath}`;
   };
 
+  const items = projects.slice(0, 4);
+  const count = items.length;
+  const multiple = count > 1;
+  const current = items[active];
+  const go = (dir) => setActive((a) => (a + dir + count) % count);
+
+  const Head = (
+    <div>
+      <h2 className="font-heading text-4xl font-medium leading-[1.1] text-[#292622] md:text-5xl xl:text-6xl">
+        New trending designs
+      </h2>
+      <p className="mt-4 max-w-md text-base leading-relaxed text-[#292622]/70">
+        Fresh ideas for your next project, picked from our latest work.
+      </p>
+    </div>
+  );
+
+  /* Loading: skeleton in the same split layout */
   if (loading) {
     return (
-      <section className="bg-[#F5EBE0] py-24 px-6 text-center">
-        Loading projects...
+      <section className="bg-[#F7F3ED] py-16 md:py-24" aria-busy="true" aria-label="Loading design">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 xl:px-12">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-5">{Head}</div>
+            <div className="aspect-[4/3] animate-pulse rounded-sm bg-[#E8DED0] lg:col-span-7" />
+          </div>
+        </div>
       </section>
     );
   }
 
-  if (projects.length === 0) {
-    return null;
-  }
+  if (!current) return null;
 
   return (
-    <section className="relative bg-[#F5EBE0] py-24 px-6 sm:px-10 lg:px-16 selection:bg-[#3D1F0D] selection:text-[#F5EBE0]">
-      <div className="max-w-7xl mx-auto font-poppins">
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 border-b border-[#3D1F0D]/10 pb-8">
-          <div>
-            <p className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[#C8972B] font-semibold mb-2">
-              <span className="w-6 h-px bg-[#C8972B]" />
-              {/* Upcoming Projects */} Trending Design
-            </p>
+    <section
+      className="bg-[#F7F3ED] py-16 selection:bg-[#593719] selection:text-[#F7F3ED] md:py-24"
+      onKeyDown={(e) => {
+        if (!multiple) return;
+        if (e.key === "ArrowRight") go(1);
+        if (e.key === "ArrowLeft") go(-1);
+      }}
+    >
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 xl:px-12">
+        {/* Phones: heading, photo, details. Desktop: text left, photo right. */}
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-10">
+          {/* heading */}
+          <div className="lg:col-span-5 lg:row-start-1 lg:self-end">{Head}</div>
 
-            <h2 className="font-marcellus text-4xl sm:text-5xl text-[#3D1F0D] tracking-wide mt-2">
-              {/* Our Upcoming Projects */} New Trending Design
-            </h2>
+          {/* photo */}
+          <div className="relative lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
+            {/* soft beige block behind the photo, for depth */}
+            <span
+              className="absolute -bottom-4 -left-4 hidden h-3/4 w-3/4 bg-[#E8DED0] sm:block lg:-bottom-6 lg:-left-6"
+              aria-hidden="true"
+            />
+            <Link
+              href={`/upcoming-project/${current.id}`}
+              aria-label={`View ${current.title}`}
+              onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (!multiple || touchX.current === null) return;
+                const dx = e.changedTouches[0].clientX - touchX.current;
+                if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+                touchX.current = null;
+              }}
+              className="group relative block aspect-[4/3] overflow-hidden rounded-sm bg-[#E8DED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+            >
+              {items.map((project, i) => (
+                <img
+                  key={project.id}
+                  src={getImageUrl(project.image)}
+                  alt={i === active ? project.alt || project.title || "Interior design project" : ""}
+                  aria-hidden={i !== active}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  onError={handleImageError}
+                  className={`absolute inset-0 h-full w-full object-cover transition-all duration-[900ms] ease-out motion-reduce:transition-none group-hover:scale-[1.04] ${
+                    i === active ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
+            </Link>
           </div>
 
-          <p className="text-[#6B6B6B] max-w-sm text-sm leading-relaxed font-light">
-            A meticulous showcase of spaces we are currently transforming,
-            custom engineering, and finishing to an absolute luxury standard.
-          </p>
-        </div>
+          {/* project details + actions */}
+          <div className="lg:col-span-5 lg:row-start-2 lg:self-start">
+            <span className="mb-5 block h-[3px] w-12 bg-[#C18A35]" aria-hidden="true" />
+            <p className="text-sm text-[#292622]/60">Latest design</p>
+            <h3 className="mt-1 font-heading text-2xl leading-tight text-[#292622] sm:text-3xl">
+              {current.title}
+            </h3>
 
-        {/* PROJECT CARDS */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {projects.slice(0, 4).map((project, index) => {
-            const projectId = project.id;
-
-            const imageUrl = getImageUrl(project.image);
-
-            return (
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
               <Link
-                key={projectId}
-                href={`/upcoming-project/${projectId}`}
-                className="relative block h-[280px] sm:h-[420px] lg:h-[460px] w-full overflow-hidden bg-[#F0E6D8] group cursor-pointer"
+                href={`/upcoming-project/${current.id}`}
+                className="inline-flex h-12 items-center gap-2 rounded-sm bg-[#593719] px-7 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
               >
-                {/* IMAGE */}
-                <div className="absolute inset-0 w-full h-full overflow-hidden">
-                  <img
-                    className="block h-full w-full object-cover grayscale-[15%] sepia-[5%] transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0 group-hover:sepia-0"
-                    src={imageUrl}
-                    alt={
-                      project.alt ||
-                      project.title ||
-                      "Upcoming interior project"
-                    }
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.src = "/image/placeholder.webp";
-                    }}
-                  />
-                </div>
-
-                {/* OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3D1F0D]/90 via-[#3D1F0D]/30 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-95" />
-
-                {/* TOP GOLD LINE */}
-                <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-[#C8972B]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* NUMBER */}
-                <span className="font-marcellus pointer-events-none absolute right-4 top-2 select-none text-4xl sm:text-5xl font-medium tracking-tight text-[#F5EBE0]/10 transition-colors duration-500 group-hover:text-[#C8972B]/20">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                {/* CONTENT */}
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 flex flex-col gap-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-[#C8972B] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    {/* Upcoming Project */} Trending Design
-                  </span>
-
-                  <h3 className="font-marcellus text-lg sm:text-xl lg:text-2xl text-white tracking-wide leading-tight">
-                    {project.title}
-                  </h3>
-                </div>
+                View design
+                <ArrowRight size={16} />
               </Link>
-            );
-          })}
+              <Link
+                href="/portfolio"
+                className="text-sm font-semibold text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35]"
+              >
+                See all projects
+              </Link>
+            </div>
+
+            {multiple && (
+              <div className="mt-8 flex items-center gap-4">
+                <button type="button" onClick={() => go(-1)} aria-label="Previous design" className={arrowBtn}>
+                  <ArrowLeft size={18} />
+                </button>
+                <button type="button" onClick={() => go(1)} aria-label="Next design" className={arrowBtn}>
+                  <ArrowRight size={18} />
+                </button>
+                <div className="ml-2 flex items-center gap-2" role="group" aria-label="Choose a design">
+                  {items.map((project, i) => (
+                    <button
+                      key={project.id}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-label={`Show ${project.title}`}
+                      aria-pressed={i === active}
+                      className="flex h-6 items-center focus-visible:outline-none"
+                    >
+                      <span
+                        className={`block h-[3px] rounded-full transition-all duration-300 ${
+                          i === active ? "w-10 bg-[#C18A35]" : "w-5 bg-[#593719]/25 hover:bg-[#593719]/50"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

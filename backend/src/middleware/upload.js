@@ -12,23 +12,49 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+const ALLOWED_EXT = new Set([
+  ".jpeg",
+  ".jpg",
+  ".jfif",
+  ".png",
+  ".webp",
+  ".gif",
+  ".avif",
+]);
+
+// Extension to use when a file arrives with no extension
+const EXT_FROM_MIME = {
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/gif": ".gif",
+  "image/avif": ".avif",
+};
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, `${unique}${path.extname(file.originalname)}`);
+    const ext =
+      path.extname(file.originalname).toLowerCase() ||
+      EXT_FROM_MIME[file.mimetype] ||
+      "";
+    cb(null, `${unique}${ext}`);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowed = /jpeg|jpg|png|webp|gif/;
-  const isValid = allowed.test(path.extname(file.originalname).toLowerCase());
-  if (!isValid) {
-    return cb(new Error("Only image files are allowed"), false);
+  const ext = path.extname(file.originalname).toLowerCase();
+  const mimeOk = Boolean(EXT_FROM_MIME[file.mimetype]);
+  const extOk = ALLOWED_EXT.has(ext);
+
+  // Browser must say it's an image, and the extension must be known (or missing)
+  if (mimeOk && (extOk || ext === "")) {
+    return cb(null, true);
   }
-  cb(null, true);
+  cb(new Error("Only JPG, PNG, WEBP, GIF or AVIF images are allowed"), false);
 };
 
 const upload = multer({
@@ -38,5 +64,25 @@ const upload = multer({
     fileSize: 8 * 1024 * 1024, // 8 MB
   },
 });
+
+/*
+  Use this in routes instead of upload.single(...).
+  It sends upload errors back as JSON, so the admin page shows a clear
+  message instead of failing with "Unexpected token '<'".
+
+  Example:  router.post("/", uploadSingle("image"), createProject);
+*/
+export const uploadSingle = (field) => (req, res, next) => {
+  upload.single(field)(req, res, (err) => {
+    if (err) {
+      const message =
+        err.code === "LIMIT_FILE_SIZE"
+          ? "Image is too large. Maximum size is 8 MB"
+          : err.message;
+      return res.status(400).json({ success: false, message });
+    }
+    next();
+  });
+};
 
 export default upload;
