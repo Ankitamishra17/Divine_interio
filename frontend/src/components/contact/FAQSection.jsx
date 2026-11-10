@@ -105,7 +105,7 @@ export default function FAQSection() {
   const rightFaqs = faqs.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-[#F7F2EB]">
+    <section className="py-10 md:py-12 lg:py-12 bg-[#F7F2EB]">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-14">
         {/* Heading */}
         <div className="text-center mb-12 md:mb-16">
@@ -117,7 +117,7 @@ export default function FAQSection() {
             Got Questions?
           </h2>
 
-          <div className="w-12 h-px bg-[#C8972B] mx-auto mt-5 md:mt-6 mb-5 md:mb-6" />
+          <div className="w-12 h-px bg-[#C8972B] mx-auto mt-5 md:mt-2 mb-2 md:mb-2" />
 
           <p className="text-[#6E6258] max-w-xl mx-auto leading-7 sm:leading-8 text-sm px-2">
             Find answers to the most common questions about our design ideas,
@@ -126,7 +126,7 @@ export default function FAQSection() {
         </div>
 
         {/* FAQ Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 -mt-5">
           {/* Left Column */}
           <div className="space-y-4">
             {leftFaqs.map((faq) => {
