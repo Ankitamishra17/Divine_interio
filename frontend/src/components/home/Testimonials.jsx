@@ -2,28 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  Phone,
-  MessageCircle,
-  Clock,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Phone, MessageCircle, Clock } from "lucide-react";
 
 /*
-  Palette (same as StatsMarquee)
-  Charcoal #292622 (wall) | Espresso #593719 (card) | Warm Gold #C18A35 (accents, hairlines)
+  Palette (unchanged)
+  Charcoal #292622 (wall) | Espresso #593719 (cards) | Warm Gold #C18A35 (accents, hairlines)
   Ivory #F7F3ED (text)    | Beige #E8DED0
 
-  Why this was redesigned (the old version had real UX problems):
-  - Reviews are ~200 words, but the old carousel changed every 5 seconds, so nobody could finish one.
-    Autoplay is gone. People pick a review, or use Prev / Next, or swipe.
-  - 10px text on phones. Reviews are now 16-17px with a comfortable line length.
-  - A wall of text in one card. Each review now shows its first paragraph, with "Read full review" to expand.
-  - 13 tiny dots are hard to tap. They are replaced by a list of reviewers (a swipeable row on phones)
-    plus a "4 of 13" counter.
-  - The "Admit One" ticket is replaced by a plain contact panel with big tap targets.
+  New layout, built around how people actually read reviews
+  - Scan: every review is a card in one swipeable rail, so you see several at once
+    instead of clicking through one by one.
+  - Read: "Read full review" opens a calm reading window (no layout jumping on the page).
+    Esc closes it, arrow keys or Prev / Next move between reviews, and focus returns to the card.
+  - Move: arrow buttons, swipe, trackpad, or Tab. A thin line shows how far along the rail you are.
 */
 
 const testimonials = [
@@ -146,296 +137,304 @@ I highly recommend Living Space Decor to anyone looking for professional home in
 ];
 
 const EASE = [0.22, 1, 0.36, 1];
+const PHONE_DISPLAY = "+91 88266 06869";
+const PHONE_TEL = "+918826606869";
+const WHATSAPP = "918826606869";
 
-// "SHIVAM MISHRA" -> "Shivam Mishra"
 const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
-
-// First sentence, used as the one-line preview in the reviewer list
 const firstSentence = (s) => {
   const m = s.match(/^.*?[.!?](\s|$)/);
   return (m ? m[0] : s).trim();
 };
+const readMinutes = (s) => Math.max(1, Math.round(s.trim().split(/\s+/).length / 200));
+
+/* Open / closed, read in Indian time so it is right for visitors anywhere */
+function isOpenNow() {
+  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "numeric", hour12: false }).formatToParts(new Date());
+  const hour = Number(parts.find((p) => p.type === "hour").value) % 24;
+  return hour >= 10 && hour < 19;
+}
+
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35]";
+const ringWall = `${ring} focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]`;
+const ringCard = `${ring} focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]`;
+
+const Stars = () => (
+  <span className="text-sm tracking-wide text-[#C18A35]" role="img" aria-label="5 out of 5 stars">
+    <span aria-hidden="true">★★★★★</span>
+  </span>
+);
+
+const Avatar = ({ name, size = "h-11 w-11 text-lg" }) => (
+  <span className={`flex shrink-0 items-center justify-center rounded-full bg-[#C18A35] font-heading font-semibold text-[#292622] ${size}`} aria-hidden="true">
+    {name.charAt(0)}
+  </span>
+);
 
 export default function Testimonials() {
-  const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [expanded, setExpanded] = useState(false);
   const reduce = useReducedMotion();
-
-  const itemRefs = useRef([]);
-  const mounted = useRef(false);
-
   const total = testimonials.length;
-  const current = testimonials[active];
-  const paragraphs = current.review.split("\n\n");
-  const lead = paragraphs[0];
-  const rest = paragraphs.slice(1);
-  const pull = firstSentence(lead); // big pull-quote
-  const leadBody = lead.slice(pull.length).trim(); // remainder of the first paragraph
 
-  const select = (i) => {
-    if (i === active) return;
-    setDirection(i > active ? 1 : -1);
-    setActive(i);
-    setExpanded(false);
-  };
-  const next = () => {
-    setDirection(1);
-    setActive((p) => (p + 1) % total);
-    setExpanded(false);
-  };
-  const prev = () => {
-    setDirection(-1);
-    setActive((p) => (p - 1 + total) % total);
-    setExpanded(false);
-  };
+  const railRef = useRef(null);
+  const dialogRef = useRef(null);
+  const closeRef = useRef(null);
+  const opener = useRef(null);
 
-  // Keep the selected reviewer visible in the list / row (skip first render so the page doesn't jump)
+  const [reading, setReading] = useState(null); // index of the open review, or null
+  const [edge, setEdge] = useState({ start: true, end: false, pct: 0 });
+  const [open, setOpen] = useState(null);
+
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
-    itemRefs.current[active]?.scrollIntoView({
-      block: "nearest",
-      inline: "center",
-      behavior: reduce ? "auto" : "smooth",
-    });
-  }, [active, reduce]);
+    setOpen(isOpenNow());
+    const t = setInterval(() => setOpen(isOpenNow()), 60000);
+    return () => clearInterval(t);
+  }, []);
 
-  const variants = {
-    enter: (dir) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir > 0 ? 40 : -40 }),
-    center: { opacity: 1, x: 0 },
-    exit: (dir) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir > 0 ? -40 : 40 }),
+  /* Rail position: arrow states + progress line */
+  const measure = () => {
+    const el = railRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setEdge({ start: el.scrollLeft < 8, end: el.scrollLeft > max - 8, pct: max > 0 ? el.scrollLeft / max : 0 });
   };
+  useEffect(() => {
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+  const scrollRail = (dir) =>
+    railRef.current?.scrollBy({ left: dir * railRef.current.clientWidth * 0.8, behavior: reduce ? "auto" : "smooth" });
+
+  /* Reading window */
+  const openReview = (i, el) => {
+    opener.current = el || opener.current;
+    setReading(i);
+  };
+  const closeReview = () => {
+    setReading(null);
+    opener.current?.focus?.();
+  };
+  const step = (d) => setReading((r) => (r + d + total) % total);
+
+  useEffect(() => {
+    if (reading === null) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [reading === null]);
+
+  useEffect(() => {
+    if (reading !== null) dialogRef.current?.scrollTo({ top: 0 });
+  }, [reading]);
+
+  const onDialogKey = (e) => {
+    if (e.key === "Escape") return closeReview();
+    if (e.key === "ArrowRight") return step(1);
+    if (e.key === "ArrowLeft") return step(-1);
+    if (e.key === "Tab") {
+      // keep focus inside the window
+      const f = dialogRef.current.querySelectorAll("button, a[href]");
+      const a = f[0];
+      const z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) {
+        e.preventDefault();
+        z.focus();
+      } else if (!e.shiftKey && document.activeElement === z) {
+        e.preventDefault();
+        a.focus();
+      }
+    }
+  };
+
+  const r = reading !== null ? testimonials[reading] : null;
+  const paras = r ? r.review.split("\n\n") : [];
 
   return (
-    <section
-      className="bg-[#292622] py-16 md:py-20 lg:py-24"
-      aria-labelledby="testimonials-heading"
-    >
+    <section className="bg-[#292622] py-16 md:py-20 lg:py-24" aria-labelledby="testimonials-heading">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
         {/* ── Heading ── */}
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <h2
-            id="testimonials-heading"
-            className="max-w-2xl font-heading text-4xl font-medium leading-[1.08] text-[#F7F3ED] sm:text-5xl lg:text-6xl"
-          >
-            Loved by homeowners across NCR
-          </h2>
-          <div className="flex items-center gap-3 md:pb-2">
-            <span className="flex gap-0.5 text-lg text-[#C18A35]" aria-hidden="true">
-              ★★★★★
-            </span>
-            <p className="text-sm text-[#F7F3ED]/70">{total} client reviews</p>
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 id="testimonials-heading" className="max-w-2xl font-heading text-4xl font-medium leading-[1.08] text-[#F7F3ED] sm:text-5xl lg:text-6xl">
+              Loved by homeowners across NCR
+            </h2>
+            <p className="mt-4 flex items-center gap-3 text-sm text-[#F7F3ED]/70">
+              <Stars />
+              {total} client reviews
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            {[
+              { label: "Scroll reviews left", dir: -1, off: edge.start, Icon: ChevronLeft },
+              { label: "Scroll reviews right", dir: 1, off: edge.end, Icon: ChevronRight },
+            ].map(({ label, dir, off, Icon }) => (
+              <button
+                key={label}
+                type="button"
+                aria-label={label}
+                disabled={off}
+                onClick={() => scrollRail(dir)}
+                className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] disabled:pointer-events-none disabled:opacity-30 ${ringWall}`}
+              >
+                <Icon size={19} aria-hidden="true" />
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* ── Reviewer list + review ── */}
-        <div className="mt-10 grid gap-5 lg:mt-14 lg:grid-cols-[340px_1fr] lg:gap-10">
-          {/* Reviewers: swipeable row on phones, list that matches the panel height on desktop */}
-          <div className="relative lg:min-h-[560px]">
+        {/* ── Rail ── */}
+        <div className="relative mt-10 lg:mt-12">
           <div
-            aria-label="Choose a review"
-            className="-mx-5 flex snap-x gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:absolute lg:inset-0 lg:flex-col lg:gap-1 lg:overflow-y-auto lg:overflow-x-hidden lg:px-0 lg:pb-0 lg:pr-2 lg:[scrollbar-color:#C18A35_transparent] lg:[scrollbar-width:thin]"
+            ref={railRef}
+            onScroll={measure}
+            role="list"
+            aria-label="Client reviews"
+            className="-mx-5 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-5 pb-6 [scrollbar-width:none] sm:-mx-8 sm:gap-5 sm:px-8 lg:-mx-10 lg:px-10 [&::-webkit-scrollbar]:hidden"
           >
-            {testimonials.map((t, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={t.name}
-                  ref={(el) => (itemRefs.current[i] = el)}
-                  type="button"
-                  onClick={() => select(i)}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`shrink-0 snap-start rounded-sm border px-3.5 py-2.5 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] lg:w-full lg:py-3.5 ${
-                    isActive
-                      ? "border-[#C18A35] bg-[#593719]"
-                      : "border-[#C18A35]/20 bg-transparent hover:border-[#C18A35]/60 hover:bg-[#593719]/40 lg:border-transparent"
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-heading text-base font-semibold transition-colors duration-300 ${
-                        isActive ? "bg-[#C18A35] text-[#292622]" : "bg-[#593719] text-[#C18A35]"
-                      }`}
-                      aria-hidden="true"
-                    >
-                      {t.name.charAt(0)}
-                    </span>
-                    <span className="whitespace-nowrap text-sm font-medium text-[#F7F3ED] lg:whitespace-normal">
-                      {titleCase(t.name)}
-                    </span>
-                  </span>
-                  <span className="mt-1.5 hidden pl-11 text-[13px] leading-snug text-[#F7F3ED]/60 line-clamp-1 lg:block">
-                    {firstSentence(t.review)}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-          </div>
-
-          {/* Review panel */}
-          <div className="relative flex flex-col overflow-hidden rounded-sm border border-[#C18A35]/25 bg-[#593719] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.6)] lg:min-h-[560px]">
-            {/* gold top edge + oversized quote mark (decoration) */}
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-4 top-2 select-none font-heading text-[160px] leading-none text-[#C18A35]/10 sm:right-8 sm:text-[220px]"
-            >
-              “
-            </span>
-
-            <AnimatePresence mode="wait" custom={direction} initial={false}>
-              <motion.article
-                key={active}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.35, ease: EASE }}
-                drag="x"
-                dragDirectionLock
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.15}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x > 80) prev();
-                  else if (info.offset.x < -80) next();
-                }}
-                className="relative flex flex-1 flex-col px-6 pb-8 pt-9 sm:px-10 sm:pt-11 lg:px-14"
-                aria-live="polite"
+            {testimonials.map((t, i) => (
+              <article
+                key={t.name}
+                role="listitem"
+                className="group relative flex w-[84%] shrink-0 snap-start flex-col rounded-sm border border-[#C18A35]/30 bg-transparent p-6 transition-colors duration-500 hover:border-[#C18A35]/70 hover:bg-[#593719]/30 sm:w-[380px] sm:p-7"
               >
-                {/* Who said it */}
-                <header className="flex items-center gap-4">
-                  <span
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C18A35] font-heading text-xl font-semibold text-[#292622]"
-                    aria-hidden="true"
-                  >
-                    {current.name.charAt(0)}
-                  </span>
-                  <div>
-                    <p className="text-base font-medium text-[#F7F3ED]">{titleCase(current.name)}</p>
-                    <p className="mt-0.5 text-sm text-[#C18A35]" aria-label="5 out of 5 stars">
-                      <span aria-hidden="true">★★★★★</span>
-                    </p>
-                  </div>
-                </header>
-
-                {/* Pull-quote: the first sentence, big */}
-                <blockquote className="mt-8 max-w-[34ch] font-heading text-[26px] font-medium leading-[1.2] text-[#F7F3ED] sm:max-w-[40ch] sm:text-[30px] lg:text-[34px]">
-                  “{pull}”
-                </blockquote>
-
-                {/* The rest of the review */}
-                <div className="mt-7 max-w-[64ch] space-y-4 border-l border-[#C18A35]/40 pl-5 text-base leading-[1.8] text-[#F7F3ED]/85 sm:text-[17px]">
-                  {leadBody && <p>{leadBody}</p>}
-
-                  <AnimatePresence initial={false}>
-                    {expanded && (
-                      <motion.div
-                        key="rest"
-                        initial={reduce ? false : { height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: EASE }}
-                        className="space-y-4 overflow-hidden"
-                      >
-                        {rest.map((para, i) => (
-                          <p key={i}>{para}</p>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {rest.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={() => setExpanded((v) => !v)}
-                    aria-expanded={expanded}
-                    className="mt-3 inline-flex min-h-11 items-center gap-1.5 self-start text-sm font-semibold text-[#C18A35] transition-colors hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
-                  >
-                    {expanded ? "Show less" : "Read full review"}
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                )}
-              </motion.article>
-            </AnimatePresence>
-
-            {/* Controls + progress line */}
-            <div className="relative mt-auto border-t border-[#C18A35]/25">
-              <span
-                aria-hidden="true"
-                className="absolute -top-px left-0 h-[2px] bg-[#C18A35] transition-all duration-500"
-                style={{ width: `${((active + 1) / total) * 100}%` }}
-              />
-              <div className="flex items-center justify-between px-6 py-4 sm:px-10 lg:px-14">
-                <p className="text-sm tabular-nums text-[#F7F3ED]/70">
-                  {active + 1} of {total}
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
+                <Stars />
+                <p className="mt-4 font-heading text-[22px] font-medium leading-[1.25] text-[#F7F3ED]">“{firstSentence(t.review)}”</p>
+                <p className="mt-4 line-clamp-4 text-[15px] leading-[1.7] text-[#F7F3ED]/75">
+                  {t.review.split("\n\n")[0].slice(firstSentence(t.review).length).trim()}
                 </p>
-                <div className="flex gap-2">
+
+                <div className="mt-auto pt-6">
+                  <div className="flex items-center gap-3 border-t border-[#C18A35]/25 pt-5">
+                    <Avatar name={t.name} size="h-10 w-10 text-base" />
+                    <p className="min-w-0 truncate text-[15px] font-medium text-[#F7F3ED]">{titleCase(t.name)}</p>
+                  </div>
                   <button
                     type="button"
-                    aria-label="Previous review"
-                    onClick={prev}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
+                    onClick={(e) => openReview(i, e.currentTarget)}
+                    className={`mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#C18A35] transition-colors hover:text-[#F7F3ED] ${ringWall}`}
+                    aria-label={`Read full review by ${titleCase(t.name)}`}
                   >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="Next review"
-                    onClick={next}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#593719]"
-                  >
-                    <ChevronRight size={18} />
+                    Read full review
+                    <span className="font-normal text-[#F7F3ED]/55">{readMinutes(t.review)} min</span>
                   </button>
                 </div>
-              </div>
-            </div>
+              </article>
+            ))}
+          </div>
+
+          {/* progress line */}
+          <div className="h-px w-full bg-[#C18A35]/20" aria-hidden="true">
+            <div className="h-[2px] -translate-y-px bg-[#C18A35] transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${Math.max(12, edge.pct * 100)}%` }} />
           </div>
         </div>
 
         {/* ── Contact panel ── */}
         <div className="mt-16 grid gap-8 rounded-sm border border-[#C18A35]/25 bg-[#593719]/35 px-6 py-8 sm:px-10 sm:py-10 md:mt-20 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-14">
           <div>
-            <h3 className="max-w-xl font-heading text-3xl font-medium leading-[1.15] text-[#F7F3ED] sm:text-4xl">
-              Looking for interior designers in Noida?
-            </h3>
+            <h3 className="max-w-xl font-heading text-3xl font-medium leading-[1.15] text-[#F7F3ED] sm:text-4xl">Looking for interior designers in Noida?</h3>
             <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#F7F3ED]/70">
               Book a free consultation today and transform your dream home with Living Space Decor.
             </p>
-            <p className="mt-5 flex items-center gap-2 text-sm text-[#F7F3ED]/65">
+            <p className="mt-5 flex items-center gap-2.5 text-sm text-[#F7F3ED]/70" role="status">
+              <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                {open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C18A35] opacity-50 motion-reduce:animate-none" />}
+                <span className={`relative h-2 w-2 rounded-full ${open ? "bg-[#C18A35]" : "bg-[#F7F3ED]/35"}`} />
+              </span>
               <Clock size={15} className="text-[#C18A35]" aria-hidden="true" />
-              Open every day, 10 AM – 7 PM
+              {open === null ? "Open every day, 10 AM to 7 PM" : open ? "Open now, until 7 PM" : "Closed now. Open every day, 10 AM to 7 PM"}
             </p>
           </div>
-
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-            <a
-              href="tel:+918826606869"
-              className="group inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#C18A35] px-7 text-[15px] font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
-            >
+            <a href={`tel:${PHONE_TEL}`} className={`inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#C18A35] px-7 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ringWall}`}>
               <Phone size={17} aria-hidden="true" />
-              Call +91 88266 06869
+              Call {PHONE_DISPLAY}
             </a>
-            <a
-              href="https://wa.me/918826606869"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm border border-[#F7F3ED]/40 px-7 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
-            >
+            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm border border-[#F7F3ED]/40 px-7 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] ${ringWall}`}>
               <MessageCircle size={17} aria-hidden="true" />
               WhatsApp us
             </a>
           </div>
         </div>
       </div>
+
+      {/* ── Reading window ── */}
+      <AnimatePresence>
+        {r && (
+          <motion.div
+            key="overlay"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 flex items-end justify-center bg-[#292622]/85 sm:items-center sm:p-6"
+            onMouseDown={(e) => e.target === e.currentTarget && closeReview()}
+          >
+            <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Review by ${titleCase(r.name)}`}
+              onKeyDown={onDialogKey}
+              initial={reduce ? false : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.35, ease: EASE }}
+              className="relative flex max-h-[92dvh] w-full max-w-[720px] flex-col overflow-hidden rounded-t-sm border border-[#C18A35]/30 bg-[#593719] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] sm:rounded-sm"
+            >
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
+
+              {/* Header */}
+              <div className="flex items-center gap-4 px-6 pb-4 pt-7 sm:px-10">
+                <Avatar name={r.name} size="h-12 w-12 text-xl" />
+                <div className="min-w-0">
+                  <p className="truncate text-base font-medium text-[#F7F3ED]">{titleCase(r.name)}</p>
+                  <Stars />
+                </div>
+                <button
+                  ref={closeRef}
+                  type="button"
+                  onClick={closeReview}
+                  aria-label="Close review"
+                  className={`ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors hover:bg-[#C18A35] hover:text-[#292622] ${ringCard}`}
+                >
+                  <X size={18} aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Review text, one comfortable column */}
+              <div className="flex-1 overflow-y-auto px-6 pb-8 sm:px-10">
+                <p className="font-heading text-[26px] font-medium leading-[1.22] text-[#F7F3ED] sm:text-[30px]">“{firstSentence(paras[0])}”</p>
+                <div className="mt-6 max-w-[62ch] space-y-4 text-base leading-[1.8] text-[#F7F3ED]/85 sm:text-[17px]">
+                  {paras[0].slice(firstSentence(paras[0]).length).trim() && <p>{paras[0].slice(firstSentence(paras[0]).length).trim()}</p>}
+                  {paras.slice(1).map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-center justify-between border-t border-[#C18A35]/25 px-6 py-4 sm:px-10">
+                <p className="text-sm tabular-nums text-[#F7F3ED]/70" aria-live="polite">
+                  {reading + 1} of {total}
+                </p>
+                <div className="flex gap-2">
+                  <button type="button" aria-label="Previous review" onClick={() => step(-1)} className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors hover:bg-[#C18A35] hover:text-[#292622] ${ringCard}`}>
+                    <ChevronLeft size={18} aria-hidden="true" />
+                  </button>
+                  <button type="button" aria-label="Next review" onClick={() => step(1)} className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#C18A35]/50 text-[#F7F3ED] transition-colors hover:bg-[#C18A35] hover:text-[#292622] ${ringCard}`}>
+                    <ChevronRight size={18} aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

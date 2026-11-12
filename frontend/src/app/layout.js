@@ -1,13 +1,13 @@
 
-import { Italiana, Jost } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Script from "next/script";
+import { Aboreto, Jost } from "next/font/google";
 
-const italiana = Italiana({
+const aboreto = Aboreto({
   subsets: ["latin"],
-  variable: "--font-heading",
   weight: "400",
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -73,7 +73,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${italiana.variable} ${jost.variable} h-full antialiased`}
+      className={`${aboreto.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col">
         <LayoutWrapper>{children}</LayoutWrapper>

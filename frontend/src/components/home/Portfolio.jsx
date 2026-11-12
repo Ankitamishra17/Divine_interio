@@ -10,33 +10,34 @@ import { ArrowUpRight } from "lucide-react";
   Palette
   Ivory #F7F3ED | Charcoal #292622 | Warm Gold #C18A35 | Espresso #593719 | Beige #E8DED0
 
-  Layout: PHOTO MOSAIC. Four projects in four different sizes: one big, two medium, one wide.
-  Each photo carries its caption on a small ivory label (always readable, never over a
-  busy part of the photo). With fewer than 4 projects it falls back to an even grid.
-  Optional fields: project.category and project.location.
+  New layout: STICKY INTRO + STAGGERED GALLERY.
+  - Left: the heading, short text and the "view all" button stay pinned while you scroll
+    through the projects (desktop). The button is always in reach.
+  - Right: two columns of tall photos. The second column sits lower, so the photos zigzag
+    like pictures hung on a gallery wall instead of a rigid grid.
+  - Captions sit under each photo (name, then category and location), never on top of it,
+    so they are always easy to read. Small screens show one column, in order.
+  - Same props and data as before: { portfolio, limit }, project.name / slug / image,
+    optional project.category and project.location. Shows up to 6 projects.
 */
 
 const IMAGE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ||
-  "http://localhost:5000";
+  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:5000";
 
 const PLACEHOLDER = "/image/placeholder.webp";
 const EASE = [0.22, 1, 0.36, 1];
 
-// Mosaic tile shapes (4 projects). Phones: 2 columns. Desktop: 12-column grid, 3 rows.
-const MOSAIC = [
-  "col-span-2 aspect-[4/3] lg:col-span-7 lg:row-span-2 lg:aspect-auto",
-  "col-span-1 aspect-[4/5] lg:col-span-5 lg:aspect-auto",
-  "col-span-1 aspect-[4/5] lg:col-span-5 lg:aspect-auto",
-  "col-span-2 aspect-[16/9] lg:col-span-12 lg:aspect-auto",
-];
-// Fewer than 4 projects: simple even tiles
-const EVEN = "col-span-1 aspect-[4/5] lg:col-span-4 lg:aspect-[4/3]";
+const subline = (p) => [p.category, p.location].filter(Boolean).join(", ");
 
 function ProjectImage({ src, alt, sizes, priority }) {
   const [failed, setFailed] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const url = !failed && src ? (src.startsWith("http") ? src : `${IMAGE_URL}${src}`) : PLACEHOLDER;
+
+  // Full URL from the API, or the placeholder if there is no image / it failed to load
+  let url = PLACEHOLDER;
+  if (!failed && src) {
+    url = src.startsWith("http") ? src : `${IMAGE_URL}${src.startsWith("/") ? "" : "/"}${src}`;
+  }
+  const remote = url !== PLACEHOLDER;
 
   return (
     <Image
@@ -45,62 +46,53 @@ function ProjectImage({ src, alt, sizes, priority }) {
       fill
       sizes={sizes}
       priority={priority}
-      onLoad={() => setLoaded(true)}
+      // Images come from your API server, so skip Next's image optimizer for them.
+      // (No next.config.js "images.remotePatterns" setup needed.)
+      unoptimized={remote}
       onError={() => setFailed(true)}
-      className={`object-cover transition-[transform,opacity] duration-[1200ms] ease-out group-hover:scale-105 motion-reduce:transition-none ${
-        loaded ? "opacity-100" : "opacity-0"
-      }`}
+      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 motion-reduce:transition-none"
     />
   );
 }
 
-function Tile({ project, index, shape, big, reduce }) {
+function Card({ project, index }) {
   return (
-    <motion.li
-      className={`relative ${shape}`}
-      initial={reduce ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: Math.min(index, 3) * 0.1, ease: EASE }}
-    >
+    <li className={index % 2 === 1 ? "sm:translate-y-16" : ""}>
       <Link
         href={`/portfolio/${project.slug}`}
-        aria-label={`View project: ${project.name}`}
-        className="group absolute inset-0 block overflow-hidden rounded-sm bg-[#E8DED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+        className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
       >
-        <ProjectImage
-          src={project.image}
-          alt={project.name}
-          priority={index === 0}
-          sizes={big ? "(max-width:1024px) 100vw, 58vw" : "(max-width:1024px) 50vw, 42vw"}
-        />
-
-        {/* arrow, top right */}
-        <span
-          aria-hidden="true"
-          className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#F7F3ED] text-[#292622] shadow-sm transition-all duration-300 group-hover:bg-[#C18A35] sm:right-4 sm:top-4 sm:h-11 sm:w-11"
-        >
-          <ArrowUpRight size={18} />
+        <span className="relative block aspect-[4/5] overflow-hidden rounded-sm bg-[#E8DED0]">
+          <ProjectImage
+            src={project.image}
+            alt={project.name}
+            priority={index < 2}
+            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 34vw"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#F7F3ED] text-[#292622] shadow-sm transition-colors duration-300 group-hover:bg-[#C18A35]"
+          >
+            <ArrowUpRight size={19} />
+          </span>
         </span>
 
-        {/* caption label: always readable */}
-        <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] bg-[#F7F3ED] px-4 py-3 transition-transform duration-500 ease-out group-hover:-translate-y-1 sm:bottom-4 sm:left-4 sm:max-w-[min(420px,calc(100%-2rem))] sm:px-5 sm:py-4">
-          <h3 className="line-clamp-2 font-heading text-base leading-tight text-[#292622] sm:text-xl lg:text-2xl">
-            {project.name}
-          </h3>
-          {(project.category || project.location) && (
-            <p className="mt-1 hidden line-clamp-1 text-[13px] text-[#292622]/60 sm:block">
-              {[project.category, project.location].filter(Boolean).join(", ")}
-            </p>
-          )}
-          <span className="mt-2 block h-[3px] w-8 bg-[#C18A35] transition-all duration-500 group-hover:w-14" aria-hidden="true" />
-        </div>
+        <span className="mt-5 block font-heading text-2xl leading-tight text-[#292622] xl:text-[28px]">
+          {project.name}
+        </span>
+        {subline(project) && (
+          <span className="mt-1.5 block text-sm text-[#292622]/65">{subline(project)}</span>
+        )}
+        <span
+          aria-hidden="true"
+          className="mt-4 block h-[3px] w-8 bg-[#C18A35] transition-all duration-500 group-hover:w-16"
+        />
       </Link>
-    </motion.li>
+    </li>
   );
 }
 
-export default function Portfolio({ portfolio, limit = 4 }) {
+export default function Portfolio({ portfolio, limit = 2 }) {
   const reduce = useReducedMotion();
 
   // Nothing to show: say so, and give people somewhere to go
@@ -115,7 +107,7 @@ export default function Portfolio({ portfolio, limit = 4 }) {
         </p>
         <Link
           href="/contact"
-          className="mt-7 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#593719] px-7 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+          className="mt-7 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#593719] px-7 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
         >
           Talk to our design team
         </Link>
@@ -124,8 +116,7 @@ export default function Portfolio({ portfolio, limit = 4 }) {
   }
 
   const total = portfolio.length;
-  const shown = portfolio.slice(0, Math.min(limit, 4));
-  const useMosaic = shown.length === 4;
+  const shown = portfolio.slice(0, Math.min(limit, 6));
   const hasMore = total > shown.length;
 
   return (
@@ -133,65 +124,78 @@ export default function Portfolio({ portfolio, limit = 4 }) {
       className="overflow-hidden bg-[#F7F3ED] px-5 py-20 sm:px-8 md:py-28 lg:px-14"
       aria-labelledby="portfolio-heading"
     >
-      <div className="mx-auto max-w-[1400px]">
-        {/* Header */}
-        <motion.div
-          className="grid items-end gap-6 lg:grid-cols-[1.4fr_1fr] lg:gap-16"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: EASE }}
-        >
+      <motion.div
+        className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[4fr_8fr] lg:gap-20"
+        initial={reduce ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.8, ease: EASE }}
+      >
+        {/* Sticky intro */}
+        <div className="lg:sticky lg:top-28 lg:self-start">
           <h2
             id="portfolio-heading"
-            className="font-heading text-[40px] font-medium leading-[1.05] text-[#292622] sm:text-6xl xl:text-[64px]"
+            className="font-heading text-[40px] font-medium leading-[1.05] text-[#292622] sm:text-6xl lg:text-5xl xl:text-[56px]"
           >
             Transforming spaces into legacies
           </h2>
-          <p className="max-w-md text-base leading-relaxed text-[#292622]/70 sm:text-lg lg:pb-2">
-            Each project blends timeless elegance with contemporary sophistication,
-            creating interiors that tell your story.
-          </p>
-        </motion.div>
-
-        {/* Mosaic */}
-        <ul
-          aria-label="Featured projects"
-          className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-16 lg:grid-cols-12 lg:gap-5 lg:[grid-template-rows:repeat(2,minmax(0,300px))_minmax(0,340px)]"
-        >
-          {shown.map((project, i) => (
-            <Tile
-              key={project.id ?? project.slug}
-              project={project}
-              index={i}
-              shape={useMosaic ? MOSAIC[i] : EVEN}
-              big={useMosaic && i === 0}
-              reduce={reduce}
-            />
-          ))}
-        </ul>
-
-        {/* Next step */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-5 sm:flex-row">
-          <p className="text-sm text-[#292622]/65">
-            {hasMore
-              ? `Showing ${shown.length} of ${total} projects`
-              : `${total} ${total === 1 ? "project" : "projects"}`}
+          <p className="mt-5 max-w-md text-base leading-relaxed text-[#292622]/70 sm:text-lg">
+            Each project blends timeless elegance with contemporary sophistication, creating
+            interiors that tell your story.
           </p>
 
-          <Link
-            href="/portfolio"
-            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] sm:w-auto"
-          >
-            {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
-            <ArrowUpRight
-              size={18}
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </Link>
+          <div className="mt-8 hidden lg:block">
+            <Link
+              href="/portfolio"
+              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+            >
+              {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+            {hasMore && (
+              <p className="mt-3 text-sm text-[#292622]/65">
+                Showing {shown.length} of {total}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+
+        {/* Staggered gallery */}
+        <div>
+          <ul
+            aria-label="Featured projects"
+            className="grid gap-x-6 gap-y-12 sm:grid-cols-2 sm:pb-16 xl:gap-x-8"
+          >
+            {shown.map((project, i) => (
+              <Card key={project.id ?? project.slug ?? i} project={project} index={i} />
+            ))}
+          </ul>
+
+          {/* Phones and tablets: button after the gallery */}
+          <div className="mt-12 lg:hidden">
+            <Link
+              href="/portfolio"
+              className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] sm:w-auto"
+            >
+              {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+            {hasMore && (
+              <p className="mt-3 text-sm text-[#292622]/65">
+                Showing {shown.length} of {total}
+              </p>
+            )}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

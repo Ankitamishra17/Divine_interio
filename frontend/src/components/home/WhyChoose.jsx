@@ -208,7 +208,7 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: EASE }}
-              className="max-w-2xl font-heading text-4xl font-medium leading-[1.1] text-[#292622] sm:text-5xl xl:text-6xl"
+              className="max-w-2xl font-heading text-4xl font-medium leading-[1.1] text-[#593719] sm:text-5xl xl:text-6xl"
             >
               Design that lives with you, not just in it.
             </motion.h2>
