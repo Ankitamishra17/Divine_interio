@@ -25,7 +25,10 @@ Divine_interio/
 - HTML5 & CSS3
 
 ### Backend
-- Backend technologies and APIs
+- Node.js
+- Express.js
+- MySQL
+- REST APIs
 
 ## 🚀 Getting Started
 
