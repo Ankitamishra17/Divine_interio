@@ -1,188 +1,67 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
-export default function ProcessCard({ num, title, desc, img }) {
+// One step. The number sits in a solid gold badge that overlaps the photo edge,
+// and on large screens a thin line runs from it to the next step's badge.
+export default function ProcessCard({
+  num,
+  title,
+  desc,
+  img,
+  index = 0,
+  isLast = false,
+}) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <motion.div
-      whileHover={{ y: -8 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+    <motion.li
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+        // Stagger within a row only, so lower cards never wait on earlier ones
+        delay: (index % 4) * 0.1,
+      }}
       className="group"
     >
-      {/* Image Frame */}
-      <div className="relative mb-6 sm:mb-8 overflow-hidden bg-white rounded-2xl">
-        {/* Image */}
-        <motion.img
+      {/* Photo: always in full colour (the old grayscale hid the work on desktop) */}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-stone-200 sm:aspect-[4/5]">
+        {/* Decorative: the title below names the step.
+            Plain <img> so any image host works; swap for next/image if all hosts are configured. */}
+        <img
           src={img}
-          alt={title}
-          className="
-            w-full
-            h-56
-            sm:h-64
-            md:h-72
-            object-cover
-
-            grayscale-0
-            lg:grayscale
-
-            lg:group-hover:grayscale-0
-
-            transition-all
-            duration-700
-          "
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1.05 }}
-          transition={{ duration: 0.6 }}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out motion-reduce:transition-none [@media(hover:hover)]:group-hover:scale-105"
         />
+      </div>
 
-        {/* Border Frame */}
-        <div className="absolute inset-0 border border-neutral-200 rounded-2xl pointer-events-none" />
-
-        {/* Overlay */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-t
-            from-black/30
-            to-transparent
-            opacity-100
-            lg:opacity-0
-            lg:group-hover:opacity-100
-            transition-all
-            duration-500
-          "
-        />
-
-      
-        {/* Explore Text - Desktop Only */}
-        {/* <div
-          className="
-    hidden
-    lg:flex
-    absolute
-    inset-0
-    items-center
-    justify-center
-
-    opacity-0
-    group-hover:opacity-100
-
-    transition-all
-    duration-500
-  "
-        >
-          <span
-            className="
-      px-5
-      py-2
-      rounded-full
-      bg-white/10
-      backdrop-blur-md
-      border
-      border-white/20
-      text-white
-      uppercase
-      tracking-[0.25em]
-      text-xs
-    "
-          >
-            Explore →
-          </span>
-        </div> */}
-
-        {/* Step Number */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.2,
-          }}
-          viewport={{ once: true }}
-          className="
-            absolute
-            bottom-4
-            right-4
-            sm:bottom-5
-            sm:right-5
-            text-4xl
-            sm:text-5xl
-            md:text-6xl
-            font-light
-            text-[#C8972B]
-            opacity-20
-          "
-        >
+      {/* Number badge + connector */}
+      <div className="relative z-10 -mt-6 flex items-center pl-5">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C8972B] font-heading text-lg text-[#1E0F06] ring-4 ring-white">
+          <span className="sr-only">Step </span>
           {num}
-        </motion.div>
-      </div>
-
-      {/* Badge */}
-      <div className="flex items-center gap-3 mb-4 sm:mb-5">
-        <div className="w-2 h-2 bg-[#C8972B]" />
-
-        <span
-          className="
-            text-[10px]
-            sm:text-xs
-            tracking-[0.25em]
-            text-[#C8972B]
-            font-medium
-          "
-        >
-          STEP {num}
         </span>
+
+        {!isLast && (
+          <span
+            aria-hidden="true"
+            className="-mr-[2.75rem] ml-3 hidden h-px flex-1 bg-[#C8972B]/40 lg:block"
+          />
+        )}
       </div>
 
-      {/* Title */}
-      <h3
-        className="
-          text-xl
-          sm:text-2xl
-          md:text-3xl
-          font-light
-          text-black
-          mb-3
-          sm:mb-4
-          tracking-tight
-          transition-colors
-          duration-300
-          group-hover:text-[#C8972B]
-        "
-      >
-        {title}
-      </h3>
-
-      {/* Description */}
-      <p
-        className="
-          text-sm
-          sm:text-base
-          text-neutral-600
-          leading-relaxed
-          font-light
-        "
-      >
-        {desc}
-      </p>
-
-      {/* Accent Line */}
-      <motion.div
-        initial={{ width: 0 }}
-        whileHover={{ width: 50 }}
-        whileTap={{ width: 50 }}
-        transition={{ duration: 0.4 }}
-        className="
-          mt-5
-          sm:mt-6
-          h-px
-          bg-gradient-to-r
-          from-[#C8972B]
-          to-transparent
-        "
-      />
-    </motion.div>
+      {/* Text */}
+      <div className="mt-5">
+        <h3 className="font-heading text-2xl leading-snug text-stone-900 sm:text-[26px]">
+          {title}
+        </h3>
+        <p className="mt-2 text-[15px] leading-7 text-stone-600">{desc}</p>
+      </div>
+    </motion.li>
   );
 }

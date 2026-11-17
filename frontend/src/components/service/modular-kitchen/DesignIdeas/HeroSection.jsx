@@ -1,31 +1,9 @@
-
 "use client";
 
 import Image from "next/image";
-import { wardrobeTypes } from "@/data/wardrobeData";
-import { ArrowRight, DoorClosed, Shirt } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-const icons = [DoorClosed, DoorClosed, Shirt];
-const kitchenTypes = [
-  {
-    title: "Straight Kitchen",
-    image: "/Straight-shape.png",
-  },
-  {
-    title: "L-Shaped Kitchen",
-    image: "/L-shape.png",
-  },
-  {
-    title: "U-Shaped Kitchen",
-    image: "/image/u-kitchenDesign.webp",
-  },
-  {
-    title: "Island Kitchen",
-    image: "/image/island_kitchen.avif",
-  },
-];
+import KitchenCards from "./KitchenCards";
 
 export default function HeroSection() {
   return (
@@ -44,7 +22,7 @@ export default function HeroSection() {
 
         <div className="absolute inset-0">
           <div className="container mx-auto flex h-full items-center justify-center px-4">
-            <div className="max-w-2xl lg:-mt-56 text-center text-white">
+            <div className="max-w-2xl lg:-mt-30 text-center text-white">
               <span className="inline-block mb-5 whitespace-nowrap tracking-[2px] uppercase text-[#B8851F] text-sm">
                 Beautiful. Functional. Timeless.
               </span>
@@ -63,13 +41,11 @@ export default function HeroSection() {
                 className="flex items-center justify-center gap-3 mt-6 md:mt-8 origin-center"
               >
                 <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#C8972B]" />
-
                 <motion.div
                   animate={{ scale: [1, 1.3, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-2 h-2 bg-[#C8972B] rounded-full"
                 />
-
                 <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#C8972B]" />
               </motion.div>
 
@@ -95,42 +71,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Floating Cards */}
-      <div className=" bg-[#F5EBE0] relative z-20 ">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-4 md:grid-cols-4">
-            {kitchenTypes.map((item, index) => {
-              const Icon = icons[index];
-
-              return (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-[10px] -mt-6 bg-white shadow-md hover:shadow-2xl transition-shadow"
-                >
-                  <div className="relative h-[260px] ">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="relative px-4 pb-6 pt-6  text-center">
-                    <h3 className="text-xl md:text-2xl font-serif text-[#3D1F0D]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm md:text-base text-gray-500 leading-relaxed">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      {/* Floating Cards: try "card", "strip", "stagger" or "reveal" */}
+      <KitchenCards variant="strip" className="z-90" />
     </section>
   );
 }

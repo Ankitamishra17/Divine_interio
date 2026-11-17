@@ -1,7 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { useId, useState } from "react";
+import { Plus, Phone, MessageCircle } from "lucide-react";
+
+/*
+  Palette
+  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
+
+  Layout: heading and a "still unsure?" help card stay pinned on the left while one calm list of
+  questions scrolls on the right. Hairline dividers instead of a box around every question.
+  Accessible accordion (button + region, aria-expanded), smooth open and close, one open at a time.
+  Also outputs FAQ structured data, which helps these answers show up in Google results.
+*/
+
+const PHONE_DISPLAY = "+919876543210";
+const PHONE_TEL = "tel:+919876543210";
+const WHATSAPP_URL = "https://wa.me/919876543210";
 
 const faqs = [
   {
@@ -32,62 +46,62 @@ const faqs = [
   {
     question: "What styles do you specialize in?",
     answer:
-      "We work across contemporary, modern minimalist, classic, and eclectic styles — always tailored to your taste and lifestyle.",
+      "We work across contemporary, modern minimalist, classic, and eclectic styles, always tailored to your taste and lifestyle.",
   },
 ];
 
-function FAQItem({ faq, index, openIndex, toggleFAQ }) {
-  const isOpen = openIndex === index;
+const ring =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]";
+
+function FAQItem({ faq, isOpen, onToggle, baseId }) {
+  const buttonId = `${baseId}-button`;
+  const panelId = `${baseId}-panel`;
 
   return (
-    <div className="border border-[#C8972B]/15 bg-white overflow-hidden group hover:border-[#C8972B]/40 transition-colors duration-300">
-      <button
-        onClick={() => toggleFAQ(index)}
-        className="w-full flex items-start justify-between p-4 sm:p-5 lg:p-6 text-left gap-3 sm:gap-4"
-      >
-        {/* Number + Question */}
-        <div className="flex items-start gap-3 sm:gap-4 flex-1">
-          <span className="text-[#C8972B]/40 text-[10px] sm:text-xs tracking-widest font-light mt-1 flex-shrink-0">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-
-          <span className="font-medium text-[#2A1506] text-sm sm:text-base leading-snug group-hover:text-[#C8972B] transition-colors duration-300">
+    <div className="border-b border-[#292622]/15">
+      <h3>
+        <button
+          type="button"
+          id={buttonId}
+          aria-expanded={isOpen}
+          aria-controls={panelId}
+          onClick={onToggle}
+          className={`group flex w-full items-center justify-between gap-6 py-6 text-left sm:py-7 ${ring} rounded-sm`}
+        >
+          <span
+            className={`font-heading text-[20px] font-normal leading-snug tracking-wide transition-colors duration-300 sm:text-2xl ${
+              isOpen ? "text-[#593719]" : "text-[#292622] group-hover:text-[#593719]"
+            }`}
+          >
             {faq.question}
           </span>
-        </div>
+          <span
+            aria-hidden="true"
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+              isOpen
+                ? "border-[#593719] bg-[#593719] text-[#F7F3ED]"
+                : "border-[#593719]/40 text-[#593719] group-hover:border-[#C18A35] group-hover:bg-[#C18A35] group-hover:text-[#292622]"
+            }`}
+          >
+            <Plus
+              size={18}
+              className={`transition-transform duration-300 motion-reduce:transition-none ${isOpen ? "rotate-45" : ""}`}
+            />
+          </span>
+        </button>
+      </h3>
 
-        {/* Icon */}
-        <div
-          className={`
-            flex-shrink-0
-            w-7 h-7
-            rounded-full
-            border
-            flex
-            items-center
-            justify-center
-            transition-all
-            duration-300
-            mt-0.5
-            ${isOpen ? "bg-[#C8972B] border-[#C8972B]" : "border-[#C8972B]/30"}
-          `}
-        >
-          {isOpen ? (
-            <Minus size={13} className="text-white" />
-          ) : (
-            <Plus size={13} className="text-[#C8972B]" />
-          )}
-        </div>
-      </button>
-
-      {/* Answer */}
+      {/* grid-rows trick: animates to the answer's real height, no fixed max-height */}
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-48" : "max-h-0"
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
-        <div className="px-4 sm:px-6 pb-5 sm:pb-6 pl-10 sm:pl-14 text-[#6E6258] leading-7 sm:leading-8 text-sm border-t border-[#C8972B]/10 pt-4">
-          {faq.answer}
+        <div className="overflow-hidden">
+          <p className="max-w-[60ch] pb-7 pr-14 text-base leading-[1.8] text-[#292622]/75">{faq.answer}</p>
         </div>
       </div>
     </div>
@@ -95,70 +109,79 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
 }
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
+  const uid = useId();
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
   };
 
-  const leftFaqs = faqs.filter((_, i) => i % 2 === 0);
-  const rightFaqs = faqs.filter((_, i) => i % 2 !== 0);
-
   return (
-    <section className="py-10 md:py-12 lg:py-12 bg-[#F7F2EB]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-14">
-        {/* Heading */}
-        <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#C8972B] text-[11px] sm:text-xs mb-4">
-            Frequently Asked Questions
-          </p>
+    <section className="bg-[#F7F3ED] py-16 md:py-24" aria-labelledby="faq-heading">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-          <h2 className="font-[Playfair,serif] text-[36px] sm:text-[44px] md:text-5xl text-[#2A1506] leading-tight">
-            Got Questions?
-          </h2>
+      <div className="mx-auto max-w-[1280px] px-5 sm:px-8 xl:px-12">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Left: heading + help card, pinned on large screens */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <h2
+                id="faq-heading"
+                className="font-heading text-4xl font-normal leading-[1.12] tracking-wide text-[#292622] md:text-5xl xl:text-6xl"
+              >
+                Questions, answered
+              </h2>
+              <p className="mt-5 max-w-md text-base leading-7 text-[#292622]/70">
+                The things homeowners ask us most about timelines, turnkey projects, kitchens and consultations.
+              </p>
 
-          <div className="w-12 h-px bg-[#C8972B] mx-auto mt-5 md:mt-2 mb-2 md:mb-2" />
-
-          <p className="text-[#6E6258] max-w-xl mx-auto leading-7 sm:leading-8 text-sm px-2">
-            Find answers to the most common questions about our design ideas,
-            architecture, and turnkey services.
-          </p>
-        </div>
-
-        {/* FAQ Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 -mt-5">
-          {/* Left Column */}
-          <div className="space-y-4">
-            {leftFaqs.map((faq) => {
-              const originalIndex = faqs.indexOf(faq);
-
-              return (
-                <FAQItem
-                  key={faq.question}
-                  faq={faq}
-                  index={originalIndex}
-                  openIndex={openIndex}
-                  toggleFAQ={toggleFAQ}
-                />
-              );
-            })}
+              <div className="relative mt-9 max-w-md rounded-sm bg-[#E8DED0] p-6 sm:p-7">
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
+                <p className="font-heading text-2xl font-normal tracking-wide text-[#292622]">Still have a question?</p>
+                <p className="mt-2 text-[15px] leading-relaxed text-[#292622]/70">
+                  Talk to our design team. We reply during studio hours, 10 AM to 7 PM.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={PHONE_TEL}
+                    className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#593719] px-5 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] ${ring} focus-visible:ring-offset-[#E8DED0]`}
+                  >
+                    <Phone size={16} aria-hidden="true" />
+                    {PHONE_DISPLAY}
+                  </a>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-[#593719]/50 bg-white px-5 text-[15px] font-semibold text-[#593719] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] ${ring} focus-visible:ring-offset-[#E8DED0]`}
+                  >
+                    <MessageCircle size={16} aria-hidden="true" />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-4">
-            {rightFaqs.map((faq) => {
-              const originalIndex = faqs.indexOf(faq);
-
-              return (
+          {/* Right: accordion */}
+          <div className="lg:col-span-7">
+            <div className="border-t border-[#292622]/15">
+              {faqs.map((faq, i) => (
                 <FAQItem
                   key={faq.question}
                   faq={faq}
-                  index={originalIndex}
-                  openIndex={openIndex}
-                  toggleFAQ={toggleFAQ}
+                  baseId={`${uid}-faq-${i}`}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? null : i)}
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>

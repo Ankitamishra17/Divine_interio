@@ -64,7 +64,7 @@ export default function MaterialsAndFinishes() {
   ];
 
   return (
-    <section className="py-20 bg-[#F5EBE0]">
+    <section className="py-20 bg-[#E8DED0]">
       <div className="max-w-7xl mx-auto px-4">
 
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden">

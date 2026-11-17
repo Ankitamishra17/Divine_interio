@@ -350,27 +350,7 @@ export default function ArchitectureHero() {
             </motion.div>
         </motion.div>
 
-        {/* Bottom Accent Line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{
-            duration: 1,
-            delay: 0.8,
-          }}
-          className="
-            mt-16
-            sm:mt-20
-            lg:mt-24
-
-            h-px
-            bg-gradient-to-r
-            from-transparent
-            via-[#C8972B]/50
-            to-transparent
-            origin-center
-          "
-        />
+   
       </div>
     </section>
   );

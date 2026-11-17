@@ -5,7 +5,7 @@ import { wardrobeAccessories, wardrobeFeatures } from "@/data/wardrobeData";
 
 export default function WardrobeAccessories() {
   return (
-    <section className="bg-[#F5EBE0] py-16">
+    <section className="bg-[#F7F3ED] py-16">
       <div className="container mx-auto px-4">
         {/* Premium Accessories */}
         <div className="rounded-3xl bg-white border border-[#e8dfd5] p-8">

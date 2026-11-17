@@ -1,70 +1,93 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
   {
     title: "Sofa",
-    image: "https://i.pinimg.com/1200x/ba/ec/d5/baecd59c765562016d8f793a3cdf98b9.jpg",
+    slug: "sofa",
+    count: 48,
+    image:
+      "https://i.pinimg.com/1200x/ba/ec/d5/baecd59c765562016d8f793a3cdf98b9.jpg",
   },
   {
     title: "Dining",
-    image: "https://i.pinimg.com/736x/4b/0d/b4/4b0db4c1ffe80956662e6bfb7720d45a.jpg",
+    slug: "dining",
+    count: 32,
+    image:
+      "https://i.pinimg.com/736x/4b/0d/b4/4b0db4c1ffe80956662e6bfb7720d45a.jpg",
   },
   {
     title: "Bedroom",
+    slug: "bedroom",
+    count: 27,
     image: "/image/bedroom_interior_design.webp",
   },
- 
   {
     title: "Wardrobe",
+    slug: "wardrobe",
+    count: 19,
     image: "/image/wardrobe_design8.webp",
   },
-  
 ];
 
 export default function CategorySection() {
   return (
-    <section className="bg-[#F8F4EE] py-20">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-[#F8F4EE] py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Heading */}
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <span className="w-12 h-[1px] bg-[#B88A5A]" />
-          <h2 className="text-xs tracking-[2px] text-nowrap font-heading text-[#3D1F0D] uppercase">
-            Browse By Category
+        <div className="mb-12 flex flex-col items-center text-center">
+          <h2 className="font-heading text-3xl text-[#3D1F0D] sm:text-4xl md:text-5xl">
+            Shop by room
           </h2>
-          <span className="w-12 h-[1px] bg-[#B88A5A]" />
+          <p className="mt-4 max-w-md text-base leading-relaxed text-[#6B5646]">
+            Furniture made to last, grouped by the space you are styling.
+          </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {categories.map((item, index) => (
-            <div
-              key={index}
-              className="group bg-white rounded-2xl border border-[#E8DDD0] overflow-hidden hover:shadow-xl transition-all duration-500"
+        {/* Equal cards */}
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+          {categories.map((item) => (
+            <Link
+              key={item.slug}
+              href={`/category/${item.slug}`}
+              className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B88A5A]"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-[#E8DDD0]">
                 <Image
                   src={item.image}
-                  alt={item.title}
+                  alt={`${item.title} furniture collection`}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
+
+                {/* Arrow badge */}
+                <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#3D1F0D] shadow-md backdrop-blur transition-colors duration-300 group-hover:bg-[#B88A5A] group-hover:text-white">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5 -rotate-45 transition-transform duration-300 group-hover:rotate-0 motion-reduce:transition-none"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 12h16m-6-6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </div>
 
-              {/* Content */}
-              <div className="relative text-center py-8">
-                {/* Icon Circle */}
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#B88A5A] border-2 border-white flex items-center justify-center shadow-lg">
-                  <span className="text-white text-lg">⌂</span>
-                </div>
-
-                <h3 className="text-[#3D1F0D] font-heading text-lg mt-2">
+              {/* Text */}
+              <div className="flex items-baseline justify-between px-1 pt-4">
+                <h3 className="font-heading text-xl text-[#3D1F0D] sm:text-2xl">
                   {item.title}
                 </h3>
-
-                
+                <span className="text-sm text-[#6B5646]">
+                  {item.count} products
+                </span>
               </div>
-            </div>
+              <span className="mt-2 block h-px w-full origin-left scale-x-0 bg-[#B88A5A] transition-transform duration-500 group-hover:scale-x-100 motion-reduce:transition-none" />
+            </Link>
           ))}
         </div>
       </div>

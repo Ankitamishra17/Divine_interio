@@ -17,7 +17,7 @@ const VIEW = { y: 40, h: 370 };
 const LOCATION = { lng: 77.5, lat: 28.47 };
 const LABEL = "We are here";
 const PLACE = "Greater Noida";
-const STUDIO = "Living Space Decor";
+const STUDIO = "Divine Interio";
 const ADDRESS =
   "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009";
 

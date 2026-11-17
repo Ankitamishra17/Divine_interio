@@ -1,162 +1,158 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { Phone, MapPin, Clock, MessageCircle, ArrowDown } from "lucide-react";
+
+const PHONE_DISPLAY = "+91 88266 06869";
+const PHONE_TEL = "tel:+918826606869";
+const WHATSAPP_URL = "https://wa.me/918826606869";
+
+// Add id="contact-form" to your form section so this button scrolls to it
+const FORM_ANCHOR = "#contact-form";
+
+const ring =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8972B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F0E04]";
+
+const facts = [
+  {
+    icon: Phone,
+    label: "Call us",
+    value: PHONE_DISPLAY,
+    href: PHONE_TEL,
+  },
+  {
+    icon: MapPin,
+    label: "Where we work",
+    value: "Noida & Delhi NCR",
+  },
+  {
+    icon: Clock,
+    label: "Studio hours",
+    value: "10 AM to 7 PM",
+  },
+];
 
 export default function ContactHeroSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
-      className="
-        relative
-        min-h-[100svh]
-        flex
-        items-center
-        justify-center
-        overflow-hidden
-      "
-      style={{
-        backgroundImage: "url('/Design/contact_banner.avif')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      aria-labelledby="contact-hero-heading"
+      className="relative isolate overflow-hidden bg-[#1F0E04]"
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#1F0E04]/70" />
+      {/* Background image: next/image so it loads early and at the right size */}
+      <Image
+        src="/banner/14.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover"
+      />
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8 lg:px-14 text-center">
-        {/* Eyebrow */}
+      {/* Darker at the bottom where the text sits, lighter at the top so the photo still shows */}
+   <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-[#292622] via-[#292622]/80 via-45% to-[#292622]/10 md:bg-gradient-to-r md:from-[#292622]/90 md:via-[#292622]/60 md:to-[#292622]/10"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 hidden h-56 bg-gradient-to-t from-[#292622]/85 to-transparent md:block"
+      />
+
+      <div className="mx-auto flex min-h-[34rem] w-full max-w-[1200px] flex-col justify-between px-5 pb-8 pt-5 sm:min-h-[36rem] sm:px-8 md:pt-20 lg:min-h-[70svh] lg:px-4">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm text-white/70">
+            <li>
+              <Link
+                href="/"
+                className={`rounded-sm transition-colors hover:text-[#C8972B] ${ring}`}
+              >
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" className="text-[#E3B352]">
+              Contact
+            </li>
+          </ol>
+        </nav>
+
+        {/* Main content: one reveal, left aligned */}
         <motion.div
-          className="flex items-center justify-center gap-2 sm:gap-3 mb-6 md:mb-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.3,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mt-3 max-w-3xl"
         >
-          <motion.span
-            className="block h-px w-6 md:w-8 bg-[#C8972B] origin-right"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          />
-
-          <p
-            className="
-              uppercase
-              tracking-[0.18em]
-              sm:tracking-[0.25em]
-              md:tracking-[0.35em]
-              text-[#C8972B]
-              text-[10px]
-              sm:text-xs
-              font-heading
-            "
+          <h1
+            id="contact-hero-heading"
+            className="font-heading text-[38px] font-medium leading-[1.08] text-white sm:text-5xl lg:text-[64px]"
           >
-            Get In Touch
+            Let&rsquo;s create your dream space
+          </h1>
+
+          <p className="mt-5 max-w-xl text-base leading-8 text-white/80 md:text-lg">
+            Whether you&rsquo;re planning a complete home transformation or
+            looking for expert interior guidance, tell us about your space and
+            we&rsquo;ll take it from there.
           </p>
 
-          <motion.span
-            className="block h-px w-6 md:w-8 bg-[#C8972B] origin-left"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          />
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={FORM_ANCHOR}
+              className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#C8972B] px-7 text-[15px] font-semibold text-[#1F0E04] transition-colors duration-300 hover:bg-[#E3B352] ${ring}`}
+            >
+              Send an enquiry
+              <ArrowDown
+                size={17}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none"
+              />
+            </a>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-white/40 px-7 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-white/10 ${ring}`}
+            >
+              <MessageCircle size={17} aria-hidden="true" />
+              Chat on WhatsApp
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </div>
         </motion.div>
 
-        {/* Heading */}
-        <motion.h1
-          className="
-            font-heading
-            text-white
-            leading-[1.05]
-            font-medium
-            text-[30px]
-            sm:text-[44px]
-            md:text-[50px]
-            lg:text-[60px]
-          "
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.9,
-            delay: 0.4,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
-        >
-          Let's Create Your
-          <br />
-          <span className="text-[#C8972B] font-heading">Dream Space</span>
-        </motion.h1>
-
-        {/* Divider */}
-        <motion.div
-          className="mx-auto mt-5 md:mt-6 h-px bg-[#C8972B]"
-          initial={{ width: 0 }}
-          animate={{ width: 60 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.8,
-          }}
-        />
-
-        {/* Description */}
-        <motion.p
-          className="
-            max-w-2xl
-            mx-auto
-            mt-5
-            md:mt-6
-            text-white/75
-            text-sm
-            sm:text-base
-            md:text-sm
-            leading-7
-            md:leading-8
-            px-2
-          "
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.9,
-          }}
-        >
-          Whether you're planning a complete home transformation or looking for
-          expert interior guidance, we're here to bring your vision to life.
-        </motion.p>
-
-        {/* Breadcrumb */}
-        <motion.div
-          className="
-            flex
-            items-center
-            justify-center
-            gap-2
-            md:gap-3
-            mt-7
-            md:mt-8
-            text-xs
-            sm:text-sm
-            text-white/60
-          "
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 1.1,
-          }}
-        >
-          <Link href="/" className="hover:text-[#C8972B] transition-colors">
-            Home
-          </Link>
-
-          <span>/</span>
-
-          <span className="text-[#C8972B]">Contact</span>
-        </motion.div>
+        {/* Quick facts */}
+        <ul className="mt-14 grid gap-5 border-t border-white/20 pt-6 sm:grid-cols-3 sm:gap-8">
+          {/* {facts.map(({ icon: Icon, label, value, href }) => (
+            <li key={label} className="flex items-center gap-4">
+              <span
+                aria-hidden="true"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#C8972B]/60 text-[#E3B352]"
+              >
+                <Icon size={18} strokeWidth={1.6} />
+              </span>
+              <div>
+                <p className="text-sm text-white/65">{label}</p>
+                {href ? (
+                  <a
+                    href={href}
+                    className={`rounded-sm text-base font-medium text-white underline decoration-[#C8972B] decoration-1 underline-offset-4 transition-colors hover:text-[#E3B352] ${ring}`}
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <p className="text-base font-medium text-white">{value}</p>
+                )}
+              </div>
+            </li>
+          ))} */}
+        </ul>
       </div>
     </section>
   );

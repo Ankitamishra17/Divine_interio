@@ -1,463 +1,103 @@
-// "use client";
-
-// import Image from "next/image";
-// import { kitchenShapes } from "@/data/kitchenCalculatorData";
-
-// export default function ShapeStep({
-//   selected,
-//   onSelect,
-//   onNext,
-//   onBack,
-// }) {
-//   const activeShape =
-//     kitchenShapes.find(
-//       (shape) => shape.id === selected
-//     ) || kitchenShapes[0];
-
-//   return (
-//     <div>
-//       {/* Heading */}
-//       <div className="text-center mb-10">
-//         <p className="text-[#C8972B] font-medium mb-2">
-//           Step 2 of 4
-//         </p>
-
-//         <h2 className="text-3xl md:text-4xl font-bold text-[#3D1F0D]">
-//           Select Kitchen Shape
-//         </h2>
-
-//         <p className="text-gray-600 mt-3">
-//           Choose your preferred kitchen layout
-//         </p>
-//       </div>
-
-//       {/* Shape Layout */}
-//       <div className="grid lg:grid-cols-2 gap-10 items-center">
-        
-//         {/* Left Side */}
-//         <div className="space-y-4">
-//           {kitchenShapes.map((shape) => (
-//             <button
-//               key={shape.id}
-//               onClick={() => onSelect(shape.id)}
-//               className={`w-full p-5 rounded-2xl border-2 transition-all text-left
-              
-//               ${
-//                 selected === shape.id
-//                   ? "border-[#C8972B] bg-[#F5EBE0]"
-//                   : "border-gray-200 hover:border-[#C8972B]/40"
-//               }
-//             `}
-//             >
-//               <div className="flex items-center gap-4">
-//                 <div
-//                   className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
-                  
-//                   ${
-//                     selected === shape.id
-//                       ? "border-[#C8972B]"
-//                       : "border-gray-300"
-//                   }
-//                 `}
-//                 >
-//                   {selected === shape.id && (
-//                     <div className="w-3 h-3 rounded-full bg-[#C8972B]" />
-//                   )}
-//                 </div>
-
-//                 <div>
-//                   <h3 className="font-semibold text-[#3D1F0D]">
-//                     {shape.title}
-//                   </h3>
-
-//                   <p className="text-sm text-gray-500 mt-1">
-//                     {shape.description}
-//                   </p>
-//                 </div>
-//               </div>
-//             </button>
-//           ))}
-//         </div>
-
-//         {/* Right Side */}
-//         <div className="flex justify-center">
-//           <div className="bg-[#F5EBE0] rounded-3xl p-8 w-full max-w-md">
-//             <Image
-//               src={activeShape.image}
-//               alt={activeShape.title}
-//               width={450}
-//               height={450}
-//               className="w-full h-auto object-contain"
-//             />
-
-//             <h3 className="text-center text-xl font-bold text-[#3D1F0D] mt-6">
-//               {activeShape.title}
-//             </h3>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Buttons */}
-//       <div className="flex justify-center gap-4 mt-12">
-//         <button
-//           onClick={onBack}
-//           className="px-8 py-3 border border-[#3D1F0D] rounded-full text-[#3D1F0D] font-medium"
-//         >
-//           Back
-//         </button>
-
-//         <button
-//           disabled={!selected}
-//           onClick={onNext}
-//           className={`px-10 py-3 rounded-full font-medium transition
-          
-//           ${
-//             selected
-//               ? "bg-[#3D1F0D] text-white"
-//               : "bg-gray-300 text-gray-500 cursor-not-allowed"
-//           }
-//         `}
-//         >
-//           Next
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { LayoutGrid, Layout, Wind, Zap } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { kitchenShapes } from "@/data/kitchenCalculatorData";
 
-// Shape icons and metadata
-const shapeMetadata = {
-  linear: { icon: LayoutGrid, color: "#3b82f6" },
-  lshaped: { icon: Layout, color: "#f59e0b" },
-  ushaped: { icon: Wind, color: "#8b5cf6" },
-  galley: { icon: Zap, color: "#ec4899" },
-};
+/*
+  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  - Title, step count and Back live in KitchenCostCalculator now.
+  - Layouts are real radio buttons. The preview shows the selected layout (or the first one until you choose).
+  - Removed: rainbow icon colours, the endlessly spinning icon, and "Scroll down to see action buttons".
+  - "Best for" and "Work triangle" only appear when your data has them (no made-up "Various spaces").
+*/
 
-export default function ShapeStep({
-  selected,
-  onSelect,
-  onNext,
-  onBack,
-}) {
-  const [imageLoading, setImageLoading] = useState(true);
-
-  const activeShape =
-    kitchenShapes.find((shape) => shape.id === selected) ||
-    kitchenShapes[0];
-
-  const metadata = shapeMetadata[selected] || shapeMetadata.linear;
-  const Icon = metadata.icon;
+export default function ShapeStep({ selected, onSelect, onNext }) {
+  const active = kitchenShapes.find((s) => s.id === selected) || kitchenShapes[0];
 
   return (
     <div>
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-14"
-      >
-        <p className="text-sm tracking-widest uppercase text-[#C8972B] font-medium mb-4">
-          Step 2 of 4
-        </p>
+      <p className="font-body max-w-xl text-[15px] font-light leading-7 text-[#292622]/75">
+        Select the layout that matches your space and the way you cook.
+      </p>
 
-        <h2 className="text-4xl md:text-5xl font-heading text-[#3D1F0D] mb-4">
-          Choose Your Kitchen
-          <br />
-          <span className="text-[#C8972B]">Layout</span>
-        </h2>
-
-        <p className="text-gray-600 text-sm max-w-2xl mx-auto leading-relaxed">
-          Select the kitchen shape that matches your space and workflow needs
-        </p>
-      </motion.div>
-
-      {/* Main Content */}
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-        {/* Left Side - Shape Options */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="space-y-4 order-2 lg:order-1"
-        >
-          <p className="text-sm font-heading text-gray-600 uppercase tracking-wide mb-6">
-            Available Layouts
-          </p>
-
-          <AnimatePresence mode="popLayout">
-            {kitchenShapes.map((shape, idx) => {
-              const shapeIcon = shapeMetadata[shape.id];
-              const ShapeIcon = shapeIcon?.icon || LayoutGrid;
-              const isSelected = selected === shape.id;
-
-              return (
-                <motion.button
-                  key={shape.id}
-                  onClick={() => onSelect(shape.id)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  whileHover={{ x: 8 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`relative w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left overflow-hidden group
-                    ${
-                      isSelected
-                        ? "border-[#C8972B] bg-[#F5EBE0]"
-                        : "border-gray-200 bg-white hover:border-[#C8972B]/40"
-                    }`}
-                >
-                  {/* Background glow on select */}
-                  {isSelected && (
-                    <motion.div
-                      layoutId="shape-glow"
-                      className="absolute inset-0 bg-gradient-to-r from-[#C8972B]/10 to-transparent"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
-
-                  <div className="relative z-10 flex items-start gap-4">
-                    {/* Radio Circle */}
-                    <motion.div
-                      animate={isSelected ? { scale: 1.2 } : { scale: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className={`flex-shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center mt-1
-                        ${
-                          isSelected
-                            ? "border-[#C8972B]"
-                            : "border-gray-300 group-hover:border-[#C8972B]/60"
-                        }`}
-                    >
-                      {isSelected && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 200,
-                          }}
-                          className="w-3 h-3 rounded-full bg-[#C8972B]"
-                        />
-                      )}
-                    </motion.div>
-
-                    {/* Icon and Text */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <motion.div
-                          animate={
-                            isSelected
-                              ? { rotate: 360, scale: 1.1 }
-                              : { rotate: 0, scale: 1 }
-                          }
-                          transition={{ duration: 0.4 }}
-                          className="flex-shrink-0 p-2 rounded-lg"
-                          style={{
-                            backgroundColor:
-                              shapeIcon?.color + "20",
-                          }}
-                        >
-                          <ShapeIcon
-                            size={16}
-                            strokeWidth={2}
-                            style={{
-                              color: shapeIcon?.color || "#3D1F0D",
-                            }}
-                          />
-                        </motion.div>
-
-                        <h3 className="font-heading text-nowrap text-[#3D1F0D] text-[11px] lg:text[14px]">
-                          {shape.title}
-                        </h3>
-                      </div>
-
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {shape.description}
-                      </p>
-                    </div>
-
-                    {/* Hover indicator */}
-                    {!isSelected && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        whileHover={{ opacity: 1, x: 0 }}
-                        className="flex-shrink-0 text-[#C8972B]"
-                      >
-                        →
-                      </motion.div>
-                    )}
+      <div className="mt-6 grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
+        {/* Preview (first on phones so you see what you're choosing) */}
+        <div className="order-1 rounded-sm border border-[#E8DED0] bg-[#F7F3ED] p-4 sm:p-5 lg:order-2 lg:sticky lg:top-6">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white lg:aspect-square">
+            <Image
+              key={active.id}
+              src={active.image}
+              alt={`${active.title} kitchen layout`}
+              fill
+              priority
+              sizes="(min-width: 1024px) 400px, 90vw"
+              className="object-contain p-3"
+            />
+          </div>
+          <p className="font-heading mt-4 text-2xl text-[#292622]">{active.title}</p>
+          {(active.bestFor || active.workTriangle) && (
+            <dl className="mt-3 grid grid-cols-2 gap-3">
+              {[
+                ["Best for", active.bestFor],
+                ["Work triangle", active.workTriangle],
+              ]
+                .filter(([, v]) => v)
+                .map(([k, v]) => (
+                  <div key={k} className="rounded-sm bg-white p-3">
+                    <dt className="font-body text-[11px] uppercase tracking-[0.18em] text-[#292622]/60">{k}</dt>
+                    <dd className="font-body mt-1 text-sm text-[#292622]">{v}</dd>
                   </div>
-                </motion.button>
+                ))}
+            </dl>
+          )}
+        </div>
+
+        {/* Choices */}
+        <fieldset className="order-2 lg:order-1">
+          <legend className="sr-only">Kitchen layout</legend>
+          <div className="space-y-3">
+            {kitchenShapes.map((shape) => {
+              const on = selected === shape.id;
+              return (
+                <label key={shape.id} className="relative block">
+                  <input type="radio" name="shape" value={shape.id} checked={on} onChange={() => onSelect(shape.id)} className="peer sr-only" />
+                  <span className="flex cursor-pointer items-start gap-4 rounded-sm border border-[#292622]/20 bg-[#F7F3ED] p-5 transition-colors duration-300 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:bg-white peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#C18A35] peer-focus-visible:ring-offset-2">
+                    <span
+                      aria-hidden="true"
+                      className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${on ? "border-[#593719] bg-[#593719] text-[#F7F3ED]" : "border-[#292622]/30 bg-white"}`}
+                    >
+                      {on && <Check size={14} />}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="font-heading block text-xl leading-tight text-[#292622]">{shape.title}</span>
+                      <span className="font-body mt-1.5 block text-sm font-light leading-6 text-[#292622]/70">{shape.description}</span>
+                    </span>
+                  </span>
+                </label>
               );
             })}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Right Side - Image Preview */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex flex-col justify-center order-1 lg:order-2"
-        >
-          {/* Image Container */}
-          <div className="sticky top-20 lg:top-32">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeShape.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="bg-gradient-to-br from-[#F5EBE0] to-[#F5EBE0]/50 rounded-3xl p-8 md:p-10 border border-[#C8972B]/10 shadow-lg shadow-[#C8972B]/5"
-              >
-                {/* Image Wrapper */}
-                <div className="relative aspect-square flex items-center justify-center mb-8 overflow-hidden rounded-2xl">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: imageLoading ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-br from-[#C8972B]/10 to-transparent"
-                  />
-
-                  <Image
-                    src={activeShape.image}
-                    alt={activeShape.title}
-                    width={450}
-                    height={450}
-                    priority
-                    onLoadingComplete={() => setImageLoading(false)}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-
-                {/* Shape Info */}
-                <div className="space-y-2 -mt-16">
-                  <div className="flex items-center gap-3 pb-4 border-b border-[#C8972B]/20">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "loop",
-                      }}
-                      className="flex-shrink-0 p-2.5 rounded-lg"
-                      style={{
-                        backgroundColor:
-                         "#3D1F0D"  + "20",
-                      }}
-                    >
-                      <Icon
-                        size={24}
-                        strokeWidth={2}
-                        style={{
-                          color:  "#3D1F0D",
-                        }}
-                      />
-                    </motion.div>
-
-                    <div>
-                      <h3 className="text-2xl font-bold text-[#3D1F0D]">
-                        {activeShape.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        Kitchen Layout
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Details */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="grid grid-cols-2 gap-4"
-                  >
-                    {[
-                      {
-                        label: "Best For",
-                        value: activeShape.bestFor || "Various spaces",
-                      },
-                      {
-                        label: "Work Triangle",
-                        value: activeShape.workTriangle || "Optimized",
-                      },
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3 rounded-xl bg-white/60 backdrop-blur-sm"
-                      >
-                        <p className="text-xs font-body uppercase tracking-wide text-gray-600 mb-1">
-                          {item.label}
-                        </p>
-                        <p className="text-sm font-body text-[#3D1F0D]">
-                          {item.value}
-                        </p>
-                      </div>
-                    ))}
-                  </motion.div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Mobile Image Note */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="text-center text-sm text-gray-600 mt-6 lg:hidden"
-            >
-              Scroll down to see action buttons
-            </motion.p>
           </div>
-        </motion.div>
+        </fieldset>
       </div>
 
-      
-      {/* Action Buttons */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto mt-12"
-      >
+      <div className="mt-8 flex flex-col items-start gap-3">
         <button
-          onClick={onBack}
-          className="px-8 py-3 border-2 border-[#3D1F0D] text-[#3D1F0D] rounded-md font-body hover:bg-[#3D1F0D]/5 transition-all duration-300 w-full sm:w-auto"
-        >
-          Back
-        </button>
-
-        <motion.button
-          whileHover={selected ? { scale: 1.05 } : {}}
-          whileTap={selected ? { scale: 0.95 } : {}}
-          disabled={!selected}
+          type="button"
           onClick={onNext}
-          className={`px-12 py-4 rounded-md font-body text-nowrap text-md transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto
-            ${
-              selected
-                ? "bg-[#3D1F0D] text-white hover:bg-[#2A1408] shadow-lg shadow-[#3D1F0D]/20 hover:shadow-xl hover:shadow-[#3D1F0D]/30"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed"
-            }`}
+          disabled={!selected}
+          aria-describedby={!selected ? "shape-hint" : undefined}
+          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
         >
-          Continue to Package
-          <motion.span
-            animate={selected ? { x: [0, 4, 0] } : {}}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            →
-          </motion.span>
-        </motion.button>
-      </motion.div>
+          Continue
+          <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
+        </button>
+        {!selected && (
+          <p id="shape-hint" className="font-body text-sm text-[#292622]/60">
+            Choose a layout to continue.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

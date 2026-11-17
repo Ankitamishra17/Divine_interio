@@ -5,10 +5,8 @@ import Link from "next/link";
 
 export default function KitchenCTA() {
   return (
-    <section className="py-12 bg-[#3D1F0D] relative overflow-hidden">
+    <section className="py-12 bg-[#292622] relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-0 left-0 w-72 h-42 bg-[#B8851F]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-72 h-42 bg-[#B8851F]/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">

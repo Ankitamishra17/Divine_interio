@@ -1,133 +1,200 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+
+// Apni route yahan change kar lena
+const CONTACT_HREF = "/contact";
 
 export default function DesignGallery({ data }) {
-  const leftRef = useRef(null);
-  const centerRef = useRef(null);
-  const rightRef = useRef(null);
+  const reduce = useReducedMotion();
+  const [active, setActive] = useState(null);
+  const triggerRef = useRef(null);
 
-  const leftInView = useInView(leftRef, { once: true, margin: "-100px" });
-  const centerInView = useInView(centerRef, { once: true, margin: "-100px" });
-  const rightInView = useInView(rightRef, { once: true, margin: "-100px" });
+  const images = [
+    { src: data.leftImage, label: data.title },
+    { src: data.rightImage, label: `${data.title} – detail` },
+  ];
 
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+  const open = (i, e) => {
+    triggerRef.current = e.currentTarget;
+    setActive(i);
+  };
+  const close = () => {
+    setActive(null);
+    triggerRef.current?.focus();
   };
 
-  const contentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, delay: 0.2, ease: "easeOut" },
-    },
-  };
+  useEffect(() => {
+    if (active === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        setActive((a) => (a + 1) % images.length);
+      }
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
+  // whileInView: page load par jo screen mein hai woh turant dikhta hai
+  const reveal = (delay = 0) => ({
+    initial: reduce ? false : { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.1 },
+    transition: { duration: 0.7, delay, ease: "easeOut" },
+  });
+
+  const archBtn =
+    "group relative block h-full w-full overflow-hidden rounded-t-[999px] rounded-b-2xl bg-[#e8dfd5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F5EBE0]";
 
   return (
-    <section className="bg-[#F5EBE0] py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-10 items-center">
-          {/* Left Image */}
+    <section className="bg-[#F5EBE0] py-14 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="grid grid-cols-2 items-center gap-x-4 gap-y-10 lg:grid-cols-[1fr_minmax(0,1.05fr)_1fr] lg:gap-x-12">
+          {/* Center content: mobile par sabse upar */}
           <motion.div
-            ref={leftRef}
-            initial="hidden"
-            animate={leftInView ? "visible" : "hidden"}
-            variants={imageVariants}
-            className="relative h-[380px] md:h-[480px] group"
+            {...reveal(0.05)}
+            className="order-1 col-span-2 text-center lg:order-2 lg:col-span-1"
           >
-            {/* Main border frame */}
-            <div className="absolute inset-0 border border-[#C8972B]/20 pointer-events-none z-10" />
-            
-            {/* Left side accent border */}
-            <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C8972B]/30 via-[#C8972B]/60 to-[#C8972B]/30" />
-            
-            {/* Right side accent border */}
-            <div className="absolute -right-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C8972B]/30 via-[#C8972B]/60 to-[#C8972B]/30" />
 
-            <Image
-              src={data.leftImage}
-              alt={data.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </motion.div>
-
-          {/* Center Content */}
-          <motion.div
-            ref={centerRef}
-            initial="hidden"
-            animate={centerInView ? "visible" : "hidden"}
-            variants={contentVariants}
-            className="text-center px-2"
-          >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={centerInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[#B8851F] uppercase tracking-[2px] text-[10px] font-medium"
-            >
-              About The Design
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={centerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-5 text-[#3D1F0D] text-3xl md:text-4xl font-serif leading-tight tracking-tight"
-            >
+            <h2 className="mt-6 font-serif text-3xl leading-tight tracking-tight text-[#3D1F0D] md:text-4xl lg:text-5xl">
               {data.galleryTitle}
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={centerInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 text-xs md:text-sm text-[#6B6B6B] leading-7 max-w-sm mx-auto font-light"
-            >
+            <p className="mx-auto mt-5 max-w-sm text-sm leading-7 text-[#3D1F0D]/70 md:text-base md:leading-8">
               {data.galleryDescription}
-            </motion.p>
+            </p>
 
-            
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link
+                href={`${CONTACT_HREF}?design=${encodeURIComponent(data.title ?? "")}`}
+                className="group/cta inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#B8851F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5EBE0]"
+              >
+                Enquire about this design
+                <ArrowRight
+                  size={16}
+                  className="transition-transform group-hover/cta:translate-x-1 motion-reduce:transition-none"
+                />
+              </Link>
+            </div>
+
           </motion.div>
 
-          {/* Right Image */}
+          {/* Left arch image */}
           <motion.div
-            ref={rightRef}
-            initial="hidden"
-            animate={rightInView ? "visible" : "hidden"}
-            variants={imageVariants}
-            className="relative h-[380px] md:h-[480px] group"
+            {...reveal(0.15)}
+            className="order-2 h-[300px] sm:h-[420px] lg:order-1 lg:h-[540px]"
           >
-            {/* Main border frame */}
-            <div className="absolute inset-0 border border-[#C8972B]/20 pointer-events-none z-10" />
-            
-            {/* Left side accent border */}
-            <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C8972B]/30 via-[#C8972B]/60 to-[#C8972B]/30" />
-            
-            {/* Right side accent border */}
-            <div className="absolute -right-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C8972B]/30 via-[#C8972B]/60 to-[#C8972B]/30" />
+            <button
+              type="button"
+              onClick={(e) => open(0, e)}
+              aria-label={`View ${images[0].label} larger`}
+              className={archBtn}
+            >
+              <Image
+                src={images[0].src}
+                alt={images[0].label}
+                fill
+                priority
+                sizes="(max-width: 1024px) 50vw, 30vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
+              />
+              {/* Inner frame */}
+              <span className="pointer-events-none absolute inset-3 rounded-t-[999px] rounded-b-xl border border-white/60" />
+            </button>
+          </motion.div>
 
-            <Image
-              src={data.rightImage}
-              alt={data.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {/* Right arch image */}
+          <motion.div
+            {...reveal(0.25)}
+            className="order-3 h-[300px] sm:h-[420px] lg:h-[540px]"
+          >
+            <button
+              type="button"
+              onClick={(e) => open(1, e)}
+              aria-label={`View ${images[1].label} larger`}
+              className={archBtn}
+            >
+              <Image
+                src={images[1].src}
+                alt={images[1].label}
+                fill
+                sizes="(max-width: 1024px) 50vw, 30vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
+              />
+              <span className="pointer-events-none absolute inset-3 rounded-t-[999px] rounded-b-xl border border-white/60" />
+            </button>
           </motion.div>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {active !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={images[active].label}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#3D1F0D]/90 p-4 backdrop-blur-sm"
+          onClick={close}
+        >
+          <button
+            type="button"
+            autoFocus
+            onClick={close}
+            aria-label="Close"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F]"
+          >
+            <X size={22} />
+          </button>
+
+          {[
+            { dir: -1, label: "Previous image", Icon: ChevronLeft, pos: "left-2 md:left-6" },
+            { dir: 1, label: "Next image", Icon: ChevronRight, pos: "right-2 md:right-6" },
+          ].map(({ dir, label, Icon, pos }) => (
+            <button
+              key={label}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive((a) => (a + dir + images.length) % images.length);
+              }}
+              aria-label={label}
+              className={`absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] ${pos}`}
+            >
+              <Icon size={24} />
+            </button>
+          ))}
+
+          <figure className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+            <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl bg-[#F5EBE0] md:h-[72vh]">
+              <Image
+                key={images[active].src}
+                src={images[active].src}
+                alt={images[active].label}
+                fill
+                sizes="(max-width: 1024px) 100vw, 896px"
+                className="object-contain"
+              />
+            </div>
+            <figcaption className="mt-4 flex items-center justify-between gap-3">
+              <p className="font-serif text-xl text-white">{images[active].label}</p>
+              <span className="text-sm text-white/60">
+                {active + 1} / {images.length}
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      )}
     </section>
   );
 }

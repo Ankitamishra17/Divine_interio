@@ -346,7 +346,7 @@ export default function Footer() {
               className="flex items-center gap-3 group flex-shrink-0"
             >
               <Image
-                src="/divine_logo.png"
+                src="/divine_logo_trimmed1.png"
                 alt="Living Space Decor"
                 width={300}
                 height={80}
@@ -471,8 +471,8 @@ export default function Footer() {
 
             <ContactRow
               label="Call"
-              value="+91 8826606869"
-              href="tel:+918826606869"
+              value="+91 9876543210"
+              href="tel:+919876543210"
               icon={
                 <svg
                   width="16"
@@ -491,8 +491,8 @@ export default function Footer() {
 
             <ContactRow
               label="Email"
-              value="info@livingspacedekor.com"
-              href="mailto:info@livingspacedekor.com"
+              value="info@divineinterio.com"
+              href="mailto:info@divineinterio.com"
               icon={
                 <svg
                   width="16"
@@ -538,7 +538,7 @@ export default function Footer() {
                 margin: 0,
               }}
             >
-              © 2026 Living Space Decor Pvt. Ltd. All rights reserved.
+              © 2026 Divine Interio Pvt. Ltd. All rights reserved.
             </p>
 
             <div

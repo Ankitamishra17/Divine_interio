@@ -1,152 +1,91 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const stats = [
+  { value: "250+", label: "Projects" },
+  { value: "15+", label: "Years" },
+  { value: "40+", label: "Awards" },
+];
+
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E3B352]";
 
 export default function CTA() {
   return (
-    <section className="bg-[#F8F6F1] py-16 md:py-20 lg:py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-sm bg-[#F2EBD9]">
-          <div className="grid lg:grid-cols-2">
-            {/* Content Side */}
-            <div className="flex items-center order-2 lg:order-1">
-              <div className="w-full px-6 sm:px-8 lg:px-20 py-12 md:py-16 lg:py-24">
-                {/* Eyebrow */}
-                <div className="flex items-center justify-center lg:justify-start gap-3 md:gap-5 mb-8 md:mb-10">
-                  <div className="h-px w-8 md:w-16 bg-[#B8954A]" />
+    <section
+      aria-labelledby="cta-heading"
+      className="bg-[#F8F6F1] py-16 md:py-20 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid overflow-hidden rounded-2xl bg-[#292622] sm:rounded-3xl lg:grid-cols-12">
+          {/* Content: first on every screen size, so the action is never pushed below an image */}
+          <div className="px-6 py-12 sm:px-10 md:py-14 lg:col-span-7 lg:px-16 lg:py-20">
+            <p className="text-sm font-semibold text-[#292622]">
+              Begin your journey
+            </p>
 
-                  <span className="uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.4em] text-[#B8954A] text-[10px] sm:text-xs text-center">
-                    Begin Your Journey
-                  </span>
+            <h2
+              id="cta-heading"
+              className="mt-4 font-heading text-4xl leading-tight text-[#F8F6F1] sm:text-5xl lg:text-[56px]"
+            >
+              Ready to transform your space?
+            </h2>
 
-                  <div className="h-px w-8 md:w-16 bg-[#B8954A]" />
-                </div>
+            <p className="mt-6 max-w-xl text-base leading-8 text-[#F8F6F1]/75">
+              Schedule a complimentary consultation and let&rsquo;s begin
+              crafting an interior that reflects your lifestyle, personality,
+              and aspirations.
+            </p>
 
-                {/* Heading */}
-                <h2 className="font-heading text-[#231A14] text-[34px] sm:text-[42px] md:text-[50px] lg:text-[56px] leading-tight text-center lg:text-left">
-                  Ready to{" "}
-                  <span className="font-heading text-[#C59A43]">Transform</span>
-                  <br />
-                  Your Space?
-                </h2>
+            {/* Actions */}
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
+              <Link
+                href="/contact"
+                className={`group inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#C8972B] px-8 text-base font-semibold text-[#1E0F06] transition-colors duration-300 hover:bg-[#E3B352] ${focusRing}`}
+              >
+                Book a free consultation
+                <ArrowRight
+                  size={18}
+                  aria-hidden="true"
+                  className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+                />
+              </Link>
 
-                {/* Description */}
-                <p className="mt-6 md:mt-8 text-[#6A5F55] leading-7 md:leading-8 max-w-xl text-sm sm:text-base text-center lg:text-left">
-                  Schedule a complimentary consultation and let’s begin crafting
-                  an interior that reflects your lifestyle, personality, and
-                  aspirations.
-                </p>
-
-                {/* Stats */}
-                <div className="flex flex-wrap md:flex-nowrap justify-center lg:justify-start items-center gap-6 md:gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-[#DCCFAF]">
-                  <div className="text-center">
-                    <h3 className="text-[#C59A43] text-3xl md:text-4xl font-light">
-                      250+
-                    </h3>
-
-                    <p className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-[#9A8D7E] mt-2">
-                      Projects
-                    </p>
-                  </div>
-
-                  <div className="hidden md:block h-14 w-px bg-[#DCCFAF]" />
-
-                  <div className="text-center">
-                    <h3 className="text-[#C59A43] text-3xl md:text-4xl font-light">
-                      15+
-                    </h3>
-
-                    <p className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-[#9A8D7E] mt-2">
-                      Years
-                    </p>
-                  </div>
-
-                  <div className="hidden md:block h-14 w-px bg-[#DCCFAF]" />
-
-                  <div className="text-center">
-                    <h3 className="text-[#C59A43] text-3xl md:text-4xl font-light">
-                      40+
-                    </h3>
-
-                    <p className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-[#9A8D7E] mt-2">
-                      Awards
-                    </p>
-                  </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mt-10 md:mt-12">
-                  {/* Contact Button */}
-                  <Link
-                    href="/contact"
-                    className="
-                      group
-                      w-full sm:w-auto
-                      bg-[#2B1A0D]
-                      text-white
-                      px-4 md:px-4
-                      py-4
-                      uppercase
-                      tracking-[0.08em] md:tracking-[0.1em]
-                      text-[11px] md:text-xs
-                      transition
-                      hover:bg-[#3A2412]
-                      text-center
-                    "
-                  >
-                    Book Free Consultation
-                    <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </Link>
-
-                  {/* Portfolio Button */}
-                  <Link
-                    href="/portfolio"
-                    className="
-                      w-full sm:w-auto
-                      border
-                      border-[#D7C8A3]
-                      text-[#B8954A]
-                      px-6
-                      py-4
-                      uppercase
-                      tracking-[0.08em] md:tracking-[0.1em]
-                      text-[11px] md:text-sm
-                      transition
-                      hover:bg-white
-                      text-center
-                    "
-                  >
-                    View Portfolio
-                  </Link>
-                </div>
-              </div>
+              <Link
+                href="/portfolio"
+                className={`inline-flex min-h-14 items-center justify-center rounded-full border border-[#F8F6F1]/35 px-8 text-base font-semibold text-[#F8F6F1] transition-colors duration-300 hover:bg-[#F8F6F1]/10 ${focusRing}`}
+              >
+                View portfolio
+              </Link>
             </div>
 
-            {/* Image Side */}
-            <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[500px] lg:min-h-[700px] order-1 lg:order-2">
-              <Image
-                src="/image/office_design6.webp"
-                alt="Luxury Interior"
-                fill
-                sizes="(max-width: 1024px) 100vw, 150vw"
-                className="object-cover"
-              />
+            {/* Proof, kept below the actions so it supports them instead of competing */}
+            <dl className="mt-12 grid grid-cols-3 gap-4 border-t border-[#F8F6F1]/15 pt-8 sm:max-w-md">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse gap-1">
+                  <dt className="text-sm text-[#F8F6F1]/65">{stat.label}</dt>
+                  <dd className="font-heading text-3xl text-[#E3B352] sm:text-4xl">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#F2EBD9]/20" />
+          {/* Image */}
+          <div className="relative aspect-[4/3] lg:col-span-5 lg:aspect-auto lg:min-h-[560px]">
+            <Image
+              src="/image/office_design6.webp"
+              alt="Office interior designed by Divine Interiors"
+              fill
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover"
+            />
 
-              {/* Decorative Frame */}
-              <div className="absolute inset-4 md:inset-8 border border-white/20" />
-
-              {/* Year Badge */}
-              <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 border border-[#D7C8A3] bg-[#F4EFE4]/80 backdrop-blur-sm px-4 py-2 md:px-5 md:py-3">
-                <span className="tracking-[0.2em] md:tracking-[0.35em] text-[10px] md:text-xs text-[#B8954A] uppercase">
-                  Est. 2008
-                </span>
-              </div>
-            </div>
+            <span className="absolute bottom-4 left-4 rounded-full bg-[#F8F6F1]/90 px-4 py-2 text-sm font-semibold text-[#2B1A0D] backdrop-blur-sm sm:bottom-6 sm:left-6">
+              Since 2008
+            </span>
           </div>
         </div>
       </div>

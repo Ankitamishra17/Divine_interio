@@ -1,104 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import ProcessCard from "./ProcessCard";
 import { steps } from "@/data/interiorData";
 
-export default function Process() {
-  // Stagger animation for cards
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
-  };
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+export default function Process() {
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header Section */}
+    <section
+      aria-labelledby="process-heading"
+      className="bg-white py-16 sm:py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header: one reveal, left aligned */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-12 max-w-2xl sm:mb-16"
         >
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className=" font-heading text-xs tracking-widest text-[#C8972B] font-medium mb-6"
+          <p className="text-sm font-semibold text-[#8A6416]">How we work</p>
+          <h2
+            id="process-heading"
+            className="mt-4 font-heading text-4xl leading-tight text-stone-950 sm:text-5xl lg:text-6xl"
           >
-            HOW WE WORK
-          </motion.div>
-
-          {/* Main Title */}
-          <div className="max-w-3xl mx-auto">
-            <h2 className=" font-heading text-5xl md:text-7xl lg:text-6xl font-light text-black mb-8 tracking-tight">
-              Our Design{" "}
-              <motion.span
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="font-heading text-[#C8972B] font-light"
-              >
-                Process
-              </motion.span>
-            </h2>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center gap-4 mt-10 origin-center"
-          >
-            <motion.div
-              className="flex-1 h-px bg-gradient-to-r from-transparent to-amber-300/50"
-              style={{ maxWidth: "60px" }}
-            />
-            <motion.div
-              className="w-2 h-2 rotate-45 bg-[#C8972B]"
-              whileInView={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
-            />
-            <motion.div
-              className="flex-1 h-px bg-gradient-to-l from-transparent to-amber-300/50"
-              style={{ maxWidth: "60px" }}
-            />
-          </motion.div>
+            Our design process
+          </h2>
+          <p className="mt-5 text-base leading-8 text-stone-600">
+            A clear, step-by-step approach that takes your project from the
+            first idea to the finished space.
+          </p>
         </motion.div>
 
-        {/* Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className=" font-heading grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6"
-        >
+        {/* Steps */}
+        <ol className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
-            <motion.div key={step.num} variants={itemVariants}>
-              <ProcessCard {...step} />
-            </motion.div>
+            <ProcessCard
+              key={step.num}
+              {...step}
+              index={i}
+              isLast={i === steps.length - 1}
+            />
           ))}
-        </motion.div>
+        </ol>
+
+        {/* Next step */}
+        <div className="mt-14 flex flex-col items-start gap-5 border-t border-stone-200 pt-10 sm:flex-row sm:items-center sm:justify-between lg:mt-20">
+          <p className="font-heading text-2xl text-stone-900 sm:text-3xl">
+            Ready to begin?
+          </p>
+          <Link
+            href="/contact"
+            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#593719] px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-[#C8972B] hover:text-stone-950 ${focusRing}`}
+          >
+            Start your project
+            <ArrowRight
+              size={18}
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );

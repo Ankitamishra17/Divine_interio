@@ -1,626 +1,227 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  User,
-  Phone,
-  Mail,
-  MapPin,
-  CheckCircle2,
-  AlertCircle,
-} from "lucide-react";
+import { AlertCircle, ArrowRight, Check, Loader2, MessageCircle, Phone } from "lucide-react";
 
-export default function LeadFormStep({ formData, setFormData, onBack }) {
+/*
+  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+
+  Same request as before: POST { formType, dimension, shape, package, name, email, phone, pincode }.
+
+  What's better
+  - Title, step count, Back and the "Your configuration" summary live in KitchenCostCalculator now
+    (it shows your choices as chips), so they are not repeated here.
+  - Errors appear next to the field (not in browser alert() pop-ups), and the first wrong field gets focus.
+  - Phone and pincode accept digits only. Fields have proper labels, autocomplete and numeric keyboards.
+  - The old WhatsApp tick-box was never sent to the server, so it is removed. Tell me if your API can take
+    an opt-in flag and I'll add it back properly.
+  - After sending, "Calculate another kitchen" resets the calculator (no full page reload).
+
+  New props from the wrapper: onSubmitted() and onRestart().
+*/
+
+const ENDPOINT = "https://livingspacedecor.in/api/send-quote";
+const PHONE_DISPLAY = "+91 88266 06869";
+const PHONE_TEL = "tel:+918826606869";
+const WHATSAPP_URL = "https://wa.me/918826606869";
+
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+
+const validators = {
+  name: (v) => (!v.trim() ? "Enter your name." : v.trim().length < 2 ? "Name must be at least 2 characters." : ""),
+  phone: (v) => (!v ? "Enter your mobile number." : /^[6-9]\d{9}$/.test(v) ? "" : "Enter a valid 10-digit mobile number."),
+  email: (v) => (!v.trim() ? "Enter your email." : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : "Enter a valid email, like name@example.com."),
+  pincode: (v) => (!v ? "Enter your pincode." : /^\d{6}$/.test(v) ? "" : "Enter a valid 6-digit pincode."),
+};
+const FIELDS = ["name", "phone", "email", "pincode"];
+
+const inputClass = (err) =>
+  `h-14 w-full rounded-sm border bg-[#F7F3ED] px-4 text-base text-[#292622] placeholder-[#292622]/45 outline-none transition-colors focus:border-[#593719] focus:bg-white focus:ring-2 focus:ring-[#C18A35]/50 ${
+    err ? "border-red-600" : "border-[#292622]/25"
+  }`;
+
+function Field({ id, label, error, hint, children }) {
+  return (
+    <div>
+      <label htmlFor={id} className="font-body mb-2 block text-sm font-medium text-[#292622]">
+        {label}
+      </label>
+      {children}
+      {error ? (
+        <p id={`${id}-error`} className="font-body mt-2 flex items-start gap-1.5 text-sm text-red-700">
+          <AlertCircle size={15} className="mt-0.5 shrink-0" aria-hidden="true" />
+          {error}
+        </p>
+      ) : (
+        hint && <p id={`${id}-hint`} className="font-body mt-2 text-sm text-[#292622]/60">{hint}</p>
+      )}
+    </div>
+  );
+}
+
+export default function LeadFormStep({ formData, setFormData, onSubmitted, onRestart }) {
   const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [serverError, setServerError] = useState("");
 
-  const validateField = (name, value) => {
-    const newErrors = { ...errors };
-
-    switch (name) {
-      case "name":
-        if (!value.trim()) {
-          newErrors.name = "Name is required";
-        } else if (value.trim().length < 2) {
-          newErrors.name = "Name must be at least 2 characters";
-        } else {
-          delete newErrors.name;
-        }
-        break;
-
-      case "email":
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value.trim()) {
-          newErrors.email = "Email is required";
-        } else if (!emailRegex.test(value)) {
-          newErrors.email = "Please enter a valid email";
-        } else {
-          delete newErrors.email;
-        }
-        break;
-
-      case "phone":
-        if (!value.trim()) {
-          newErrors.phone = "Phone number is required";
-        } else if (!/^\d{10}$/.test(value.replace(/\D/g, ""))) {
-          newErrors.phone = "Please enter a valid 10-digit number";
-        } else {
-          delete newErrors.phone;
-        }
-        break;
-
-      case "pincode":
-        if (!value.trim()) {
-          newErrors.pincode = "Pincode is required";
-        } else if (!/^\d{6}$/.test(value)) {
-          newErrors.pincode = "Please enter a valid 6-digit pincode";
-        } else {
-          delete newErrors.pincode;
-        }
-        break;
-
-      default:
-        break;
-    }
-
-    setErrors(newErrors);
+  const set = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((e) => ({ ...e, [name]: validators[name](value) })); // re-check once an error is showing
+    if (serverError) setServerError("");
   };
-
-  const handleChange = (e) => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (touched[name]) {
-      validateField(name, value);
-    }
+    if (name === "phone") return set(name, value.replace(/\D/g, "").slice(0, 10));
+    if (name === "pincode") return set(name, value.replace(/\D/g, "").slice(0, 6));
+    set(name, value);
   };
-
-  const handleBlur = (e) => {
+  const onBlur = (e) => {
     const { name, value } = e.target;
-    setTouched((prev) => ({
-      ...prev,
-      [name]: true,
-    }));
-    validateField(name, value);
+    if (value) setErrors((er) => ({ ...er, [name]: validators[name](value) }));
   };
-
-  const isFormValid =
-    formData.name &&
-    formData.email &&
-    formData.phone &&
-    formData.pincode &&
-    Object.keys(errors).length === 0;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
 
-    setTouched({
-      name: true,
-      email: true,
-      phone: true,
-      pincode: true,
-    });
+    const found = {};
+    FIELDS.forEach((f) => (found[f] = validators[f](formData[f] || "")));
+    setErrors(found);
+    const bad = FIELDS.find((f) => found[f]);
+    if (bad) return document.getElementById(`lead-${bad}`)?.focus();
 
-    if (!isFormValid) return;
-
-    setIsSubmitting(true);
-
+    setSubmitting(true);
+    setServerError("");
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch("https://livingspacedecor.in/api/send-quote", {
+      const res = await fetch(ENDPOINT, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           formType: "Kitchen Calculator",
           dimension: formData.dimension,
           shape: formData.shape,
           package: formData.package,
-
-          name: formData.name,
-          email: formData.email,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
           phone: formData.phone,
           pincode: formData.pincode,
         }),
       });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setSubmitSuccess(true);
+      const result = await res.json().catch(() => ({}));
+      if (res.ok && result.success) {
+        setDone(true);
+        onSubmitted?.();
       } else {
-        alert(result.error || "Failed to submit enquiry");
+        setServerError(result.error || "We couldn't send your enquiry. Please try again, or call us.");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Network error. Please try again.");
+    } catch (err) {
+      console.error(err);
+      setServerError(err.name === "AbortError" ? "This is taking too long. Please try again, or message us on WhatsApp." : "We couldn't reach the server. Check your connection and try again, or message us on WhatsApp.");
     } finally {
-      setIsSubmitting(false);
+      clearTimeout(timer);
+      setSubmitting(false);
     }
   };
 
+  /* ───────── Success ───────── */
+  if (done) {
+    return (
+      <div role="status" className="py-4 text-center">
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#593719] text-[#F7F3ED]">
+          <Check size={30} aria-hidden="true" />
+        </span>
+        <p className="font-body mx-auto mt-6 max-w-lg text-base font-light leading-8 text-[#292622]/80">
+          Thank you! Our kitchen design experts will review your details and contact you within 24 hours with a personalized cost estimate.
+        </p>
+        <p className="font-body mx-auto mt-4 max-w-lg rounded-sm bg-[#F7F3ED] px-5 py-4 text-sm leading-6 text-[#292622]/75">
+          Check your email ({formData.email}) for a confirmation. You can also track your request on WhatsApp.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`font-body inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] ${ring}`}
+          >
+            <MessageCircle size={17} aria-hidden="true" />
+            Track on WhatsApp
+          </a>
+          <button
+            type="button"
+            onClick={onRestart}
+            className={`font-body inline-flex min-h-14 items-center justify-center rounded-sm border border-[#593719]/50 px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#593719] transition-colors duration-300 hover:border-[#593719] hover:bg-[#F7F3ED] ${ring}`}
+          >
+            Calculate another kitchen
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ───────── Form ───────── */
   return (
-    <AnimatePresence mode="wait">
-      {!submitSuccess ? (
-        <motion.div
-          key="form"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <p className="text-sm tracking-widest uppercase text-[#C8972B] font-medium mb-4">
-              Step 4 of 4
+    <form onSubmit={handleSubmit} noValidate>
+      <p className="font-body max-w-xl text-[15px] font-light leading-7 text-[#292622]/75">
+        Share your details and our expert team will send a personalized cost estimate within 24 hours.
+      </p>
+
+      {serverError && (
+        <div role="alert" className="font-body mt-6 flex items-start gap-3 rounded-sm border border-red-300 bg-red-50 p-4 text-sm text-red-800">
+          <AlertCircle size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <div>
+            <p>{serverError}</p>
+            <p className="mt-1.5">
+              <a href={PHONE_TEL} className="font-semibold underline underline-offset-2">Call {PHONE_DISPLAY}</a>
+              {" or "}
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">WhatsApp us</a>.
             </p>
-
-            <h2 className="text-4xl md:text-5xl font-heading text-[#3D1F0D] mb-4">
-              Get Your Kitchen
-              <br />
-              <span className="text-[#C8972B]">Estimate</span>
-            </h2>
-
-            <p className="text-gray-600 text-md max-w-2xl mx-auto leading-relaxed">
-              Share your details and our expert team will provide a personalized
-              cost estimate within 24 hours.
-            </p>
-          </motion.div>
-
-          <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-8">
-            {/* Form Fields */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-            >
-              {/* Name Field */}
-              <div className="relative">
-                <label className="block mb-3 text-sm font-body text-[#3D1F0D] uppercase tracking-wide">
-                  Full Name
-                </label>
-
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                    <User size={20} strokeWidth={1.5} />
-                  </div>
-
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter your full name"
-                    className={`w-full h-14 px-4 pl-12 rounded-2xl border-2 transition-all duration-300 bg-white
-                      ${
-                        touched.name && errors.name
-                          ? "border-red-300 focus:border-red-400"
-                          : "border-gray-200 focus:border-[#C8972B]"
-                      }
-                      focus:outline-none focus:shadow-lg focus:shadow-[#C8972B]/10
-                      placeholder:text-gray-400`}
-                  />
-
-                  {touched.name && errors.name && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <AlertCircle size={20} className="text-red-500" />
-                    </motion.div>
-                  )}
-
-                  {touched.name && !errors.name && formData.name && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <CheckCircle2 size={20} className="text-green-500" />
-                    </motion.div>
-                  )}
-                </div>
-
-                <AnimatePresence>
-                  {touched.name && errors.name && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="text-red-500 text-sm mt-2"
-                    >
-                      {errors.name}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Pincode Field */}
-              <div className="relative">
-                <label className="block mb-3 text-sm font-body text-[#3D1F0D] uppercase tracking-wide">
-                  Pincode
-                </label>
-
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                    <MapPin size={20} strokeWidth={1.5} />
-                  </div>
-
-                  <input
-                    type="text"
-                    name="pincode"
-                    value={formData.pincode}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="6-digit pincode"
-                    maxLength="6"
-                    className={`w-full h-14 px-4 pl-12 rounded-2xl border-2 transition-all duration-300 bg-white
-                      ${
-                        touched.pincode && errors.pincode
-                          ? "border-red-300 focus:border-red-400"
-                          : "border-gray-200 focus:border-[#C8972B]"
-                      }
-                      focus:outline-none focus:shadow-lg focus:shadow-[#C8972B]/10
-                      placeholder:text-gray-400`}
-                  />
-
-                  {touched.pincode && errors.pincode && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <AlertCircle size={20} className="text-red-500" />
-                    </motion.div>
-                  )}
-
-                  {touched.pincode && !errors.pincode && formData.pincode && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <CheckCircle2 size={20} className="text-green-500" />
-                    </motion.div>
-                  )}
-                </div>
-
-                <AnimatePresence>
-                  {touched.pincode && errors.pincode && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="text-red-500 text-sm mt-2"
-                    >
-                      {errors.pincode}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Phone Field */}
-              <div className="relative sm:col-span-2 md:col-span-1">
-                <label className="block mb-3 text-sm font-body text-[#3D1F0D] uppercase tracking-wide">
-                  Phone Number
-                </label>
-
-                <div className="flex gap-0">
-                  <div className="flex items-center px-4 border-2 border-gray-200 border-r-0 rounded-l-2xl bg-[#F5EBE0] text-[#3D1F0D] font-medium">
-                    +91
-                  </div>
-
-                  <div className="relative flex-1">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                      <Phone size={20} strokeWidth={1.5} />
-                    </div>
-
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="10-digit mobile number"
-                      maxLength="10"
-                      className={`w-full h-14 px-4 pl-12 rounded-r-2xl border-2 transition-all duration-300 bg-white
-                        ${
-                          touched.phone && errors.phone
-                            ? "border-red-300 focus:border-red-400"
-                            : "border-gray-200 focus:border-[#C8972B]"
-                        }
-                        focus:outline-none focus:shadow-lg focus:shadow-[#C8972B]/10
-                        placeholder:text-gray-400`}
-                    />
-
-                    {touched.phone && errors.phone && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2"
-                      >
-                        <AlertCircle size={20} className="text-red-500" />
-                      </motion.div>
-                    )}
-
-                    {touched.phone && !errors.phone && formData.phone && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2"
-                      >
-                        <CheckCircle2 size={20} className="text-green-500" />
-                      </motion.div>
-                    )}
-                  </div>
-                </div>
-
-                <AnimatePresence>
-                  {touched.phone && errors.phone && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="text-red-500 text-sm mt-2"
-                    >
-                      {errors.phone}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Email Field */}
-              <div className="relative sm:col-span-2 md:col-span-1">
-                <label className="block mb-3 text-sm font-body text-[#3D1F0D] uppercase tracking-wide">
-                  Email Address
-                </label>
-
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                    <Mail size={20} strokeWidth={1.5} />
-                  </div>
-
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="your.email@example.com"
-                    className={`w-full h-14 px-4 pl-12 rounded-2xl border-2 transition-all duration-300 bg-white
-                      ${
-                        touched.email && errors.email
-                          ? "border-red-300 focus:border-red-400"
-                          : "border-gray-200 focus:border-[#C8972B]"
-                      }
-                      focus:outline-none focus:shadow-lg focus:shadow-[#C8972B]/10
-                      placeholder:text-gray-400`}
-                  />
-
-                  {touched.email && errors.email && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <AlertCircle size={20} className="text-red-500" />
-                    </motion.div>
-                  )}
-
-                  {touched.email && !errors.email && formData.email && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2"
-                    >
-                      <CheckCircle2 size={20} className="text-green-500" />
-                    </motion.div>
-                  )}
-                </div>
-
-                <AnimatePresence>
-                  {touched.email && errors.email && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="text-red-500 text-sm mt-2"
-                    >
-                      {errors.email}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Configuration Summary */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#F5EBE0] to-[#F5EBE0]/50 border-2 border-[#C8972B]/20"
-            >
-              <h3 className="font-bold text-lg text-[#3D1F0D] mb-6 flex items-center gap-2">
-                <span className="w-1 h-6 bg-[#C8972B] rounded-full" />
-                Your Configuration
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  { label: "Dimension", value: formData.dimension || "-" },
-                  {
-                    label: "Shape",
-                    value: formData.shape || "Custom Requirement",
-                  },
-                  {
-                    label: "Package",
-                    value: formData.package || "Custom Package",
-                  },
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 + idx * 0.1 }}
-                    className="p-4 rounded-2xl bg-white/60 backdrop-blur-sm"
-                  >
-                    <p className="text-xs font-body uppercase tracking-wide text-gray-500 mb-2">
-                      {item.label}
-                    </p>
-                    <p className="font-body text-[#3D1F0D] text-md">
-                      {item.value}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* WhatsApp Opt-in */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="flex items-start gap-3 p-4 rounded-2xl bg-[#F5EBE0]/50 border border-[#C8972B]/10"
-            >
-              <input
-                type="checkbox"
-                id="whatsapp"
-                defaultChecked
-                className="mt-1 w-5 h-5 accent-[#C8972B] cursor-pointer rounded"
-              />
-
-              <label
-                htmlFor="whatsapp"
-                className="text-gray-700 leading-relaxed cursor-pointer font-medium"
-              >
-                Yes, send me kitchen updates, design tips, and exclusive offers
-                on WhatsApp
-              </label>
-            </motion.div>
-
-            {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
-            >
-              <button
-                type="button"
-                onClick={onBack}
-                disabled={isSubmitting}
-                className="px-8 py-4 rounded-md border-2 border-[#3D1F0D] text-[#3D1F0D] font-body hover:bg-[#3D1F0D]/5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Back
-              </button>
-
-              <button
-                type="submit"
-                disabled={isSubmitting || !isFormValid}
-                className={`px-12 py-4 rounded-md font-body text-md text-white transition-all duration-300 flex items-center justify-center gap-2
-                  ${
-                    isFormValid && !isSubmitting
-                      ? "bg-[#3D1F0D] hover:bg-[#2A1408] shadow-lg shadow-[#3D1F0D]/20 hover:shadow-xl hover:shadow-[#3D1F0D]/30"
-                      : "bg-gray-300 cursor-not-allowed"
-                  }`}
-              >
-                {isSubmitting ? (
-                  <>
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity }}
-                      className="w-5 h-5 border-2 text-nowrap border-white border-t-transparent rounded-md"
-                    />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    Get Estimate
-                    <motion.span
-                      animate={isFormValid ? { x: [0, 4, 0] } : {}}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      →
-                    </motion.span>
-                  </>
-                )}
-              </button>
-            </motion.div>
-          </form>
-        </motion.div>
-      ) : (
-        /* Success State */
-        <motion.div
-          key="success"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="text-center py-12"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6"
-          >
-            <CheckCircle2 size={40} className="text-white" />
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-4xl md:text-5xl font-body text-[#3D1F0D] mb-4"
-          >
-            Request Submitted!
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed"
-          >
-            Thank you! Our kitchen design experts will review your details and
-            contact you within 24 hours with a personalized cost estimate.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="p-6 rounded-2xl bg-blue-50 border border-blue-200 max-w-xl mx-auto mb-8"
-          >
-            <p className="text-sm text-blue-900">
-              Check your email ({formData.email}) for a confirmation. You can
-              also track your request on WhatsApp.
-            </p>
-          </motion.div>
-
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            onClick={() => window.location.reload()}
-            className="px-10 py-4 rounded-full bg-[#3D1F0D] text-white font-semibold hover:bg-[#2A1408] transition-all duration-300"
-          >
-            Calculate Another Kitchen
-          </motion.button>
-        </motion.div>
+          </div>
+        </div>
       )}
-    </AnimatePresence>
+
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+        <Field id="lead-name" label="Full name" error={errors.name}>
+          <input id="lead-name" name="name" type="text" autoComplete="name" placeholder="Your full name" value={formData.name} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.name} aria-describedby={errors.name ? "lead-name-error" : undefined} className={inputClass(errors.name)} />
+        </Field>
+
+        <Field id="lead-phone" label="Mobile number" error={errors.phone} hint="We'll only use it to share your estimate.">
+          <div className="relative">
+            <span className="font-body pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 border-r border-[#292622]/20 pr-3 text-base text-[#292622]/70" aria-hidden="true">+91</span>
+            <input id="lead-phone" name="phone" type="tel" inputMode="numeric" autoComplete="tel-national" placeholder="98765 43210" value={formData.phone} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "lead-phone-error" : "lead-phone-hint"} className={`${inputClass(errors.phone)} pl-[4.25rem]`} />
+          </div>
+        </Field>
+
+        <Field id="lead-email" label="Email address" error={errors.email}>
+          <input id="lead-email" name="email" type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" value={formData.email} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.email} aria-describedby={errors.email ? "lead-email-error" : undefined} className={inputClass(errors.email)} />
+        </Field>
+
+        <Field id="lead-pincode" label="Pincode" error={errors.pincode}>
+          <input id="lead-pincode" name="pincode" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="6-digit pincode" value={formData.pincode} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.pincode} aria-describedby={errors.pincode ? "lead-pincode-error" : undefined} className={inputClass(errors.pincode)} />
+        </Field>
+      </div>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        aria-busy={submitting}
+        className={`font-body group mt-8 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto ${ring}`}
+      >
+        {submitting ? (
+          <>
+            <Loader2 size={17} className="motion-safe:animate-spin" aria-hidden="true" />
+            Sending
+          </>
+        ) : (
+          <>
+            Get my estimate
+            <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
+          </>
+        )}
+      </button>
+    </form>
   );
 }

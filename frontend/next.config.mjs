@@ -1,8 +1,12 @@
-
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
+  distDir: ".next-new",
   images: {
-    unoptimized: process.env.NODE_ENV === "production",
+    unoptimized: isProd,
+    // Sirf local dev ke liye: localhost:5000 ki images ko optimize karne deta hai
+    dangerouslyAllowLocalIP: !isProd,
     remotePatterns: [
       {
         protocol: "http",
@@ -19,11 +23,15 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
         hostname: "randomuser.me",
       },
       {
         protocol: "https",
-        hostname: "images.pexels.com",
+        hostname: "i.pinimg.com",
       },
     ],
   },

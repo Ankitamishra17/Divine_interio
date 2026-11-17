@@ -1,35 +1,70 @@
-
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Play } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, ChevronRight, Phone, MessageCircle } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 35 },
-  visible: { opacity: 1, y: 0 },
-};
+/*
+  Palette
+  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
+
+  Layout: full-bleed photo, headline anchored low on the left, and a working strip along the bottom
+  edge: what you do, where you work, the studio (with live open / closed status) and a one-tap way
+  to call or WhatsApp. On phones the photo stays visible in the top half and the text sits below it.
+*/
+
+// Tied directly to the next/font variables set in layout.js (--font-philosopher, --font-jost)
+const HEADING = "font-[family-name:var(--font-philosopher)]";
+const BODY = "font-[family-name:var(--font-jost)]";
+
+const PHONE_DISPLAY = "+91 88266 06869";
+const PHONE_TEL = "tel:+918826606869";
+const WHATSAPP_URL = "https://wa.me/918826606869";
+const ADDRESS_SHORT = "Galaxy Diamond Plaza, Greater Noida West";
+const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009"
+)}`;
+
+/* Studio hours in Indian time, so it is right for visitors anywhere */
+function isOpenNow() {
+  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "numeric", hour12: false }).formatToParts(new Date());
+  const hour = Number(parts.find((p) => p.type === "hour").value) % 24;
+  return hour >= 10 && hour < 19;
+}
 
 const container = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.16,
-      delayChildren: 0.15,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
+};
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
+const ring =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]";
+const link = `rounded-sm text-[#F7F3ED] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring}`;
+
 export default function AboutHero() {
+  const reduce = useReducedMotion();
+  const [open, setOpen] = useState(null);
+
+  useEffect(() => {
+    setOpen(isOpenNow());
+    const t = setInterval(() => setOpen(isOpenNow()), 60000);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <section
       aria-labelledby="about-hero-heading"
-      className="relative isolate flex min-h-[650px] items-center overflow-hidden bg-[#593719] py-24 md:min-h-[720px] lg:min-h-[680px]"
+      className={`relative isolate flex min-h-[700px] flex-col overflow-hidden bg-[#292622] md:min-h-[760px] ${BODY}`}
     >
-      {/* Background Image */}
+      {/* Photo */}
       <motion.div
-        initial={{ scale: 1.08 }}
+        initial={reduce ? false : { scale: 1.06 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
         className="absolute inset-0 -z-20"
@@ -44,115 +79,117 @@ export default function AboutHero() {
         />
       </motion.div>
 
-      {/* Left Dark Gradient Overlay */}
+      {/* Veils: from below on phones so the photo shows above the text, from the left on larger screens */}
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-[#241409]/95 via-[#3D2415]/85 to-[#593719]/10 md:from-[#241409]/95 md:via-[#3D2415]/75 md:to-transparent"
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-[#292622] via-[#292622]/80 via-45% to-[#292622]/10 md:bg-gradient-to-r md:from-[#292622]/90 md:via-[#292622]/60 md:to-[#292622]/10"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 hidden h-56 bg-gradient-to-t from-[#292622]/85 to-transparent md:block"
       />
 
-      {/* Subtle bottom shadow */}
-      {/* <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-[#241409]/35 to-transparent" /> */}
-
-      <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-16 xl:px-20">
+      {/* Content */}
+      <div className="mx-auto flex w-full max-w-[1280px] flex-1 items-end px-5 pb-12 sm:px-8 md:pb-35 xl:px-12">
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={reduce ? false : "hidden"}
           animate="visible"
           className="max-w-[720px]"
         >
-          {/* Breadcrumb */}
-          <motion.nav
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            aria-label="Breadcrumb"
-            className="mb-12 flex items-center gap-3 font-[family-name:var(--font-body)] text-sm text-white/80 md:text-base"
-          >
-            <Link
-              href="/"
-              className="transition-colors hover:text-[#C18A35]"
-            >
-              Home
-            </Link>
-            <ChevronRight
-              size={16}
-              className="text-[#C18A35]"
-            />
-            <span className="text-white">About Us</span>
+          <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-7 md:mb-9 ">
+            <ol className="flex items-center gap-2 text-sm text-[#F7F3ED]/80">
+              <li>
+                <Link href="/" className={`rounded-sm transition-colors hover:text-[#C18A35] ${ring}`}>
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <ChevronRight size={15} className="text-[#C18A35]" />
+              </li>
+              <li aria-current="page" className="text-[#F7F3ED]">
+                About us
+              </li>
+            </ol>
           </motion.nav>
 
-          {/* Eyebrow */}
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.7 }}
-            className="mb-6 flex items-center gap-4"
-          >
-            <span className="font-[family-name:var(--font-body)] text-xs font-medium uppercase tracking-[0.25em] text-[#E9BD76] sm:text-sm">
-              About Divine Interiors
-            </span>
-            <span className="h-px w-12 bg-[#C18A35] sm:w-20" />
-          </motion.div>
-
-          {/* Heading */}
           <motion.h1
             id="about-hero-heading"
             variants={fadeUp}
-            transition={{ duration: 0.8 }}
-            className="font-[family-name:var(--font-heading)] text-[clamp(3rem,5.2vw,5.8rem)] leading-[1.12] tracking-[-0.02em] text-[#FFFFFF]"
+            className={`${HEADING} text-[clamp(2.75rem,5.2vw,5.8rem)] font-normal leading-[1.12] tracking-[-0.02em] text-[#F7F3ED]`}
           >
-            Crafting Spaces
-            <br />
-            That Feel Like{" "}
-            <span className="italic text-[#E9BD76]">
-              Home
-            </span>
+            Crafting Spaces that feel Like Home
           </motion.h1>
 
-          {/* Description */}
           <motion.p
             variants={fadeUp}
-            transition={{ duration: 0.7 }}
-            className="mt-7 max-w-[570px] font-[family-name:var(--font-body)] text-base font-light leading-[1.9] text-[#F7F3ED]/90 md:text-lg"
+            className="mt-6 max-w-[540px] text-base font-light leading-[1.8] text-[#F7F3ED]/90 md:text-lg"
           >
-            A passionate team of designers, architects and
-            execution experts, creating functional, stylish
-            and personalized interiors for modern living.
+            Living Space Decor is a team of designers, architects and execution experts creating functional, stylish and personal interiors for modern living.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.7 }}
-            className="mt-10 flex flex-wrap items-center gap-5"
-          >
-            <Link
+          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
+            <a
               href="#our-story"
-              className="group inline-flex min-h-14 items-center justify-center gap-4 rounded-full bg-[#C18A35] px-8 font-[family-name:var(--font-body)] text-sm font-semibold text-[#292622] transition-all duration-300 hover:-translate-y-1 hover:bg-[#E9BD76] hover:shadow-[0_12px_30px_rgba(193,138,53,0.25)]"
+              className={`group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#C18A35] px-8 text-[15px] font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ring}`}
             >
-              Our Story
-              <ArrowRight
-                size={18}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </Link>
+              Our story
+              <ArrowDown size={18} className="transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none" aria-hidden="true" />
+            </a>
 
             <Link
-              href="/projects"
-              className="group inline-flex min-h-14 items-center gap-3 font-[family-name:var(--font-body)] text-sm font-medium text-white transition-colors hover:text-[#E9BD76]"
+              href="/portfolio"
+              className={`inline-flex min-h-11 items-center ${link} text-[15px] font-semibold`}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/70 transition-all duration-300 group-hover:border-[#C18A35] group-hover:bg-[#C18A35]/15">
-                <Play size={17} fill="currentColor" />
-              </span>
-              Explore Our Work
+              Explore our work
             </Link>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Decorative vertical line */}
-      <div className="absolute bottom-10 right-10 hidden items-center gap-3 lg:flex">
-        <span className="h-px w-12 bg-[#C18A35]" />
-        <span className="font-[family-name:var(--font-body)] text-xs uppercase tracking-[0.25em] text-white/80">
-          Design With Purpose
-        </span>
+      {/* Working strip */}
+      <div className="border-t border-[#F7F3ED]/20 bg-[#292622]/70 backdrop-blur-sm">
+        <dl className="mx-auto grid max-w-[1280px] gap-6 px-5 py-6 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:gap-0 xl:px-12">
+          <div className="lg:pr-8">
+            <dt className="text-sm text-[#F7F3ED]/60">What we do</dt>
+            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">Interiors, modular kitchens and turnkey homes</dd>
+          </div>
+
+          <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:px-8">
+            <dt className="text-sm text-[#F7F3ED]/60">Where we work</dt>
+            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">Noida, Greater Noida, Ghaziabad and Delhi NCR</dd>
+          </div>
+
+          <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:px-8">
+            <dt className="text-sm text-[#F7F3ED]/60">Visit the studio</dt>
+            <dd className="mt-1 text-[15px] leading-snug">
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={link}>
+                {ADDRESS_SHORT}
+              </a>
+              <span className="mt-2 flex items-center gap-2 text-sm text-[#F7F3ED]/75" role="status">
+                <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                  {open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C18A35] opacity-60 motion-reduce:animate-none" />}
+                  <span className={`relative h-2 w-2 rounded-full ${open ? "bg-[#C18A35]" : "bg-[#F7F3ED]/40"}`} />
+                </span>
+                {open === null ? "Open daily, 10 AM to 7 PM" : open ? "Open now, until 7 PM" : "Closed now. Opens 10 AM"}
+              </span>
+            </dd>
+          </div>
+
+          <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:pl-8">
+            <dt className="text-sm text-[#F7F3ED]/60">Talk to us</dt>
+            <dd className="mt-1 flex flex-col gap-2 text-[15px] leading-snug">
+              <a href={PHONE_TEL} className={`inline-flex min-h-6 items-center gap-2 ${link}`}>
+                <Phone size={15} className="text-[#C18A35]" aria-hidden="true" />
+                {PHONE_DISPLAY}
+              </a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-6 items-center gap-2 ${link}`}>
+                <MessageCircle size={15} className="text-[#C18A35]" aria-hidden="true" />
+                WhatsApp us
+              </a>
+            </dd>
+          </div>
+        </dl>
       </div>
     </section>
   );

@@ -1,247 +1,154 @@
-
 "use client";
 
+import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+/*
+  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+
+  New layout: pick a service on the left, the photo on the right changes with it.
+  - Only one service is open at a time, so the section stays short and easy to scan.
+  - Works with tap, click and the Up / Down arrow keys. Nothing changes on hover or on a timer.
+  - All photos are loaded once and fade into each other, so switching never flashes.
+  - On phones the photo sits on top and the list follows.
+  - Change `href` per service when you have pages for them (all go to /contact for now).
+*/
 
 const howWeHelp = [
   {
     id: "01",
-    tag: "RESIDENTIAL",
+    tag: "Residential",
     title: "Luxury Residential Design",
     description:
       "Custom-designed homes that blend elegance, functionality, and comfort while reflecting your unique lifestyle.",
-    image:
-    "/image/office_design.webp",
+    image: "/image/office_design.webp",
+    href: "/contact",
   },
   {
     id: "02",
-    tag: "COMMERCIAL",
+    tag: "Commercial",
     title: "Commercial Architecture",
     description:
       "Innovative office spaces, retail environments, and business facilities designed to enhance productivity and brand identity.",
-    image:
-    "https://images.pexels.com/photos/13073718/pexels-photo-13073718.jpeg",
+    image: "https://images.pexels.com/photos/13073718/pexels-photo-13073718.jpeg",
+    href: "/contact",
   },
   {
     id: "03",
-    tag: "PLANNING",
+    tag: "Planning",
     title: "Master Planning",
     description:
       "Strategic planning solutions that create sustainable communities, public spaces, and future-ready developments.",
-    image:
-      "/image/living_room5.webp",
+    image: "/image/living_room5.webp",
+    href: "/contact",
   },
 ];
 
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-inset";
+
 export default function HowWeHelp() {
+  const [active, setActive] = useState(0);
+  const btnRefs = useRef([]);
+  const current = howWeHelp[active];
+
+  const onKeyDown = (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const n = (active + (e.key === "ArrowDown" ? 1 : -1) + howWeHelp.length) % howWeHelp.length;
+    setActive(n);
+    btnRefs.current[n]?.focus();
+  };
+
   return (
-    <section className="bg-[#F7F4EE] py-16 md:py-20 lg:py-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-14 md:mb-20 lg:mb-24">
-          <p className="uppercase tracking-[0.35em] md:tracking-[0.45em] text-[#B8954A] text-[10px] sm:text-xs mb-4 md:mb-6">
-            Our Expertise
-          </p>
-
-          <h2
-            className="
-              font-heading
-              text-[#3D1F0D]
-              text-3xl
-              sm:text-4xl
-              md:text-5xl
-              lg:text-7xl
-              leading-tight
-              font-light
-            "
-          >
-            Architecture With{" "}
-            <span className="font-heading text-[#B8954A]">Purpose</span>
-            <br />
-            Designed for You
-          </h2>
-
-          <div className="w-16 md:w-20 h-px bg-[#B8954A] mx-auto mt-6 md:mt-8" />
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
-          {howWeHelp.map((item) => (
-            <article
-              key={item.id}
-              className="group flex flex-col h-full"
-            >
-              {/* Image */}
-              <div
-                className="
-                  relative
-                  overflow-hidden
-                  h-[300px]
-                  sm:h-[380px]
-                  md:h-[420px]
-                  lg:h-[500px]
-                  flex-shrink-0
-                "
-                style={{
-                  clipPath:
-                    "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
-                }}
-              >
+    <section className="overflow-hidden bg-white py-16 md:py-20 lg:py-24" aria-labelledby="how-we-help-heading">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+          {/* Photo (first on phones) */}
+          <div className="relative mx-auto w-full max-w-[560px] lg:sticky lg:top-28 lg:order-2 lg:max-w-none">
+            <span aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 rounded-t-[100px] border border-[#C18A35]/60 lg:rounded-t-[180px]" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-t-[100px] bg-[#E8DED0] shadow-[0_30px_70px_-40px_rgba(89,55,25,0.5)] sm:aspect-[5/4] lg:aspect-[4/4.6] lg:rounded-t-[180px]">
+              {howWeHelp.map((item, i) => (
                 <Image
+                  key={item.id}
                   src={item.image}
-                  alt={item.title}
+                  alt=""
                   fill
-                  sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
-                  className="
-                    object-cover
-                    transition-transform
-                    duration-700
-                    lg:group-hover:scale-110
-                  "
+                  priority={i === 0}
+                  sizes="(min-width: 1024px) 50vw, 90vw"
+                  className={`object-cover transition-opacity duration-700 motion-reduce:transition-none ${i === active ? "opacity-100" : "opacity-0"}`}
                 />
+              ))}
+              <span className="font-body absolute bottom-5 left-5 rounded-sm bg-[#C18A35] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#292622]">
+                {current.tag}
+              </span>
+              <span className="font-heading absolute right-5 top-5 rounded-full bg-white/90 px-4 py-2 text-sm tabular-nums text-[#593719] shadow-sm" aria-hidden="true">
+                {current.id} / {String(howWeHelp.length).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/10" />
+          {/* Words + list */}
+          <div className="lg:order-1">
+            <p className="font-body mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[#C18A35]">Our Expertise</p>
+            <h2 id="how-we-help-heading" className="font-heading text-3xl leading-[1.12] text-[#292622] sm:text-4xl lg:text-5xl">
+              Architecture with <span className="text-[#593719]">purpose</span>, designed for you
+            </h2>
+            <div className="mt-6 h-px w-16 bg-[#C18A35]" aria-hidden="true" />
 
-                {/* Number */}
-                <span
-                  className="
-                    absolute
-                    top-4
-                    left-4
-                    md:top-8
-                    md:left-8
-                    font-light
-                    text-white/20
-                    leading-none
-                    select-none
-                    pointer-events-none
-                    text-5xl
-                    sm:text-6xl
-                    md:text-7xl
-                    lg:text-[78px]
-                    transition-all
-                    duration-500
-                    lg:group-hover:text-[#B8954A]
-                    lg:group-hover:text-opacity-60
-                  "
-                >
-                  {item.id}
-                </span>
+            <div className="mt-8 border-t border-[#E8DED0]" onKeyDown={onKeyDown}>
+              {howWeHelp.map((item, i) => {
+                const open = i === active;
+                return (
+                  <div key={item.id} className={`border-b border-[#E8DED0] transition-colors duration-500 motion-reduce:transition-none ${open ? "bg-[#F7F3ED]" : ""}`}>
+                    <h3>
+                      <button
+                        ref={(el) => (btnRefs.current[i] = el)}
+                        type="button"
+                        id={`hwh-tab-${i}`}
+                        aria-expanded={open}
+                        aria-controls={`hwh-panel-${i}`}
+                        onClick={() => setActive(i)}
+                        className={`relative flex min-h-[76px] w-full items-center gap-5 px-4 py-5 text-left sm:px-6 ${ring}`}
+                      >
+                        <span aria-hidden="true" className={`absolute inset-y-0 left-0 w-[3px] bg-[#C18A35] transition-opacity duration-500 motion-reduce:transition-none ${open ? "opacity-100" : "opacity-0"}`} />
+                        <span className={`font-heading text-2xl tabular-nums transition-colors duration-300 ${open ? "text-[#C18A35]" : "text-[#292622]/35"}`} aria-hidden="true">
+                          {item.id}
+                        </span>
+                        <span className={`font-heading text-[22px] leading-snug transition-colors duration-300 sm:text-2xl ${open ? "text-[#593719]" : "text-[#292622]"}`}>
+                          {item.title}
+                        </span>
+                        <span aria-hidden="true" className={`ml-auto text-xl text-[#593719] transition-transform duration-300 motion-reduce:transition-none ${open ? "rotate-45" : ""}`}>
+                          +
+                        </span>
+                      </button>
+                    </h3>
 
-                {/* Tag */}
-                <span
-                  className="
-                    absolute
-                    bottom-6
-                    right-0
-                    bg-[#C59A43]
-                    text-white
-                    text-[9px]
-                    sm:text-[10px]
-                    font-semibold
-                    tracking-[0.25em]
-                    sm:tracking-[0.35em]
-                    px-4
-                    sm:px-5
-                    py-2
-                    sm:py-3
-                  "
-                >
-                  {item.tag}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="relative pt-6 md:pt-8 lg:pt-10 flex flex-col flex-1">
-                <h3
-                  className="
-                    font-serif
-                    text-[#2B2017]
-                    text-2xl
-                    sm:text-3xl
-                    lg:text-[38px]
-                    leading-tight
-                    mb-4
-                    transition-colors
-                    duration-500
-                    lg:group-hover:text-[#B8954A]
-                  "
-                >
-                  {item.title}
-                </h3>
-
-                <div className="w-10 h-px bg-[#C59A43] mb-5" />
-
-                <p
-                  className="
-                    text-[#6D6258]
-                    text-sm
-                    sm:text-[15px]
-                    leading-7
-                    sm:leading-8
-                    flex-1
-                  "
-                >
-                  {item.description}
-                </p>
-
-                {/* Button */}
-                <button
-                  className="
-                    mt-6
-                    md:mt-8
-                    flex
-                    items-center
-                    gap-3
-                    text-[#C59A43]
-                    uppercase
-                    tracking-[0.25em]
-                    sm:tracking-[0.35em]
-                    text-[10px]
-                    font-bold
-                    w-fit
-                    group/button
-                  "
-                >
-                  Discover More
-
-                  <span
-                    className="
-                      block
-                      h-px
-                      w-8
-                      bg-[#C59A43]
-                      transition-all
-                      duration-300
-                      lg:group-hover/button:w-12
-                    "
-                  />
-                </button>
-
-                {/* Corner Accent */}
-                <span
-                  className="
-                    absolute
-                    bottom-0
-                    right-0
-                    w-8
-                    h-8
-                    md:w-10
-                    md:h-10
-                    border-r
-                    border-b
-                    border-[#C59A43]
-                    opacity-100
-                    lg:opacity-0
-                    lg:group-hover:opacity-100
-                    transition-opacity
-                    duration-300
-                  "
-                />
-              </div>
-            </article>
-          ))}
+                    <div
+                      id={`hwh-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`hwh-tab-${i}`}
+                      inert={!open}
+                      className={`grid transition-[grid-template-rows] duration-500 ease-out motion-reduce:transition-none ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="px-4 pb-7 pl-[4.25rem] sm:px-6 sm:pb-8 sm:pl-[5.25rem]">
+                          <p className="font-body max-w-md text-[15px] font-light leading-7 text-[#292622]/75">{item.description}</p>
+                          <Link
+                            href={item.href}
+                            className="font-body group mt-5 inline-flex min-h-11 items-center gap-3 rounded-sm text-xs font-semibold uppercase tracking-[0.22em] text-[#593719] transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+                          >
+                            Discuss this project
+                            <span className="block h-px w-8 bg-current transition-all duration-300 group-hover:w-12 motion-reduce:transition-none" aria-hidden="true" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

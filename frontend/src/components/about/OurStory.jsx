@@ -43,17 +43,16 @@ export default function OurStory() {
           className="relative mx-auto w-full max-w-[590px] pb-12 pr-8 sm:pb-14 sm:pr-12"
         >
           {/* Decorative frame */}
-          <div className="absolute -left-4 top-8 h-[75%] w-[75%] rounded-[4px] border border-[#C18A35]/60 sm:-left-7 sm:top-12" />
+          <div className="absolute -left-4 top-8 h-[85%] w-[75%] rounded-[4px] border border-[#C18A35]/60 sm:-left-7 sm:top-12" />
 
           {/* Main image */}
-          <div className="relative aspect-[4/4.5] overflow-hidden rounded-[5px]">
+          <div className="relative aspect-[4/5.5] overflow-hidden rounded-[5px]">
             <Image
-              src="/images/our-story-main.jpg"
+              src="https://i.pinimg.com/736x/22/a9/29/22a929c0a392a65d8e5bbf0357c714bd.jpg"
               alt="Elegant luxury interior designed by Divine Interiors"
               fill
               sizes="(max-width: 768px) 90vw, 45vw"
-              className="object-cover transition-transform duration-1000 hover:scale-105"
-            />
+className="object-cover transition-transform duration-1000 hover:scale-105 shadow-xl shadow-black"            />
           </div>
 
           {/* Secondary overlapping image */}
@@ -66,7 +65,7 @@ export default function OurStory() {
           >
             <div className="relative aspect-[4/3]">
               <Image
-                src="/images/our-story-detail.jpg"
+                src="https://i.pinimg.com/1200x/e9/93/6a/e9936a03e02300bd8a0ac5495ad1435f.jpg"
                 alt="Premium interior design details"
                 fill
                 sizes="(max-width: 768px) 45vw, 22vw"
@@ -116,7 +115,7 @@ export default function OurStory() {
           >
             The Story Behind
             <br />
-            <span className="italic text-[#C18A35]">
+            <span className=" text-[#C18A35]">
               Divine Interiors
             </span>
           </motion.h2>

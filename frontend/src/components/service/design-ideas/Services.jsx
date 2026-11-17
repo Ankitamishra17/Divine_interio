@@ -1,68 +1,62 @@
-
-
 "use client";
 
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 
 const services = [
   {
-    id: "01",
+    id: "living-spaces",
     title: "Living Spaces",
-    image:
-      "/image/living_room1.webp",
+    image: "/image/living_room1.webp",
     description:
       "Curated living rooms blending comfort with timeless elegance, tailored to your lifestyle.",
   },
   {
-    id: "02",
+    id: "bedroom-sanctuaries",
     title: "Bedroom Sanctuaries",
-    image:
-      "/image/bedroom_design7.webp",
+    image: "/image/bedroom_design7.webp",
     description:
       "Restful retreats designed with layered textures, ambient lighting, and bespoke furniture.",
   },
   {
-    id: "03",
+    id: "kitchen-dining",
     title: "Kitchen & Dining",
-    image:
-      "/image/kitchen_design13.webp",
+    image: "/image/kitchen_design13.webp",
     description:
       "Functional yet stunning culinary spaces that become the heart of your home.",
   },
   {
-    id: "04",
+    id: "bespoke-furniture",
     title: "Bespoke Furniture",
-    image:
-      "/lsd_images/45.jpg",
+    image: "/lsd_images/45.jpg",
     description:
       "Custom-crafted pieces designed exclusively for your space and sensibilities.",
   },
   {
-    id: "05",
+    id: "lighting-design",
     title: "Lighting Design",
     image: "/lsd_images/2.jpg",
     description:
       "Atmospheric lighting schemes that sculpt mood and highlight architectural features.",
   },
   {
-    id: "06",
+    id: "material-sourcing",
     title: "Material Sourcing",
-    image:
-      "/lsd_images/32.jpg",
+    image: "/lsd_images/32.jpg",
     description:
       "Premium materials sourced globally to elevate every surface in your home.",
   },
   {
-    id: "07",
+    id: "space-planning",
     title: "Space Planning",
-    image:
-      "/lsd_images/42.jpg",
+    image: "/lsd_images/42.jpg",
     description:
       "Intelligent layouts that optimize flow and functionality without sacrificing style.",
   },
   {
-    id: "08",
+    id: "color-consultation",
     title: "Color Consultation",
     image: "/image/color_consultation.webp",
     description:
@@ -70,104 +64,149 @@ const services = [
   },
 ];
 
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+
+const arrowBtn = `flex h-12 w-12 items-center justify-center rounded-full border border-[#593719]/30 text-[#593719] transition-colors duration-300 hover:bg-[#593719] hover:text-white disabled:pointer-events-none disabled:opacity-30 ${focusRing}`;
+
 export default function Services() {
+  const scrollerRef = useRef(null);
+  const [state, setState] = useState({
+    canPrev: false,
+    canNext: true,
+    thumb: 30, // progress thumb width, %
+    left: 0, // progress thumb offset, %
+  });
+
+  // Keep arrows and the progress bar in sync with the scroll position
+  const update = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setState({
+      canPrev: scrollLeft > 4,
+      canNext: scrollLeft < scrollWidth - clientWidth - 4,
+      thumb: Math.min(100, (clientWidth / scrollWidth) * 100),
+      left: (scrollLeft / scrollWidth) * 100,
+    });
+  }, []);
+
+  useEffect(() => {
+    update();
+    const el = scrollerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [update]);
+
+  // Scroll by exactly one card, using the real distance between two cards
+  const scrollByCard = (direction) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const cards = el.querySelectorAll("li");
+    const stepSize =
+      cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : el.clientWidth;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: direction * stepSize, behavior: reduce ? "auto" : "smooth" });
+  };
+
   return (
-    <section className=" overflow-x-hidden bg-gradient-to-b from-stone-50 to-white py-16 sm:py-20 md:py-24 lg:py-32">
-      {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24"
-        >
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.1em" }}
-            whileInView={{ opacity: 1, letterSpacing: "0.35em" }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="uppercase tracking-widest text-[#C8972B] text-xs sm:text-xs font-medium mb-4 sm:mb-6"
-          >
-            What We Offer
-          </motion.p>
-
-          {/* Main Title */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-stone-950 leading-tight px-2">
-              Our Design{" "}
-              <motion.span
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="font-heading text-[#C8972B] block md:inline"
-              >
-                Services
-              </motion.span>
+    <section
+      aria-labelledby="services-heading"
+      className="overflow-hidden bg-stone-50 py-16 sm:py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header with scroll controls */}
+        <div className="mb-8 flex flex-col gap-6 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold text-[#8A6416]">What we offer</p>
+            <h2
+              id="services-heading"
+              className="mt-4 font-heading text-4xl leading-tight text-stone-950 sm:text-5xl lg:text-6xl"
+            >
+              Our design services
             </h2>
-          </motion.div>
+            <p className="mt-5 text-base leading-8 text-stone-600">
+              From the first layout to the final light fitting, every service is
+              tailored to your space and the way you live.
+            </p>
+          </div>
 
-          {/* Decorative Divider */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center gap-2 sm:gap-4 mt-6 sm:mt-8 lg:mt-10 origin-center"
-          >
-            <motion.div
-              className="flex-1 h-px bg-gradient-to-r from-transparent to-amber-300/50"
-              style={{ maxWidth: "40px", minWidth: "20px" }}
-            />
-            <motion.div
-              className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-[#C8972B] flex-shrink-0"
-              whileInView={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
-            />
-            <motion.div
-              className="flex-1 h-px bg-gradient-to-l from-transparent to-amber-300/50"
-              style={{ maxWidth: "40px", minWidth: "20px" }}
-            />
-          </motion.div>
-        </motion.div>
+          <div className="hidden gap-3 sm:flex">
+            <button
+              type="button"
+              aria-label="Previous services"
+              onClick={() => scrollByCard(-1)}
+              disabled={!state.canPrev}
+              className={arrowBtn}
+            >
+              <ArrowLeft size={20} aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next services"
+              onClick={() => scrollByCard(1)}
+              disabled={!state.canNext}
+              className={arrowBtn}
+            >
+              <ArrowRight size={20} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
 
-        {/* Services Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.12,
-                delayChildren: 0.2,
-              },
-            },
-          }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-8 xl:gap-12"
+        {/* Scroller: swipe on touch, arrows or keyboard on desktop.
+            Negative margins let the cards run to the screen edge so the next one peeks in. */}
+        <div
+          ref={scrollerRef}
+          onScroll={update}
+          role="region"
+          aria-label="Design services, scrollable"
+          tabIndex={0}
+          className={`-mx-4 snap-x snap-mandatory overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:-mx-8 lg:scroll-px-8 lg:px-8 [&::-webkit-scrollbar]:hidden motion-safe:scroll-smooth ${focusRing}`}
         >
-          {services.map((item, index) => (
-            <ServiceCard key={item.id} item={item} index={index} />
-          ))}
-        </motion.div>
+          <ul className="flex gap-4 sm:gap-5">
+            {services.map((item) => (
+              <ServiceCard key={item.id} item={item} />
+            ))}
 
-        {/* Bottom Accent */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent"
-        />
+            {/* Final card: the next step, so the row ends with an action */}
+            <li className="flex aspect-[3/4] w-[78%] shrink-0 snap-start flex-col justify-between rounded-2xl bg-[#593719] p-6 text-white sm:w-[44%] lg:w-[31%] xl:w-[24%]">
+              <span aria-hidden="true" className="block h-0.5 w-8 bg-[#C8972B]" />
+              <div>
+                <p className="font-heading text-3xl leading-snug">
+                  Not sure which service you need?
+                </p>
+                <p className="mt-3 text-[15px] leading-7 text-white/80">
+                  Tell us about your space and we&rsquo;ll suggest where to
+                  start. The first consultation is free.
+                </p>
+                <Link
+                  href="/contact"
+                  className={`group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#C8972B] px-7 text-[15px] font-semibold text-stone-950 transition-colors duration-300 hover:bg-white ${focusRing}`}
+                >
+                  Book a free consultation
+                  <ArrowRight
+                    size={18}
+                    aria-hidden="true"
+                    className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+                  />
+                </Link>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        {/* Progress */}
+        <div
+          aria-hidden="true"
+          className="relative mt-6 h-0.5 w-full overflow-hidden rounded-full bg-stone-200"
+        >
+          <span
+            className="absolute top-0 h-full rounded-full bg-[#593719] transition-[left,width] duration-200 motion-reduce:transition-none"
+            style={{ width: `${state.thumb}%`, left: `${state.left}%` }}
+          />
+        </div>
       </div>
     </section>
   );

@@ -1,255 +1,266 @@
-
-
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { ArrowLeft, Check, MessageCircle, Phone } from "lucide-react";
 
 import DimensionStep from "./DimensionStep";
 import ShapeStep from "./ShapeStep";
 import PackageStep from "./PackageStep";
 import LeadFormStep from "./LeadFormStep";
+import { kitchenShapes, packages } from "@/data/kitchenCalculatorData";
+
+/*
+  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+
+  What's better
+  - The step bar is honest: if someone picks "Custom" size we skip Shape and Package, so the bar shows
+    2 steps ("Step 2 of 2"), not a jump to "4 of 4". Finished steps can be tapped to go back.
+  - Fixed the old step-circle colour logic (the "done" tick never showed).
+  - One Back button, placed where the eye already is (top of the card). The old one at the bottom is gone.
+  - Your choices so far show as small chips under the step bar.
+  - On each new step the title gets keyboard / screen-reader focus, and the card scrolls into view on phones.
+  - "Chat with us" was plain text; now it's real Call and WhatsApp links.
+  - Light, calm look: no gradient page, one white card with a gold top edge, soft motion (off when reduced motion is on).
+
+  The four step files now share this palette and no longer draw their own title, step count or Back button.
+  After a successful send, LeadFormStep calls onSubmitted() (this card switches to "Thank you") and
+  onRestart() ("Calculate another kitchen") resets everything without reloading the page.
+*/
+
+const PHONE_DISPLAY = "+91 88266 06869";
+const PHONE_TEL = "tel:+918826606869";
+const WHATSAPP_URL = "https://wa.me/918826606869";
 
 const STEPS = [
-  { id: 1, label: "Dimensions", shortLabel: "Size" },
-  { id: 2, label: "Shape", shortLabel: "Layout" },
-  { id: 3, label: "Package", shortLabel: "Package" },
-  { id: 4, label: "Your Details", shortLabel: "Details" },
+  { id: 1, label: "Size", title: "How big is your kitchen?" },
+  { id: 2, label: "Layout", title: "Choose your kitchen shape" },
+  { id: 3, label: "Package", title: "Pick a package" },
+  { id: 4, label: "Details", title: "Where should we send your estimate?" },
 ];
 
+const EASE = [0.22, 1, 0.36, 1];
+const EMPTY = { dimension: "", shape: "", package: "", name: "", email: "", phone: "", pincode: "" };
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+
 export default function KitchenCostCalculator() {
+  const reduce = useReducedMotion();
+  const cardRef = useRef(null);
+  const titleRef = useRef(null);
+  const mounted = useRef(false);
+
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    dimension: "",
-    shape: "",
-    package: "",
-    name: "",
-    email: "",
-    phone: "",
-    pincode: "",
-  });
+  const [formData, setFormData] = useState(EMPTY);
+  const [submitted, setSubmitted] = useState(false);
+
+  const isCustom = formData.dimension === "Custom";
+  const visible = isCustom ? [STEPS[0], STEPS[3]] : STEPS; // "Custom" skips Shape and Package
+  const position = Math.max(0, visible.findIndex((s) => s.id === step));
+  const total = visible.length;
+  const current = STEPS[step - 1];
+  const progress = submitted ? 100 : ((position + 1) / total) * 100;
 
   const handleDimensionSelect = (dimension) => {
-    setFormData((prev) => ({
-      ...prev,
-      dimension,
-    }));
-
-    if (dimension === "Custom") {
-      setStep(4);
-    }
+    setFormData((prev) => ({ ...prev, dimension }));
+    if (dimension === "Custom") setStep(4);
   };
 
-  const nextStep = () => {
-    setStep((prev) => Math.min(prev + 1, 4));
-  };
-
-  const prevStep = () => {
-    setStep((prev) => Math.max(prev - 1, 1));
-  };
-
+  const nextStep = () => setStep((p) => Math.min(p + 1, 4));
+  const prevStep = () => setStep((p) => Math.max(p - 1, 1));
   const handleBack = () => {
-    if (formData.dimension === "Custom" && step === 4) {
-      setStep(1);
-    } else {
-      prevStep();
-    }
+    if (isCustom && step === 4) setStep(1);
+    else prevStep();
+  };
+  const goTo = (id) => !submitted && id < step && setStep(id); // finished steps only
+  const restart = () => {
+    setFormData(EMPTY);
+    setSubmitted(false);
+    setStep(1);
   };
 
-  const progressPercentage = (step / 4) * 100;
-  const currentStepData = STEPS[step - 1];
+  // New step: give the title focus, and bring the card into view if it scrolled away
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    titleRef.current?.focus({ preventScroll: true });
+    const r = cardRef.current?.getBoundingClientRect();
+    if (r && r.top < 0) cardRef.current.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }, [step, submitted, reduce]);
+
+  const shapeName = kitchenShapes.find((x) => x.id === formData.shape)?.title || formData.shape;
+  const packageName = packages.find((x) => x.id === formData.package)?.name || formData.package;
+  const chips = [
+    formData.dimension && step > 1 && formData.dimension,
+    formData.shape && step > 2 && shapeName,
+    formData.package && step > 3 && packageName,
+  ].filter(Boolean);
+
+  const slide = reduce
+    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
+    : { initial: { opacity: 0, x: 18 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: -18 } };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#F5EBE0]/30 to-white py-6 md:py-12 px-4 sm:px-6">
-      <div className="max-w-5xl mx-auto">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
+    <div className="min-h-screen bg-[#F7F3ED] px-4 py-12 sm:px-6 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        {/* Header */}
+        <motion.header
+          initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 md:mb-12"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="text-center"
         >
-          <h1 className=" mt-10 text-2xl  md:text-4xl font-heading text-[#3D1F0D] text-center mb-3">
-            Kitchen Cost
-            <br />
-            <span className="text-[#C8972B]">Calculator</span>
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.35em] text-[#C18A35]">Free estimate</p>
+          <h1 className="font-heading mt-4 text-4xl leading-[1.08] text-[#292622] md:text-5xl">
+            Kitchen Cost <span className="text-[#593719]">Calculator</span>
           </h1>
-          <p className="text-gray-600 text-center text-md max-w-2xl mx-auto">
-            Get an instant estimate for your dream kitchen in just a few steps
+          <div className="mx-auto mt-5 h-px w-14 bg-[#C18A35]" aria-hidden="true" />
+          <p className="font-body mx-auto mt-5 max-w-xl text-base font-light leading-8 text-[#292622]/75">
+            Get an instant estimate for your dream kitchen in just a few steps.
           </p>
-        </motion.div>
+        </motion.header>
 
-        {/* Progress Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-8 md:mb-12"
-        >
-          {/* Step Circles - Hidden on very small screens */}
-          <div className="hidden sm:flex justify-between mb-6">
-            {STEPS.map((s, idx) => (
-              <motion.div
-                key={s.id}
-                className="flex flex-col items-center flex-1"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <motion.div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg transition-all duration-300 mb-2 cursor-pointer relative
-                    ${
-                      step >= s.id
-                        ? "bg-[#C8972B] text-white shadow-lg shadow-[#C8972B]/30"
-                        : step > s.id
-                        ? "bg-[#C8972B] text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                  animate={
-                    step === s.id ? { scale: [1, 1.15, 1] } : { scale: 1 }
-                  }
-                  transition={{ duration: 0.5 }}
+        {/* Step bar */}
+        <nav aria-label="Calculator progress" className="mt-10">
+          <ol className="flex items-start">
+            {visible.map((s, i) => {
+              const done = submitted || i < position;
+              const now = !submitted && i === position;
+              const dot = (
+                <span
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none sm:h-11 sm:w-11 ${
+                    done
+                      ? "border-[#C18A35] bg-[#C18A35] text-[#292622]"
+                      : now
+                      ? "border-[#593719] bg-[#593719] text-[#F7F3ED]"
+                      : "border-[#E8DED0] bg-white text-[#292622]/50"
+                  }`}
                 >
-                  {step > s.id ? (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 200 }}
-                    >
-                      ✓
-                    </motion.span>
-                  ) : (
-                    s.id
+                  {done ? <Check size={18} aria-hidden="true" /> : i + 1}
+                </span>
+              );
+              return (
+                <li key={s.id} aria-current={now ? "step" : undefined} className={`flex items-start ${i < visible.length - 1 ? "flex-1" : ""}`}>
+                  <div className="flex w-16 flex-col items-center gap-2 text-center sm:w-20">
+                    {done ? (
+                      <button type="button" onClick={() => goTo(s.id)} aria-label={`Go back to ${s.label}`} className={`rounded-full ${ring} focus-visible:ring-offset-[#F7F3ED]`}>
+                        {dot}
+                      </button>
+                    ) : (
+                      dot
+                    )}
+                    <span className={`font-body text-xs sm:text-sm ${now ? "font-semibold text-[#292622]" : "text-[#292622]/60"}`}>{s.label}</span>
+                  </div>
+                  {i < visible.length - 1 && (
+                    <span aria-hidden="true" className="mx-1 mt-5 h-px flex-1 sm:mt-[22px]">
+                      <span className={`block h-px w-full transition-colors duration-500 motion-reduce:transition-none ${done ? "bg-[#C18A35]" : "bg-[#E8DED0]"}`} />
+                    </span>
                   )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+
+        {/* Card */}
+        <div
+          ref={cardRef}
+          className="relative mt-8 scroll-mt-4 overflow-hidden rounded-sm border border-[#E8DED0] bg-white shadow-[0_30px_70px_-40px_rgba(89,55,25,0.45)]"
+        >
+          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#E8DED0]">
+            <span className="block h-full bg-[#C18A35] transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+          </span>
+
+          <div className="px-5 pb-8 pt-8 sm:px-10 sm:pb-12 sm:pt-10 md:px-14">
+            {/* Card header: back, step count, title, choices */}
+            <div className="flex min-h-11 items-center justify-between gap-4">
+              {step > 1 && !submitted ? (
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className={`font-body -ml-2 inline-flex min-h-11 items-center gap-2 rounded-sm px-2 text-sm font-medium text-[#593719] transition-colors hover:text-[#C18A35] ${ring}`}
+                >
+                  <ArrowLeft size={16} aria-hidden="true" />
+                  Back
+                </button>
+              ) : (
+                <span />
+              )}
+              <p className="font-body text-sm tabular-nums text-[#292622]/60" aria-live="polite">
+                {submitted ? "Done" : `Step ${position + 1} of ${total}`}
+              </p>
+            </div>
+
+            <h2
+              ref={titleRef}
+              tabIndex={-1}
+              className="font-heading mt-3 text-2xl leading-tight text-[#292622] outline-none sm:text-3xl"
+            >
+              {submitted ? "Request submitted" : current.title}
+            </h2>
+
+            {chips.length > 0 && (
+              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Your choices so far">
+                {chips.map((c) => (
+                  <li key={c} className="font-body rounded-full bg-[#F7F3ED] px-3.5 py-1.5 text-sm text-[#593719]">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Step content */}
+            <div className="mt-8">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div key={`step-${step}`} {...slide} transition={{ duration: 0.35, ease: EASE }}>
+                  {step === 1 && <DimensionStep selected={formData.dimension} onSelect={handleDimensionSelect} onNext={nextStep} />}
+
+                  {step === 2 && (
+                    <ShapeStep
+                      selected={formData.shape}
+                      onSelect={(shape) => setFormData((prev) => ({ ...prev, shape }))}
+                      onNext={nextStep}
+                    />
+                  )}
+
+                  {step === 3 && (
+                    <PackageStep
+                      selected={formData.package}
+                      onSelect={(pkg) => setFormData((prev) => ({ ...prev, package: pkg }))}
+                      onNext={nextStep}
+                    />
+                  )}
+
+                  {step === 4 && <LeadFormStep formData={formData} setFormData={setFormData} onSubmitted={() => setSubmitted(true)} onRestart={restart} />}
                 </motion.div>
-                <p className="text-xs md:text-sm font-medium text-[#3D1F0D] text-center">
-                  {s.label}
-                </p>
-              </motion.div>
-            ))}
+              </AnimatePresence>
+            </div>
           </div>
+        </div>
 
-          {/* Mobile Step Indicator */}
-          <div className="sm:hidden flex items-center justify-center gap-2 mb-6">
-            <span className="text-sm font-semibold text-[#3D1F0D]">
-              Step {step} of 4
-            </span>
-            <span className="text-[#C8972B]">•</span>
-            <span className="text-sm text-gray-600">{currentStepData.shortLabel}</span>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="relative h-1.5 bg-gray-200 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-[#C8972B] to-[#B8851F] rounded-full shadow-lg shadow-[#C8972B]/40"
-              initial={{ width: "0%" }}
-              animate={{ width: `${progressPercentage}%` }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            />
-          </div>
-
-          {/* Progress Text */}
-          <p className="text-center text-xs text-gray-500 mt-2">
-            {Math.round(progressPercentage)}% Complete
-          </p>
-        </motion.div>
-
-        {/* Main Content Container */}
-        <motion.div
-          className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 md:p-12 border border-gray-100"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          {/* Step Content with Animation */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`step-${step}`}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
+        {/* Help */}
+        <div className="font-body mt-8 text-center text-sm text-[#292622]/70">
+          <p>Questions? Talk to our design team.</p>
+          <div className="mt-1 flex flex-wrap items-center justify-center gap-x-6">
+            <a
+              href={PHONE_TEL}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
             >
-              {step === 1 && (
-                <DimensionStep
-                  selected={formData.dimension}
-                  onSelect={handleDimensionSelect}
-                  onNext={nextStep}
-                />
-              )}
-
-              {step === 2 && (
-                <ShapeStep
-                  selected={formData.shape}
-                  onSelect={(shape) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      shape,
-                    }))
-                  }
-                  onNext={nextStep}
-                  onBack={prevStep}
-                />
-              )}
-
-              {step === 3 && (
-                <PackageStep
-                  selected={formData.package}
-                  onSelect={(pkg) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      package: pkg,
-                    }))
-                  }
-                  onNext={nextStep}
-                  onBack={prevStep}
-                />
-              )}
-
-              {step === 4 && (
-                <LeadFormStep
-                  formData={formData}
-                  setFormData={setFormData}
-                  onBack={handleBack}
-                />
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Back Button - Only on steps 2+ */}
-        <AnimatePresence>
-          {step > 1 && (
-            <motion.button
-              onClick={handleBack}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3 }}
-              className="mt-6 mx-auto flex items-center gap-2 px-6 py-3 text-gray-700 hover:text-[#3D1F0D] font-body transition-colors duration-300 group"
+              <Phone size={16} aria-hidden="true" />
+              {PHONE_DISPLAY}
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
             >
-              <ChevronLeft
-                size={20}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
-              Go Back
-            </motion.button>
-          )}
-        </AnimatePresence>
-
-        {/* Footer Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-8 md:mt-12 text-center text-sm text-gray-500 px-4"
-        >
-          <p>
-             Questions? <span className="text-[#C8972B]">Chat with us</span> or call our
-            design team
-          </p>
-        </motion.div>
+              <MessageCircle size={16} aria-hidden="true" />
+              WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

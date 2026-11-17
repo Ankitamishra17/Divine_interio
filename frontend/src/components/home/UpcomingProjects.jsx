@@ -1,17 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 /*
   Palette
   Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
-  Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
+  Beige #E8DED0    | Charcoal #292622 | White #FFFFFF
 
-  Layout: clean SPLIT. Text on the left, one photo on the right (a soft beige block sits
-  behind it for depth). Compact, no heavy frame. Works with 1 project (your data now)
-  and up to 4 (arrows, dots, swipe, arrow keys).
+  Row of cards. Every project (up to 4) is visible at once, so there is nothing to
+  swipe or click through. The grid adapts to the count:
+    1 project  -> one wide landscape card (your data now)
+    2 projects -> two cards
+    3 projects -> three tall cards
+    4 projects -> four tall cards
+  Phones: cards stack in one column (two across on small tablets).
 */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
@@ -24,14 +28,23 @@ const handleImageError = (e) => {
   e.currentTarget.src = PLACEHOLDER;
 };
 
-const arrowBtn =
-  "flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[#593719]/30 text-[#593719] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]";
+// Full class names (not built dynamically) so Tailwind keeps them
+const LAYOUTS = {
+  1: { grid: "grid-cols-1", ratio: "aspect-[4/3] md:aspect-[16/8]" },
+  2: { grid: "grid-cols-1 md:grid-cols-2", ratio: "aspect-[4/3]" },
+  3: {
+    grid: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+    ratio: "aspect-[4/3] lg:aspect-[4/5]",
+  },
+  4: {
+    grid: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+    ratio: "aspect-[4/3] lg:aspect-[3/4]",
+  },
+};
 
 export default function ProjectsSection() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [active, setActive] = useState(0);
-  const touchX = useRef(null);
 
   useEffect(() => {
     const fetchUpcomingProjects = async () => {
@@ -62,142 +75,102 @@ export default function ProjectsSection() {
   };
 
   const items = projects.slice(0, 4);
-  const count = items.length;
-  const multiple = count > 1;
-  const current = items[active];
-  const go = (dir) => setActive((a) => (a + dir + count) % count);
+  const layout = LAYOUTS[items.length] || LAYOUTS[4];
 
-  const Head = (
-    <div>
-      <h2 className="font-heading text-4xl font-medium leading-[1.1] text-[#292622] md:text-5xl xl:text-6xl">
-        New trending designs
-      </h2>
-      <p className="mt-4 max-w-md text-base leading-relaxed text-[#292622]/70">
-        Fresh ideas for your next project, picked from our latest work.
-      </p>
+  const Header = (
+    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
+      <div>
+        <h2 className="font-heading text-4xl font-medium leading-[1.1] tracking-tight text-[#292622] md:text-5xl xl:text-[56px]">
+          New Trending Designs
+        </h2>
+        <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[#292622]/70">
+          Explore our latest interior design projects, where creativity meets elegance and
+          every detail is thoughtfully crafted to perfection.
+        </p>
+      </div>
+
+      <Link
+        href="/portfolio"
+        className="group/all inline-flex flex-shrink-0 items-center gap-2.5 self-start text-[15px] font-semibold text-[#593719] transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED] md:self-auto"
+      >
+        <span className="border-b-2 border-[#C18A35] pb-1">See all projects</span>
+        <ArrowRight
+          size={16}
+          className="transition-transform duration-300 group-hover/all:translate-x-1"
+        />
+      </Link>
     </div>
   );
 
-  /* Loading: skeleton in the same split layout */
+  /* Loading: skeleton cards */
   if (loading) {
     return (
-      <section className="bg-[#F7F3ED] py-16 md:py-24" aria-busy="true" aria-label="Loading design">
+      <section
+        className="bg-[#F7F3ED] py-16 md:py-24 lg:py-28"
+        aria-busy="true"
+        aria-label="Loading designs"
+      >
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 xl:px-12">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-5">{Head}</div>
-            <div className="aspect-[4/3] animate-pulse rounded-sm bg-[#E8DED0] lg:col-span-7" />
+          {Header}
+          <div className={`mt-12 grid gap-6 md:mt-14 lg:gap-8 ${LAYOUTS[3].grid}`}>
+            {[0, 1, 2].map((n) => (
+              <div key={n}>
+                <div className={`animate-pulse rounded-sm bg-[#E8DED0] ${LAYOUTS[3].ratio}`} />
+                <div className="mt-5 h-6 w-2/3 animate-pulse rounded-sm bg-[#E8DED0]" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
     );
   }
 
-  if (!current) return null;
+  if (items.length === 0) return null;
 
   return (
-    <section
-      className="bg-[#F7F3ED] py-16 selection:bg-[#593719] selection:text-[#F7F3ED] md:py-24"
-      onKeyDown={(e) => {
-        if (!multiple) return;
-        if (e.key === "ArrowRight") go(1);
-        if (e.key === "ArrowLeft") go(-1);
-      }}
-    >
+    <section className="bg-[#F7F3ED] py-16 selection:bg-[#593719] selection:text-[#F7F3ED] md:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 xl:px-12">
-        {/* Phones: heading, photo, details. Desktop: text left, photo right. */}
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-10">
-          {/* heading */}
-          <div className="lg:col-span-5 lg:row-start-1 lg:self-end">{Head}</div>
+        {Header}
 
-          {/* photo */}
-          <div className="relative lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
-            {/* soft beige block behind the photo, for depth */}
-            <span
-              className="absolute -bottom-4 -left-4 hidden h-3/4 w-3/4 bg-[#E8DED0] sm:block lg:-bottom-6 lg:-left-6"
-              aria-hidden="true"
-            />
-            <Link
-              href={`/upcoming-project/${current.id}`}
-              aria-label={`View ${current.title}`}
-              onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-              onTouchEnd={(e) => {
-                if (!multiple || touchX.current === null) return;
-                const dx = e.changedTouches[0].clientX - touchX.current;
-                if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
-                touchX.current = null;
-              }}
-              className="group relative block aspect-[4/3] overflow-hidden rounded-sm bg-[#E8DED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
-            >
-              {items.map((project, i) => (
-                <img
-                  key={project.id}
-                  src={getImageUrl(project.image)}
-                  alt={i === active ? project.alt || project.title || "Interior design project" : ""}
-                  aria-hidden={i !== active}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  onError={handleImageError}
-                  className={`absolute inset-0 h-full w-full object-cover transition-all duration-[900ms] ease-out motion-reduce:transition-none group-hover:scale-[1.04] ${
-                    i === active ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
-            </Link>
-          </div>
-
-          {/* project details + actions */}
-          <div className="lg:col-span-5 lg:row-start-2 lg:self-start">
-            <span className="mb-5 block h-[3px] w-12 bg-[#C18A35]" aria-hidden="true" />
-            <p className="text-sm text-[#292622]/60">Latest design</p>
-            <h3 className="mt-1 font-heading text-2xl leading-tight text-[#292622] sm:text-3xl">
-              {current.title}
-            </h3>
-
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <ul className={`mt-12 grid gap-x-6 gap-y-12 md:mt-14 lg:gap-x-8 ${layout.grid}`}>
+          {items.map((project, i) => (
+            <li key={project.id}>
               <Link
-                href={`/upcoming-project/${current.id}`}
-                className="inline-flex h-12 items-center gap-2 rounded-sm bg-[#593719] px-7 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+                href={`/upcoming-project/${project.id}`}
+                aria-label={`View ${project.title}`}
+                className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
               >
-                View design
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/portfolio"
-                className="text-sm font-semibold text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35]"
-              >
-                See all projects
-              </Link>
-            </div>
+                {/* photo */}
+                <span className={`relative block overflow-hidden rounded-sm bg-[#E8DED0] ${layout.ratio}`}>
+                  <img
+                    src={getImageUrl(project.image)}
+                    alt={project.alt || project.title || "Interior design project"}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    onError={handleImageError}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
+                  />
+                </span>
 
-            {multiple && (
-              <div className="mt-8 flex items-center gap-4">
-                <button type="button" onClick={() => go(-1)} aria-label="Previous design" className={arrowBtn}>
-                  <ArrowLeft size={18} />
-                </button>
-                <button type="button" onClick={() => go(1)} aria-label="Next design" className={arrowBtn}>
-                  <ArrowRight size={18} />
-                </button>
-                <div className="ml-2 flex items-center gap-2" role="group" aria-label="Choose a design">
-                  {items.map((project, i) => (
-                    <button
-                      key={project.id}
-                      type="button"
-                      onClick={() => setActive(i)}
-                      aria-label={`Show ${project.title}`}
-                      aria-pressed={i === active}
-                      className="flex h-6 items-center focus-visible:outline-none"
-                    >
-                      <span
-                        className={`block h-[3px] rounded-full transition-all duration-300 ${
-                          i === active ? "w-10 bg-[#C18A35]" : "w-5 bg-[#593719]/25 hover:bg-[#593719]/50"
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+                {/* caption */}
+                <span className="mt-5 flex items-center justify-between gap-4">
+                  <span className="min-w-0">
+                    <span className="block text-sm text-[#292622]/55">Latest design</span>
+                    <span className="mt-1 block truncate font-heading text-2xl font-medium leading-tight text-[#292622] decoration-[#C18A35] decoration-2 underline-offset-[6px] transition-colors group-hover:text-[#593719] group-hover:underline">
+                      {project.title}
+                    </span>
+                  </span>
+
+                  <span
+                    className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[#593719]/25 text-[#593719] transition-colors duration-300 group-hover:border-[#593719] group-hover:bg-[#593719] group-hover:text-[#F7F3ED]"
+                    aria-hidden="true"
+                  >
+                    <ArrowUpRight size={18} />
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

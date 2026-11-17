@@ -1,3 +1,4 @@
+
 import { designIdeas } from "@/data/designIdeas";
 import { notFound } from "next/navigation";
 import DesignHero from "@/components/common/DesignHero";
@@ -20,9 +21,9 @@ export async function generateMetadata({ params }) {
 
   if (!design) {
     return {
-      title: "Design Ideas | Living Space Decor",
+      title: "Interior Design Ideas | Divine Interio",
       description:
-        "Explore premium interior design ideas by Living Space Decor.",
+        "Discover inspiring home interior design ideas, elegant spaces, and modern design concepts with Divine Interio.",
 
       robots: {
         index: false,
@@ -32,24 +33,45 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${design.title} | Living Space Decor`,
+    title: `${design.title} | Divine Interio`,
+
     description: design.description,
 
     keywords: [
       design.title,
+      "Divine Interio",
       "Interior Design",
-      "Home Interior",
-      "Living Space Decor",
+      "Home Interior Design",
+      "Modern Interior Design",
+      "Luxury Interior Design",
       "Interior Design Ideas",
+      "Residential Interior Design",
+      "Interior Designers in Noida",
+      "Interior Designers in Greater Noida",
+      "Interior Designers in Delhi NCR",
     ],
 
     alternates: {
-      canonical: `https://livingspacedecor.in/services/design-ideas/${slug}`,
+      canonical: `https://divineinterio.in/services/design-ideas/${slug}`,
     },
 
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+      },
+    },
+
+    openGraph: {
+      title: `${design.title} | Divine Interio`,
+      description: design.description,
+      url: `https://divineinterio.in/services/design-ideas/${slug}`,
+      siteName: "Divine Interio",
+      locale: "en_IN",
+      type: "website",
     },
   };
 }
@@ -66,27 +88,23 @@ export default async function Page({ params }) {
   const detailTypeMap = {
     "living-room-design": "livingRoom",
     "bedroom-design": "bedroom",
-    "bathroom-design":"bathroom",
-    "dining-room-design":"diningRoom",
-    "home-office-design":"homeOffice",
-    "kids-room-design":"kidsRoom",
-    "mandir-design":"mandir",
-    "balcony-terrace-design":"balconyTerrace",
-    "kitchen-design-ideas":"modularKitchen",
+    "bathroom-design": "bathroom",
+    "dining-room-design": "diningRoom",
+    "home-office-design": "homeOffice",
+    "kids-room-design": "kidsRoom",
+    "mandir-design": "mandir",
+    "balcony-terrace-design": "balconyTerrace",
+    "kitchen-design-ideas": "modularKitchen",
   };
-
-
-
 
   return (
     <>
       <DesignHero data={design} />
-      <DesignGallery data={design}/>
+      <DesignGallery data={design} />
       <MoodBoard data={design} />
       <Details type={detailTypeMap[slug]} />
-      <FAQ data={design}/>
-      <CTASection data={design}/>
-      
+      <FAQ data={design} />
+      <CTASection data={design} />
     </>
   );
 }

@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
-  AnimatePresence,
   useInView,
   useReducedMotion,
   animate,
@@ -13,19 +12,15 @@ import {
 import { ArrowRight } from "lucide-react";
 
 /*
-  Palette
+  Palette (unchanged)
   Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
-  Design idea (kept): architectural DIMENSION LINES  |-----label-----|  under each number,
-  like measurements on a floor plan. Numbers count up once when scrolled into view.
-
-  UX changes:
-  - One large photo instead of four static ones. Hover, focus or tap a stat and the
-    photo + caption change to match it, so every number is explained by an image.
-  - Stats are real buttons (keyboard + screen reader friendly, aria-pressed).
-  - Active stat gets a solid gold dimension line, so people can see what is selected.
-  - Dimension lines draw themselves once on scroll. Reduced motion is respected.
+  Layout: four photo panels side by side, each carrying one number.
+  The selected panel opens wide and shows its title and description over the photo;
+  the others stay as narrow strips with just the number and label.
+  Hover, focus or tap a panel to open it. Numbers count up once on scroll.
+  Phones: the same four panels, stacked, and the selected one opens downward.
 */
 
 const STATS = [
@@ -101,167 +96,144 @@ function CountUp({ to, suffix = "" }) {
   );
 }
 
-// |------ label ------|  like a measurement on a floor plan
-function DimensionLine({ label, active, delay = 0 }) {
-  const reduce = useReducedMotion();
-  const line = active ? "bg-[#C18A35]" : "bg-[#C18A35]/40";
-
-  return (
-    <motion.div
-      className="mt-4 flex items-center gap-3"
-      initial={reduce ? false : { scaleX: 0, opacity: 0 }}
-      whileInView={{ scaleX: 1, opacity: 1 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
-      style={{ originX: 0 }}
-    >
-      <span className={`h-3 w-px transition-colors duration-300 ${active ? "bg-[#C18A35]" : "bg-[#C18A35]/70"}`} aria-hidden="true" />
-      <span className={`h-px flex-1 transition-colors duration-300 ${line}`} aria-hidden="true" />
-      <span
-        className={`text-[13px] font-medium transition-colors duration-300 ${
-          active ? "text-[#593719]" : "text-[#593719]/70"
-        }`}
-      >
-        {label}
-      </span>
-      <span className={`h-px flex-1 transition-colors duration-300 ${line}`} aria-hidden="true" />
-      <span className={`h-3 w-px transition-colors duration-300 ${active ? "bg-[#C18A35]" : "bg-[#C18A35]/70"}`} aria-hidden="true" />
-    </motion.div>
-  );
-}
-
 export default function WhyChooseUs() {
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
-  const current = STATS[active];
 
   return (
-    <section className="bg-[#F7F3ED] py-20 md:py-28" aria-labelledby="why-choose-us-heading">
+    <section
+      className="bg-[#F7F3ED] py-20 md:py-28"
+      aria-labelledby="why-choose-us-heading"
+    >
       <div className="mx-auto max-w-[1680px] px-5 sm:px-8 xl:px-12">
-        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-24">
-          {/* ───────── Featured photo (changes with the selected stat) ───────── */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="lg:sticky lg:top-28 lg:col-span-5"
+        {/* ───────── Header ───────── */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16"
+        >
+          <h2
+            id="why-choose-us-heading"
+            className="max-w-3xl font-heading text-4xl font-medium leading-[1.08] tracking-tight text-[#292622] sm:text-5xl xl:text-[64px]"
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[#E8DED0] shadow-[0_24px_60px_-28px_rgba(41,38,34,0.45)]">
-              {/* All photos stay mounted and fade, so switching never flickers or reloads */}
-              {STATS.map((s, i) => (
-                <Image
-                  key={s.img}
-                  src={s.img}
-                  alt={i === active ? s.title : ""}
-                  aria-hidden={i !== active}
-                  fill
-                  priority={i === 0}
-                  sizes="(max-width:1024px) 92vw, 40vw"
-                  className={`object-cover transition-opacity duration-700 ease-out ${
-                    i === active ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
+            Design that lives with you, not just in it.
+          </h2>
 
-              {/* Caption */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#292622]/85 via-[#292622]/45 to-transparent px-5 pb-5 pt-20 sm:px-7 sm:pb-7">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={reduce ? false : { opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
-                    transition={{ duration: 0.3, ease: EASE }}
-                    aria-live="polite"
-                  >
-                    <p className="font-heading text-2xl leading-tight text-[#F7F3ED] sm:text-3xl">
-                      {current.value}
-                      {current.suffix}{" "}
-                      <span className="text-[#C18A35]">{current.label.toLowerCase()}</span>
-                    </p>
-                    <p className="mt-1 text-sm text-[#F7F3ED]/80">{current.title}</p>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Progress ticks: show which of the four is selected, and let people jump */}
-              <div className="absolute right-4 top-4 flex gap-1.5 sm:right-5 sm:top-5">
-                {STATS.map((s, i) => (
-                  <span
-                    key={s.label}
-                    aria-hidden="true"
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      i === active ? "w-7 bg-[#C18A35]" : "w-3 bg-[#FFFFFF]/60"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ───────── Heading + stats ───────── */}
-          <div className="lg:col-span-7">
-            <motion.h2
-              id="why-choose-us-heading"
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="max-w-2xl font-heading text-4xl font-medium leading-[1.1] text-[#593719] sm:text-5xl xl:text-6xl"
-            >
-              Design that lives with you, not just in it.
-            </motion.h2>
-
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#292622]/70">
-              Hover or tap a number to see the work behind it.
+          <div className="flex flex-shrink-0 flex-col items-start gap-5 md:items-end md:text-right">
+            <p className="max-w-xs text-base leading-relaxed text-[#292622]/70">
+              Hover or tap a panel to see the work behind the number.
             </p>
-
-            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12">
-              {STATS.map((stat, i) => {
-                const isActive = i === active;
-                return (
-                  <button
-                    key={stat.label}
-                    type="button"
-                    aria-pressed={isActive}
-                    onClick={() => setActive(i)}
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    className={`group rounded-sm p-5 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] xl:p-6 ${
-                      isActive
-                        ? "bg-[#FFFFFF] shadow-[0_18px_40px_-26px_rgba(89,55,25,0.55)]"
-                        : "bg-transparent hover:bg-[#E8DED0]/45"
-                    }`}
-                  >
-                    <p
-                      className={`font-heading text-6xl leading-none transition-colors duration-300 xl:text-7xl ${
-                        isActive ? "text-[#593719]" : "text-[#593719]/55"
-                      }`}
-                    >
-                      {stat.count ? <CountUp to={stat.value} suffix={stat.suffix} /> : stat.value}
-                    </p>
-
-                    <DimensionLine label={stat.label} active={isActive} delay={i * 0.12} />
-
-                    <h3 className="mt-5 font-heading text-xl text-[#292622]">{stat.title}</h3>
-                    <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-[#292622]/70">
-                      {stat.description}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-
             <Link
               href="/portfolio"
-              className="group mt-12 inline-flex items-center gap-2 rounded-sm bg-[#593719] px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+              className="group inline-flex items-center gap-2.5 rounded-sm bg-[#593719] px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
             >
               See our work
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </Link>
           </div>
-        </div>
+        </motion.div>
+
+        {/* ───────── Expanding panels ───────── */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+          className="mt-12 flex h-[680px] flex-col gap-2 md:mt-16 lg:h-[620px] lg:flex-row xl:h-[680px]"
+        >
+          {STATS.map((stat, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={stat.label}
+                type="button"
+                aria-expanded={isActive}
+                onClick={() => setActive(i)}
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                className={`group relative min-h-0 min-w-0 overflow-hidden rounded-sm bg-[#E8DED0] text-left transition-[flex-grow] duration-700 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] motion-reduce:transition-none ${
+                  isActive ? "flex-[6_1_0%] lg:flex-[4_1_0%]" : "flex-[1_1_0%]"
+                }`}
+              >
+                {/* photo */}
+                <Image
+                  src={stat.img}
+                  alt={isActive ? stat.title : ""}
+                  aria-hidden={!isActive}
+                  fill
+                  priority={i === 0}
+                  sizes="(max-width:1024px) 92vw, 60vw"
+                  className={`object-cover transition-transform duration-[1200ms] ease-out motion-reduce:transition-none ${
+                    isActive ? "scale-100" : "scale-110"
+                  }`}
+                />
+
+                {/* shade: heavier on closed panels, lighter when open */}
+                <span
+                  className={`pointer-events-none absolute inset-0 transition-colors duration-700 ${
+                    isActive
+                      ? "bg-gradient-to-t from-[#292622]/85 via-[#292622]/20 to-transparent"
+                      : "bg-[#292622]/60 group-hover:bg-[#292622]/45"
+                  }`}
+                  aria-hidden="true"
+                />
+
+                {/* gold line along the bottom of the open panel */}
+                <span
+                  className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-[#C18A35] transition-transform duration-700 ease-out motion-reduce:transition-none ${
+                    isActive ? "scale-x-100" : "scale-x-0"
+                  }`}
+                  aria-hidden="true"
+                />
+
+                {/* content */}
+                <span
+                  className={`absolute inset-0 flex flex-col p-5 sm:p-7 lg:justify-end lg:p-8 ${
+                    isActive ? "justify-end" : "justify-center"
+                  }`}
+                >
+                  <span className="flex items-baseline gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span
+                      className={`font-heading text-4xl leading-none transition-colors duration-500 sm:text-5xl xl:text-6xl ${
+                        isActive ? "text-[#C18A35]" : "text-white"
+                      }`}
+                    >
+                      {stat.count ? (
+                        <CountUp to={stat.value} suffix={stat.suffix} />
+                      ) : (
+                        stat.value
+                      )}
+                    </span>
+                    <span className="text-sm font-medium text-[#F7F3ED] sm:text-base">
+                      {stat.label}
+                    </span>
+                  </span>
+
+                  {/* title + description, only on the open panel */}
+                  <span
+                    className={`block max-w-md overflow-hidden transition-all duration-500 ease-out motion-reduce:transition-none lg:w-[26rem] lg:max-w-none ${
+                      isActive
+                        ? "mt-5 max-h-64 opacity-100 delay-300 motion-reduce:delay-0"
+                        : "mt-0 max-h-0 opacity-0"
+                    }`}
+                  >
+                    <span className="block font-heading text-2xl font-medium leading-tight text-white sm:text-3xl">
+                      {stat.title}
+                    </span>
+                    <span className="mt-2 block text-sm leading-relaxed text-[#F7F3ED]/85 sm:text-base">
+                      {stat.description}
+                    </span>
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

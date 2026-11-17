@@ -2,44 +2,48 @@
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Script from "next/script";
-import { Aboreto, Jost } from "next/font/google";
+import { Philosopher, Jost } from "next/font/google";
 
-const aboreto = Aboreto({
+const heading = Philosopher({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-heading",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-philosopher",
   display: "swap",
 });
 
-const jost = Jost({
+const body = Jost({
   subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-jost",
   display: "swap",
 });
 
 export const metadata = {
-  metadataBase: new URL("https://livingspacedecor.in"),
+  metadataBase: new URL("https://divineinterio.in"),
 
   title: {
-    default: "Living Space Decor | Interior Designers in Noida & Greater Noida",
-    template: "%s",
+    default: "Divine Interio | Interior Designers in Noida & Greater Noida",
+    template: "%s | Divine Interio",
   },
 
   description:
-    "Living Space Decor offers premium interior design, modular kitchens, wardrobes, and turnkey home interiors in Noida, Greater Noida, Ghaziabad, and Delhi NCR.",
+    "Divine Interio creates elegant residential and commercial spaces with premium interior design, modular kitchens, custom wardrobes, and turnkey interior solutions across Noida, Greater Noida, Ghaziabad, and Delhi NCR.",
 
   keywords: [
+    "Divine Interio",
     "Interior Designers in Noida",
     "Interior Designers in Greater Noida",
+    "Best Interior Designers in Noida",
     "Home Interior Design",
-    "Modular Kitchen",
-    "Wardrobe Design",
-    "Turnkey Interior",
-    "Luxury Interior Design",
-    "Living Room Interior",
-    "Bedroom Interior",
-    "Living Space Decor",
+    "Luxury Home Interior Design",
+    "Modular Kitchen Design",
+    "Custom Wardrobe Design",
+    "Turnkey Interior Solutions",
+    "Living Room Interior Design",
+    "Bedroom Interior Design",
+    "Residential Interior Design",
+    "Commercial Interior Design",
+    "Interior Designers in Delhi NCR",
   ],
 
   alternates: {
@@ -59,13 +63,20 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Living Space Decor | Interior Designers in Noida & Greater Noida",
+    title: "Divine Interio | Premium Interior Designers in Noida & Delhi NCR",
     description:
-      "Premium interior design company offering modular kitchens, wardrobes, luxury home interiors, and turnkey solutions across Noida and Delhi NCR.",
-    url: "https://livingspacedecor.in",
-    siteName: "Living Space Decor",
+      "Transform your spaces with Divine Interio. Discover premium home interiors, modular kitchens, custom wardrobes, and complete turnkey interior solutions across Noida and Delhi NCR.",
+    url: "https://divineinterio.in",
+    siteName: "Divine Interio",
     locale: "en_IN",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Divine Interio | Premium Interior Designers",
+    description:
+      "Thoughtfully designed homes and commercial spaces by Divine Interio. Explore premium interior design and turnkey solutions across Delhi NCR.",
   },
 };
 
@@ -73,9 +84,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${aboreto.variable} ${jost.variable} h-full antialiased`}
+      className={`${heading.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col font-body">
         <LayoutWrapper>{children}</LayoutWrapper>
 
         {/* Google Ads Tag */}

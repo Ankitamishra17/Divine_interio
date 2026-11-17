@@ -245,13 +245,13 @@ export default function Navbar() {
               className={`flex-shrink-0 lg:mr-6 xl:mr-12 rounded-sm transition-opacity hover:opacity-90 ${focusRing}`}
             >
               <Image
-                src="/divine_logo_trimmed.png"
+                src="/divine_logo_trimmed1.png"
                 alt="Divine Interio"
-                width={804}
-                height={253}
+                width={900}
+                height={300}
                 priority
                 className={`w-auto object-contain transition-all duration-300 ${
-                  scrolled ? "h-9 sm:h-10 lg:h-11" : "h-10 sm:h-11 lg:h-12"
+                  scrolled ? "h-9 sm:h-10 lg:h-24" : "h-10 sm:h-11 lg:h-24 lg:w-25"
                 }`}
               />
             </Link>

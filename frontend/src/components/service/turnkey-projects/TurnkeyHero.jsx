@@ -224,13 +224,7 @@ export default function TrunkeyHero() {
         </motion.div>
 
         {/* Bottom Accent Line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-12 md:mt-20 lg:mt-24 h-px bg-gradient-to-r from-transparent via-[#C8972B]/50 to-transparent origin-center"
-        />
+
       </div>
     </section>
   );

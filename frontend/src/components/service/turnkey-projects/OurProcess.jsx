@@ -5,6 +5,10 @@ import {
   Hammer,
   ShieldCheck,
   KeyRound,
+  UsersRound,
+  Wallet,
+  Home,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -12,115 +16,151 @@ const processSteps = [
   {
     icon: PencilRuler,
     title: "Design",
+    text: "Layouts, 3D views and finishes agreed with you.",
   },
   {
     icon: Package,
-    title: "Material Procurement",
+    title: "Material procurement",
+    text: "All materials sourced and checked before work starts.",
   },
   {
     icon: Factory,
     title: "Manufacturing",
+    text: "Furniture and fittings made to your approved designs.",
   },
   {
     icon: Hammer,
-    title: "Site Execution",
+    title: "Site execution",
+    text: "Our own team installs everything at your home.",
   },
   {
     icon: ShieldCheck,
-    title: "Quality Checks",
+    title: "Quality checks",
+    text: "Every room inspected before it is shown to you.",
   },
   {
     icon: KeyRound,
-    title: "Final Handover",
+    title: "Final handover",
+    text: "You receive a finished, move-in-ready home.",
+  },
+];
+
+const benefits = [
+  {
+    icon: UsersRound,
+    title: "One team, start to finish",
+    text: "No juggling multiple vendors or contractors.",
+  },
+  {
+    icon: Wallet,
+    title: "One point of contact",
+    text: "Planning, design and execution all handled together.",
+  },
+  {
+    icon: Home,
+    title: "Move-in ready",
+    text: "Your home arrives fully finished.",
   },
 ];
 
 export default function TurnkeyOverview() {
   return (
     <section className="bg-[#F5EBE0] py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side - Process Graphic */}
-          <div className="relative">
-            <div className="bg-white rounded-md p-8 shadow-xl">
-              <h3 className="text-xl font-bold text-[#3D1F0D] mb-8 text-center">
-                Turnkey Process
-              </h3>
-
-              <div className="space-y-2">
-                {processSteps.map((step, index) => {
-                  const Icon = step.icon;
-
-                  return (
-                    <div key={index}>
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-[#C8972B]/10 flex items-center justify-center">
-                          <Icon size={18} className="text-[#C8972B]" />
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold text-[#3D1F0D]">
-                            {step.title}
-                          </h4>
-                        </div>
-                      </div>
-
-                      {index !== processSteps.length - 1 && (
-                        <div className="ml-7 h-8 border-l-2 border-dashed border-[#C8972B]"></div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side - Content */}
-          <div>
-            <span className="inline-block bg-[#C8972B]/10 text-[#C8972B] px-4 py-2 rounded-full text-sm font-semibold mb-5">
-              End-to-End Interior Solutions
-            </span>
-
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#3D1F0D] leading-tight mb-6">
-              What is a Turnkey Project?
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+          {/* Left: content */}
+          <div className="lg:sticky lg:top-24">
+            <h2 className="font-serif text-3xl leading-tight text-[#3D1F0D] sm:text-4xl lg:text-5xl">
+              What is a turnkey project?
             </h2>
 
-            <p className="text-gray-700 text-base leading-relaxed mb-8">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#5C4A3C]">
               A turnkey interior project is a complete solution where a single
               team manages everything from planning and design to execution and
               final handover. You receive a fully finished, move-in-ready home
               without coordinating multiple vendors or contractors.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                "Design",
-                "Material Procurement",
-                "Manufacturing",
-                "Site Execution",
-                "Quality Checks",
-                "Final Handover",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all"
+            <ul className="mt-10 space-y-3">
+              {benefits.map(({ icon: Icon, title, text }) => (
+                <li
+                  key={title}
+                  className="flex items-start gap-4 rounded-2xl border border-[#E8D5BC] bg-white p-4 shadow-[0_2px_12px_rgba(61,31,13,0.06)]"
                 >
-                  <div className="w-7 h-7 rounded-full bg-[#C8972B] flex items-center justify-center text-white text-sm">
-                    ✓
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#C8972B]/12 text-[#C8972B]">
+                    <Icon size={20} strokeWidth={1.6} />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-[#3D1F0D]">{title}</p>
+                    <p className="mt-0.5 text-sm text-[#5C4A3C]">{text}</p>
                   </div>
-
-                  <span className="font-medium text-[#3D1F0D]">{item}</span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            <div className="mt-10">
-              <Link href="/contact">
-                <button className="bg-[#3D1F0D] hover:bg-[#C8972B] text-white px-8 py-4 rounded-md font-body transition-all duration-300">
-                  Book Free Consultation
-                </button>
-              </Link>
-            </div>
+            <Link
+              href="/contact"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-[#C8972B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C8972B]"
+            >
+              Book free consultation
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+              />
+            </Link>
+          </div>
+
+          {/* Right: process timeline */}
+          <div className="rounded-3xl border border-[#E8D5BC] bg-white p-6 shadow-[0_18px_40px_rgba(61,31,13,0.1)] sm:p-10">
+            <h3 className="font-serif text-2xl text-[#3D1F0D]">
+              How your project moves
+            </h3>
+            <p className="mt-1 text-sm text-[#5C4A3C]">
+              Six steps, all handled by one team.
+            </p>
+
+            <ol className="mt-8">
+              {processSteps.map((step, index) => {
+                const Icon = step.icon;
+                const isLast = index === processSteps.length - 1;
+
+                return (
+                  <li key={step.title} className="relative flex gap-5 pb-8 last:pb-0">
+                    {/* Connector line */}
+                    {!isLast && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-6 top-12 -ml-px h-[calc(100%-3rem)] border-l-2 border-dashed border-[#C8972B]/50"
+                      />
+                    )}
+
+                    {/* Icon */}
+                    <span
+                      className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${
+                        isLast
+                          ? "bg-[#C8972B] text-white shadow-md"
+                          : "border border-[#C8972B]/40 bg-[#FBF5EA] text-[#C8972B]"
+                      }`}
+                    >
+                      <Icon size={20} strokeWidth={1.6} />
+                    </span>
+
+                    {/* Text */}
+                    <div className="pt-1">
+                      <h4 className="font-semibold text-[#3D1F0D]">
+                        <span className="mr-2 text-sm font-medium text-[#C8972B]">
+                          {index + 1}.
+                        </span>
+                        {step.title}
+                      </h4>
+                      <p className="mt-0.5 text-sm leading-relaxed text-[#5C4A3C]">
+                        {step.text}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
         </div>
       </div>

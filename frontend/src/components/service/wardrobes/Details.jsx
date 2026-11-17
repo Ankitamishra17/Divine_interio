@@ -4,7 +4,7 @@ export default function Details() {
   const data = wardrobeDetails;
 
   return (
-    <section className="max-w-7xl mx-auto py-16 px-5">
+    <section className="max-w-7xl mx-auto py-16 px-5 bg-[#F7F3ED]">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-heading mb-6 text-[#3D1F0D]">
           {data.title}

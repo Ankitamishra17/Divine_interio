@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 const kitchenIdeas = [
   {
@@ -26,60 +28,167 @@ const kitchenIdeas = [
   },
 ];
 
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B8851F]";
+
 export default function DesignIdeas() {
+  const [active, setActive] = useState(0);
+  const current = kitchenIdeas[active];
+
   return (
-    <section className="bg-[#F5EBE0] py-20">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
-        <div className="mb-10 flex items-center justify-between">
-          <div>
-            <span className="text-[#B8851F] uppercase tracking-[3px] text-sm font-medium">
-              Inspiration Gallery
-            </span>
-
-            <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-[#3D1F0D]">
-              Kitchen Design Ideas
-            </h2>
-          </div>
-        </div>
-
-        {/* Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {kitchenIdeas.map((item, index) => (
+    <section
+      aria-labelledby="ideas-heading"
+      className="bg-[#FBF7F2] py-16 sm:py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* Image stage */}
+          <div className="relative lg:order-2 lg:col-span-7">
+            {/* Gold offset frame */}
             <div
-              key={index}
-              className="group overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              {/* Image */}
-              <div className="relative h-64 overflow-hidden">
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-[2rem] border-2 border-[#C8972B]/50 sm:block"
+            />
+
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-stone-200 shadow-2xl shadow-[#3D1F0D]/20 sm:aspect-[5/4] lg:h-[620px] lg:aspect-auto">
+              {kitchenIdeas.map((item, i) => (
                 <Image
+                  key={item.title}
                   src={item.image}
-                  alt={item.title}
+                  alt={i === active ? item.title : ""}
                   fill
-                  className="object-cover transition duration-500 group-hover:scale-110"
+                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  className={`object-cover transition-all duration-700 ease-out motion-reduce:transition-none ${
+                    i === active
+                      ? "scale-100 opacity-100"
+                      : "scale-110 opacity-0"
+                  }`}
                 />
+              ))}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"
+              />
 
-              {/* Content */}
-              <div className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-[#3D1F0D]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-2 text-sm text-gray-600">
-                      {item.description}
-                    </p>
-                  </div>
-
-                
+              {/* Floating caption */}
+              <Link
+                href="/portfolio"
+                className={`group absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-2xl bg-white/95 p-4 shadow-xl backdrop-blur sm:bottom-6 sm:left-6 sm:right-auto sm:min-w-[340px] sm:p-5 ${focusRing}`}
+              >
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6416]">
+                    0{active + 1} / 0{kitchenIdeas.length}
+                  </p>
+                  <p className="mt-1 font-heading text-xl text-[#3D1F0D]">
+                    {current.title}
+                  </p>
                 </div>
-              </div>
+                <span
+                  aria-hidden="true"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#B8851F] text-white transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#3D1F0D]"
+                >
+                  <ArrowUpRight size={20} />
+                </span>
+              </Link>
             </div>
-          ))}
+          </div>
+
+          {/* Text + list */}
+          <div className="lg:order-1 lg:col-span-5">
+            <p className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#8A6416]">
+              <span aria-hidden="true" className="h-px w-10 bg-[#C8972B]" />
+              Inspiration gallery
+            </p>
+            <h2
+              id="ideas-heading"
+              className="mt-4 font-heading text-4xl leading-[1.1] text-[#3D1F0D] sm:text-5xl"
+            >
+              Kitchen design ideas
+              <span className="text-[#B8851F]">.</span>
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-8 text-stone-600">
+              Four styles to start from. Whatever you choose, we tailor it to
+              your space and the way you cook.
+            </p>
+
+            <ul className="mt-8 border-t border-[#3D1F0D]/10">
+              {kitchenIdeas.map((item, i) => {
+                const isActive = i === active;
+                return (
+                  <li key={item.title} className="border-b border-[#3D1F0D]/10">
+                    <button
+                      type="button"
+                      onMouseEnter={() => setActive(i)}
+                      onFocus={() => setActive(i)}
+                      onClick={() => setActive(i)}
+                      aria-pressed={isActive}
+                      className={`group relative flex w-full items-center gap-5 py-5 text-left transition-all duration-300 ${focusRing}`}
+                    >
+                      {/* Active indicator */}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute left-0 top-0 h-full w-0.5 bg-[#B8851F] transition-transform duration-300 origin-top ${
+                          isActive ? "scale-y-100" : "scale-y-0"
+                        }`}
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={`pl-4 font-heading text-lg transition-colors duration-300 ${
+                          isActive ? "text-[#B8851F]" : "text-stone-400"
+                        }`}
+                      >
+                        0{i + 1}
+                      </span>
+                      <span className="flex-1">
+                        <span
+                          className={`block font-heading text-xl transition-colors duration-300 sm:text-2xl ${
+                            isActive ? "text-[#3D1F0D]" : "text-stone-500"
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                        <span
+                          className={`grid transition-all duration-500 motion-reduce:transition-none ${
+                            isActive
+                              ? "grid-rows-[1fr] opacity-100"
+                              : "grid-rows-[0fr] opacity-0"
+                          }`}
+                        >
+                          <span className="overflow-hidden text-[15px] leading-6 text-stone-600">
+                            <span className="block pt-1">
+                              {item.description}
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                      <ArrowRight
+                        size={20}
+                        aria-hidden="true"
+                        className={`mr-2 transition-all duration-300 ${
+                          isActive
+                            ? "translate-x-0 text-[#B8851F] opacity-100"
+                            : "-translate-x-2 opacity-0"
+                        }`}
+                      />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <Link
+              href="/portfolio"
+              className={`group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F5EBE0] transition-colors duration-300 hover:bg-[#B8851F] hover:text-white ${focusRing}`}
+            >
+              View full portfolio
+              <ArrowRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

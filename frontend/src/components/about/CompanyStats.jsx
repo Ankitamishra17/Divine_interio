@@ -131,7 +131,7 @@ export default function CompanyStats() {
 
           <h2 className="font-[family-name:var(--font-heading)] text-4xl text-[#593719] sm:text-5xl">
             Numbers That Reflect
-            <span className="italic text-[#C18A35]">
+            <span className=" text-[#C18A35]">
               {" "}Our Journey
             </span>
           </h2>
