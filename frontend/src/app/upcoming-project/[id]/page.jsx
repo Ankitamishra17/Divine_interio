@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import Link from "next/link";
 // import { notFound } from "next/navigation";
 
@@ -275,9 +274,8 @@
 // }
 
 // New Design Feature
-=======
+
 // app/upcoming-project/[id]/page.jsx
->>>>>>> fe92ff18702a4c44b1382eaacb4e9feef64592d2
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -290,8 +288,7 @@ import ProjectGallery from "./ProjectGallery";
   Beige #E8DED0    | Charcoal #292622
 */
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000/api";
 const BACKEND_URL = API_URL.replace(/\/api\/?$/, "");
 const PLACEHOLDER = "/image/placeholder.webp";
 
@@ -361,14 +358,7 @@ export default async function UpcomingProjectDetails({ params }) {
   const photoCount = new Set([heroUrl, ...galleryUrls]).size;
 
   return (
-<<<<<<< HEAD
-    <main className="min-h-screen bg-[##F7F3ED] px-4 pb-20 pt-28 sm:px-6 lg:px-10 xl:px-16">
-      <div className="mx-auto max-w-[1600px]">
-        {/* =====================================================
-            BACK TO HOME
-        ===================================================== */}
-=======
-    <main className="bg-[#F7F3ED] selection:bg-[#593719] selection:text-[#F7F3ED]">
+    <main>
       <div className="mx-auto max-w-[1400px] px-5 pb-20 pt-28 sm:px-8 md:pb-28 xl:px-12">
         {/* Back link */}
         <Link
@@ -382,8 +372,6 @@ export default async function UpcomingProjectDetails({ params }) {
           />
           Back to home
         </Link>
->>>>>>> fe92ff18702a4c44b1382eaacb4e9feef64592d2
-
         {/* Title block: title left, description right */}
         <header className="mt-8 grid gap-6 md:mt-10 md:grid-cols-[1.3fr_1fr] md:items-end md:gap-16">
           <h1 className="font-heading text-4xl font-medium leading-[1.1] tracking-tight text-[#292622] md:text-5xl xl:text-[60px]">
