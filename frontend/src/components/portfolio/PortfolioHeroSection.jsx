@@ -75,7 +75,7 @@ export default function PortfolioHeroSection() {
           }}
         >
           <motion.span
-            className="block h-px w-6 md:w-8 bg-[#C8972B] origin-right"
+            className="block h-px w-6 md:w-8 bg-[#dba343] origin-right"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -87,7 +87,7 @@ export default function PortfolioHeroSection() {
               tracking-[0.18em]
               sm:tracking-[0.25em]
               md:tracking-[0.35em]
-              text-[#C8972B]
+              text-[#dba343]
               text-[10px]
               sm:text-xs
             "
@@ -96,7 +96,7 @@ export default function PortfolioHeroSection() {
           </p>
 
           <motion.span
-            className="block h-px w-6 md:w-8 bg-[#C8972B] origin-left"
+            className="block h-px w-6 md:w-8 bg-[#dba343] origin-left"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -123,13 +123,13 @@ export default function PortfolioHeroSection() {
               ease: [0.25, 0.1, 0.25, 1],
             }}
           >
-            Our <span className="text-[#C8972B]">Portfolio</span>
+            Our <span className="text-[#dba343]">Portfolio</span>
           </motion.h1>
         </div>
 
         {/* Divider */}
         <motion.div
-          className="mx-auto mt-5 md:mt-6 h-px bg-[#C8972B] origin-center"
+          className="mx-auto mt-5 md:mt-6 h-px bg-[#dba343] origin-center"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{
@@ -187,13 +187,13 @@ export default function PortfolioHeroSection() {
             delay: 1.2,
           }}
         >
-          <Link href="/" className="hover:text-[#C8972B] transition">
+          <Link href="/" className="hover:text-[#dba343] transition">
             Home
           </Link>
 
           <span>/</span>
 
-          <span className="text-[#C8972B]">Portfolio</span>
+          <span className="text-[#dba343]">Portfolio</span>
         </motion.div>
       </motion.div>
     </section>

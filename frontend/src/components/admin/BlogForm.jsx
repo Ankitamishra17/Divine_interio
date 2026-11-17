@@ -15,7 +15,7 @@ const empty = {
 function Section({ label, children }) {
   return (
     <div className="mb-7">
-      <p className="text-[10px] tracking-[0.25em] uppercase text-[#C8972B] font-semibold mb-3.5">
+      <p className="text-[10px] tracking-[0.25em] uppercase text-[#dba343] font-semibold mb-3.5">
         {label}
       </p>
       <div className="space-y-4">{children}</div>
@@ -101,7 +101,7 @@ export default function BlogForm({ blogId, onSaved, onCancel }) {
   };
 
   const fieldInput =
-    "w-full px-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#C8972B] focus:ring-[3px] focus:ring-[#C8972B]/12 transition-all";
+    "w-full px-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#dba343] focus:ring-[3px] focus:ring-[#dba343]/12 transition-all";
 
   if (loading) {
     return (
@@ -185,7 +185,7 @@ export default function BlogForm({ blogId, onSaved, onCancel }) {
             aria-checked={form.isPublished}
             onClick={() => setForm((f) => ({ ...f, isPublished: !f.isPublished }))}
             className={`relative w-10 h-6 rounded-full shrink-0 transition-colors ${
-              form.isPublished ? "bg-[#C8972B]" : "bg-[#3D1F0D]/15"
+              form.isPublished ? "bg-[#dba343]" : "bg-[#3D1F0D]/15"
             }`}
           >
             <span
@@ -207,14 +207,14 @@ export default function BlogForm({ blogId, onSaved, onCancel }) {
         <button
           type="submit"
           disabled={saving}
-          className="bg-[#C8972B] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] active:bg-[#B8871F] disabled:opacity-60 transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)]"
+          className="bg-[#dba343] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] active:bg-[#B8871F] disabled:opacity-60 transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)]"
         >
           {saving ? "Saving…" : "Save post"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="border border-[#3D1F0D]/15 text-[#3D1F0D]/60 px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:border-[#C8972B] hover:text-[#C8972B] transition-colors"
+          className="border border-[#3D1F0D]/15 text-[#3D1F0D]/60 px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:border-[#dba343] hover:text-[#dba343] transition-colors"
         >
           Cancel
         </button>

@@ -5,7 +5,7 @@ import { Plus, Phone, MessageCircle } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
 
   Layout: heading and a "still unsure?" help card stay pinned on the left while one calm list of
   questions scrolls on the right. Hairline dividers instead of a box around every question.
@@ -51,7 +51,7 @@ const faqs = [
 ];
 
 const ring =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]";
 
 function FAQItem({ faq, isOpen, onToggle, baseId }) {
   const buttonId = `${baseId}-button`;
@@ -80,7 +80,7 @@ function FAQItem({ faq, isOpen, onToggle, baseId }) {
             className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
               isOpen
                 ? "border-[#593719] bg-[#593719] text-[#F7F3ED]"
-                : "border-[#593719]/40 text-[#593719] group-hover:border-[#C18A35] group-hover:bg-[#C18A35] group-hover:text-[#292622]"
+                : "border-[#593719]/40 text-[#593719] group-hover:border-[#dba343] group-hover:bg-[#dba343] group-hover:text-[#292622]"
             }`}
           >
             <Plus
@@ -142,7 +142,7 @@ export default function FAQSection() {
               </p>
 
               <div className="relative mt-9 max-w-md rounded-sm bg-[#E8DED0] p-6 sm:p-7">
-                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#dba343]" />
                 <p className="font-heading text-2xl font-normal tracking-wide text-[#292622]">Still have a question?</p>
                 <p className="mt-2 text-[15px] leading-relaxed text-[#292622]/70">
                   Talk to our design team. We reply during studio hours, 10 AM to 7 PM.
@@ -150,7 +150,7 @@ export default function FAQSection() {
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <a
                     href={PHONE_TEL}
-                    className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#593719] px-5 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] ${ring} focus-visible:ring-offset-[#E8DED0]`}
+                    className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#593719] px-5 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] ${ring} focus-visible:ring-offset-[#E8DED0]`}
                   >
                     <Phone size={16} aria-hidden="true" />
                     {PHONE_DISPLAY}

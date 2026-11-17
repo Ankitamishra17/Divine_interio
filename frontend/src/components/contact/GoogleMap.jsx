@@ -6,7 +6,7 @@ export default function GoogleMap() {
       <div className="max-w-7xl mx-auto px-6 lg:px-14">
         {/* Heading */}
         <div className="text-center mb-10">
-          <p className="uppercase tracking-[0.3em] pt-30 text-[#C8972B] text-xs mb-4">
+          <p className="uppercase tracking-[0.3em] pt-30 text-[#dba343] text-xs mb-4">
             Visit Our Studio
           </p>
 
@@ -21,7 +21,7 @@ export default function GoogleMap() {
         </div>
 
         {/* Map */}
-        <div className="overflow-hidden border border-[#C8972B]/20 shadow-sm">
+        <div className="overflow-hidden border border-[#dba343]/20 shadow-sm">
           <iframe
             title="Office Location"
             src="https://www.google.com/maps?q=Noida,India&output=embed"

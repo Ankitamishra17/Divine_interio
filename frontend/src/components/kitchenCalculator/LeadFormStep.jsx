@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AlertCircle, ArrowRight, Check, Loader2, MessageCircle, Phone } from "lucide-react";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
 
   Same request as before: POST { formType, dimension, shape, package, name, email, phone, pincode }.
 
@@ -25,7 +25,7 @@ const PHONE_DISPLAY = "+91 9911066420";
 const PHONE_TEL = "tel:+919911066420";
 const WHATSAPP_URL = "https://wa.me/919911066420";
 
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const validators = {
   name: (v) => (!v.trim() ? "Enter your name." : v.trim().length < 2 ? "Name must be at least 2 characters." : ""),
@@ -36,7 +36,7 @@ const validators = {
 const FIELDS = ["name", "phone", "email", "pincode"];
 
 const inputClass = (err) =>
-  `h-14 w-full rounded-sm border bg-[#F7F3ED] px-4 text-base text-[#292622] placeholder-[#292622]/45 outline-none transition-colors focus:border-[#593719] focus:bg-white focus:ring-2 focus:ring-[#C18A35]/50 ${
+  `h-14 w-full rounded-sm border bg-[#F7F3ED] px-4 text-base text-[#292622] placeholder-[#292622]/45 outline-none transition-colors focus:border-[#593719] focus:bg-white focus:ring-2 focus:ring-[#dba343]/50 ${
     err ? "border-red-600" : "border-[#292622]/25"
   }`;
 
@@ -145,7 +145,7 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`font-body inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] ${ring}`}
+            className={`font-body inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] ${ring}`}
           >
             <MessageCircle size={17} aria-hidden="true" />
             Track on WhatsApp
@@ -208,7 +208,7 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
         type="submit"
         disabled={submitting}
         aria-busy={submitting}
-        className={`font-body group mt-8 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto ${ring}`}
+        className={`font-body group mt-8 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto ${ring}`}
       >
         {submitting ? (
           <>

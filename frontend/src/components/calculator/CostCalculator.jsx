@@ -67,7 +67,7 @@ export default function QuoteCalculator() {
       {/* Animated Orbs */}
       <div className="absolute inset-0 pointer-events-none -z-10">
         <motion.div
-          className="absolute top-20 left-5 sm:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-[#C8972B]/12 rounded-full blur-3xl"
+          className="absolute top-20 left-5 sm:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-[#dba343]/12 rounded-full blur-3xl"
           animate={{ y: [0, 40, 0], x: [0, 25, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -131,7 +131,7 @@ export default function QuoteCalculator() {
                   <motion.div
                     className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-semibold transition-all ${
                       step >= s.num
-                        ? "bg-gradient-to-br from-[#C8972B] to-[#A0762E] text-white shadow-lg"
+                        ? "bg-gradient-to-br from-[#dba343] to-[#A0762E] text-white shadow-lg"
                         : "bg-white/10 text-white/40 border border-white/20"
                     }`}
                     animate={step === s.num ? { scale: 1.05 } : { scale: 1 }}
@@ -148,7 +148,7 @@ export default function QuoteCalculator() {
                   {idx < progressSteps.length - 1 && (
                     <div
                       className={`hidden sm:block w-8 h-0.5 mx-1 transition-colors ${
-                        step > s.num ? "bg-[#C8972B]" : "bg-white/20"
+                        step > s.num ? "bg-[#dba343]" : "bg-white/20"
                       }`}
                     />
                   )}
@@ -167,12 +167,12 @@ export default function QuoteCalculator() {
           viewport={{ once: true }}
         >
           {/* Gradient Border Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#C8972B]/20 via-[#C8972B]/30 to-[#C8972B]/20 rounded-[32px] blur-lg opacity-40" />
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C8972B]/10 via-transparent to-[#C8972B]/10 rounded-[32px]" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#dba343]/20 via-[#dba343]/30 to-[#dba343]/20 rounded-[32px] blur-lg opacity-40" />
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-[#dba343]/10 via-transparent to-[#dba343]/10 rounded-[32px]" />
 
           <div className="relative bg-white/8 backdrop-blur-xl rounded-[28px] md:rounded-[32px] shadow-[0_25px_75px_rgba(0,0,0,0.4)] border border-white/20 overflow-hidden">
             {/* Top Accent Line */}
-            <div className="h-1 bg-gradient-to-r from-transparent via-[#C8972B] to-transparent" />
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#dba343] to-transparent" />
 
             {/* Content */}
             <div className="p-6 sm:p-8 md:p-10 lg:p-12">
@@ -186,10 +186,10 @@ export default function QuoteCalculator() {
                   className="mb-8 md:mb-10"
                 >
                   <div className="flex items-baseline gap-3 mb-4">
-                    <span className="text-xs uppercase tracking-[.2em] text-[#C8972B] font-semibold">
+                    <span className="text-xs uppercase tracking-[.2em] text-[#dba343] font-semibold">
                       Step {step} of 4
                     </span>
-                    <div className="flex-1 h-0.5 bg-gradient-to-r from-[#C8972B]/50 to-transparent rounded-full" />
+                    <div className="flex-1 h-0.5 bg-gradient-to-r from-[#dba343]/50 to-transparent rounded-full" />
                   </div>
                   <h3 className="font-[Cormorant_Garamond,serif] text-2xl sm:text-3xl md:text-4xl font-medium text-white leading-tight">
                     {step === 1 && "What type of home are you designing?"}
@@ -248,7 +248,7 @@ export default function QuoteCalculator() {
             </div>
 
             {/* Bottom Accent Line */}
-            <div className="h-1 bg-gradient-to-l from-transparent via-[#C8972B] to-transparent" />
+            <div className="h-1 bg-gradient-to-l from-transparent via-[#dba343] to-transparent" />
           </div>
         </motion.div>
 
@@ -261,10 +261,10 @@ export default function QuoteCalculator() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#C8972B]/8 to-[#8B6B4A]/8 border border-[#C8972B]/25 backdrop-blur-sm">
+            <div className="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#dba343]/8 to-[#8B6B4A]/8 border border-[#dba343]/25 backdrop-blur-sm">
               <div className="flex gap-3 md:gap-4">
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#C8972B] flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#dba343] flex items-center justify-center text-white text-xs font-bold">
                     ✓
                   </div>
                 </div>

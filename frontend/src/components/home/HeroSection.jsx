@@ -13,7 +13,7 @@ import "swiper/css/effect-fade";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   Cinematic, centered banner: one clear message in the middle,
@@ -61,7 +61,7 @@ const textItem = {
 };
 
 const arrowBtn =
-  "hidden h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-[#292622]/25 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#C18A35] hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622] md:flex";
+  "hidden h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-[#292622]/25 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#dba343] hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622] md:flex";
 
 export default function HomePage() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -130,7 +130,7 @@ export default function HomePage() {
               >
                 <motion.span
                   variants={textItem}
-                  className="mb-6 block h-[3px] w-14 bg-[#C18A35]"
+                  className="mb-6 block h-[3px] w-14 bg-[#dba343]"
                   aria-hidden="true"
                 />
 
@@ -228,7 +228,7 @@ export default function HomePage() {
                       {active && (
                         <span
                           ref={progressRef}
-                          className="absolute inset-0 origin-left bg-[#C18A35]"
+                          className="absolute inset-0 origin-left bg-[#dba343]"
                           style={{ transform: "scaleX(0)" }}
                         />
                       )}

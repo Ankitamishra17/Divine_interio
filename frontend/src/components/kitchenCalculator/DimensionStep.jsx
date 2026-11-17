@@ -4,7 +4,7 @@ import { ArrowRight, Building2, Check, Home, PencilRuler, Sofa } from "lucide-re
 import { dimensions } from "@/data/kitchenCalculatorData";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
   The title, "Step 1 of 4" and Back button now live in KitchenCostCalculator, so they are not repeated here.
   Sizes are real radio buttons (arrow keys work, screen readers say "1 of 5").
 */
@@ -41,8 +41,8 @@ export default function DimensionStep({ selected, onSelect, onNext }) {
                   onChange={() => onSelect(dimension)}
                   className="peer sr-only"
                 />
-                <span className="flex h-full cursor-pointer items-center gap-4 rounded-sm border border-[#292622]/20 bg-[#F7F3ED] p-5 transition-colors duration-300 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:bg-white peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#C18A35] peer-focus-visible:ring-offset-2">
-                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${on ? "bg-[#C18A35] text-[#292622]" : "bg-white text-[#593719]"}`}>
+                <span className="flex h-full cursor-pointer items-center gap-4 rounded-sm border border-[#292622]/20 bg-[#F7F3ED] p-5 transition-colors duration-300 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:bg-white peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#dba343] peer-focus-visible:ring-offset-2">
+                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${on ? "bg-[#dba343] text-[#292622]" : "bg-white text-[#593719]"}`}>
                     <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -70,7 +70,7 @@ export default function DimensionStep({ selected, onSelect, onNext }) {
           onClick={onNext}
           disabled={!selected}
           aria-describedby={!selected ? "dimension-hint" : undefined}
-          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
+          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
         >
           Continue
           <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />

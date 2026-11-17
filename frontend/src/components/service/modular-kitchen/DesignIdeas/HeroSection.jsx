@@ -40,13 +40,13 @@ export default function HeroSection() {
                 viewport={{ once: true }}
                 className="flex items-center justify-center gap-3 mt-6 md:mt-8 origin-center"
               >
-                <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#C8972B]" />
+                <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#dba343]" />
                 <motion.div
                   animate={{ scale: [1, 1.3, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="w-2 h-2 bg-[#C8972B] rounded-full"
+                  className="w-2 h-2 bg-[#dba343] rounded-full"
                 />
-                <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#C8972B]" />
+                <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#dba343]" />
               </motion.div>
 
               <p className="mt-6 text-sm text-gray-200 max-w-xl leading-relaxed">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
 
   Clean editorial layout: the heading and one clear button stay on the left (sticky on desktop),
   and the four services are a simple numbered list on the right, each with a small photo.
@@ -44,17 +44,17 @@ export default function ArchitectureServices() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[minmax(0,380px)_1fr] lg:gap-20 lg:px-8">
         {/* Left: heading and one clear action */}
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.4em] text-[#C18A35]">What We Build</p>
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.4em] text-[#dba343]">What We Build</p>
           <h2 id="arch-services-heading" className="font-heading mt-5 text-4xl leading-[1.08] text-[#292622] sm:text-5xl">
             Architecture Services
           </h2>
-          <div className="mt-6 h-px w-16 bg-[#C18A35]" aria-hidden="true" />
+          <div className="mt-6 h-px w-16 bg-[#dba343]" aria-hidden="true" />
           <p className="font-body mt-6 max-w-sm text-base font-light leading-8 text-[#292622]/75">
             We create exceptional spaces through innovative design, meticulous planning, and flawless execution.
           </p>
           <Link
             href="/contact"
-            className="font-body group mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+            className="font-body group mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
           >
             Book Consultation
             <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
@@ -68,7 +68,7 @@ export default function ArchitectureServices() {
               <Link
                 href="/contact"
                 aria-label={`${s.title}: get a quote`}
-                className="group flex items-center gap-4 rounded-sm px-2 py-6 transition-colors duration-300 hover:bg-white focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#C18A35] sm:gap-6 sm:px-4 sm:py-7"
+                className="group flex items-center gap-4 rounded-sm px-2 py-6 transition-colors duration-300 hover:bg-white focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#dba343] sm:gap-6 sm:px-4 sm:py-7"
               >
                 {/* Photo */}
                 <span className="relative h-24 w-24 shrink-0 overflow-hidden rounded-sm bg-[#E8DED0] sm:h-28 sm:w-36 lg:h-32 lg:w-48">
@@ -83,7 +83,7 @@ export default function ArchitectureServices() {
 
                 {/* Words */}
                 <span className="min-w-0 flex-1">
-                  <span className="font-heading block text-sm tabular-nums text-[#C18A35]" aria-hidden="true">
+                  <span className="font-heading block text-sm tabular-nums text-[#dba343]" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="font-heading mt-1 block text-[22px] leading-tight text-[#292622] transition-colors duration-300 group-hover:text-[#593719] sm:text-2xl lg:text-[28px]">
@@ -95,7 +95,7 @@ export default function ArchitectureServices() {
                 {/* Arrow */}
                 <span
                   aria-hidden="true"
-                  className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#C18A35]/60 text-[#593719] transition-colors duration-300 group-hover:bg-[#C18A35] group-hover:text-[#292622] sm:flex"
+                  className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#dba343]/60 text-[#593719] transition-colors duration-300 group-hover:bg-[#dba343] group-hover:text-[#292622] sm:flex"
                 >
                   <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none" />
                 </span>

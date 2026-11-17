@@ -8,7 +8,7 @@ import { getLocations, deleteLocation } from "@/lib/serverApi";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Pencil, Trash2, ImageOff, Loader2, MapPin } from "lucide-react";
 
-const GOLD = "#C8972B";
+const GOLD = "#dba343";
 const ESPRESSO = "#3D1F0D";
 
 const API =

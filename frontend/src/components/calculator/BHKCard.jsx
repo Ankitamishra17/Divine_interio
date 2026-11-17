@@ -29,12 +29,12 @@ export default function BHKCard({
         hover:-translate-y-1
         focus:outline-none
         focus:ring-2
-        focus:ring-[#C8972B]/40
+        focus:ring-[#dba343]/40
 
         ${
           selected
             ? "bg-[#8B6B4A] text-white border-[#8B6B4A] shadow-lg shadow-[#8B6B4A]/20"
-            : "bg-white border-[#E5D8C7] text-[#3D1F0D] hover:border-[#C8972B] hover:text-[#C8972B] hover:shadow-md"
+            : "bg-white border-[#E5D8C7] text-[#3D1F0D] hover:border-[#dba343] hover:text-[#dba343] hover:shadow-md"
         }
       `}
     >

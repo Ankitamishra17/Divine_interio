@@ -339,8 +339,8 @@ export default function UpcomingProjectsPage() {
       <div className="mb-6 border-b border-[#3D1F0D]/10 pb-5 sm:mb-8 sm:pb-7">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-2 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#C8972B]">
-              <span className="h-px w-7 bg-[#C8972B]" />
+            <p className="mb-2 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#dba343]">
+              <span className="h-px w-7 bg-[#dba343]" />
               Manage Projects
             </p>
 
@@ -426,7 +426,7 @@ export default function UpcomingProjectsPage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. Luxury Modular Kitchen"
-                    className="w-full rounded-xl border border-[#3D1F0D]/15 bg-[#FFFCF8] px-4 py-3 text-sm text-[#3D1F0D] outline-none transition placeholder:text-gray-400 focus:border-[#C8972B]"
+                    className="w-full rounded-xl border border-[#3D1F0D]/15 bg-[#FFFCF8] px-4 py-3 text-sm text-[#3D1F0D] outline-none transition placeholder:text-gray-400 focus:border-[#dba343]"
                   />
                 </div>
 
@@ -439,7 +439,7 @@ export default function UpcomingProjectsPage() {
                     value={alt}
                     onChange={(e) => setAlt(e.target.value)}
                     placeholder="Describe the main image for accessibility..."
-                    className="w-full rounded-xl border border-[#3D1F0D]/15 bg-[#FFFCF8] px-4 py-3 text-sm text-[#3D1F0D] outline-none transition placeholder:text-gray-400 focus:border-[#C8972B]"
+                    className="w-full rounded-xl border border-[#3D1F0D]/15 bg-[#FFFCF8] px-4 py-3 text-sm text-[#3D1F0D] outline-none transition placeholder:text-gray-400 focus:border-[#dba343]"
                   />
                   <p className="mt-2 text-xs text-[#888]">
                     Optional. Used as the main image alternative text.
@@ -482,9 +482,9 @@ export default function UpcomingProjectsPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex h-[220px] w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#C8972B]/40 bg-[#FDF8F2] text-center transition hover:border-[#C8972B] hover:bg-[#F9F0E5] sm:h-[280px]"
+                    className="flex h-[220px] w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#dba343]/40 bg-[#FDF8F2] text-center transition hover:border-[#dba343] hover:bg-[#F9F0E5] sm:h-[280px]"
                   >
-                    <div className="mb-4 rounded-full bg-[#C8972B]/10 p-4 text-[#C8972B]">
+                    <div className="mb-4 rounded-full bg-[#dba343]/10 p-4 text-[#dba343]">
                       <Upload size={28} />
                     </div>
                     <span className="px-4 text-sm font-medium text-[#3D1F0D]">
@@ -500,7 +500,7 @@ export default function UpcomingProjectsPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[#C8972B]"
+                    className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[#dba343]"
                   >
                     <ImageIcon size={16} />
                     Change main image
@@ -532,7 +532,7 @@ export default function UpcomingProjectsPage() {
                     type="button"
                     onClick={() => detailFileInputRef.current?.click()}
                     disabled={detailImages.length >= MAX_GALLERY_IMAGES}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#C8972B]/40 bg-[#FDF8F2] px-4 py-4 text-sm font-medium text-[#3D1F0D] transition hover:border-[#C8972B] hover:bg-[#F9F0E5] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#dba343]/40 bg-[#FDF8F2] px-4 py-4 text-sm font-medium text-[#3D1F0D] transition hover:border-[#dba343] hover:bg-[#F9F0E5] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <FolderOpen size={18} />
                     {detailImages.length >= MAX_GALLERY_IMAGES
@@ -547,7 +547,7 @@ export default function UpcomingProjectsPage() {
                         <p className="text-xs font-medium text-[#777]">
                           New Images
                         </p>
-                        <span className="rounded-lg bg-[#C8972B]/10 px-2 py-1 text-xs font-medium text-[#9C7017]">
+                        <span className="rounded-lg bg-[#dba343]/10 px-2 py-1 text-xs font-medium text-[#9C7017]">
                           {detailImages.length}/{MAX_GALLERY_IMAGES}
                         </span>
                       </div>
@@ -674,7 +674,7 @@ export default function UpcomingProjectsPage() {
       {/* PROJECTS HEADER */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#C8972B]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#dba343]">
             Uploaded Projects
           </p>
           <h2 className="mt-1 text-xl font-medium text-[#3D1F0D] sm:text-2xl">
@@ -698,7 +698,7 @@ export default function UpcomingProjectsPage() {
       {/* EMPTY STATE */}
       {!loading && projects.length === 0 && (
         <div className="rounded-2xl border border-dashed border-[#3D1F0D]/15 bg-white/60 p-8 text-center sm:p-14">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#C8972B]/10 text-[#C8972B]">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#dba343]/10 text-[#dba343]">
             <ImageIcon size={25} />
           </div>
           <h3 className="text-lg font-medium text-[#3D1F0D]">
@@ -745,7 +745,7 @@ export default function UpcomingProjectsPage() {
                 </div>
 
                 {index < 4 && (
-                  <div className="absolute right-3 top-3 rounded-lg bg-[#C8972B] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                  <div className="absolute right-3 top-3 rounded-lg bg-[#dba343] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
                     Home Page
                   </div>
                 )}
@@ -760,7 +760,7 @@ export default function UpcomingProjectsPage() {
 
                   {Array.isArray(project.gallery) &&
                     project.gallery.length > 0 && (
-                      <span className="shrink-0 rounded-lg bg-[#C8972B]/10 px-2 py-1 text-[10px] font-medium text-[#9C7017]">
+                      <span className="shrink-0 rounded-lg bg-[#dba343]/10 px-2 py-1 text-[10px] font-medium text-[#9C7017]">
                         {project.gallery.length} Images
                       </span>
                     )}
@@ -776,7 +776,7 @@ export default function UpcomingProjectsPage() {
                   <button
                     type="button"
                     onClick={() => handleEdit(project)}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#C8972B]/30 bg-[#C8972B]/5 px-3 py-2.5 text-sm font-medium text-[#9C7017] transition hover:bg-[#C8972B]/10 sm:px-4"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#dba343]/30 bg-[#dba343]/5 px-3 py-2.5 text-sm font-medium text-[#9C7017] transition hover:bg-[#dba343]/10 sm:px-4"
                   >
                     <Pencil size={16} />
                     Edit

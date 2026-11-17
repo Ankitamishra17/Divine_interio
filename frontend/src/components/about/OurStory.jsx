@@ -28,8 +28,8 @@ export default function OurStory() {
       className="relative overflow-hidden bg-[#F7F3ED] py-20 sm:py-24 lg:py-32"
     >
       {/* Decorative background */}
-      <div className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full border border-[#C18A35]/10" />
-      <div className="pointer-events-none absolute -right-20 top-24 h-64 w-64 rounded-full border border-[#C18A35]/10" />
+      <div className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full border border-[#dba343]/10" />
+      <div className="pointer-events-none absolute -right-20 top-24 h-64 w-64 rounded-full border border-[#dba343]/10" />
 
       <div className="relative mx-auto grid max-w-[1440px] items-center gap-16 px-6 sm:px-10 lg:grid-cols-2 lg:gap-20 lg:px-16 xl:px-20">
 
@@ -43,7 +43,7 @@ export default function OurStory() {
           className="relative mx-auto w-full max-w-[590px] pb-12 pr-8 sm:pb-14 sm:pr-12"
         >
           {/* Decorative frame */}
-          <div className="absolute -left-4 top-8 h-[85%] w-[75%] rounded-[4px] border border-[#C18A35]/60 sm:-left-7 sm:top-12" />
+          <div className="absolute -left-4 top-8 h-[85%] w-[75%] rounded-[4px] border border-[#dba343]/60 sm:-left-7 sm:top-12" />
 
           {/* Main image */}
           <div className="relative aspect-[4/5.5] overflow-hidden rounded-[5px]">
@@ -76,7 +76,7 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
 
           {/* Experience badge - no unverified numbers */}
           <div className="absolute bottom-2 left-0 flex items-center gap-3 bg-[#593719] px-4 py-4 text-[#F7F3ED] shadow-xl sm:bottom-3 sm:px-6">
-            <Sparkles className="h-7 w-7 text-[#C18A35]" />
+            <Sparkles className="h-7 w-7 text-[#dba343]" />
             <div>
               <p className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl">
                 Thoughtful
@@ -102,10 +102,10 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
             variants={fadeUp}
             className="mb-5 flex items-center gap-4"
           >
-            <span className="font-[family-name:var(--font-body)] text-xs font-semibold uppercase tracking-[0.3em] text-[#C18A35]">
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold uppercase tracking-[0.3em] text-[#dba343]">
               Our Story
             </span>
-            <span className="h-px w-16 bg-[#C18A35]/70" />
+            <span className="h-px w-16 bg-[#dba343]/70" />
           </motion.div>
 
           {/* Heading */}
@@ -115,7 +115,7 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
           >
             The Story Behind
             <br />
-            <span className=" text-[#C18A35]">
+            <span className=" text-[#dba343]">
               Divine Interiors
             </span>
           </motion.h2>
@@ -123,7 +123,7 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
           {/* Highlight text */}
           <motion.p
             variants={fadeUp}
-            className="mt-7 border-l-[2px] border-[#C18A35] pl-5 font-[family-name:var(--font-body)] text-lg font-medium leading-relaxed text-[#593719] sm:text-xl"
+            className="mt-7 border-l-[2px] border-[#dba343] pl-5 font-[family-name:var(--font-body)] text-lg font-medium leading-relaxed text-[#593719] sm:text-xl"
           >
             We believe every space has a story, and every
             beautiful space begins with a vision.
@@ -166,7 +166,7 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
           >
             <Link
               href="/services"
-              className="group inline-flex items-center gap-4 rounded-full bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#C18A35] hover:text-[#292622] hover:shadow-lg"
+              className="group inline-flex items-center gap-4 rounded-full bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#dba343] hover:text-[#292622] hover:shadow-lg"
             >
               Explore Our Services
               <ArrowRight

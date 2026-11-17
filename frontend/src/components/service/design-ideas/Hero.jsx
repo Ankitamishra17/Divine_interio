@@ -50,7 +50,7 @@ export default function InteriorHero() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
-        className="absolute top-1/2 right-4 md:right-8 z-[4] w-[1px] h-20 md:h-32 bg-gradient-to-b from-transparent via-[#C8972B] to-transparent hidden md:block"
+        className="absolute top-1/2 right-4 md:right-8 z-[4] w-[1px] h-20 md:h-32 bg-gradient-to-b from-transparent via-[#dba343] to-transparent hidden md:block"
       />
 
       {/* Content */}
@@ -67,7 +67,7 @@ export default function InteriorHero() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-2 text-[10px] -mt-20 sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#C8972B] mb-6 md:mb-8"
+            className="flex items-center justify-center gap-2 text-[10px] -mt-20 sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#dba343] mb-6 md:mb-8"
           >
             <span>Service</span>
             <span className="text-white/40">/</span>
@@ -99,15 +99,15 @@ export default function InteriorHero() {
             viewport={{ once: true }}
             className="flex items-center justify-center gap-3 mt-6 md:mt-8 origin-center"
           >
-            <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#C8972B]" />
+            <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#dba343]" />
 
             <motion.div
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 bg-[#C8972B] rounded-full"
+              className="w-2 h-2 bg-[#dba343] rounded-full"
             />
 
-            <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#C8972B]" />
+            <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#dba343]" />
           </motion.div>
 
           {/* Description */}
@@ -137,7 +137,7 @@ export default function InteriorHero() {
                     w-full sm:w-auto
                     px-8 md:px-10
                     py-3.5 md:py-4
-                    bg-[#C8972B]
+                    bg-[#dba343]
                     rounded-md
                     text-white
                     uppercase
@@ -172,14 +172,14 @@ export default function InteriorHero() {
                     px-8 md:px-10
                     py-3.5 md:py-3.5
                     border-2
-                    border-[#C8972B]
+                    border-[#dba343]
                     rounded-md
-                    text-[#C8972B]
+                    text-[#dba343]
                     uppercase
                     tracking-[0.12em]
                     md:tracking-[0.15em]
                     text-xs md:text-sm
-                    hover:bg-[#C8972B]/10
+                    hover:bg-[#dba343]/10
                     transition-all
                     duration-300
                   "

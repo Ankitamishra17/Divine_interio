@@ -28,7 +28,7 @@ export default function Step3Style({ formData, setFormData, next, back }) {
     <div className="w-full max-w-6xl mx-auto">
       {/* Heading */}
       <div className="text-center mb-8 md:mb-12">
-        <p className="uppercase tracking-[0.25em] text-[#C8972B] text-[10px] sm:text-xs mb-3">
+        <p className="uppercase tracking-[0.25em] text-[#dba343] text-[10px] sm:text-xs mb-3">
           Cost Calculator
         </p>
 
@@ -65,7 +65,7 @@ export default function Step3Style({ formData, setFormData, next, back }) {
                 ${
                   selected
                     ? "border-[#8B6B4A] ring-2 ring-[#8B6B4A]/20 shadow-lg"
-                    : "border-[#E5D8C7] hover:border-[#C8972B]"
+                    : "border-[#E5D8C7] hover:border-[#dba343]"
                 }
               `}
             >
@@ -114,7 +114,7 @@ export default function Step3Style({ formData, setFormData, next, back }) {
         <div className="mt-6 text-center">
           <span className="text-sm text-[#6E6258]">Selected Style:</span>
 
-          <span className="ml-2 font-semibold text-[#C8972B]">
+          <span className="ml-2 font-semibold text-[#dba343]">
             {formData.style}
           </span>
         </div>

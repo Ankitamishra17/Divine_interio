@@ -7,7 +7,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   New layout: a stacked "film still + quote slip".
@@ -91,7 +91,7 @@ export default function CTABanner() {
           transition={{ duration: 0.8, ease: EASE }}
           className="relative z-10 -mt-16 px-3 sm:-mt-20 sm:px-8 lg:-mt-24 lg:px-14"
         >
-          <div className="rounded-sm border-t-2 border-[#C18A35] bg-white p-6 shadow-[0_24px_60px_-20px_rgba(41,38,34,0.45)] sm:p-8 lg:grid lg:grid-cols-[1fr_auto] lg:items-end lg:gap-10 lg:p-10">
+          <div className="rounded-sm border-t-2 border-[#dba343] bg-white p-6 shadow-[0_24px_60px_-20px_rgba(41,38,34,0.45)] sm:p-8 lg:grid lg:grid-cols-[1fr_auto] lg:items-end lg:gap-10 lg:p-10">
             {/* Choose home size */}
             <div role="radiogroup" aria-labelledby="home-size-label">
               <p
@@ -111,10 +111,10 @@ export default function CTABanner() {
                       role="radio"
                       aria-checked={active}
                       onClick={() => setHome(size.id)}
-                      className={`min-h-12 rounded-sm border px-4 text-[15px] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 ${
+                      className={`min-h-12 rounded-sm border px-4 text-[15px] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 ${
                         active
                           ? "border-[#593719] bg-[#593719] text-[#F7F3ED]"
-                          : "border-[#E8DED0] bg-[#F7F3ED] text-[#292622] hover:border-[#C18A35]"
+                          : "border-[#E8DED0] bg-[#F7F3ED] text-[#292622] hover:border-[#dba343]"
                       }`}
                     >
                       {size.label}
@@ -128,7 +128,7 @@ export default function CTABanner() {
             <div className="mt-6 flex flex-col gap-3 lg:mt-0 lg:w-[300px]">
               <Link
                 href={`/cost-calculator?home=${home}`}
-                className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#C18A35] px-6 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
+                className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#dba343] px-6 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
               >
                 Calculate my estimate
                 <ArrowRight
@@ -138,7 +138,7 @@ export default function CTABanner() {
               </Link>
               <Link
                 href="/contact"
-                className="text-center text-sm font-medium text-[#593719] underline decoration-[#C18A35] underline-offset-4 transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2"
+                className="text-center text-sm font-medium text-[#593719] underline decoration-[#dba343] underline-offset-4 transition-colors hover:text-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2"
               >
                 Prefer to talk? Book a free consultation
               </Link>
@@ -146,7 +146,7 @@ export default function CTABanner() {
           </div>
 
           <p className="mt-5 flex items-center justify-center gap-2 text-center text-[13px] text-[#292622]/70">
-            <MapPin size={14} className="shrink-0 text-[#C18A35]" aria-hidden="true" />
+            <MapPin size={14} className="shrink-0 text-[#dba343]" aria-hidden="true" />
             Luxury projects delivered across Noida, Greater Noida and Ghaziabad
           </p>
         </motion.div>

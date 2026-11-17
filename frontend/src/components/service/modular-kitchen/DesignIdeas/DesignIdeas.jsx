@@ -47,7 +47,7 @@ export default function DesignIdeas() {
             {/* Gold offset frame */}
             <div
               aria-hidden="true"
-              className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-[2rem] border-2 border-[#C8972B]/50 sm:block"
+              className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-[2rem] border-2 border-[#dba343]/50 sm:block"
             />
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-stone-200 shadow-2xl shadow-[#3D1F0D]/20 sm:aspect-[5/4] lg:h-[620px] lg:aspect-auto">
@@ -97,7 +97,7 @@ export default function DesignIdeas() {
           {/* Text + list */}
           <div className="lg:order-1 lg:col-span-5">
             <p className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#8A6416]">
-              <span aria-hidden="true" className="h-px w-10 bg-[#C8972B]" />
+              <span aria-hidden="true" className="h-px w-10 bg-[#dba343]" />
               Inspiration gallery
             </p>
             <h2

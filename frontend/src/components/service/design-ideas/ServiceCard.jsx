@@ -26,7 +26,7 @@ const icons = {
 };
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 // Hover reveal:
 // - On devices with a mouse (hover: hover) the title + description are hidden and
@@ -69,7 +69,7 @@ export default function ServiceCard({ item }) {
       {isLink && (
         <span
           aria-hidden="true"
-          className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#C8972B] text-[#1E0F06] transition-transform duration-300 group-hover:rotate-12 motion-reduce:transition-none"
+          className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#dba343] text-[#1E0F06] transition-transform duration-300 group-hover:rotate-12 motion-reduce:transition-none"
         >
           <ArrowUpRight size={20} />
         </span>
@@ -91,7 +91,7 @@ export default function ServiceCard({ item }) {
         </h3>
         <span
           aria-hidden="true"
-          className="mt-3 block h-0.5 w-8 bg-[#C8972B]"
+          className="mt-3 block h-0.5 w-8 bg-[#dba343]"
         />
         <p className="mt-3 text-[15px] leading-7 text-white/90">
           {item.description}

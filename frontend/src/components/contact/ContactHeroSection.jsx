@@ -13,7 +13,7 @@ const WHATSAPP_URL = "https://wa.me/919911066420";
 const FORM_ANCHOR = "#contact-form";
 
 const ring =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8972B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F0E04]";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F0E04]";
 
 const facts = [
   {
@@ -69,7 +69,7 @@ export default function ContactHeroSection() {
             <li>
               <Link
                 href="/"
-                className={`rounded-sm transition-colors hover:text-[#C8972B] ${ring}`}
+                className={`rounded-sm transition-colors hover:text-[#dba343] ${ring}`}
               >
                 Home
               </Link>
@@ -104,7 +104,7 @@ export default function ContactHeroSection() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href={FORM_ANCHOR}
-              className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#C8972B] px-7 text-[15px] font-semibold text-[#1F0E04] transition-colors duration-300 hover:bg-[#E3B352] ${ring}`}
+              className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#dba343] px-7 text-[15px] font-semibold text-[#1F0E04] transition-colors duration-300 hover:bg-[#E3B352] ${ring}`}
             >
               Send an enquiry
               <ArrowDown
@@ -133,7 +133,7 @@ export default function ContactHeroSection() {
             <li key={label} className="flex items-center gap-4">
               <span
                 aria-hidden="true"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#C8972B]/60 text-[#E3B352]"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#dba343]/60 text-[#E3B352]"
               >
                 <Icon size={18} strokeWidth={1.6} />
               </span>
@@ -142,7 +142,7 @@ export default function ContactHeroSection() {
                 {href ? (
                   <a
                     href={href}
-                    className={`rounded-sm text-base font-medium text-white underline decoration-[#C8972B] decoration-1 underline-offset-4 transition-colors hover:text-[#E3B352] ${ring}`}
+                    className={`rounded-sm text-base font-medium text-white underline decoration-[#dba343] decoration-1 underline-offset-4 transition-colors hover:text-[#E3B352] ${ring}`}
                   >
                     {value}
                   </a>

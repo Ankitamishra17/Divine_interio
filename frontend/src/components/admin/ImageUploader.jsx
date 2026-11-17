@@ -43,7 +43,7 @@ export default function ImageUploader({ value, onChange, label = "Image" }) {
           <img
             src={resolveImageUrl(value)}
             alt={label}
-            className="w-full h-40 object-cover rounded-lg bg-[#C8972B]/10"
+            className="w-full h-40 object-cover rounded-lg bg-[#dba343]/10"
           />
           <div className="absolute inset-0 rounded-lg bg-[#1A0F08]/0 group-hover:bg-[#1A0F08]/30 transition-colors" />
         </div>
@@ -58,13 +58,13 @@ export default function ImageUploader({ value, onChange, label = "Image" }) {
         onDrop={handleDrop}
         className={`flex flex-col items-center justify-center gap-2 border border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
           dragOver
-            ? "border-[#C8972B] bg-[#C8972B]/8"
-            : "border-[#3D1F0D]/20 hover:border-[#C8972B] hover:bg-[#C8972B]/[0.03]"
+            ? "border-[#dba343] bg-[#dba343]/8"
+            : "border-[#3D1F0D]/20 hover:border-[#dba343] hover:bg-[#dba343]/[0.03]"
         }`}
       >
         {uploading ? (
           <>
-            <div className="w-5 h-5 border-2 border-[#C8972B]/30 border-t-[#C8972B] rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-[#dba343]/30 border-t-[#dba343] rounded-full animate-spin" />
             <span className="text-xs text-[#3D1F0D]/50">Uploading…</span>
           </>
         ) : (

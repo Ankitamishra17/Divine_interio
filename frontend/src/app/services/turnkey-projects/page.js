@@ -7,10 +7,10 @@ import FAQ from "@/components/service/turnkey-projects/FAQ";
 import ServiceConsultation from "@/components/common/ServiceConsultation";
 
 export const metadata = {
-  title: "Turnkey Interior Design Services | Living Space Decor",
+  title: "Turnkey Interior Design Services | Divine Interio",
 
   description:
-    "Living Space Decor provides turnkey interior design services for homes, apartments, villas, and offices in Noida, Greater Noida, & Gaziabad.",
+    "Divine Interio provides turnkey interior design services for homes, apartments, villas, and offices in Noida, Greater Noida, & Gaziabad.",
   keywords: [
     "Turnkey Interior Design",
     "Turnkey Interior Services",
@@ -18,7 +18,7 @@ export const metadata = {
     "Office Interior",
     "Interior Designer in Noida",
     "Complete Home Interior",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

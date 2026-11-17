@@ -2,8 +2,6 @@ import { notFound } from "next/navigation";
 import { getBlog } from "@/lib/serverApi";
 import BlogDetail from "@/components/BlogDetail";
 
-
-
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
@@ -11,14 +9,14 @@ export async function generateMetadata({ params }) {
     const { data: post } = await getBlog(slug);
 
     return {
-      title: `${post.title} | Living Space Decor`,
+      title: `${post.title} | Divine Interio`,
       description: post.excerpt,
 
       keywords: post.tags || [
         "Interior Designer in Greater Noida",
         "Interior Designer",
         "Home Interior",
-        "Living Space Decor",
+        "Divine Interio",
         "Modular Kitchen",
       ],
 
@@ -33,8 +31,8 @@ export async function generateMetadata({ params }) {
     };
   } catch {
     return {
-      title: "Blog | Living Space Decor",
-      description: "Interior designer blogs by Living Space Decor.",
+      title: "Blog | Divine Interio",
+      description: "Interior designer blogs by Divine Interio.",
     };
   }
 }

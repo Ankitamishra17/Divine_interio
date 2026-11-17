@@ -42,7 +42,7 @@ export default function ProcessCard({
 
       {/* Number badge + connector */}
       <div className="relative z-10 -mt-6 flex items-center pl-5">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C8972B] font-heading text-lg text-[#1E0F06] ring-4 ring-white">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#dba343] font-heading text-lg text-[#1E0F06] ring-4 ring-white">
           <span className="sr-only">Step </span>
           {num}
         </span>
@@ -50,7 +50,7 @@ export default function ProcessCard({
         {!isLast && (
           <span
             aria-hidden="true"
-            className="-mr-[2.75rem] ml-3 hidden h-px flex-1 bg-[#C8972B]/40 lg:block"
+            className="-mr-[2.75rem] ml-3 hidden h-px flex-1 bg-[#dba343]/40 lg:block"
           />
         )}
       </div>

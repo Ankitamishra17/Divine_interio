@@ -4,7 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { packages } from "@/data/kitchenCalculatorData";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
   - Title, step count and Back live in KitchenCostCalculator now.
   - Each package is one real radio card. (Before, a clickable <div> held another <button>, so keyboard
     users couldn't pick a package.) Package colours (green, blue, black) are replaced by the site palette.
@@ -26,8 +26,8 @@ export default function PackageStep({ selected, onSelect, onNext }) {
             return (
               <label key={pkg.id} className="relative block h-full">
                 <input type="radio" name="package" value={pkg.id} checked={on} onChange={() => onSelect(pkg.id)} className="peer sr-only" />
-                <span className="relative flex h-full cursor-pointer flex-col overflow-hidden rounded-sm border border-[#292622]/20 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#C18A35] peer-focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                  <span aria-hidden="true" className={`block h-[3px] w-full transition-colors ${on ? "bg-[#C18A35]" : "bg-[#E8DED0]"}`} />
+                <span className="relative flex h-full cursor-pointer flex-col overflow-hidden rounded-sm border border-[#292622]/20 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#dba343] peer-focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                  <span aria-hidden="true" className={`block h-[3px] w-full transition-colors ${on ? "bg-[#dba343]" : "bg-[#E8DED0]"}`} />
 
                   <span className={`flex items-start justify-between gap-3 p-5 transition-colors duration-300 ${on ? "bg-[#F7F3ED]" : ""}`}>
                     <span className="min-w-0">
@@ -45,7 +45,7 @@ export default function PackageStep({ selected, onSelect, onNext }) {
                   <ul className="flex-1 space-y-3 border-t border-[#E8DED0] p-5">
                     {pkg.features.map((item, i) => (
                       <li key={i} className="font-body flex items-start gap-3 text-sm leading-6 text-[#292622]/80">
-                        <Check size={16} className="mt-1 shrink-0 text-[#C18A35]" aria-hidden="true" />
+                        <Check size={16} className="mt-1 shrink-0 text-[#dba343]" aria-hidden="true" />
                         {item}
                       </li>
                     ))}
@@ -67,7 +67,7 @@ export default function PackageStep({ selected, onSelect, onNext }) {
           onClick={onNext}
           disabled={!selected}
           aria-describedby={!selected ? "package-hint" : undefined}
-          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
+          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
         >
           Continue to details
           <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />

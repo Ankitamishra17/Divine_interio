@@ -42,18 +42,18 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
   const isOpen = openIndex === index;
 
   return (
-    <div className="border border-[#C8972B]/15 bg-white overflow-hidden group hover:border-[#C8972B]/40 transition-colors duration-300">
+    <div className="border border-[#dba343]/15 bg-white overflow-hidden group hover:border-[#dba343]/40 transition-colors duration-300">
       <button
         onClick={() => toggleFAQ(index)}
         className="w-full flex items-start justify-between p-4 sm:p-5 lg:p-6 text-left gap-3 sm:gap-4"
       >
         {/* Number + Question */}
         <div className="flex items-start gap-3 sm:gap-4 flex-1">
-          <span className="text-[#C8972B]/40 text-[10px] sm:text-xs tracking-widest font-light mt-1 flex-shrink-0">
+          <span className="text-[#dba343]/40 text-[10px] sm:text-xs tracking-widest font-light mt-1 flex-shrink-0">
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <span className="font-medium text-[#2A1506] text-sm sm:text-base leading-snug group-hover:text-[#C8972B] transition-colors duration-300">
+          <span className="font-medium text-[#2A1506] text-sm sm:text-base leading-snug group-hover:text-[#dba343] transition-colors duration-300">
             {faq.question}
           </span>
         </div>
@@ -71,13 +71,13 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
             transition-all
             duration-300
             mt-0.5
-            ${isOpen ? "bg-[#C8972B] border-[#C8972B]" : "border-[#C8972B]/30"}
+            ${isOpen ? "bg-[#dba343] border-[#dba343]" : "border-[#dba343]/30"}
           `}
         >
           {isOpen ? (
             <Minus size={13} className="text-white" />
           ) : (
-            <Plus size={13} className="text-[#C8972B]" />
+            <Plus size={13} className="text-[#dba343]" />
           )}
         </div>
       </button>
@@ -88,7 +88,7 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
           isOpen ? "max-h-48" : "max-h-0"
         }`}
       >
-        <div className="px-4 sm:px-6 pb-5 sm:pb-6 pl-10 sm:pl-14 text-[#6E6258] leading-7 sm:leading-8 text-sm border-t border-[#C8972B]/10 pt-4">
+        <div className="px-4 sm:px-6 pb-5 sm:pb-6 pl-10 sm:pl-14 text-[#6E6258] leading-7 sm:leading-8 text-sm border-t border-[#dba343]/10 pt-4">
           {faq.answer}
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function FAQSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-14">
         {/* Heading */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#C8972B] text-[11px] sm:text-xs mb-4">
+          <p className="uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#dba343] text-[11px] sm:text-xs mb-4">
             Frequently Asked Questions
           </p>
 
@@ -119,7 +119,7 @@ export default function FAQSection() {
             Got Questions?
           </h2>
 
-          <div className="w-12 h-px bg-[#C8972B] mx-auto mt-5 md:mt-6 mb-5 md:mb-6" />
+          <div className="w-12 h-px bg-[#dba343] mx-auto mt-5 md:mt-6 mb-5 md:mb-6" />
 
           
         </div>

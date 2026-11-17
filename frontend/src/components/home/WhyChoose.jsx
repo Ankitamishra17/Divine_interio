@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 
 /*
   Palette (unchanged)
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   Layout: four photo panels side by side, each carrying one number.
@@ -127,7 +127,7 @@ export default function WhyChooseUs() {
             </p>
             <Link
               href="/portfolio"
-              className="group inline-flex items-center gap-2.5 rounded-sm bg-[#593719] px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+              className="group inline-flex items-center gap-2.5 rounded-sm bg-[#593719] px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
             >
               See our work
               <ArrowRight
@@ -156,7 +156,7 @@ export default function WhyChooseUs() {
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className={`group relative min-h-0 min-w-0 overflow-hidden rounded-sm bg-[#E8DED0] text-left transition-[flex-grow] duration-700 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] motion-reduce:transition-none ${
+                className={`group relative min-h-0 min-w-0 overflow-hidden rounded-sm bg-[#E8DED0] text-left transition-[flex-grow] duration-700 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] motion-reduce:transition-none ${
                   isActive ? "flex-[6_1_0%] lg:flex-[4_1_0%]" : "flex-[1_1_0%]"
                 }`}
               >
@@ -185,7 +185,7 @@ export default function WhyChooseUs() {
 
                 {/* gold line along the bottom of the open panel */}
                 <span
-                  className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-[#C18A35] transition-transform duration-700 ease-out motion-reduce:transition-none ${
+                  className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-[#dba343] transition-transform duration-700 ease-out motion-reduce:transition-none ${
                     isActive ? "scale-x-100" : "scale-x-0"
                   }`}
                   aria-hidden="true"
@@ -200,7 +200,7 @@ export default function WhyChooseUs() {
                   <span className="flex items-baseline gap-4 lg:flex-col lg:items-start lg:gap-3">
                     <span
                       className={`font-heading text-4xl leading-none transition-colors duration-500 sm:text-5xl xl:text-6xl ${
-                        isActive ? "text-[#C18A35]" : "text-white"
+                        isActive ? "text-[#dba343]" : "text-white"
                       }`}
                     >
                       {stat.count ? (

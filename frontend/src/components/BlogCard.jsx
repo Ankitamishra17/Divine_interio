@@ -8,7 +8,7 @@ export default function BlogCard({ post }) {
     <Link
       href={`/blog/${post.slug}`}
       className="group block bg-white border border-[#E8DED0] overflow-hidden rounded-sm
-      hover:border-[#C18A35]/60
+      hover:border-[#dba343]/60
       hover:shadow-[0_15px_40px_rgba(89,55,25,0.12)]
       hover:-translate-y-1 transition-all duration-500"
     >
@@ -41,7 +41,7 @@ export default function BlogCard({ post }) {
 
         {/* Category + Read Time */}
         <div className="flex items-center justify-between gap-3 mb-4">
-          <span className="text-[10px] tracking-[0.25em] uppercase text-[#C18A35] font-semibold font-body">
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[#dba343] font-semibold font-body">
             Journal
           </span>
 
@@ -53,7 +53,7 @@ export default function BlogCard({ post }) {
         </div>
 
         {/* Title */}
-        <h3 className="font-heading text-xl md:text-2xl text-[#593719] mb-3 leading-snug group-hover:text-[#C18A35] transition-colors duration-300 line-clamp-2">
+        <h3 className="font-heading text-xl md:text-2xl text-[#593719] mb-3 leading-snug group-hover:text-[#dba343] transition-colors duration-300 line-clamp-2">
           {post.title}
         </h3>
 
@@ -66,7 +66,7 @@ export default function BlogCard({ post }) {
 
         {/* Read More */}
         <div className="mt-6 pt-4 border-t border-[#E8DED0]">
-          <span className="inline-flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-[#593719] font-semibold font-body group-hover:text-[#C18A35] transition-colors duration-300">
+          <span className="inline-flex items-center gap-3 text-[10px] tracking-[0.2em] uppercase text-[#593719] font-semibold font-body group-hover:text-[#dba343] transition-colors duration-300">
             Read Article
             <span className="transition-transform duration-300 group-hover:translate-x-2">
               →

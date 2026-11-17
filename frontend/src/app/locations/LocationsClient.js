@@ -27,13 +27,13 @@ export default function LocationsClient({ locations = [] }) {
       <section className="relative isolate overflow-hidden bg-[#292622] px-5 py-24 text-center sm:py-32">
 
         {/* Decorative background */}
-        <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#C18A35]/15 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-[#C18A35]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#dba343]/15 blur-[120px]" />
+        <div className="pointer-events-none absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-[#dba343]/10 blur-[120px]" />
 
         <div className="relative mx-auto max-w-4xl">
 
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#C18A35]/40 bg-white/5 px-5 py-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C18A35]" />
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#dba343]/40 bg-white/5 px-5 py-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#dba343]" />
             <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#EBC882]">
               Our Presence
             </span>
@@ -41,7 +41,7 @@ export default function LocationsClient({ locations = [] }) {
 
           <h1 className="font-heading text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
             Beautiful Spaces,
-            <span className="mt-2 block text-[#C18A35]">
+            <span className="mt-2 block text-[#dba343]">
               Across Every Location
             </span>
           </h1>
@@ -53,11 +53,11 @@ export default function LocationsClient({ locations = [] }) {
 
           {/* SEARCH BAR */}
           <div className="mx-auto mt-10 max-w-2xl">
-            <div className="group relative flex items-center rounded-full border border-white/15 bg-white px-3 py-2 shadow-2xl transition-all duration-300 focus-within:border-[#C18A35] focus-within:ring-4 focus-within:ring-[#C18A35]/15">
+            <div className="group relative flex items-center rounded-full border border-white/15 bg-white px-3 py-2 shadow-2xl transition-all duration-300 focus-within:border-[#dba343] focus-within:ring-4 focus-within:ring-[#dba343]/15">
 
               <Search
                 size={21}
-                className="ml-3 shrink-0 text-[#292622]/50 transition-colors group-focus-within:text-[#C18A35]"
+                className="ml-3 shrink-0 text-[#292622]/50 transition-colors group-focus-within:text-[#dba343]"
               />
 
               <input
@@ -73,7 +73,7 @@ export default function LocationsClient({ locations = [] }) {
                   type="button"
                   onClick={() => setSearch("")}
                   aria-label="Clear search"
-                  className="mr-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#292622]/60 transition hover:bg-[#F7F3ED] hover:text-[#C18A35]"
+                  className="mr-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#292622]/60 transition hover:bg-[#F7F3ED] hover:text-[#dba343]"
                 >
                   <X size={18} />
                 </button>
@@ -98,8 +98,8 @@ export default function LocationsClient({ locations = [] }) {
         <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
 
           <div>
-            <p className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#C18A35]">
-              <span className="h-px w-9 bg-[#C18A35]" />
+            <p className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
+              <span className="h-px w-9 bg-[#dba343]" />
               Where We Work
             </p>
 
@@ -114,7 +114,7 @@ export default function LocationsClient({ locations = [] }) {
           </div>
 
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#292622]/10 bg-white px-5 py-3 text-sm font-medium text-[#292622]">
-            <MapPin size={16} className="text-[#C18A35]" />
+            <MapPin size={16} className="text-[#dba343]" />
             {filteredLocations.length}{" "}
             {filteredLocations.length === 1 ? "Location" : "Locations"}
           </div>
@@ -124,7 +124,7 @@ export default function LocationsClient({ locations = [] }) {
         {filteredLocations.length === 0 ? (
           <div className="rounded-2xl border border-[#292622]/10 bg-white px-5 py-20 text-center">
 
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F7F3ED] text-[#C18A35]">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F7F3ED] text-[#dba343]">
               <Compass size={30} />
             </div>
 
@@ -138,7 +138,7 @@ export default function LocationsClient({ locations = [] }) {
 
             <button
               onClick={() => setSearch("")}
-              className="mt-7 rounded-full bg-[#292622] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#C18A35] hover:text-[#292622]"
+              className="mt-7 rounded-full bg-[#292622] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#dba343] hover:text-[#292622]"
             >
               Clear Search
             </button>
@@ -150,7 +150,7 @@ export default function LocationsClient({ locations = [] }) {
               <Link
                 key={location.id}
                 href={`/locations/${location.slug}`}
-                className="group overflow-hidden rounded-xl border border-[#292622]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:border-[#C18A35]/50 hover:shadow-2xl hover:shadow-[#292622]/10"
+                className="group overflow-hidden rounded-xl border border-[#292622]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:border-[#dba343]/50 hover:shadow-2xl hover:shadow-[#292622]/10"
               >
 
                 {/* Card Image */}
@@ -176,7 +176,7 @@ export default function LocationsClient({ locations = [] }) {
                   </div>
 
                   {/* Arrow */}
-                  <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#C18A35] text-[#292622] transition-all duration-300 group-hover:rotate-45 group-hover:bg-white">
+                  <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#dba343] text-[#292622] transition-all duration-300 group-hover:rotate-45 group-hover:bg-white">
                     <ArrowUpRight size={20} />
                   </div>
                 </div>
@@ -185,12 +185,12 @@ export default function LocationsClient({ locations = [] }) {
                 <div className="p-6">
 
                   {location.service && (
-                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C18A35]">
+                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#dba343]">
                       {location.service}
                     </p>
                   )}
 
-                  <h3 className="font-heading text-xl leading-snug text-[#292622] transition-colors duration-300 group-hover:text-[#C18A35]">
+                  <h3 className="font-heading text-xl leading-snug text-[#292622] transition-colors duration-300 group-hover:text-[#dba343]">
                     {location.title}
                   </h3>
 
@@ -199,13 +199,13 @@ export default function LocationsClient({ locations = [] }) {
                   </p>
 
                   <div className="mt-6 flex items-center justify-between border-t border-[#292622]/10 pt-4">
-                    <span className="font-body text-xs font-semibold uppercase tracking-[0.15em] text-[#292622] transition-colors group-hover:text-[#C18A35]">
+                    <span className="font-body text-xs font-semibold uppercase tracking-[0.15em] text-[#292622] transition-colors group-hover:text-[#dba343]">
                       Explore Location
                     </span>
 
                     <ArrowUpRight
                       size={18}
-                      className="text-[#C18A35] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      className="text-[#dba343] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                     />
                   </div>
                 </div>

@@ -7,7 +7,7 @@ import { ArrowRight, Phone, MessageCircle } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   Colours follow the ServicesSection: Charcoal wall, Gold accents and hairlines,
@@ -118,17 +118,17 @@ function StatCell({ stat, index }) {
       />
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#C18A35] transition-transform duration-500 ease-out group-hover:scale-x-100"
+        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#dba343] transition-transform duration-500 ease-out group-hover:scale-x-100"
       />
 
       <span className="sr-only">{spoken}</span>
 
-      <p className="relative flex items-baseline justify-center gap-1.5 font-[Cormorant_Garamond,serif] font-medium leading-none text-[#C18A35]">
+      <p className="relative flex items-baseline justify-center gap-1.5 font-[Cormorant_Garamond,serif] font-medium leading-none text-[#dba343]">
         <span className="text-5xl sm:text-6xl lg:text-7xl">
           <Counter to={stat.value} decimals={stat.decimals} suffix={stat.suffix} run={inView} />
         </span>
         {stat.unit && (
-          <span className="text-lg text-[#C18A35]/80 sm:text-2xl lg:text-3xl" aria-hidden="true">
+          <span className="text-lg text-[#dba343]/80 sm:text-2xl lg:text-3xl" aria-hidden="true">
             {stat.unit}
           </span>
         )}
@@ -140,7 +140,7 @@ function StatCell({ stat, index }) {
 
       <span
         aria-hidden="true"
-        className="relative mt-3 h-px w-10 bg-[#C18A35]/40 transition-all duration-500 group-hover:w-16 group-hover:bg-[#C18A35] sm:mt-4"
+        className="relative mt-3 h-px w-10 bg-[#dba343]/40 transition-all duration-500 group-hover:w-16 group-hover:bg-[#dba343] sm:mt-4"
       />
 
       <p className="relative mx-auto mt-3 max-w-[240px] text-[13px] leading-relaxed text-[#F7F3ED]/65 sm:mt-4 sm:text-sm">
@@ -159,14 +159,14 @@ export default function StatsMarquee() {
     <section className="bg-[#292622]" aria-label="Our track record">
       <div className="mx-auto max-w-[1280px]">
         {/* gap-px on a tinted wrapper = clean 1px dividers at every breakpoint */}
-        <ul className="grid grid-cols-2 gap-px bg-[#C18A35]/25 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-px bg-[#dba343]/25 lg:grid-cols-4">
           {stats.map((s, i) => (
             <StatCell key={s.title} stat={s} index={i} />
           ))}
         </ul>
 
         {/* Contact row. Delete this block if you don't want it. */}
-        <div className="flex flex-col items-stretch justify-between gap-5 border-t border-[#C18A35]/25 px-5 py-7 sm:flex-row sm:items-center sm:px-8 lg:px-10">
+        <div className="flex flex-col items-stretch justify-between gap-5 border-t border-[#dba343]/25 px-5 py-7 sm:flex-row sm:items-center sm:px-8 lg:px-10">
           <p className="text-center text-sm text-[#F7F3ED]/75 sm:text-left sm:text-base">
             Planning a home in Noida? Talk to our design team before you decide.
           </p>
@@ -174,7 +174,7 @@ export default function StatsMarquee() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/contact"
-              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#C18A35] px-6 text-sm font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-[#dba343] px-6 text-sm font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
             >
               Book a free consultation
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -185,7 +185,7 @@ export default function StatsMarquee() {
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-[#F7F3ED]/40 px-5 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-[#F7F3ED]/40 px-5 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#dba343] hover:text-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
               >
                 <MessageCircle size={16} />
                 WhatsApp
@@ -195,7 +195,7 @@ export default function StatsMarquee() {
             {PHONE && (
               <a
                 href={`tel:${PHONE}`}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-[#F7F3ED]/40 px-5 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-[#F7F3ED]/40 px-5 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#dba343] hover:text-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
               >
                 <Phone size={16} />
                 Call us

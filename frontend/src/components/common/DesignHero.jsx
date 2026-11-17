@@ -54,13 +54,13 @@ export default function DesignHero({ data }) {
                         className="flex items-center gap-1.5"
                       >
                         {isLast || !crumb.href ? (
-                          <span className="text-[#C8972B] font-medium">
+                          <span className="text-[#dba343] font-medium">
                             {crumb.label}
                           </span>
                         ) : (
                           <Link
                             href={crumb.href}
-                            className="text-[#F7F3ED]/75 hover:text-[#C8972B] transition-colors duration-300"
+                            className="text-[#F7F3ED]/75 hover:text-[#dba343] transition-colors duration-300"
                           >
                             {crumb.label}
                           </Link>

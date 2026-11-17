@@ -34,20 +34,20 @@ export default async function PortfolioPage({ searchParams }) {
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
 
           <div className="flex items-center gap-3 mb-5">
-            <span className="w-9 h-px bg-[#C18A35]" />
+            <span className="w-9 h-px bg-[#dba343]" />
 
-            <p className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-[#C18A35] font-semibold">
+            <p className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-[#dba343] font-semibold">
               Luxury Interior Studio
             </p>
 
-            <span className="w-9 h-px bg-[#C18A35]" />
+            <span className="w-9 h-px bg-[#dba343]" />
           </div>
 
           <h1 className="font-heading text-5xl md:text-7xl font-normal text-[#FFFFFF] mb-5">
-            Our <span className="text-[#C18A35]">Portfolio</span>
+            Our <span className="text-[#dba343]">Portfolio</span>
           </h1>
 
-          <span className="w-16 h-px bg-[#C18A35] mb-6" />
+          <span className="w-16 h-px bg-[#dba343] mb-6" />
 
           <p className="text-[#F7F3ED]/80 max-w-xl mx-auto font-body font-light leading-relaxed mb-7">
             Explore our finest work — spaces designed with purpose,
@@ -57,14 +57,14 @@ export default async function PortfolioPage({ searchParams }) {
           <div className="flex items-center gap-3 text-sm font-body">
             <Link
               href="/"
-              className="text-white/80 hover:text-[#C18A35] transition-colors"
+              className="text-white/80 hover:text-[#dba343] transition-colors"
             >
               Home
             </Link>
 
             <span className="text-white/40">/</span>
 
-            <span className="text-[#C18A35]">Portfolio</span>
+            <span className="text-[#dba343]">Portfolio</span>
           </div>
         </div>
       </section>
@@ -72,7 +72,7 @@ export default async function PortfolioPage({ searchParams }) {
       {/* Section Heading */}
       <section className="max-w-6xl mx-auto px-6 md:px-16 pt-20 pb-12 text-center">
 
-        <p className="text-[10px] tracking-[0.4em] uppercase text-[#C18A35] font-semibold mb-5 font-body">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#dba343] font-semibold mb-5 font-body">
           Our Work
         </p>
 
@@ -80,7 +80,7 @@ export default async function PortfolioPage({ searchParams }) {
           Selected Projects
         </h2>
 
-        <span className="block w-14 h-px bg-[#C18A35] mx-auto mb-6" />
+        <span className="block w-14 h-px bg-[#dba343] mx-auto mb-6" />
 
         <p className="text-[#292622]/65 max-w-xl mx-auto font-body font-light leading-relaxed">
           A collection of interiors we've designed and built,

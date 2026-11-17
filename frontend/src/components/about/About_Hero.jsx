@@ -8,7 +8,7 @@ import { ArrowDown, ChevronRight, Phone, MessageCircle } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Beige #E8DED0 | Charcoal #292622 | White #FFFFFF
 
   Layout: full-bleed photo, headline anchored low on the left, and a working strip along the bottom
   edge: what you do, where you work, the studio (with live open / closed status) and a one-tap way
@@ -24,12 +24,16 @@ const PHONE_TEL = "tel:+919911066420";
 const WHATSAPP_URL = "https://wa.me/919911066420";
 const ADDRESS_SHORT = "Galaxy Diamond Plaza, Greater Noida West";
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009"
+  "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009",
 )}`;
 
 /* Studio hours in Indian time, so it is right for visitors anywhere */
 function isOpenNow() {
-  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "numeric", hour12: false }).formatToParts(new Date());
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    hour: "numeric",
+    hour12: false,
+  }).formatToParts(new Date());
   const hour = Number(parts.find((p) => p.type === "hour").value) % 24;
   return hour >= 10 && hour < 19;
 }
@@ -40,12 +44,16 @@ const container = {
 };
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 const ring =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]";
-const link = `rounded-sm text-[#F7F3ED] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring}`;
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]";
+const link = `rounded-sm text-[#F7F3ED] underline decoration-[#dba343] decoration-2 underline-offset-4 transition-colors hover:text-[#dba343] ${ring}`;
 
 export default function AboutHero() {
   const reduce = useReducedMotion();
@@ -97,15 +105,22 @@ export default function AboutHero() {
           animate="visible"
           className="max-w-[720px]"
         >
-          <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-7 md:mb-9 ">
+          <motion.nav
+            variants={fadeUp}
+            aria-label="Breadcrumb"
+            className="mb-7 md:mb-9 "
+          >
             <ol className="flex items-center gap-2 text-sm text-[#F7F3ED]/80">
               <li>
-                <Link href="/" className={`rounded-sm transition-colors hover:text-[#C18A35] ${ring}`}>
+                <Link
+                  href="/"
+                  className={`rounded-sm transition-colors hover:text-[#dba343] ${ring}`}
+                >
                   Home
                 </Link>
               </li>
               <li aria-hidden="true">
-                <ChevronRight size={15} className="text-[#C18A35]" />
+                <ChevronRight size={15} className="text-[#dba343]" />
               </li>
               <li aria-current="page" className="text-[#F7F3ED]">
                 About us
@@ -125,16 +140,25 @@ export default function AboutHero() {
             variants={fadeUp}
             className="mt-6 max-w-[540px] text-base font-light leading-[1.8] text-[#F7F3ED]/90 md:text-lg"
           >
-            Living Space Decor is a team of designers, architects and execution experts creating functional, stylish and personal interiors for modern living.
+            Divine Interio is a team of designers, architects and execution
+            experts creating functional, stylish and personal interiors for
+            modern living.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5"
+          >
             <a
               href="#our-story"
-              className={`group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#C18A35] px-8 text-[15px] font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ring}`}
+              className={`group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#dba343] px-8 text-[15px] font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ring}`}
             >
               Our story
-              <ArrowDown size={18} className="transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none" aria-hidden="true" />
+              <ArrowDown
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none"
+                aria-hidden="true"
+              />
             </a>
 
             <Link
@@ -152,26 +176,49 @@ export default function AboutHero() {
         <dl className="mx-auto grid max-w-[1280px] gap-6 px-5 py-6 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:gap-0 xl:px-12">
           <div className="lg:pr-8">
             <dt className="text-sm text-[#F7F3ED]/60">What we do</dt>
-            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">Interiors, modular kitchens and turnkey homes</dd>
+            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">
+              Interiors, modular kitchens and turnkey homes
+            </dd>
           </div>
 
           <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:px-8">
             <dt className="text-sm text-[#F7F3ED]/60">Where we work</dt>
-            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">Noida, Greater Noida, Ghaziabad and Delhi NCR</dd>
+            <dd className="mt-1 text-[15px] leading-snug text-[#F7F3ED]">
+              Noida, Greater Noida, Ghaziabad and Delhi NCR
+            </dd>
           </div>
 
           <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:px-8">
             <dt className="text-sm text-[#F7F3ED]/60">Visit the studio</dt>
             <dd className="mt-1 text-[15px] leading-snug">
-              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={link}>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={link}
+              >
                 {ADDRESS_SHORT}
               </a>
-              <span className="mt-2 flex items-center gap-2 text-sm text-[#F7F3ED]/75" role="status">
-                <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                  {open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C18A35] opacity-60 motion-reduce:animate-none" />}
-                  <span className={`relative h-2 w-2 rounded-full ${open ? "bg-[#C18A35]" : "bg-[#F7F3ED]/40"}`} />
+              <span
+                className="mt-2 flex items-center gap-2 text-sm text-[#F7F3ED]/75"
+                role="status"
+              >
+                <span
+                  className="relative flex h-2 w-2 shrink-0"
+                  aria-hidden="true"
+                >
+                  {open && (
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#dba343] opacity-60 motion-reduce:animate-none" />
+                  )}
+                  <span
+                    className={`relative h-2 w-2 rounded-full ${open ? "bg-[#dba343]" : "bg-[#F7F3ED]/40"}`}
+                  />
                 </span>
-                {open === null ? "Open daily, 10 AM to 7 PM" : open ? "Open now, until 7 PM" : "Closed now. Opens 10 AM"}
+                {open === null
+                  ? "Open daily, 10 AM to 7 PM"
+                  : open
+                    ? "Open now, until 7 PM"
+                    : "Closed now. Opens 10 AM"}
               </span>
             </dd>
           </div>
@@ -179,12 +226,28 @@ export default function AboutHero() {
           <div className="lg:border-l lg:border-[#F7F3ED]/15 lg:pl-8">
             <dt className="text-sm text-[#F7F3ED]/60">Talk to us</dt>
             <dd className="mt-1 flex flex-col gap-2 text-[15px] leading-snug">
-              <a href={PHONE_TEL} className={`inline-flex min-h-6 items-center gap-2 ${link}`}>
-                <Phone size={15} className="text-[#C18A35]" aria-hidden="true" />
+              <a
+                href={PHONE_TEL}
+                className={`inline-flex min-h-6 items-center gap-2 ${link}`}
+              >
+                <Phone
+                  size={15}
+                  className="text-[#dba343]"
+                  aria-hidden="true"
+                />
                 {PHONE_DISPLAY}
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-6 items-center gap-2 ${link}`}>
-                <MessageCircle size={15} className="text-[#C18A35]" aria-hidden="true" />
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex min-h-6 items-center gap-2 ${link}`}
+              >
+                <MessageCircle
+                  size={15}
+                  className="text-[#dba343]"
+                  aria-hidden="true"
+                />
                 WhatsApp us
               </a>
             </dd>

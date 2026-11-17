@@ -60,7 +60,7 @@ function CtaLink({ className = "" }) {
   return (
     <Link
       href="/contact"
-      className={`group inline-flex items-center gap-3 rounded-full bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C18A35] ${className}`}
+      className={`group inline-flex items-center gap-3 rounded-full bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343] ${className}`}
     >
       Start your project
       <ArrowRight
@@ -86,7 +86,7 @@ function Step({ step, index }) {
         className={`absolute left-0 top-0 z-10 flex h-11 w-11 items-center justify-center rounded-full border font-[family-name:var(--font-heading)] text-lg transition-colors duration-500 motion-reduce:transition-none sm:h-12 sm:w-12 ${
           reached
             ? "border-[#593719] bg-[#593719] text-white"
-            : "border-[#C18A35]/50 bg-[#F7F3ED] text-[#A36D28]"
+            : "border-[#dba343]/50 bg-[#F7F3ED] text-[#A36D28]"
         }`}
       >
         {index + 1}
@@ -97,7 +97,7 @@ function Step({ step, index }) {
           size={22}
           strokeWidth={1.5}
           aria-hidden="true"
-          className="shrink-0 text-[#C18A35]"
+          className="shrink-0 text-[#dba343]"
         />
         <h3 className="font-[family-name:var(--font-heading)] text-2xl leading-snug text-[#593719] sm:text-3xl">
           <span className="sr-only">{`Step ${index + 1}: `}</span>
@@ -109,7 +109,7 @@ function Step({ step, index }) {
         {step.description}
       </p>
 
-      <p className="mt-4 inline-flex items-center gap-2 border-l-2 border-[#C18A35] pl-3 font-[family-name:var(--font-body)] text-sm font-medium text-[#8A5F1F]">
+      <p className="mt-4 inline-flex items-center gap-2 border-l-2 border-[#dba343] pl-3 font-[family-name:var(--font-body)] text-sm font-medium text-[#8A5F1F]">
         {step.outcome}
       </p>
     </li>
@@ -140,7 +140,7 @@ export default function OurProcess() {
         {/* Intro: stays in view on desktop while the steps scroll */}
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <p className="mb-4 font-[family-name:var(--font-body)] text-sm font-semibold text-[#C18A35]">
+            <p className="mb-4 font-[family-name:var(--font-body)] text-sm font-semibold text-[#dba343]">
               How we work
             </p>
 
@@ -171,7 +171,7 @@ export default function OurProcess() {
             {/* Track */}
             <span
               aria-hidden="true"
-              className="absolute bottom-0 left-[21px] top-0 w-px bg-[#C18A35]/25 sm:left-6"
+              className="absolute bottom-0 left-[21px] top-0 w-px bg-[#dba343]/25 sm:left-6"
             />
             {/* Progress */}
             <motion.span

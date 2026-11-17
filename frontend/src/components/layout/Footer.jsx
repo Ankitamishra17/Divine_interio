@@ -112,7 +112,7 @@ function ColTitle({ children }) {
         fontWeight: 500,
         letterSpacing: "0.2em",
         textTransform: "uppercase",
-        color: "#C8972B",
+        color: "#dba343",
         margin: "0 0 24px",
         paddingBottom: 12,
         borderBottom: "0.5px solid rgba(200,151,43,0.25)",
@@ -142,7 +142,7 @@ function LinkRow({ label, href = "/" }) {
           transition: "color 0.2s",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.color = "#C8972B";
+          e.currentTarget.style.color = "#dba343";
           e.currentTarget.querySelector(".arr").style.opacity = "1";
           e.currentTarget.querySelector(".arr").style.transform =
             "translateX(0)";
@@ -162,7 +162,7 @@ function LinkRow({ label, href = "/" }) {
             transform: "translateX(-4px)",
             transition: "all 0.2s",
             fontSize: 12,
-            color: "#C8972B",
+            color: "#dba343",
           }}
         >
           →
@@ -192,7 +192,7 @@ function ContactRow({ icon, label, value, href }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#C8972B",
+          color: "#dba343",
         }}
       >
         {icon}
@@ -269,7 +269,7 @@ export default function Footer() {
           transition: color 0.2s;
         }
         .footer-developed:hover {
-          color: #C8972B;
+          color: #dba343;
         }
 
         /* Large laptop: below 1200px — tighten to 3 columns x 2 rows */
@@ -347,7 +347,7 @@ export default function Footer() {
             >
               <Image
                 src="/divine_logo_trimmed1.png"
-                alt="Living Space Decor"
+                alt="Divine Interio"
                 width={300}
                 height={80}
                 priority
@@ -363,8 +363,8 @@ export default function Footer() {
                 color: "rgba(245,235,224,0.62)",
                 lineHeight: 1.85,
                 margin: "0 0 28px",
-
-              }} className="-mt-15"
+              }}
+              className="-mt-15"
             >
               Crafting elevated living environments across Noida & Delhi NCR.
               Every project is a synthesis of artisan craft, precise execution,
@@ -389,8 +389,8 @@ export default function Footer() {
                     textDecoration: "none",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "#C8972B";
-                    e.currentTarget.style.color = "#C8972B";
+                    e.currentTarget.style.borderColor = "#dba343";
+                    e.currentTarget.style.color = "#dba343";
                     e.currentTarget.style.background = "rgba(200,151,43,0.08)";
                   }}
                   onMouseLeave={(e) => {
@@ -557,7 +557,7 @@ export default function Footer() {
                   width: 5,
                   height: 5,
                   borderRadius: "50%",
-                  background: "#C8972B",
+                  background: "#dba343",
                   opacity: 0.6,
                   display: "inline-block",
                 }}

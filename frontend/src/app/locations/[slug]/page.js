@@ -4,7 +4,7 @@ import { getLocation, getLocations } from "@/lib/serverApi";
 
 /*
   Palette
-  Charcoal #292622 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Charcoal #292622 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige    #E8DED0 | Espresso #593719  | White #FFFFFF
 
   Colour roles
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     const { data: location } = await getLocation(slug);
 
     return {
-      title: `${location.title} | Living Space Decor`,
+      title: `${location.title} | Divine Interio`,
       description: location.description,
       keywords: [
         `${location.city} Interior Designer`,
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
     };
   } catch {
     return {
-      title: "Location Not Found | Living Space Decor",
+      title: "Location Not Found | Divine Interio",
       description: "The requested location could not be found.",
     };
   }
@@ -63,10 +63,26 @@ export async function generateMetadata({ params }) {
 /* ───────── Static content ───────── */
 
 const steps = [
-  { n: "01", title: "Consultation", text: "We listen to your ideas, needs and budget." },
-  { n: "02", title: "Concept & 3D", text: "See your space designed before work begins." },
-  { n: "03", title: "Execution", text: "Skilled crews build and finish with care." },
-  { n: "04", title: "Handover", text: "A final walkthrough and a home you love." },
+  {
+    n: "01",
+    title: "Consultation",
+    text: "We listen to your ideas, needs and budget.",
+  },
+  {
+    n: "02",
+    title: "Concept & 3D",
+    text: "See your space designed before work begins.",
+  },
+  {
+    n: "03",
+    title: "Execution",
+    text: "Skilled crews build and finish with care.",
+  },
+  {
+    n: "04",
+    title: "Handover",
+    text: "A final walkthrough and a home you love.",
+  },
 ];
 
 /* ───────── Reveal wrapper (pure CSS, no client JS needed) ─────────
@@ -88,7 +104,10 @@ function Reveal({
   else style["--d"] = `${Math.min(delay / 25, 30)}%`;
 
   return (
-    <Tag className={`${load ? "ls-in" : "ls-reveal"} ${className}`} style={style}>
+    <Tag
+      className={`${load ? "ls-in" : "ls-reveal"} ${className}`}
+      style={style}
+    >
       {children}
     </Tag>
   );
@@ -134,7 +153,7 @@ function MotionStyles() {
 
 const goldText = {
   backgroundImage:
-    "linear-gradient(90deg,#C18A35 0%,#EBC882 25%,#C18A35 50%,#EBC882 75%,#C18A35 100%)",
+    "linear-gradient(90deg,#dba343 0%,#EBC882 25%,#dba343 50%,#EBC882 75%,#dba343 100%)",
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
@@ -154,7 +173,7 @@ export default async function LocationPage({ params }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    name: "Living Space Decor - Divine Interior",
+    name: "Divine Interio - Divine Interior",
     url: `https://livingspacedecor.in/locations/${slug}`,
     telephone: PHONE,
     areaServed: location.city,
@@ -202,7 +221,7 @@ export default async function LocationPage({ params }) {
           }}
         />
         {/* gold glow */}
-        <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[420px] w-[420px] rounded-full bg-[#C18A35]/15 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[420px] w-[420px] rounded-full bg-[#dba343]/15 blur-[120px]" />
 
         <div className="relative mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
@@ -215,7 +234,10 @@ export default async function LocationPage({ params }) {
                   Home
                 </Link>
                 <span>/</span>
-                <Link href="/locations" className="transition hover:text-[#EBC882]">
+                <Link
+                  href="/locations"
+                  className="transition hover:text-[#EBC882]"
+                >
                   Locations
                 </Link>
                 <span>/</span>
@@ -224,10 +246,10 @@ export default async function LocationPage({ params }) {
             </Reveal>
 
             <Reveal load delay={100} y={20}>
-              <span className="inline-flex items-center gap-2.5 rounded-full border border-[#C18A35]/60 bg-[#C18A35]/15 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-[#EBC882] backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-[#dba343]/60 bg-[#dba343]/15 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-[#EBC882] backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
-                  <span className="ls-ping absolute inline-flex h-full w-full rounded-full bg-[#C18A35]" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C18A35]" />
+                  <span className="ls-ping absolute inline-flex h-full w-full rounded-full bg-[#dba343]" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#dba343]" />
                 </span>
                 Now designing in {location.city}
               </span>
@@ -247,7 +269,7 @@ export default async function LocationPage({ params }) {
 
             <Reveal load delay={320} y={24}>
               <div className="mt-6 flex gap-4">
-                <span className="mt-1 h-16 w-0.5 shrink-0 rounded bg-[#C18A35]" />
+                <span className="mt-1 h-16 w-0.5 shrink-0 rounded bg-[#dba343]" />
                 <p className="max-w-xl text-base leading-relaxed text-[#E8DED0] sm:text-lg">
                   {location.description}
                 </p>
@@ -256,15 +278,31 @@ export default async function LocationPage({ params }) {
           </div>
 
           {/* floating glass card (desktop / tablet) */}
-          <Reveal load delay={600} x={30} y={0} className="absolute bottom-10 right-5 hidden sm:block sm:right-8">
+          <Reveal
+            load
+            delay={600}
+            x={30}
+            y={0}
+            className="absolute bottom-10 right-5 hidden sm:block sm:right-8"
+          >
             <div className="ls-float flex items-center gap-3 rounded-2xl border border-white/20 bg-[#292622]/50 px-5 py-4 shadow-2xl backdrop-blur-md">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#C18A35] text-[#292622]">
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#dba343] text-[#292622]">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M12 3l2.5 5.5L20 9.3l-4 4 1 5.7L12 16.3 7 19l1-5.7-4-4 5.5-.8z" />
                 </svg>
               </span>
               <div className="leading-tight">
-                <p className="text-sm font-semibold text-white">Free Consultation</p>
+                <p className="text-sm font-semibold text-white">
+                  Free Consultation
+                </p>
                 <p className="text-xs text-[#E8DED0]">Book your visit today</p>
               </div>
             </div>
@@ -276,7 +314,15 @@ export default async function LocationPage({ params }) {
             aria-label="Scroll down"
             className="ls-bob absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-white/70 transition hover:text-[#EBC882] lg:block"
           >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M12 5v14M6 13l6 6 6-6" />
             </svg>
           </a>
@@ -301,7 +347,7 @@ export default async function LocationPage({ params }) {
           <Reveal x={-40} y={0} className="lg:col-span-5">
             <div className="group relative mx-auto max-w-md lg:max-w-none">
               {/* offset frames */}
-              <div className="absolute -bottom-4 -left-4 h-full w-full rounded-3xl border-2 border-[#C18A35]/70 sm:-bottom-6 sm:-left-6" />
+              <div className="absolute -bottom-4 -left-4 h-full w-full rounded-3xl border-2 border-[#dba343]/70 sm:-bottom-6 sm:-left-6" />
               <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl shadow-[#292622]/25">
                 <img
                   src={img(location.aboutImage)}
@@ -319,7 +365,7 @@ export default async function LocationPage({ params }) {
 
               <div className="absolute -right-3 top-8 rounded-2xl bg-[#292622] px-5 py-3 text-white shadow-xl sm:-right-6">
                 <p className="font-heading text-xl leading-none">Divine</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-[#C18A35]">
+                <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-[#dba343]">
                   Interior
                 </p>
               </div>
@@ -329,8 +375,8 @@ export default async function LocationPage({ params }) {
           {/* Copy */}
           <div className="lg:col-span-7">
             <Reveal delay={100}>
-              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#C18A35]">
-                <span className="h-px w-10 bg-[#C18A35]" />
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
+                <span className="h-px w-10 bg-[#dba343]" />
                 About Our Service
               </p>
             </Reveal>
@@ -339,7 +385,7 @@ export default async function LocationPage({ params }) {
               <h2 className="mt-4 font-heading text-3xl leading-tight text-[#292622] sm:text-4xl lg:text-5xl">
                 Our {location.service}
               </h2>
-              <div className="mt-5 h-1 w-16 rounded bg-[#C18A35]" />
+              <div className="mt-5 h-1 w-16 rounded bg-[#dba343]" />
             </Reveal>
 
             <Reveal delay={300}>
@@ -361,8 +407,8 @@ export default async function LocationPage({ params }) {
 
       {/* ═════════ PROCESS ═════════ */}
       <section className="relative isolate overflow-hidden bg-[#292622]">
-        <div className="pointer-events-none absolute -left-24 top-10 -z-10 h-80 w-80 rounded-full bg-[#C18A35]/15 blur-[110px]" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#C18A35]/10 blur-[110px]" />
+        <div className="pointer-events-none absolute -left-24 top-10 -z-10 h-80 w-80 rounded-full bg-[#dba343]/15 blur-[110px]" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#dba343]/10 blur-[110px]" />
         <div
           className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
           style={{
@@ -373,24 +419,24 @@ export default async function LocationPage({ params }) {
 
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C18A35]">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
               How We Work
             </p>
             <h2 className="mt-3 font-heading text-3xl text-white sm:text-4xl lg:text-5xl">
               A simple, transparent process
             </h2>
-            <div className="mx-auto mt-5 h-1 w-16 rounded bg-[#C18A35]" />
+            <div className="mx-auto mt-5 h-1 w-16 rounded bg-[#dba343]" />
           </Reveal>
 
           <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <li key={s.n}>
                 <Reveal delay={i * 150} y={40} className="h-full">
-                  <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-7 transition duration-500 hover:-translate-y-2 hover:border-[#C18A35]/60 hover:bg-white/[0.07]">
-                    <span className="font-heading text-6xl leading-none text-[#C18A35]/25 transition duration-500 group-hover:text-[#C18A35]">
+                  <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-7 transition duration-500 hover:-translate-y-2 hover:border-[#dba343]/60 hover:bg-white/[0.07]">
+                    <span className="font-heading text-6xl leading-none text-[#dba343]/25 transition duration-500 group-hover:text-[#dba343]">
                       {s.n}
                     </span>
-                    <div className="mt-5 h-0.5 w-10 rounded bg-[#C18A35] transition-all duration-500 group-hover:w-20" />
+                    <div className="mt-5 h-0.5 w-10 rounded bg-[#dba343] transition-all duration-500 group-hover:w-20" />
                     <h3 className="mt-5 font-heading text-xl text-white">
                       {s.title}
                     </h3>
@@ -416,17 +462,17 @@ export default async function LocationPage({ params }) {
             }}
           >
             {/* decorative circles */}
-            <div className="ls-float pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border border-[#C18A35]/40" />
-            <div className="ls-float pointer-events-none absolute -right-8 -top-8 h-56 w-56 rounded-full border border-[#C18A35]/25 [animation-delay:1.5s]" />
-            <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-[#C18A35]/20 blur-3xl" />
+            <div className="ls-float pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border border-[#dba343]/40" />
+            <div className="ls-float pointer-events-none absolute -right-8 -top-8 h-56 w-56 rounded-full border border-[#dba343]/25 [animation-delay:1.5s]" />
+            <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-[#dba343]/20 blur-3xl" />
 
             <div className="relative">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C18A35]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
                 Let&apos;s Talk
               </p>
               <h2 className="mx-auto mt-4 max-w-3xl font-heading text-3xl leading-tight text-[#292622] sm:text-4xl lg:text-5xl">
                 Looking for Interior Designers in{" "}
-                <span className="text-[#C18A35]">{location.city}</span>?
+                <span className="text-[#dba343]">{location.city}</span>?
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-[#292622]/70">
                 Call today and transform your dream home with Divine Interior.
@@ -437,7 +483,7 @@ export default async function LocationPage({ params }) {
                   href={`tel:${PHONE}`}
                   className="group relative w-full overflow-hidden rounded-full bg-[#292622] px-9 py-4 text-sm font-semibold text-white shadow-xl shadow-[#292622]/30 transition duration-300 hover:-translate-y-0.5 sm:w-auto"
                 >
-                  <span className="absolute inset-0 -translate-x-full bg-[#C18A35] transition-transform duration-500 group-hover:translate-x-0" />
+                  <span className="absolute inset-0 -translate-x-full bg-[#dba343] transition-transform duration-500 group-hover:translate-x-0" />
                   <span className="relative transition-colors duration-300 group-hover:text-[#292622]">
                     Call Now
                   </span>

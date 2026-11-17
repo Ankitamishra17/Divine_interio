@@ -9,7 +9,7 @@ export default function Step1BHK({ formData, setFormData, next }) {
     <div className="w-full max-w-6xl mx-auto">
       {/* Heading */}
       <div className="text-center mb-8 md:mb-12">
-        <p className="uppercase tracking-[0.25em] text-[#C8972B] text-[10px] sm:text-xs mb-3">
+        <p className="uppercase tracking-[0.25em] text-[#dba343] text-[10px] sm:text-xs mb-3">
           Cost Calculator
         </p>
 
@@ -51,7 +51,7 @@ export default function Step1BHK({ formData, setFormData, next }) {
         <div className="mt-6 text-center">
           <span className="text-sm text-[#6E6258]">Selected:</span>
 
-          <span className="ml-2 font-semibold text-[#C8972B]">
+          <span className="ml-2 font-semibold text-[#dba343]">
             {formData.bhk}
           </span>
         </div>

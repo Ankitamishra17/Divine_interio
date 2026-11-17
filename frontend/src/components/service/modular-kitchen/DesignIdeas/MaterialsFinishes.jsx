@@ -70,7 +70,7 @@ const materials = [
 ];
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 function Dots({ value }) {
   return (
@@ -80,7 +80,7 @@ function Dots({ value }) {
           key={n}
           aria-hidden="true"
           className={`h-2 w-2 rounded-full ${
-            n <= value ? "bg-[#C8972B]" : "bg-white/20"
+            n <= value ? "bg-[#dba343]" : "bg-white/20"
           }`}
         />
       ))}
@@ -91,7 +91,7 @@ function Dots({ value }) {
 function Details({ item }) {
   return (
     <>
-      <span aria-hidden="true" className="mb-3 block h-0.5 w-8 bg-[#C8972B]" />
+      <span aria-hidden="true" className="mb-3 block h-0.5 w-8 bg-[#dba343]" />
       <h3 className="font-heading text-xl leading-snug text-white sm:text-2xl">
         {item.title}
       </h3>
@@ -99,7 +99,7 @@ function Details({ item }) {
 
       <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-white/15 pt-4">
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C8972B]">
+          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#dba343]">
             Durability
           </dt>
           <dd className="mt-1.5">
@@ -107,7 +107,7 @@ function Details({ item }) {
           </dd>
         </div>
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C8972B]">
+          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#dba343]">
             Upkeep
           </dt>
           <dd className="mt-1.5 text-[13px] font-medium text-white">
@@ -115,7 +115,7 @@ function Details({ item }) {
           </dd>
         </div>
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C8972B]">
+          <dt className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#dba343]">
             Best for
           </dt>
           <dd className="mt-1.5 text-[13px] font-medium leading-4 text-white">
@@ -183,8 +183,8 @@ export default function MaterialsFinishes() {
         {/* Header */}
         <div className="mb-10 flex flex-col gap-6 sm:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#C8972B]">
-              <span aria-hidden="true" className="h-px w-10 bg-[#C8972B]" />
+            <p className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#dba343]">
+              <span aria-hidden="true" className="h-px w-10 bg-[#dba343]" />
               Premium Collection
             </p>
             <h2
@@ -192,7 +192,7 @@ export default function MaterialsFinishes() {
               className="mt-4 font-heading text-4xl leading-[1.1] text-white sm:text-5xl lg:text-6xl"
             >
               Materials &amp; finishes
-              <span className="text-[#C8972B]">.</span>
+              <span className="text-[#dba343]">.</span>
             </h2>
           </div>
           <p className="max-w-md text-base leading-8 text-white/70">
@@ -299,7 +299,7 @@ export default function MaterialsFinishes() {
               >
                 <span
                   className={`relative block h-24 overflow-hidden rounded-2xl bg-stone-800 ring-2 transition-all duration-300 lg:h-28 ${
-                    isActive ? "ring-[#C8972B]" : "ring-transparent"
+                    isActive ? "ring-[#dba343]" : "ring-transparent"
                   }`}
                 >
                   <Image
@@ -314,7 +314,7 @@ export default function MaterialsFinishes() {
                   <span
                     aria-hidden="true"
                     className={`font-heading text-sm ${
-                      isActive ? "text-[#C8972B]" : "text-white/40"
+                      isActive ? "text-[#dba343]" : "text-white/40"
                     }`}
                   >
                     0{i + 1}
@@ -325,7 +325,7 @@ export default function MaterialsFinishes() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`mt-2 block h-0.5 bg-[#C8972B] transition-all duration-500 ${
+                  className={`mt-2 block h-0.5 bg-[#dba343] transition-all duration-500 ${
                     isActive ? "w-full" : "w-0"
                   }`}
                 />

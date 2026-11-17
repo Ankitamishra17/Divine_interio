@@ -69,7 +69,7 @@ const pad = (n) => String(n).padStart(2, "0");
 const START_INDEX = Math.floor(total / 2);
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C18A35]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 export default function TurnkeyProcess() {
   const [swiper, setSwiper] = useState(null);
@@ -158,16 +158,16 @@ export default function TurnkeyProcess() {
                   isActive
                     ? "border-[#593719] bg-[#593719] text-white shadow-md"
                     : isDone
-                    ? "border-[#C18A35]/50 bg-white text-[#593719] hover:border-[#C18A35]"
-                    : "border-[#E8DED0] bg-white text-[#593719]/75 hover:border-[#C18A35]"
+                    ? "border-[#dba343]/50 bg-white text-[#593719] hover:border-[#dba343]"
+                    : "border-[#E8DED0] bg-white text-[#593719]/75 hover:border-[#dba343]"
                 }`}
               >
                 <span
                   className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium transition-colors ${
                     isActive
-                      ? "bg-[#C18A35] text-[#292622]"
+                      ? "bg-[#dba343] text-[#292622]"
                       : isDone
-                      ? "bg-[#C18A35]/25 text-[#593719]"
+                      ? "bg-[#dba343]/25 text-[#593719]"
                       : "bg-[#F7F3ED] text-[#593719]/70"
                   }`}
                 >
@@ -235,7 +235,7 @@ export default function TurnkeyProcess() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#292622]/55 via-transparent to-transparent" />
 
-                    <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#C18A35] font-heading text-base text-[#292622] shadow-md">
+                    <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#dba343] font-heading text-base text-[#292622] shadow-md">
                       {index + 1}
                     </span>
                     <span className="absolute bottom-4 right-4 rounded-full bg-[#292622]/55 px-3 py-1 text-xs text-white backdrop-blur-sm">
@@ -263,7 +263,7 @@ export default function TurnkeyProcess() {
             type="button"
             aria-label="Previous step"
             onClick={() => swiper?.slidePrev()}
-            className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#E8DED0] bg-white text-[#593719] transition-colors hover:border-[#C18A35] hover:bg-[#C18A35] ${focusRing}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#E8DED0] bg-white text-[#593719] transition-colors hover:border-[#dba343] hover:bg-[#dba343] ${focusRing}`}
           >
             <ArrowLeft size={18} />
           </button>
@@ -279,7 +279,7 @@ export default function TurnkeyProcess() {
             <div className="h-[3px] w-full overflow-hidden rounded-full bg-[#E8DED0]">
               <div
                 ref={barRef}
-                className="h-full origin-left rounded-full bg-[#C18A35]"
+                className="h-full origin-left rounded-full bg-[#dba343]"
                 style={{ transform: "scaleX(0)" }}
               />
             </div>
@@ -289,7 +289,7 @@ export default function TurnkeyProcess() {
             type="button"
             aria-label="Next step"
             onClick={() => swiper?.slideNext()}
-            className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#E8DED0] bg-white text-[#593719] transition-colors hover:border-[#C18A35] hover:bg-[#C18A35] ${focusRing}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-full border border-[#E8DED0] bg-white text-[#593719] transition-colors hover:border-[#dba343] hover:bg-[#dba343] ${focusRing}`}
           >
             <ArrowRight size={18} />
           </button>

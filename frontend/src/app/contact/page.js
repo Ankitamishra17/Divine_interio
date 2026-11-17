@@ -4,18 +4,18 @@ import GoogleMap from "@/components/contact/GoogleMap";
 import FAQSection from "@/components/contact/FAQSection";
 
 export const metadata = {
-  title: "Contact Us | Living Space Decor - Interior Designers in Noida",
+  title: "Contact Us | Divine Interio - Interior Designers in Noida",
 
   description:
-    "Contact Living Space Decor for expert interior design services in Noida, Greater Noida, and Ghaziabad. Book a free consultation today.",
+    "Contact Divine Interio for expert interior design services in Noida, Greater Noida, and Ghaziabad. Book a free consultation today.",
   keywords: [
-    "Contact Living Space Decor",
+    "Contact Divine Interio",
     "Interior Designer Contact",
     "Interior Designer in Noida",
     "Interior Designer in Greater Noida",
     "Modular Kitchen Designer",
     "Wardrobe Design",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

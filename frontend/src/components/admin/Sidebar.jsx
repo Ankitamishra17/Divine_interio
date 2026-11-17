@@ -46,7 +46,7 @@ export default function Sidebar() {
       {/* Mobile/tablet top bar — sirf lg se neeche dikhega */}
       <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-[#1A0F08] text-[#F7F3ED] px-4 py-3 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <span className="w-[16px] h-px bg-[#C8972B] inline-block" />
+          <span className="w-[16px] h-px bg-[#dba343] inline-block" />
           <span className="font-display text-lg">Admin Panel</span>
         </div>
         <button
@@ -77,8 +77,8 @@ export default function Sidebar() {
       >
         <div className="mb-10 flex items-start justify-between">
           <div>
-            <p className="flex items-center gap-3 text-[10px] tracking-[0.35em] uppercase text-[#C8972B]/90 font-semibold mb-2.5">
-              <span className="w-[22px] h-px bg-[#C8972B] inline-block" />
+            <p className="flex items-center gap-3 text-[10px] tracking-[0.35em] uppercase text-[#dba343]/90 font-semibold mb-2.5">
+              <span className="w-[22px] h-px bg-[#dba343] inline-block" />
               Interior Decor
             </p>
             <h2 className="font-display text-2xl text-[#F7F3ED]">
@@ -109,12 +109,12 @@ export default function Sidebar() {
                 onClick={() => setOpen(false)}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] transition-colors ${
                   active
-                    ? "bg-[#C8972B]/12 text-[#C8972B]"
+                    ? "bg-[#dba343]/12 text-[#dba343]"
                     : "text-[#F7F3ED]/60 hover:bg-white/5 hover:text-[#F7F3ED]"
                 }`}
               >
                 {active && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-full bg-[#C8972B]" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-full bg-[#dba343]" />
                 )}
                 <Icon className="w-[15px] h-[15px] shrink-0" strokeWidth={2} />
                 {item.label}
@@ -125,8 +125,8 @@ export default function Sidebar() {
 
         <div className="border-t border-white/10 pt-4">
           <div className="flex items-center gap-2.5 mb-3.5">
-            <div className="w-8 h-8 rounded-full bg-[#C8972B]/15 border border-[#C8972B]/25 flex items-center justify-center shrink-0">
-              <span className="font-display text-[#C8972B] text-sm leading-none">
+            <div className="w-8 h-8 rounded-full bg-[#dba343]/15 border border-[#dba343]/25 flex items-center justify-center shrink-0">
+              <span className="font-display text-[#dba343] text-sm leading-none">
                 {initial}
               </span>
             </div>
@@ -141,7 +141,7 @@ export default function Sidebar() {
           </div>
           <button
             onClick={logout}
-            className="flex items-center gap-5 ml-2 mt-10 text-sm uppercase tracking-wide text-[#F7F3ED]/85 hover:text-[#C8972B] transition-colors"
+            className="flex items-center gap-5 ml-2 mt-10 text-sm uppercase tracking-wide text-[#F7F3ED]/85 hover:text-[#dba343] transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             Sign out
