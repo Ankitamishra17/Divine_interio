@@ -33,10 +33,10 @@
 
 
 export default async function Home() {
-  const { data: projects } = await getProjects({
-    page: 1,
-    limit: 5,
-  });
+  // const { data: projects } = await getProjects({
+  //   page: 1,
+  //   limit: 5,
+  // });
 
   return (
     <>
