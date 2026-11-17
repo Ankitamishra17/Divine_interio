@@ -13,9 +13,9 @@ import { Plus, Phone, MessageCircle } from "lucide-react";
   Also outputs FAQ structured data, which helps these answers show up in Google results.
 */
 
-const PHONE_DISPLAY = "+919876543210";
-const PHONE_TEL = "tel:+919876543210";
-const WHATSAPP_URL = "https://wa.me/919876543210";
+const PHONE_DISPLAY = "+919911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 
 const faqs = [
   {

@@ -137,9 +137,9 @@ I highly recommend Living Space Decor to anyone looking for professional home in
 ];
 
 const EASE = [0.22, 1, 0.36, 1];
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "+918826606869";
-const WHATSAPP = "918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "+919911066420";
+const WHATSAPP = "919911066420";
 
 const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 const firstSentence = (s) => {

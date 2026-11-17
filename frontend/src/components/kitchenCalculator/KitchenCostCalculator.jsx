@@ -28,9 +28,9 @@ import { kitchenShapes, packages } from "@/data/kitchenCalculatorData";
   onRestart() ("Calculate another kitchen") resets everything without reloading the page.
 */
 
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "tel:+918826606869";
-const WHATSAPP_URL = "https://wa.me/918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 
 const STEPS = [
   { id: 1, label: "Size", title: "How big is your kitchen?" },

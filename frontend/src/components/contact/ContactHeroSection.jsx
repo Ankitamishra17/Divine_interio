@@ -5,9 +5,9 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Phone, MapPin, Clock, MessageCircle, ArrowDown } from "lucide-react";
 
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "tel:+918826606869";
-const WHATSAPP_URL = "https://wa.me/918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 
 // Add id="contact-form" to your form section so this button scrolls to it
 const FORM_ANCHOR = "#contact-form";

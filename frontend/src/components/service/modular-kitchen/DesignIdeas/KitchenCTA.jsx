@@ -54,7 +54,7 @@ export default function KitchenCTA() {
             </Link>
 
             <a
-              href="tel:+918826606869"
+              href="tel:+919911066420"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-8 py-3 text-white font-medium backdrop-blur-sm transition hover:bg-white/10"
             >
               <Phone size={18} />

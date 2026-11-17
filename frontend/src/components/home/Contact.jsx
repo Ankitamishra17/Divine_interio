@@ -17,9 +17,9 @@ import { AlertCircle, ArrowRight, Check, MapPin, MessageCircle, Phone, Send } fr
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 const CONTACT_ENDPOINT = `${API_URL}/contact`;
 
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "+918826606869";
-const WHATSAPP = "918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "+919911066420";
+const WHATSAPP = "919911066420";
 const WHATSAPP_TEXT = "Hi, I’d like to talk about a home interior project.";
 
 const ROOMS = ["Living room", "Modular kitchen", "Bedroom", "Bathroom", "Dining room", "Full home", "Architecture"];
