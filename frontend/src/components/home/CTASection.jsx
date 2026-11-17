@@ -70,7 +70,7 @@ export default function CTABanner() {
             aria-hidden="true"
             className="absolute inset-0 -z-10 h-full w-full object-cover"
           >
-            <source src="/bg_video.mp4" type="video/mp4" />
+            <source src="/bg_consult_video.mp4" type="video/mp4" />
           </video>
 
           {/* Bottom-heavy scrim keeps the headline readable on any frame */}
