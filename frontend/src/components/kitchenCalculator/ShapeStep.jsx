@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { kitchenShapes } from "@/data/kitchenCalculatorData";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
   - Title, step count and Back live in KitchenCostCalculator now.
   - Layouts are real radio buttons. The preview shows the selected layout (or the first one until you choose).
   - Removed: rainbow icon colours, the endlessly spinning icon, and "Scroll down to see action buttons".
@@ -62,7 +62,7 @@ export default function ShapeStep({ selected, onSelect, onNext }) {
               return (
                 <label key={shape.id} className="relative block">
                   <input type="radio" name="shape" value={shape.id} checked={on} onChange={() => onSelect(shape.id)} className="peer sr-only" />
-                  <span className="flex cursor-pointer items-start gap-4 rounded-sm border border-[#292622]/20 bg-[#F7F3ED] p-5 transition-colors duration-300 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:bg-white peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#C18A35] peer-focus-visible:ring-offset-2">
+                  <span className="flex cursor-pointer items-start gap-4 rounded-sm border border-[#292622]/20 bg-[#F7F3ED] p-5 transition-colors duration-300 hover:border-[#593719] peer-checked:border-[#593719] peer-checked:bg-white peer-checked:ring-1 peer-checked:ring-[#593719] peer-focus-visible:ring-2 peer-focus-visible:ring-[#dba343] peer-focus-visible:ring-offset-2">
                     <span
                       aria-hidden="true"
                       className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${on ? "border-[#593719] bg-[#593719] text-[#F7F3ED]" : "border-[#292622]/30 bg-white"}`}
@@ -87,7 +87,7 @@ export default function ShapeStep({ selected, onSelect, onNext }) {
           onClick={onNext}
           disabled={!selected}
           aria-describedby={!selected ? "shape-hint" : undefined}
-          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
+          className="font-body group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-xs font-medium uppercase tracking-[0.18em] text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#E8DED0] disabled:text-[#292622]/50 sm:w-auto"
         >
           Continue
           <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />

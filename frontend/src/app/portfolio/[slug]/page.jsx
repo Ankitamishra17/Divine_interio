@@ -2,8 +2,6 @@ import { notFound } from "next/navigation";
 import { getProject } from "@/lib/serverApi";
 import ProjectDetail from "@/components/ProjectDetail";
 
-
-
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
@@ -11,14 +9,14 @@ export async function generateMetadata({ params }) {
     const { data: project } = await getProject(slug);
 
     return {
-      title: `${project.name} | Living Space Decor`,
+      title: `${project.name} | Divine Interio`,
       description: project.description,
 
       keywords: [
         project.name,
         "Interior Design Portfolio",
         "Home Interior",
-        "Living Space Decor",
+        "Divine Interio",
         "Interior Designer",
       ],
 
@@ -33,9 +31,9 @@ export async function generateMetadata({ params }) {
     };
   } catch {
     return {
-      title: "Portfolio | Living Space Decor",
+      title: "Portfolio | Divine Interio",
       description:
-        "Explore our portfolio of premium interior design and home decor projects by Living Space Decor.",
+        "Explore our portfolio of premium interior design and home decor projects by Divine Interio.",
 
       robots: {
         index: false,

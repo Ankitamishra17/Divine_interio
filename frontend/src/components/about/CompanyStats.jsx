@@ -106,8 +106,8 @@ export default function CompanyStats() {
     <section className="relative overflow-hidden bg-[#F7F3ED] px-6 py-16 sm:px-10 lg:py-20">
 
       {/* Decorative background */}
-      <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full border border-[#C18A35]/10" />
-      <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full border border-[#C18A35]/10" />
+      <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full border border-[#dba343]/10" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full border border-[#dba343]/10" />
 
       <div className="relative mx-auto max-w-[1440px]">
 
@@ -120,18 +120,18 @@ export default function CompanyStats() {
           className="mb-12 text-center"
         >
           <div className="mb-4 flex items-center justify-center gap-4">
-            <span className="h-px w-10 bg-[#C18A35]" />
+            <span className="h-px w-10 bg-[#dba343]" />
 
-            <span className="font-[family-name:var(--font-body)] text-xs font-semibold uppercase tracking-[0.3em] text-[#C18A35]">
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold uppercase tracking-[0.3em] text-[#dba343]">
               Our Achievements
             </span>
 
-            <span className="h-px w-10 bg-[#C18A35]" />
+            <span className="h-px w-10 bg-[#dba343]" />
           </div>
 
           <h2 className="font-[family-name:var(--font-heading)] text-4xl text-[#593719] sm:text-5xl">
             Numbers That Reflect
-            <span className=" text-[#C18A35]">
+            <span className=" text-[#dba343]">
               {" "}Our Journey
             </span>
           </h2>
@@ -149,7 +149,7 @@ export default function CompanyStats() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#C18A35]/15 bg-white/70 shadow-[0_12px_45px_rgba(89,55,25,0.06)] sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dba343]/15 bg-white/70 shadow-[0_12px_45px_rgba(89,55,25,0.06)] sm:grid-cols-2 lg:grid-cols-4"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -160,24 +160,24 @@ export default function CompanyStats() {
                 variants={itemVariants}
                 className={`group relative flex flex-col items-center px-6 py-10 text-center transition-colors duration-300 hover:bg-[#E8DED0]/40 lg:py-12 ${
                   index !== stats.length - 1
-                    ? "lg:border-r lg:border-[#C18A35]/20"
+                    ? "lg:border-r lg:border-[#dba343]/20"
                     : ""
                 } ${
                   index % 2 === 0
-                    ? "sm:border-r sm:border-[#C18A35]/20 lg:border-r"
+                    ? "sm:border-r sm:border-[#dba343]/20 lg:border-r"
                     : "sm:border-r-0"
                 } ${
                   index < 2
-                    ? "border-b border-[#C18A35]/20 lg:border-b-0"
+                    ? "border-b border-[#dba343]/20 lg:border-b-0"
                     : ""
                 }`}
               >
                 {/* Icon */}
-                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#C18A35]/25 bg-[#F7F3ED] transition-all duration-500 group-hover:-translate-y-1 group-hover:bg-[#593719]">
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#dba343]/25 bg-[#F7F3ED] transition-all duration-500 group-hover:-translate-y-1 group-hover:bg-[#593719]">
                   <Icon
                     size={28}
                     strokeWidth={1.4}
-                    className="text-[#C18A35] transition-colors duration-300 group-hover:text-[#E8DED0]"
+                    className="text-[#dba343] transition-colors duration-300 group-hover:text-[#E8DED0]"
                   />
                 </div>
 
@@ -200,7 +200,7 @@ export default function CompanyStats() {
                 </p>
 
                 {/* Bottom accent */}
-                <span className="mt-6 h-[2px] w-8 bg-[#C18A35] transition-all duration-500 group-hover:w-16" />
+                <span className="mt-6 h-[2px] w-8 bg-[#dba343] transition-all duration-500 group-hover:w-16" />
               </motion.div>
             );
           })}

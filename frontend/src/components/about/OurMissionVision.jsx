@@ -68,7 +68,7 @@ export default function OurMissionVision() {
       <div className="mx-auto max-w-[1440px]">
         {/* Heading */}
         <div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-          <p className="mb-4 font-[family-name:var(--font-body)] text-sm font-semibold text-[#C18A35]">
+          <p className="mb-4 font-[family-name:var(--font-body)] text-sm font-semibold text-[#dba343]">
             What drives us
           </p>
 
@@ -108,7 +108,7 @@ export default function OurMissionVision() {
                   aria-controls={`panel-${item.id}`}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveIndex(index)}
-                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C18A35] sm:flex-none sm:px-8 ${
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343] sm:flex-none sm:px-8 ${
                     isActive
                       ? "bg-[#593719] text-white shadow-sm"
                       : "text-[#593719]/70 hover:text-[#593719]"
@@ -175,7 +175,7 @@ export default function OurMissionVision() {
                   aria-labelledby={`tab-${item.id}`}
                   aria-hidden={!isActive}
                   tabIndex={isActive ? 0 : -1}
-                  className={`col-start-1 row-start-1 transition-all duration-500 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C18A35] motion-reduce:transition-none ${
+                  className={`col-start-1 row-start-1 transition-all duration-500 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#dba343] motion-reduce:transition-none ${
                     isActive
                       ? "visible translate-y-0 opacity-100"
                       : "invisible translate-y-3 opacity-0"
@@ -195,7 +195,7 @@ export default function OurMissionVision() {
                         key={point}
                         className="flex items-start gap-3 font-[family-name:var(--font-body)] text-base text-[#292622]"
                       >
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#C18A35]/15 text-[#8A5F1F]">
+                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#dba343]/15 text-[#8A5F1F]">
                           <Check size={14} strokeWidth={2.4} aria-hidden="true" />
                         </span>
                         {point}

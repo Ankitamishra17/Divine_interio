@@ -1,5 +1,3 @@
-
-
 import Hero from "@/components/service/furnitures/HeroSection";
 import Categories from "@/components/service/furnitures/Categories";
 import FurnitureTypes from "@/components/service/furnitures/FurnitureTypes";
@@ -7,10 +5,10 @@ import FAQSection from "@/components/service/furnitures/FAQSection";
 import MaterialTypes from "@/components/service/furnitures/MaterialTypes";
 
 export const metadata = {
-  title: "Custom Furniture Design Services | Living Space Decor",
+  title: "Custom Furniture Design Services | Divine Interio",
 
-description:
-  "Discover custom furniture design services by Living Space Decor. Explore sofas, beds, wardrobes, dining tables, and storage solutions in Noida and Greater Noida.",
+  description:
+    "Discover custom furniture design services by Divine Interio. Explore sofas, beds, wardrobes, dining tables, and storage solutions in Noida and Greater Noida.",
   keywords: [
     "Custom Furniture",
     "Furniture Design",
@@ -20,7 +18,7 @@ description:
     "Wardrobe Design",
     "Dining Table Design",
     "Furniture in Noida",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {
@@ -33,15 +31,14 @@ description:
   },
 };
 
-
 export default function InteriorPage() {
   return (
     <>
-      <Hero/>
-      <Categories/>
-      <FurnitureTypes/>
-      <MaterialTypes/>
-      <FAQSection/>
+      <Hero />
+      <Categories />
+      <FurnitureTypes />
+      <MaterialTypes />
+      <FAQSection />
     </>
   );
 }

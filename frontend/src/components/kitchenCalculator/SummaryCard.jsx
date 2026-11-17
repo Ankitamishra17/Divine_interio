@@ -2,20 +2,20 @@
 
 // export default function SummaryCard({ data }) {
 //   return (
-//     <div className="bg-[#F7F3ED] border border-[#C8972B]/20 rounded-3xl p-6 shadow-sm">
+//     <div className="bg-[#F7F3ED] border border-[#dba343]/20 rounded-3xl p-6 shadow-sm">
 //       <div className="flex items-center justify-between mb-5">
 //         <h3 className="text-xl font-bold text-[#3D1F0D]">
 //           Kitchen Summary
 //         </h3>
 
-//         <span className="bg-[#C8972B] text-white px-3 py-1 rounded-full text-xs font-medium">
+//         <span className="bg-[#dba343] text-white px-3 py-1 rounded-full text-xs font-medium">
 //           Selected
 //         </span>
 //       </div>
 
 //       <div className="space-y-4">
 //         {/* Dimension */}
-//         <div className="flex justify-between items-center pb-3 border-b border-[#C8972B]/10">
+//         <div className="flex justify-between items-center pb-3 border-b border-[#dba343]/10">
 //           <span className="text-gray-500">
 //             Kitchen Dimension
 //           </span>
@@ -26,7 +26,7 @@
 //         </div>
 
 //         {/* Shape */}
-//         <div className="flex justify-between items-center pb-3 border-b border-[#C8972B]/10">
+//         <div className="flex justify-between items-center pb-3 border-b border-[#dba343]/10">
 //           <span className="text-gray-500">
 //             Kitchen Shape
 //           </span>
@@ -104,18 +104,18 @@ export default function SummaryCard({ data }) {
     >
       {/* Gradient background effect */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#C8972B] rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#C8972B] rounded-full blur-3xl opacity-20" />
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#dba343] rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#dba343] rounded-full blur-3xl opacity-20" />
       </div>
 
       {/* Card */}
-      <div className="relative bg-gradient-to-br from-[#F7F3ED] to-[#F7F3ED]/70 border-2 border-[#C8972B]/20 rounded-3xl p-6 md:p-8 shadow-lg shadow-[#C8972B]/10 backdrop-blur-sm">
+      <div className="relative bg-gradient-to-br from-[#F7F3ED] to-[#F7F3ED]/70 border-2 border-[#dba343]/20 rounded-3xl p-6 md:p-8 shadow-lg shadow-[#dba343]/10 backdrop-blur-sm">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="flex items-center justify-between mb-8 pb-6 border-b-2 border-[#C8972B]/15"
+          className="flex items-center justify-between mb-8 pb-6 border-b-2 border-[#dba343]/15"
         >
           <div className="flex items-center gap-3">
             <motion.div
@@ -125,7 +125,7 @@ export default function SummaryCard({ data }) {
                 repeat: Infinity,
                 repeatType: "loop",
               }}
-              className="p-2.5 rounded-xl bg-gradient-to-br from-[#C8972B] to-[#B8851F]"
+              className="p-2.5 rounded-xl bg-gradient-to-br from-[#dba343] to-[#B8851F]"
             >
               <CheckCircle2 size={24} className="text-white" />
             </motion.div>
@@ -174,7 +174,7 @@ export default function SummaryCard({ data }) {
                 transition={{ delay: 0.2 + idx * 0.1 }}
                 className="group relative"
               >
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#C8972B]/10 hover:border-[#C8972B]/30 transition-all duration-300 hover:shadow-md hover:shadow-[#C8972B]/10">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#dba343]/10 hover:border-[#dba343]/30 transition-all duration-300 hover:shadow-md hover:shadow-[#dba343]/10">
                   {/* Icon */}
                   <motion.div
                     animate={hasValue ? { scale: [1, 1.1, 1] } : {}}
@@ -300,7 +300,7 @@ export default function SummaryCard({ data }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-6 pt-6 border-t-2 border-[#C8972B]/15"
+            className="mt-6 pt-6 border-t-2 border-[#dba343]/15"
           >
             <div className="flex gap-2">
               {summaryItems.map((item, idx) => {
@@ -317,7 +317,7 @@ export default function SummaryCard({ data }) {
                     }}
                     className={`h-1.5 flex-1 rounded-full origin-left ${
                       hasValue
-                        ? "bg-gradient-to-r from-[#C8972B] to-[#B8851F]"
+                        ? "bg-gradient-to-r from-[#dba343] to-[#B8851F]"
                         : "bg-gray-300"
                     }`}
                   />
@@ -341,7 +341,7 @@ export default function SummaryCard({ data }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ delay: 0.6 }}
-              className="mt-6 pt-6 border-t-2 border-[#C8972B]/15"
+              className="mt-6 pt-6 border-t-2 border-[#dba343]/15"
             >
               <div className="flex items-center gap-2 text-sm text-[#3D1F0D] font-semibold">
                 <span>Ready to proceed?</span>

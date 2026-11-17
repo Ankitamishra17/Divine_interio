@@ -15,7 +15,7 @@ export default function ProgressBar({ step }) {
         {/* Line */}
         <div className="absolute top-5 left-0 w-full h-1 bg-[#F7F3ED] rounded-full">
           <div
-            className="h-full bg-[#C8972B] rounded-full transition-all duration-500"
+            className="h-full bg-[#dba343] rounded-full transition-all duration-500"
             style={{
               width: `${((step - 1) / (steps.length - 1)) * 100}%`,
             }}
@@ -35,7 +35,7 @@ export default function ProgressBar({ step }) {
                   
                   ${
                     step >= currentStep
-                      ? "bg-[#C8972B] text-white"
+                      ? "bg-[#dba343] text-white"
                       : "bg-white border-2 border-[#E5E5E5] text-gray-500"
                   }
                 `}

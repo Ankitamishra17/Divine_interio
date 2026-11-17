@@ -42,7 +42,7 @@ const total = projects.length;
 const pad = (n) => String(n).padStart(2, "0");
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 // Shortest distance between two positions in a looping list
 const loopDistance = (a, b) =>
@@ -142,7 +142,7 @@ export default function ProjectGallery() {
             {/* Full-screen hint */}
             <span
               aria-hidden="true"
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/50 bg-[#1E0F06]/40 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-[#C8972B] group-hover:bg-[#C8972B] group-hover:text-[#3D1F0D] sm:right-6 sm:top-6"
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/50 bg-[#1E0F06]/40 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-[#dba343] group-hover:bg-[#dba343] group-hover:text-[#3D1F0D] sm:right-6 sm:top-6"
             >
               <Maximize2 size={18} />
             </span>
@@ -179,7 +179,7 @@ export default function ProjectGallery() {
                     {/* Gold bar marks the selected project */}
                     <span
                       aria-hidden="true"
-                      className={`absolute left-0 top-0 h-full w-[3px] origin-top bg-[#C8972B] transition-transform duration-300 motion-reduce:transition-none ${
+                      className={`absolute left-0 top-0 h-full w-[3px] origin-top bg-[#dba343] transition-transform duration-300 motion-reduce:transition-none ${
                         isActive ? "scale-y-100" : "scale-y-0"
                       }`}
                     />
@@ -229,7 +229,7 @@ export default function ProjectGallery() {
           </p>
           <Link
             href="/contact"
-            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
+            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
           >
             Start your project
             <ArrowRight
@@ -269,7 +269,7 @@ export default function ProjectGallery() {
                 type="button"
                 aria-label="Close viewer"
                 onClick={() => setViewerOpen(false)}
-                className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
+                className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
               >
                 <X size={20} />
               </button>
@@ -311,7 +311,7 @@ export default function ProjectGallery() {
                 type="button"
                 aria-label="Previous project"
                 onClick={() => step(-1)}
-                className={`absolute left-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#1E0F06]/50 backdrop-blur-sm transition-colors hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
+                className={`absolute left-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#1E0F06]/50 backdrop-blur-sm transition-colors hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
               >
                 <ArrowLeft size={20} />
               </button>
@@ -319,7 +319,7 @@ export default function ProjectGallery() {
                 type="button"
                 aria-label="Next project"
                 onClick={() => step(1)}
-                className={`absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#1E0F06]/50 backdrop-blur-sm transition-colors hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
+                className={`absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#1E0F06]/50 backdrop-blur-sm transition-colors hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
               >
                 <ArrowRight size={20} />
               </button>

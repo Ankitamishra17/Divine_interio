@@ -26,7 +26,7 @@ export default function FinishStep({
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#C18A35]/40 bg-[#C18A35]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
+        <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#dba343]/40 bg-[#dba343]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
           Step {CURRENT_STEP} of {TOTAL_STEPS}
         </span>
 
@@ -36,7 +36,7 @@ export default function FinishStep({
             <span
               key={i}
               className={`h-1 flex-1 rounded-full ${
-                i < CURRENT_STEP ? "bg-[#C18A35]" : "bg-[#E8DED0]"
+                i < CURRENT_STEP ? "bg-[#dba343]" : "bg-[#E8DED0]"
               }`}
             />
           ))}
@@ -74,7 +74,7 @@ export default function FinishStep({
 
               ${
                 selected
-                  ? "border-[#C18A35] ring-2 ring-[#C18A35]/30"
+                  ? "border-[#dba343] ring-2 ring-[#dba343]/30"
                   : "border-[#E8DED0]"
               }
               `}
@@ -91,7 +91,7 @@ export default function FinishStep({
                 <div className="absolute inset-0 bg-gradient-to-t from-[#292622]/70 via-[#292622]/10 to-transparent" />
 
                 {selected && (
-                  <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#C18A35] shadow-lg">
+                  <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#dba343] shadow-lg">
                     <Check size={16} className="text-[#FFFFFF]" />
                   </span>
                 )}
@@ -108,7 +108,7 @@ export default function FinishStep({
                 </p>
 
                 <div className="flex items-center justify-between border-t border-[#E8DED0] pt-4">
-                  <span className="font-body text-sm font-medium text-[#C18A35]">
+                  <span className="font-body text-sm font-medium text-[#dba343]">
                     Select Finish
                   </span>
 
@@ -141,7 +141,7 @@ export default function FinishStep({
 
           ${
             formData.finish
-              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#C18A35]"
+              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#dba343]"
               : "bg-[#E8DED0] text-[#292622]/40 cursor-not-allowed"
           }
           `}

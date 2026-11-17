@@ -89,7 +89,7 @@ export default function DesignGallery({ data }) {
   if (!count) return null;
 
   const navBtn =
-    "absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F]";
+    "absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F]";
 
   return (
     <section className="overflow-hidden bg-[#292622] py-16 md:py-24">
@@ -107,7 +107,7 @@ export default function DesignGallery({ data }) {
 
           <Link
             href={buttonLink}
-            className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#B8851F] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#C8972B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8972B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#3D1F0D]"
+            className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-md bg-[#B8851F] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#3D1F0D]"
           >
             {buttonText}
             <ArrowRight
@@ -132,7 +132,7 @@ export default function DesignGallery({ data }) {
                     setActive(index);
                   }}
                   aria-label={`View ${item.title || "design"} larger`}
-                  className="group relative block h-full w-full overflow-hidden rounded-2xl bg-[#2c1608] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8972B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#3D1F0D]"
+                  className="group relative block h-full w-full overflow-hidden rounded-2xl bg-[#2c1608] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#3D1F0D]"
                 >
                   <Image
                     src={item.src}

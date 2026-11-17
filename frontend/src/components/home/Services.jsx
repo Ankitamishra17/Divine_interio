@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   Design idea: every service is a DOORWAY. Arch-shaped photo frames (a double gold
@@ -70,7 +70,7 @@ const services = [
 // Ruler tick marks (small tick every 12px, tall tick every 60px), drawn in pure CSS
 const rulerStyle = {
   backgroundImage:
-    "repeating-linear-gradient(90deg,#C18A35 0 1px,transparent 1px 12px), repeating-linear-gradient(90deg,#C18A35 0 1px,transparent 1px 60px)",
+    "repeating-linear-gradient(90deg,#dba343 0 1px,transparent 1px 12px), repeating-linear-gradient(90deg,#dba343 0 1px,transparent 1px 60px)",
   backgroundSize: "100% 8px, 100% 18px",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "top left",
@@ -116,7 +116,7 @@ export default function ServicesSection() {
             </p>
             <Link
               href="/services/design-ideas"
-              className="group/all mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#C18A35] transition-colors hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+              className="group/all mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#dba343] transition-colors hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
             >
               Browse all design ideas
               <ArrowRight size={16} className="transition-transform duration-300 group-hover/all:translate-x-1" />
@@ -141,7 +141,7 @@ export default function ServicesSection() {
                 className="group block focus-visible:outline-none"
               >
                 {/* outer arch = thin gold frame; inner arch = the photo */}
-                <div className="rounded-t-[999px] border border-[#C18A35]/35 p-1.5 transition-colors duration-500 group-hover:border-[#C18A35] group-focus-visible:border-[#C18A35] group-focus-visible:ring-2 group-focus-visible:ring-[#C18A35] sm:p-2">
+                <div className="rounded-t-[999px] border border-[#dba343]/35 p-1.5 transition-colors duration-500 group-hover:border-[#dba343] group-focus-visible:border-[#dba343] group-focus-visible:ring-2 group-focus-visible:ring-[#dba343] sm:p-2">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-t-[999px] bg-[#593719]">
                     <Image
                       src={service.image}
@@ -156,13 +156,13 @@ export default function ServicesSection() {
                 </div>
 
                 <div className="mt-5 px-1 text-center">
-                  <h3 className="font-heading text-xl text-[#F7F3ED] transition-colors duration-300 group-hover:text-[#C18A35] sm:text-2xl">
+                  <h3 className="font-heading text-xl text-[#F7F3ED] transition-colors duration-300 group-hover:text-[#dba343] sm:text-2xl">
                     {service.title}
                   </h3>
                   <p className="mx-auto mt-2 line-clamp-2 hidden max-w-[260px] text-[13px] leading-relaxed text-[#F7F3ED]/65 sm:block">
                     {service.description}
                   </p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#C18A35]">
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#dba343]">
                     View designs
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1.5" />
                   </span>
@@ -180,7 +180,7 @@ export default function ServicesSection() {
           </p>
           <Link
             href="/contact"
-            className="mt-7 inline-flex items-center gap-2 rounded-sm bg-[#C18A35] px-8 py-4 text-sm font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+            className="mt-7 inline-flex items-center gap-2 rounded-sm bg-[#dba343] px-8 py-4 text-sm font-semibold tracking-wide text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
           >
             Book a free consultation
           </Link>

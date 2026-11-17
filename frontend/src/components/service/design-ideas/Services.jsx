@@ -65,7 +65,7 @@ const services = [
 ];
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 const arrowBtn = `flex h-12 w-12 items-center justify-center rounded-full border border-[#593719]/30 text-[#593719] transition-colors duration-300 hover:bg-[#593719] hover:text-white disabled:pointer-events-none disabled:opacity-30 ${focusRing}`;
 
@@ -172,7 +172,7 @@ export default function Services() {
 
             {/* Final card: the next step, so the row ends with an action */}
             <li className="flex aspect-[3/4] w-[78%] shrink-0 snap-start flex-col justify-between rounded-2xl bg-[#593719] p-6 text-white sm:w-[44%] lg:w-[31%] xl:w-[24%]">
-              <span aria-hidden="true" className="block h-0.5 w-8 bg-[#C8972B]" />
+              <span aria-hidden="true" className="block h-0.5 w-8 bg-[#dba343]" />
               <div>
                 <p className="font-heading text-3xl leading-snug">
                   Not sure which service you need?
@@ -183,7 +183,7 @@ export default function Services() {
                 </p>
                 <Link
                   href="/contact"
-                  className={`group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#C8972B] px-7 text-[15px] font-semibold text-stone-950 transition-colors duration-300 hover:bg-white ${focusRing}`}
+                  className={`group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#dba343] px-7 text-[15px] font-semibold text-stone-950 transition-colors duration-300 hover:bg-white ${focusRing}`}
                 >
                   Book a free consultation
                   <ArrowRight

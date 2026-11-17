@@ -20,7 +20,7 @@ export default function FAQ({ data }) {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
         {/* Heading */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[0.3em] text-[#C8972B] text-xs mb-4">
+          <p className="uppercase tracking-[0.3em] text-[#dba343] text-xs mb-4">
             Frequently Asked Questions
           </p>
 
@@ -28,7 +28,7 @@ export default function FAQ({ data }) {
             Everything You Need To Know
           </h2>
 
-          <div className="w-12 h-px bg-[#C8972B] mx-auto mt-6" />
+          <div className="w-12 h-px bg-[#dba343] mx-auto mt-6" />
         </div>
 
         {/* FAQ Grid */}
@@ -76,18 +76,18 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
   const isOpen = openIndex === index;
 
   return (
-    <div className="border border-[#C8972B]/15 bg-white overflow-hidden group hover:border-[#C8972B]/40 transition-all duration-300">
+    <div className="border border-[#dba343]/15 bg-white overflow-hidden group hover:border-[#dba343]/40 transition-all duration-300">
       <button
         onClick={() => toggleFAQ(index)}
         className="w-full flex items-start justify-between p-5 md:p-6 text-left gap-4"
       >
         {/* Number + Question */}
         <div className="flex items-start gap-4 flex-1">
-          <span className="text-[#C8972B]/40 text-xs tracking-[0.2em] font-light mt-1">
+          <span className="text-[#dba343]/40 text-xs tracking-[0.2em] font-light mt-1">
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <span className="font-medium text-[#2A1506] text-[12px] md:text-sm leading-snug group-hover:text-[#C8972B] transition-colors">
+          <span className="font-medium text-[#2A1506] text-[12px] md:text-sm leading-snug group-hover:text-[#dba343] transition-colors">
             {faq.question}
           </span>
         </div>
@@ -96,14 +96,14 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
         <div
           className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
             isOpen
-              ? "bg-[#C8972B] border-[#C8972B]"
-              : "border-[#C8972B]/30"
+              ? "bg-[#dba343] border-[#dba343]"
+              : "border-[#dba343]/30"
           }`}
         >
           {isOpen ? (
             <Minus size={14} className="text-white" />
           ) : (
-            <Plus size={14} className="text-[#C8972B]" />
+            <Plus size={14} className="text-[#dba343]" />
           )}
         </div>
       </button>
@@ -114,7 +114,7 @@ function FAQItem({ faq, index, openIndex, toggleFAQ }) {
           isOpen ? "max-h-60" : "max-h-0"
         }`}
       >
-        <div className="px-6 pb-6 pl-14 text-[#6E6258] text-sm leading-7 border-t border-[#C8972B]/10 pt-4">
+        <div className="px-6 pb-6 pl-14 text-[#6E6258] text-sm leading-7 border-t border-[#dba343]/10 pt-4">
           {faq.answer}
         </div>
       </div>

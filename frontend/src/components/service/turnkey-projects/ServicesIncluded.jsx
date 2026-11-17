@@ -54,7 +54,7 @@ export default function TurnkeyBenefits() {
                 {!isLast && (
                   <span
                     aria-hidden="true"
-                    className="absolute left-8 top-16 -ml-px h-[calc(100%-4rem)] border-l-2 border-dashed border-[#C18A35]/60 md:left-1/2 md:top-8 md:ml-0 md:h-0 md:w-full md:border-l-0 md:border-t-2"
+                    className="absolute left-8 top-16 -ml-px h-[calc(100%-4rem)] border-l-2 border-dashed border-[#dba343]/60 md:left-1/2 md:top-8 md:ml-0 md:h-0 md:w-full md:border-l-0 md:border-t-2"
                   />
                 )}
 
@@ -62,8 +62,8 @@ export default function TurnkeyBenefits() {
                 <span
                   className={`relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full ring-8 ring-[#F7F3ED] ${
                     isLast
-                      ? "bg-[#C18A35] text-[#292622]"
-                      : "bg-[#593719] text-[#C18A35]"
+                      ? "bg-[#dba343] text-[#292622]"
+                      : "bg-[#593719] text-[#dba343]"
                   }`}
                 >
                   <Icon size={26} strokeWidth={1.5} />
@@ -90,7 +90,7 @@ export default function TurnkeyBenefits() {
         <div className="mt-14 flex justify-center lg:mt-20">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#593719] px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-[#292622] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C18A35]"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#593719] px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-[#292622] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#dba343]"
           >
             Book free consultation
             <ArrowRight

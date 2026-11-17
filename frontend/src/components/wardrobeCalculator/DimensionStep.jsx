@@ -18,8 +18,8 @@ function WardrobeIllustration({ index, selected }) {
   const y = 30;
   const panelW = W / panels;
 
-  const stroke = selected ? "#C18A35" : "#593719";
-  const dim = "#C18A35";
+  const stroke = selected ? "#dba343" : "#593719";
+  const dim = "#dba343";
 
   return (
     <svg
@@ -96,7 +96,7 @@ function WardrobeIllustration({ index, selected }) {
         y1={y + H + 6}
         x2="130"
         y2={y + H + 6}
-        stroke={selected ? "#C18A35" : "#E8DED0"}
+        stroke={selected ? "#dba343" : "#E8DED0"}
         strokeWidth="1.5"
         strokeOpacity={selected ? 0.5 : 1}
       />
@@ -120,7 +120,7 @@ export default function DimensionStep({
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#C18A35]/40 bg-[#C18A35]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
+        <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#dba343]/40 bg-[#dba343]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
           Step {CURRENT_STEP} of {TOTAL_STEPS}
         </span>
 
@@ -130,7 +130,7 @@ export default function DimensionStep({
             <span
               key={i}
               className={`h-1 flex-1 rounded-full ${
-                i < CURRENT_STEP ? "bg-[#C18A35]" : "bg-[#E8DED0]"
+                i < CURRENT_STEP ? "bg-[#dba343]" : "bg-[#E8DED0]"
               }`}
             />
           ))}
@@ -171,12 +171,12 @@ export default function DimensionStep({
                   dimension: size,
                 })
               }
-              className={`font-body group relative overflow-hidden rounded-3xl border text-left transition-all duration-300 hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]
+              className={`font-body group relative overflow-hidden rounded-3xl border text-left transition-all duration-300 hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]
 
               ${
                 selected
                   ? "bg-[#593719] border-[#593719] shadow-2xl shadow-[#593719]/25"
-                  : "bg-[#FFFFFF] border-[#E8DED0] hover:border-[#C18A35] hover:shadow-xl"
+                  : "bg-[#FFFFFF] border-[#E8DED0] hover:border-[#dba343] hover:shadow-xl"
               }
               `}
             >
@@ -220,7 +220,7 @@ export default function DimensionStep({
                   <span
                     className={`font-body text-xs font-medium uppercase tracking-[0.15em]
 
-                    ${selected ? "text-[#C18A35]" : "text-[#292622]/50"}
+                    ${selected ? "text-[#dba343]" : "text-[#292622]/50"}
                     `}
                   >
                     {selected ? "Selected" : "Select"}
@@ -231,8 +231,8 @@ export default function DimensionStep({
 
                     ${
                       selected
-                        ? "border-[#C18A35] bg-[#C18A35]"
-                        : "border-[#E8DED0] group-hover:border-[#C18A35]"
+                        ? "border-[#dba343] bg-[#dba343]"
+                        : "border-[#E8DED0] group-hover:border-[#dba343]"
                     }
                     `}
                   >
@@ -249,7 +249,7 @@ export default function DimensionStep({
 
       {/* Helper note */}
       <div className="font-body mx-auto mt-8 flex max-w-2xl items-start justify-center gap-2.5 text-center text-sm text-[#292622]/60">
-        <Info size={16} className="mt-0.5 shrink-0 text-[#C18A35]" />
+        <Info size={16} className="mt-0.5 shrink-0 text-[#dba343]" />
         <p>
           Not sure about the size? Pick the closest one — our team will confirm
           exact measurements during your free design consultation.
@@ -262,7 +262,7 @@ export default function DimensionStep({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] bg-[#FFFFFF] px-6 py-4 shadow-sm"
+          className="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#dba343] bg-[#FFFFFF] px-6 py-4 shadow-sm"
         >
           {formData.type && (
             <p className="font-body text-sm text-[#292622]/70">
@@ -301,7 +301,7 @@ export default function DimensionStep({
 
           ${
             formData.dimension
-              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#C18A35]"
+              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#dba343]"
               : "bg-[#E8DED0] text-[#292622]/40 cursor-not-allowed"
           }
           `}

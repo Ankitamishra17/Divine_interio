@@ -10,7 +10,7 @@ import ConsultationModal from "@/components/common/ConsultationModal";
 
 /*
   Brand palette
-  Espresso Brown #593719 | Warm Gold #C18A35 | Ivory Cream #F7F3ED
+  Espresso Brown #593719 | Warm Gold #dba343 | Ivory Cream #F7F3ED
   Soft Beige #E8DED0     | Charcoal #292622  | White #FFFFFF
 
   Logo has WHITE lettering -> bar sits on Charcoal.
@@ -71,9 +71,9 @@ const quickLinks = [
 ];
 
 const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]";
 
-const iconBtn = `flex h-10 w-10 items-center justify-center rounded-full border border-[#F7F3ED]/20 text-[#F7F3ED] transition-colors hover:border-[#C18A35] hover:text-[#C18A35] ${focusRing}`;
+const iconBtn = `flex h-10 w-10 items-center justify-center rounded-full border border-[#F7F3ED]/20 text-[#F7F3ED] transition-colors hover:border-[#dba343] hover:text-[#dba343] ${focusRing}`;
 
 /* Dark-theme search pill */
 function SearchBox({ onSearch, autoFocus = false, light = false }) {
@@ -85,7 +85,7 @@ function SearchBox({ onSearch, autoFocus = false, light = false }) {
         e.preventDefault();
         if (q.trim()) onSearch?.(q.trim());
       }}
-      className={`flex h-11 w-full items-center gap-2 rounded-full border pl-4 pr-1 transition-colors focus-within:border-[#C18A35] ${
+      className={`flex h-11 w-full items-center gap-2 rounded-full border pl-4 pr-1 transition-colors focus-within:border-[#dba343] ${
         light
           ? "border-[#E8DED0] bg-white"
           : "border-[#F7F3ED]/25 bg-[#F7F3ED]/10 focus-within:bg-[#F7F3ED]/15"
@@ -107,7 +107,7 @@ function SearchBox({ onSearch, autoFocus = false, light = false }) {
       <button
         type="submit"
         aria-label="Search"
-        className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#C18A35] text-[#292622] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED]"
+        className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#dba343] text-[#292622] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED]"
       >
         <Search size={16} />
       </button>
@@ -228,8 +228,8 @@ export default function Navbar() {
         ref={headerRef}
         className={`sticky top-0 z-40 w-full border-b transition-[background-color,box-shadow] duration-300 ${
           scrolled
-            ? "bg-[#292622]/95 backdrop-blur-md border-[#C18A35]/30 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
-            : "bg-[#292622] border-[#C18A35]/15"
+            ? "bg-[#292622]/95 backdrop-blur-md border-[#dba343]/30 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
+            : "bg-[#292622] border-[#dba343]/15"
         }`}
       >
         <div className="mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-12">
@@ -287,7 +287,7 @@ export default function Navbar() {
                           }
                         }}
                         className={`group relative flex items-center gap-1 whitespace-nowrap rounded-sm px-2.5 py-2 xl:px-3.5 text-[13px] xl:text-sm font-medium transition-colors duration-200 ${focusRing} ${
-                          active || open ? "text-[#C18A35]" : "text-[#F7F3ED]/85 hover:text-[#C18A35]"
+                          active || open ? "text-[#dba343]" : "text-[#F7F3ED]/85 hover:text-[#dba343]"
                         }`}
                       >
                         {item.name}
@@ -298,7 +298,7 @@ export default function Navbar() {
                           />
                         )}
                         <span
-                          className={`absolute inset-x-2.5 xl:inset-x-3.5 -bottom-0.5 h-0.5 origin-left bg-[#C18A35] transition-transform duration-300 ${
+                          className={`absolute inset-x-2.5 xl:inset-x-3.5 -bottom-0.5 h-0.5 origin-left bg-[#dba343] transition-transform duration-300 ${
                             active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                           }`}
                         />
@@ -325,7 +325,7 @@ export default function Navbar() {
                                 animate={{ scaleX: 1 }}
                                 transition={{ duration: 0.35, ease: "easeOut" }}
                                 style={{ transformOrigin: "left" }}
-                                className="h-[3px] bg-[#C18A35]"
+                                className="h-[3px] bg-[#dba343]"
                               />
                               <ul className={`p-2 ${wide ? "grid grid-cols-2 gap-x-1" : ""}`}>
                                 {item.submenu.map((sub, idx) => {
@@ -346,7 +346,7 @@ export default function Navbar() {
                                         }`}
                                       >
                                         {sub.name}
-                                        <span className="h-1.5 w-1.5 rounded-full bg-[#C18A35] opacity-0 scale-0 transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:scale-100" />
+                                        <span className="h-1.5 w-1.5 rounded-full bg-[#dba343] opacity-0 scale-0 transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:scale-100" />
                                       </Link>
                                     </motion.li>
                                   );
@@ -372,7 +372,7 @@ export default function Navbar() {
                 }}
                 aria-label={searchOpen ? "Close search" : "Open search"}
                 aria-expanded={searchOpen}
-                className={`${iconBtn} ${searchOpen ? "!border-[#C18A35] !text-[#C18A35]" : ""}`}
+                className={`${iconBtn} ${searchOpen ? "!border-[#dba343] !text-[#dba343]" : ""}`}
               >
                 {searchOpen ? <X size={18} /> : <Search size={18} />}
               </button>
@@ -384,7 +384,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setShowConsultationModal(true)}
-                className={`whitespace-nowrap rounded-sm bg-[#C18A35] px-5 xl:px-6 py-2.5 text-[13px] font-semibold tracking-wide text-[#292622] transition-all duration-300 hover:bg-[#F7F3ED] hover:shadow-lg ${focusRing}`}
+                className={`whitespace-nowrap rounded-sm bg-[#dba343] px-5 xl:px-6 py-2.5 text-[13px] font-semibold tracking-wide text-[#292622] transition-all duration-300 hover:bg-[#F7F3ED] hover:shadow-lg ${focusRing}`}
               >
                 Book consultation
               </button>
@@ -395,7 +395,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setShowConsultationModal(true)}
-                className={`whitespace-nowrap rounded-sm bg-[#C18A35] px-3.5 h-10 text-[13px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${focusRing}`}
+                className={`whitespace-nowrap rounded-sm bg-[#dba343] px-3.5 h-10 text-[13px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${focusRing}`}
               >
                 Book now
               </button>
@@ -430,7 +430,7 @@ export default function Navbar() {
                     <Link
                       key={l.name}
                       href={l.href}
-                      className="rounded-full border border-[#F7F3ED]/20 px-3 py-1 text-[12px] text-[#F7F3ED]/85 transition-colors hover:border-[#C18A35] hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35]"
+                      className="rounded-full border border-[#F7F3ED]/20 px-3 py-1 text-[12px] text-[#F7F3ED]/85 transition-colors hover:border-[#dba343] hover:text-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343]"
                     >
                       {l.name}
                     </Link>
@@ -488,7 +488,7 @@ export default function Navbar() {
                   <X size={20} />
                 </button>
               </div>
-              <div className="h-[3px] flex-shrink-0 bg-[#C18A35]" />
+              <div className="h-[3px] flex-shrink-0 bg-[#dba343]" />
 
               <div className="flex-1 overflow-y-auto">
                 {/* Search lives in the drawer so phones have it too */}
@@ -512,7 +512,7 @@ export default function Navbar() {
                                 active ? "text-[#593719]" : "text-[#292622] hover:text-[#593719]"
                               }`}
                             >
-                              {active && <span className="mr-2.5 h-5 w-[3px] rounded-full bg-[#C18A35]" />}
+                              {active && <span className="mr-2.5 h-5 w-[3px] rounded-full bg-[#dba343]" />}
                               {item.name}
                             </Link>
 
@@ -539,7 +539,7 @@ export default function Navbar() {
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.2 }}
-                                className="mb-3 ml-3 overflow-hidden border-l-2 border-[#C18A35]/60 pl-2"
+                                className="mb-3 ml-3 overflow-hidden border-l-2 border-[#dba343]/60 pl-2"
                               >
                                 {item.submenu.map((sub) => (
                                   <li key={sub.name}>
@@ -567,7 +567,7 @@ export default function Navbar() {
                         onClick={() => setIsOpen(false)}
                         className="flex min-h-[52px] items-center gap-2.5 px-3 text-[15px] font-medium text-[#292622] transition-colors hover:text-[#593719]"
                       >
-                        <MapPin size={18} className="text-[#C18A35]" />
+                        <MapPin size={18} className="text-[#dba343]" />
                         Find a showroom
                       </Link>
                     </li>
@@ -582,7 +582,7 @@ export default function Navbar() {
                     setShowConsultationModal(true);
                     setIsOpen(false);
                   }}
-                  className="flex min-h-[48px] w-full items-center justify-center rounded-sm bg-[#593719] text-[14px] font-semibold tracking-wide text-[#F7F3ED] transition-colors hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2"
+                  className="flex min-h-[48px] w-full items-center justify-center rounded-sm bg-[#593719] text-[14px] font-semibold tracking-wide text-[#F7F3ED] transition-colors hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2"
                 >
                   Book free consultation
                 </button>

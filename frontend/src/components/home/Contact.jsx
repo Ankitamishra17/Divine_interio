@@ -6,7 +6,7 @@ import { AlertCircle, ArrowRight, Check, MapPin, MessageCircle, Phone, Send } fr
 
 /*
   Palette (unchanged)
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
   Balanced version: the richness of the first design, the calm of the second.
@@ -55,10 +55,10 @@ function isOpenNow() {
   return { open: hour >= 10 && hour < 19, early: hour < 10 };
 }
 
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2";
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2";
 const ringDark = `${ring} focus-visible:ring-offset-[#292622]`;
 const chip = `inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 text-[15px] transition-colors duration-300 ${ring}`;
-const quiet = `min-h-11 rounded-sm px-1 text-sm font-medium text-[#593719] underline decoration-[#C18A35] underline-offset-4 transition-colors hover:text-[#C18A35] ${ring}`;
+const quiet = `min-h-11 rounded-sm px-1 text-sm font-medium text-[#593719] underline decoration-[#dba343] underline-offset-4 transition-colors hover:text-[#dba343] ${ring}`;
 
 export default function Contact() {
   const reduce = useReducedMotion();
@@ -233,7 +233,7 @@ export default function Contact() {
             {NEXT_STEPS.map((item, i) => (
               <li key={item.title} className="min-w-0">
                 <div className="flex items-center gap-3" aria-hidden="true">
-                  <span className="font-[Cormorant_Garamond,serif] text-[32px] font-medium leading-none text-[#C18A35]">{i + 1}</span>
+                  <span className="font-[Cormorant_Garamond,serif] text-[32px] font-medium leading-none text-[#dba343]">{i + 1}</span>
                   {i < NEXT_STEPS.length - 1 && <span className="h-px flex-1 bg-[#F7F3ED]/15" />}
                 </div>
                 <p className="mt-2 text-[15px] font-semibold leading-snug text-[#F7F3ED]">{item.title}</p>
@@ -246,8 +246,8 @@ export default function Contact() {
           <div className="mt-10 lg:mt-auto">
             <p className="flex items-center gap-3 text-sm text-[#F7F3ED]/75" role="status">
               <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                {hours?.open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C18A35] opacity-50 motion-reduce:animate-none" />}
-                <span className={`relative h-2 w-2 rounded-full ${hours?.open ? "bg-[#C18A35]" : "bg-[#F7F3ED]/35"}`} />
+                {hours?.open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#dba343] opacity-50 motion-reduce:animate-none" />}
+                <span className={`relative h-2 w-2 rounded-full ${hours?.open ? "bg-[#dba343]" : "bg-[#F7F3ED]/35"}`} />
               </span>
               {hours === null
                 ? "Open every day, 10 AM to 7 PM"
@@ -258,9 +258,9 @@ export default function Contact() {
 
             <a
               href={`tel:${PHONE_TEL}`}
-              className="group mt-4 flex items-center gap-4 rounded-sm bg-[#C18A35] p-3 pr-5 text-left transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+              className="group mt-4 flex items-center gap-4 rounded-sm bg-[#dba343] p-3 pr-5 text-left transition-colors duration-300 hover:bg-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7F3ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
             >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#292622] text-[#C18A35]">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#292622] text-[#dba343]">
                 <Phone size={19} aria-hidden="true" />
               </span>
               <span className="min-w-0">
@@ -275,13 +275,13 @@ export default function Contact() {
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2 text-sm text-[#F7F3ED]/80 underline decoration-[#F7F3ED]/25 underline-offset-4 transition-colors hover:text-[#C18A35] hover:decoration-[#C18A35] ${ringDark}`}
+                className={`flex items-center gap-2 text-sm text-[#F7F3ED]/80 underline decoration-[#F7F3ED]/25 underline-offset-4 transition-colors hover:text-[#dba343] hover:decoration-[#dba343] ${ringDark}`}
               >
                 <MessageCircle size={16} aria-hidden="true" />
                 Message us on WhatsApp
               </a>
               <p className="flex items-center gap-2 text-sm text-[#F7F3ED]/55">
-                <MapPin size={15} className="shrink-0 text-[#C18A35]" aria-hidden="true" />
+                <MapPin size={15} className="shrink-0 text-[#dba343]" aria-hidden="true" />
                 Noida, Greater Noida, Ghaziabad
               </p>
             </div>
@@ -294,7 +294,7 @@ export default function Contact() {
             {/* Header */}
             <div className="relative border-b border-[#E8DED0] bg-white">
               <div className="flex items-center gap-3 px-5 py-4 sm:px-8">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#593719] font-[Cormorant_Garamond,serif] text-lg font-semibold text-[#C18A35]" aria-hidden="true">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#593719] font-[Cormorant_Garamond,serif] text-lg font-semibold text-[#dba343]" aria-hidden="true">
                   DT
                 </span>
                 <div className="min-w-0">
@@ -317,7 +317,7 @@ export default function Contact() {
                 aria-valuemax={100}
                 aria-valuenow={Math.round(progress)}
               >
-                <div className="h-full bg-[#C18A35] transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+                <div className="h-full bg-[#dba343] transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${progress}%` }} />
               </div>
             </div>
 
@@ -364,7 +364,7 @@ export default function Contact() {
               {typing && (
                 <div className="flex w-fit items-center gap-1.5 rounded-2xl rounded-tl-sm border border-[#E8DED0] bg-white px-4 py-3.5" role="status" aria-label="The design team is typing">
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="h-2 w-2 animate-pulse rounded-full bg-[#C18A35] motion-reduce:animate-none" style={{ animationDelay: `${i * 180}ms` }} />
+                    <span key={i} className="h-2 w-2 animate-pulse rounded-full bg-[#dba343] motion-reduce:animate-none" style={{ animationDelay: `${i * 180}ms` }} />
                   ))}
                 </div>
               )}
@@ -374,7 +374,7 @@ export default function Contact() {
                   initial={reduce ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, ease: EASE }}
-                  className="max-w-[85%] space-y-1.5 rounded-sm border border-[#C18A35]/40 bg-white p-4 text-sm"
+                  className="max-w-[85%] space-y-1.5 rounded-sm border border-[#dba343]/40 bg-white p-4 text-sm"
                 >
                   {summary.map(([k, v]) => (
                     <div key={k} className="flex gap-3">
@@ -391,7 +391,7 @@ export default function Contact() {
               {status === "success" ? (
                 <div className="flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 text-sm text-[#292622]/70">
-                    <Check size={16} className="text-[#C18A35]" aria-hidden="true" />
+                    <Check size={16} className="text-[#dba343]" aria-hidden="true" />
                     We’ll call you soon
                   </p>
                   <button type="button" onClick={reset} className={`${chip} border-[#593719]/40 text-[#593719] hover:bg-[#593719] hover:text-[#F7F3ED]`}>
@@ -409,9 +409,9 @@ export default function Contact() {
                           type="button"
                           aria-pressed={on}
                           onClick={() => setMulti((c) => (c.includes(o) ? c.filter((x) => x !== o) : [...c, o]))}
-                          className={`${chip} ${on ? "border-[#593719] bg-[#593719] text-[#F7F3ED]" : "border-[#593719]/20 bg-[#F7F3ED] text-[#292622] hover:border-[#C18A35]"}`}
+                          className={`${chip} ${on ? "border-[#593719] bg-[#593719] text-[#F7F3ED]" : "border-[#593719]/20 bg-[#F7F3ED] text-[#292622] hover:border-[#dba343]"}`}
                         >
-                          {on && <Check size={14} className="text-[#C18A35]" aria-hidden="true" />}
+                          {on && <Check size={14} className="text-[#dba343]" aria-hidden="true" />}
                           {o}
                         </button>
                       ) : (
@@ -421,7 +421,7 @@ export default function Contact() {
                           role="radio"
                           aria-checked="false"
                           onClick={() => answer(o, o)}
-                          className={`${chip} border-[#593719]/20 bg-[#F7F3ED] text-[#292622] hover:border-[#C18A35]`}
+                          className={`${chip} border-[#593719]/20 bg-[#F7F3ED] text-[#292622] hover:border-[#dba343]`}
                         >
                           {o}
                         </button>
@@ -430,7 +430,7 @@ export default function Contact() {
                   </div>
                   <div className="mt-3 flex items-center gap-4">
                     {cur.type === "multi" && multi.length > 0 && (
-                      <button type="button" onClick={() => answer(multi, multi.join(", "))} className={`${chip} border-[#C18A35] bg-[#C18A35] font-semibold text-[#292622] hover:bg-[#593719] hover:text-[#F7F3ED]`}>
+                      <button type="button" onClick={() => answer(multi, multi.join(", "))} className={`${chip} border-[#dba343] bg-[#dba343] font-semibold text-[#292622] hover:bg-[#593719] hover:text-[#F7F3ED]`}>
                         Send <Send size={14} aria-hidden="true" />
                       </button>
                     )}
@@ -463,13 +463,13 @@ export default function Contact() {
                           setError("");
                         }}
                         placeholder={cur.placeholder}
-                        className={`h-12 w-full rounded-full border bg-[#F7F3ED] ${isPhone ? "pl-[4.5rem]" : "pl-5"} pr-5 text-base text-[#292622] placeholder:text-[#292622]/45 focus:outline-none focus:ring-2 focus:ring-[#C18A35] ${error ? "border-[#A23B2A]" : "border-[#593719]/20"}`}
+                        className={`h-12 w-full rounded-full border bg-[#F7F3ED] ${isPhone ? "pl-[4.5rem]" : "pl-5"} pr-5 text-base text-[#292622] placeholder:text-[#292622]/45 focus:outline-none focus:ring-2 focus:ring-[#dba343] ${error ? "border-[#A23B2A]" : "border-[#593719]/20"}`}
                       />
                     </div>
                     <button
                       type="submit"
                       aria-label="Send"
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C18A35] text-[#292622] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#dba343] text-[#292622] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
                     >
                       <Send size={18} aria-hidden="true" />
                     </button>

@@ -78,7 +78,7 @@ export default function DesignGallery({ data }) {
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href={`${CONTACT_HREF}?design=${encodeURIComponent(data.title ?? "")}`}
-                className="group/cta inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#B8851F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+                className="group/cta inline-flex items-center gap-2 rounded-md bg-[#3D1F0D] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#B8851F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
               >
                 Enquire about this design
                 <ArrowRight

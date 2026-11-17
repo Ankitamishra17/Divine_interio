@@ -6,7 +6,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 /*
   Palette
-  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622 | White #FFFFFF
 
   Row of cards. Every project (up to 4) is visible at once, so there is nothing to
@@ -91,9 +91,9 @@ export default function ProjectsSection() {
 
       <Link
         href="/portfolio"
-        className="group/all inline-flex flex-shrink-0 items-center gap-2.5 self-start text-[15px] font-semibold text-[#593719] transition-colors hover:text-[#C18A35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED] md:self-auto"
+        className="group/all inline-flex flex-shrink-0 items-center gap-2.5 self-start text-[15px] font-semibold text-[#593719] transition-colors hover:text-[#dba343] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED] md:self-auto"
       >
-        <span className="border-b-2 border-[#C18A35] pb-1">See all projects</span>
+        <span className="border-b-2 border-[#dba343] pb-1">See all projects</span>
         <ArrowRight
           size={16}
           className="transition-transform duration-300 group-hover/all:translate-x-1"
@@ -138,7 +138,7 @@ export default function ProjectsSection() {
               <Link
                 href={`/upcoming-project/${project.id}`}
                 aria-label={`View ${project.title}`}
-                className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
+                className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
               >
                 {/* photo */}
                 <span className={`relative block overflow-hidden rounded-sm bg-[#E8DED0] ${layout.ratio}`}>
@@ -155,7 +155,7 @@ export default function ProjectsSection() {
                 <span className="mt-5 flex items-center justify-between gap-4">
                   <span className="min-w-0">
                     <span className="block text-sm text-[#292622]/55">Latest design</span>
-                    <span className="mt-1 block truncate font-heading text-2xl font-medium leading-tight text-[#292622] decoration-[#C18A35] decoration-2 underline-offset-[6px] transition-colors group-hover:text-[#593719] group-hover:underline">
+                    <span className="mt-1 block truncate font-heading text-2xl font-medium leading-tight text-[#292622] decoration-[#dba343] decoration-2 underline-offset-[6px] transition-colors group-hover:text-[#593719] group-hover:underline">
                       {project.title}
                     </span>
                   </span>

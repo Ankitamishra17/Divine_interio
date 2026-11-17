@@ -24,9 +24,9 @@ export default function ResultStep({ formData }) {
       >
         {/* Success Icon */}
         <div className="flex justify-center mb-8">
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#593719]/5 ring-8 ring-[#C18A35]/10">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#593719]/5 ring-8 ring-[#dba343]/10">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#593719]">
-              <CheckCircle2 size={34} className="text-[#C18A35]" />
+              <CheckCircle2 size={34} className="text-[#dba343]" />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function ResultStep({ formData }) {
         </p>
 
         {/* Customer Details */}
-        <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] bg-[#F7F3ED] p-6 text-left">
+        <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#dba343] bg-[#F7F3ED] p-6 text-left">
           <h3 className="font-heading mb-4 text-xl font-bold text-[#593719]">
             Submitted Details
           </h3>
@@ -63,12 +63,12 @@ export default function ResultStep({ formData }) {
         {/* Contact Info */}
         <div className="font-body flex flex-col md:flex-row justify-center gap-6 mb-10">
           <div className="flex items-center justify-center gap-2 text-[#292622]">
-            <Phone size={18} className="text-[#C18A35]" />
+            <Phone size={18} className="text-[#dba343]" />
             <span>+91 XXXXX XXXXX</span>
           </div>
 
           <div className="flex items-center justify-center gap-2 text-[#292622]">
-            <Mail size={18} className="text-[#C18A35]" />
+            <Mail size={18} className="text-[#dba343]" />
             <span>info@livingspacedekor.com</span>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function ResultStep({ formData }) {
         {/* CTA */}
         <a
           href="/"
-          className="font-body inline-flex items-center justify-center rounded-xl bg-[#593719] px-8 py-4 font-semibold text-[#FFFFFF] transition-all duration-300 hover:bg-[#C18A35]"
+          className="font-body inline-flex items-center justify-center rounded-xl bg-[#593719] px-8 py-4 font-semibold text-[#FFFFFF] transition-all duration-300 hover:bg-[#dba343]"
         >
           Back to Home
         </a>

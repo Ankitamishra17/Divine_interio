@@ -12,7 +12,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
-const GOLD = "#C8972B";
+const GOLD = "#dba343";
 const ESPRESSO = "#3D1F0D";
 const API =
   process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ||
@@ -383,7 +383,7 @@ function ImageUploader({ inputRef, preview, onSelect, onClear, error }) {
 }
 
 function inputClass(hasError) {
-  return `w-full rounded-lg border px-4 py-2.5 text-sm text-[#3D1F0D] outline-none transition-colors placeholder:text-[#B4A996] focus:border-[#C8972B] ${
+  return `w-full rounded-lg border px-4 py-2.5 text-sm text-[#3D1F0D] outline-none transition-colors placeholder:text-[#B4A996] focus:border-[#dba343] ${
     hasError ? "border-[#E8B4B4] bg-[#FCEEEE]" : "border-[#EDE4D9] bg-white"
   }`;
 }

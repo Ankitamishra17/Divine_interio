@@ -83,14 +83,14 @@ export default function BlogsPage() {
     <div className="flex flex-wrap gap-2 lg:justify-end">
       <Link
         href={`/admin/blogs/${blog.id}`}
-        className="flex items-center gap-1.5 text-[10.5px] uppercase font-semibold border border-[#3D1F0D]/15 text-[#3D1F0D]/60 rounded-lg px-3 py-1.5 hover:border-[#C8972B] hover:text-[#C8972B] transition-colors"
+        className="flex items-center gap-1.5 text-[10.5px] uppercase font-semibold border border-[#3D1F0D]/15 text-[#3D1F0D]/60 rounded-lg px-3 py-1.5 hover:border-[#dba343] hover:text-[#dba343] transition-colors"
       >
         <Eye className="w-3 h-3" />
         View
       </Link>
       <button
         onClick={() => setDrawer({ blog })}
-        className="flex items-center gap-1.5 text-[10.5px] uppercase font-semibold border border-[#3D1F0D]/15 text-[#3D1F0D]/60 rounded-lg px-3 py-1.5 hover:border-[#C8972B] hover:text-[#C8972B] transition-colors"
+        className="flex items-center gap-1.5 text-[10.5px] uppercase font-semibold border border-[#3D1F0D]/15 text-[#3D1F0D]/60 rounded-lg px-3 py-1.5 hover:border-[#dba343] hover:text-[#dba343] transition-colors"
       >
         <Pencil className="w-3 h-3" />
         Edit
@@ -109,15 +109,15 @@ export default function BlogsPage() {
     <div className="min-h-screen bg-[#F7F3ED]">
       <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-5 sm:px-8 lg:px-11 pt-7 sm:pt-9 pb-5 sm:pb-6 border-b border-[#3D1F0D]/10">
         <div>
-          <p className="flex items-center gap-2.5 sm:gap-3 text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] uppercase text-[#C8972B] font-semibold mb-2">
-            <span className="w-[18px] sm:w-[22px] h-px bg-[#C8972B] inline-block" />
+          <p className="flex items-center gap-2.5 sm:gap-3 text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] uppercase text-[#dba343] font-semibold mb-2">
+            <span className="w-[18px] sm:w-[22px] h-px bg-[#dba343] inline-block" />
             Content
           </p>
           <h1 className="font-display text-2xl sm:text-3xl text-[#3D1F0D]">Blog Posts</h1>
         </div>
         <button
           onClick={() => setDrawer({ blog: null })}
-          className="flex items-center justify-center gap-1.5 bg-[#C8972B] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] active:bg-[#B8871F] transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)] w-full sm:w-auto"
+          className="flex items-center justify-center gap-1.5 bg-[#dba343] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] active:bg-[#B8871F] transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)] w-full sm:w-auto"
         >
           <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
           New
@@ -128,7 +128,7 @@ export default function BlogsPage() {
         <div className="relative max-w-xs w-full mb-5">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D1F0D]/35" />
           <input
-            className="w-full pl-9 pr-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#C8972B] focus:ring-[3px] focus:ring-[#C8972B]/12 transition-all"
+            className="w-full pl-9 pr-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#dba343] focus:ring-[3px] focus:ring-[#dba343]/12 transition-all"
             placeholder="Search blog posts…"
             value={search}
             onChange={handleSearch}
@@ -150,7 +150,7 @@ export default function BlogsPage() {
             : blogs.map((b) => (
                 <div
                   key={b.id}
-                  className="bg-white border border-[#3D1F0D]/10 rounded-xl p-4 hover:border-[#C8972B]/40 transition-colors"
+                  className="bg-white border border-[#3D1F0D]/10 rounded-xl p-4 hover:border-[#dba343]/40 transition-colors"
                 >
                   <div className="flex gap-3 mb-3">
                     {b.coverImage ? (
@@ -158,7 +158,7 @@ export default function BlogsPage() {
                       <img
                         src={resolveImageUrl(b.coverImage)}
                         alt=""
-                        className="w-14 h-11 object-cover rounded-md bg-[#C8972B]/10 shrink-0"
+                        className="w-14 h-11 object-cover rounded-md bg-[#dba343]/10 shrink-0"
                       />
                     ) : (
                       <div className="w-14 h-11 rounded-md bg-[#3D1F0D]/6 flex items-center justify-center shrink-0">
@@ -187,7 +187,7 @@ export default function BlogsPage() {
               {!search && (
                 <button
                   onClick={() => setDrawer({ blog: null })}
-                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold text-[#C8972B] hover:text-[#3D1F0D] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold text-[#dba343] hover:text-[#3D1F0D] transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Write your first post
@@ -202,7 +202,7 @@ export default function BlogsPage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse min-w-[720px]">
               <thead>
-                <tr className="bg-[#C8972B]/5">
+                <tr className="bg-[#dba343]/5">
                   <th className="w-14"></th>
                   <th className="text-left text-[10px] tracking-widest uppercase text-[#3D1F0D]/45 font-semibold px-4 py-3.5 border-b border-[#3D1F0D]/8">
                     Title
@@ -234,7 +234,7 @@ export default function BlogsPage() {
                   : blogs.map((b) => (
                       <tr
                         key={b.id}
-                        className="border-b border-[#3D1F0D]/5 last:border-none hover:bg-[#C8972B]/[0.03] transition-colors"
+                        className="border-b border-[#3D1F0D]/5 last:border-none hover:bg-[#dba343]/[0.03] transition-colors"
                       >
                         <td className="px-4 py-2.5">
                           {b.coverImage ? (
@@ -242,7 +242,7 @@ export default function BlogsPage() {
                             <img
                               src={resolveImageUrl(b.coverImage)}
                               alt=""
-                              className="w-11 h-8 object-cover rounded-md bg-[#C8972B]/10"
+                              className="w-11 h-8 object-cover rounded-md bg-[#dba343]/10"
                             />
                           ) : (
                             <div className="w-11 h-8 rounded-md bg-[#3D1F0D]/6 flex items-center justify-center">
@@ -273,7 +273,7 @@ export default function BlogsPage() {
               {!search && (
                 <button
                   onClick={() => setDrawer({ blog: null })}
-                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold text-[#C8972B] hover:text-[#3D1F0D] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold text-[#dba343] hover:text-[#3D1F0D] transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Write your first post

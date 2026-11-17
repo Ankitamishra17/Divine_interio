@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 
 /*
   Palette
-  Ivory #F7F3ED | Charcoal #292622 | Warm Gold #C18A35 | Espresso #593719 | Beige #E8DED0
+  Ivory #F7F3ED | Charcoal #292622 | Warm Gold #dba343 | Espresso #593719 | Beige #E8DED0
 
   New layout: STICKY INTRO + STAGGERED GALLERY.
   - Left: the heading, short text and the "view all" button stay pinned while you scroll
@@ -60,7 +60,7 @@ function Card({ project, index }) {
     <li className={index % 2 === 1 ? "sm:translate-y-16" : ""}>
       <Link
         href={`/portfolio/${project.slug}`}
-        className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
+        className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
       >
         <span className="relative block aspect-[4/5] overflow-hidden rounded-sm bg-[#E8DED0]">
           <ProjectImage
@@ -71,7 +71,7 @@ function Card({ project, index }) {
           />
           <span
             aria-hidden="true"
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#F7F3ED] text-[#292622] shadow-sm transition-colors duration-300 group-hover:bg-[#C18A35]"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#F7F3ED] text-[#292622] shadow-sm transition-colors duration-300 group-hover:bg-[#dba343]"
           >
             <ArrowUpRight size={19} />
           </span>
@@ -85,7 +85,7 @@ function Card({ project, index }) {
         )}
         <span
           aria-hidden="true"
-          className="mt-4 block h-[3px] w-8 bg-[#C18A35] transition-all duration-500 group-hover:w-16"
+          className="mt-4 block h-[3px] w-8 bg-[#dba343] transition-all duration-500 group-hover:w-16"
         />
       </Link>
     </li>
@@ -107,7 +107,7 @@ export default function Portfolio({ portfolio, limit = 2 }) {
         </p>
         <Link
           href="/contact"
-          className="mt-7 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#593719] px-7 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+          className="mt-7 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#593719] px-7 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
         >
           Talk to our design team
         </Link>
@@ -147,7 +147,7 @@ export default function Portfolio({ portfolio, limit = 2 }) {
           <div className="mt-8 hidden lg:block">
             <Link
               href="/portfolio"
-              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
             >
               {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
               <ArrowUpRight
@@ -179,7 +179,7 @@ export default function Portfolio({ portfolio, limit = 2 }) {
           <div className="mt-12 lg:hidden">
             <Link
               href="/portfolio"
-              className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] sm:w-auto"
+              className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] sm:w-auto"
             >
               {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
               <ArrowUpRight

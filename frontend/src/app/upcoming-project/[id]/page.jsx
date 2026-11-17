@@ -99,7 +99,7 @@
 
 //         <Link
 //           href="/"
-//           className="mb-10 inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-[#3D1F0D] transition hover:text-[#C8972B] sm:text-sm"
+//           className="mb-10 inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-[#3D1F0D] transition hover:text-[#dba343] sm:text-sm"
 //         >
 //           ← Back to Home
 //         </Link>
@@ -122,7 +122,7 @@
 
 //             {/* GOLD TOP LINE */}
 
-//             <div className="absolute inset-x-0 top-0 h-[3px] bg-[#C8972B]" />
+//             <div className="absolute inset-x-0 top-0 h-[3px] bg-[#dba343]" />
 //           </div>
 
 //           {/* ===================================================
@@ -132,8 +132,8 @@
 //           <div>
 //             {/* LABEL */}
 
-//             <p className="mb-4 mt-6 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#C8972B] lg:mt-0">
-//               <span className="h-px w-8 bg-[#C8972B]" />
+//             <p className="mb-4 mt-6 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#dba343] lg:mt-0">
+//               <span className="h-px w-8 bg-[#dba343]" />
 //               Upcoming Project
 //             </p>
 
@@ -145,7 +145,7 @@
 
 //             {/* GOLD LINE */}
 
-//             <div className="mb-6 h-px w-16 bg-[#C8972B]" />
+//             <div className="mb-6 h-px w-16 bg-[#dba343]" />
 
 //             {/* DESCRIPTION */}
 
@@ -170,8 +170,8 @@
 //             ================================================= */}
 
 //             <div className="border-t border-[#3D1F0D]/10 pt-6">
-//               <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#C8972B]">
-//                 Living Space Decor
+//               <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#dba343]">
+//                 Divine Interio
 //               </p>
 
 //               <p className="text-sm leading-relaxed text-[#6B6B6B]">
@@ -190,8 +190,8 @@
 //             {/* GALLERY HEADER */}
 
 //             <div className="mb-8">
-//               <p className="mb-3 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#C8972B]">
-//                 <span className="h-px w-8 bg-[#C8972B]" />
+//               <p className="mb-3 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#dba343]">
+//                 <span className="h-px w-8 bg-[#dba343]" />
 //                Upcoming Project Gallery
 //               </p>
 
@@ -229,7 +229,7 @@
 
 //                     {/* TOP GOLD LINE */}
 
-//                     <div className="absolute inset-x-0 top-0 h-[2px] bg-[#C8972B] opacity-0 transition duration-300 group-hover:opacity-100" />
+//                     <div className="absolute inset-x-0 top-0 h-[2px] bg-[#dba343] opacity-0 transition duration-300 group-hover:opacity-100" />
 
 //                     {/* IMAGE NUMBER */}
 
@@ -248,8 +248,8 @@
 //         ===================================================== */}
 
 //         <section className="mt-20 border-t border-[#3D1F0D]/10 pt-12 text-center sm:mt-24">
-//           <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#C8972B]">
-//             Living Space Decor
+//           <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#dba343]">
+//             Divine Interio
 //           </p>
 
 //           <h2 className="font-marcellus text-3xl tracking-wide text-[#3D1F0D] sm:text-4xl">

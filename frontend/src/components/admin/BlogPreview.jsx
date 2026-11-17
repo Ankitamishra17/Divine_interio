@@ -23,8 +23,8 @@ function formatDate(dateStr) {
 
 function SectionLabel({ children }) {
   return (
-    <p className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[#C8972B] font-semibold mb-4">
-      <span className="w-[18px] h-px bg-[#C8972B] inline-block" />
+    <p className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-semibold mb-4">
+      <span className="w-[18px] h-px bg-[#dba343] inline-block" />
       {children}
     </p>
   );
@@ -55,7 +55,7 @@ export default function BlogPreview({ post = {} }) {
       {/* Category + meta */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2">
         {post.category && (
-          <span className="text-[9.5px] sm:text-[10px] tracking-[0.25em] uppercase text-[#C8972B] font-semibold">
+          <span className="text-[9.5px] sm:text-[10px] tracking-[0.25em] uppercase text-[#dba343] font-semibold">
             {post.category}
           </span>
         )}
@@ -68,7 +68,7 @@ export default function BlogPreview({ post = {} }) {
 
       {/* Excerpt */}
       {post.excerpt && (
-        <p className="text-[#3D1F0D]/65 italic text-sm sm:text-[15px] leading-relaxed mb-6 sm:mb-8 border-l-2 border-[#C8972B]/30 pl-3 sm:pl-4">
+        <p className="text-[#3D1F0D]/65 italic text-sm sm:text-[15px] leading-relaxed mb-6 sm:mb-8 border-l-2 border-[#dba343]/30 pl-3 sm:pl-4">
           {post.excerpt}
         </p>
       )}
@@ -95,7 +95,7 @@ export default function BlogPreview({ post = {} }) {
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[10.5px] sm:text-[11px] uppercase tracking-wide px-2.5 sm:px-3 py-1.5 rounded-full bg-[#C8972B]/10 text-[#C8972B] font-medium"
+                className="text-[10.5px] sm:text-[11px] uppercase tracking-wide px-2.5 sm:px-3 py-1.5 rounded-full bg-[#dba343]/10 text-[#dba343] font-medium"
               >
                 {tag}
               </span>

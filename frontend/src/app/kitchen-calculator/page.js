@@ -1,10 +1,10 @@
 import KitchenCostCalculator from "@/components/kitchenCalculator/KitchenCostCalculator";
 
 export const metadata = {
-  title: "Modular Kitchen Cost Calculator | Living Space Decor",
+  title: "Modular Kitchen Cost Calculator | Divine Interio",
 
   description:
-    "Estimate your modular kitchen cost instantly with the Living Space Decor Kitchen Cost Calculator. Get an approximate price based on kitchen size, layout, materials, finishes, and accessories for your dream kitchen.",
+    "Estimate your modular kitchen cost instantly with the Divine Interio Kitchen Cost Calculator. Get an approximate price based on kitchen size, layout, materials, finishes, and accessories for your dream kitchen.",
 
   keywords: [
     "Modular Kitchen Cost Calculator",
@@ -13,7 +13,7 @@ export const metadata = {
     "Kitchen Interior Cost",
     "Kitchen Design Cost",
     "Interior Designer in Noida",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

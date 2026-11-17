@@ -35,7 +35,7 @@ function Lightbox({ images, current, onClose, onPrev, onNext, onSelect }) {
     >
       <motion.button
         onClick={onClose}
-        className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-8 md:right-8 text-[#FFFFFF]/60 hover:text-[#C18A35] transition-colors z-10"
+        className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-8 md:right-8 text-[#FFFFFF]/60 hover:text-[#dba343] transition-colors z-10"
         aria-label="Close"
         whileHover={{ scale: 1.1, rotate: 90 }}
       >
@@ -65,7 +65,7 @@ function Lightbox({ images, current, onClose, onPrev, onNext, onSelect }) {
           e.stopPropagation();
           onPrev();
         }}
-        className="absolute left-1 sm:left-2 md:left-8 text-[#FFFFFF]/50 hover:text-[#C18A35] transition-colors"
+        className="absolute left-1 sm:left-2 md:left-8 text-[#FFFFFF]/50 hover:text-[#dba343] transition-colors"
         aria-label="Previous image"
         whileHover={{ scale: 1.15, x: -4 }}
       >
@@ -115,7 +115,7 @@ function Lightbox({ images, current, onClose, onPrev, onNext, onSelect }) {
           e.stopPropagation();
           onNext();
         }}
-        className="absolute right-1 sm:right-2 md:right-8 text-[#FFFFFF]/50 hover:text-[#C18A35] transition-colors"
+        className="absolute right-1 sm:right-2 md:right-8 text-[#FFFFFF]/50 hover:text-[#dba343] transition-colors"
         aria-label="Next image"
         whileHover={{ scale: 1.15, x: 4 }}
       >
@@ -146,7 +146,7 @@ function Lightbox({ images, current, onClose, onPrev, onNext, onSelect }) {
             }}
             className={`relative flex-shrink-0 w-12 h-9 sm:w-14 sm:h-10 overflow-hidden transition-all duration-300 border rounded-[2px] ${
               i === current
-                ? "ring-1 ring-[#C18A35] opacity-100 border-[#C18A35]"
+                ? "ring-1 ring-[#dba343] opacity-100 border-[#dba343]"
                 : "opacity-30 hover:opacity-70 border-[#FFFFFF]/20"
             }`}
             whileHover={{ scale: 1.05 }}
@@ -336,7 +336,7 @@ export default function ProjectDetail({ project }) {
         {/* ══ Floating Spec Card ══ */}
         <section className="relative px-3 xs:px-4 sm:px-8 md:px-16">
           <motion.div
-            className="relative z-10 -mt-10 xs:-mt-12 md:-mt-16 max-w-6xl mx-auto bg-[#FFFFFF] border border-[#E8DED0] border-t-[3px] border-t-[#C18A35] rounded-sm shadow-[0_20px_60px_-15px_rgba(41,38,34,0.25)]"
+            className="relative z-10 -mt-10 xs:-mt-12 md:-mt-16 max-w-6xl mx-auto bg-[#FFFFFF] border border-[#E8DED0] border-t-[3px] border-t-[#dba343] rounded-sm shadow-[0_20px_60px_-15px_rgba(41,38,34,0.25)]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -347,7 +347,7 @@ export default function ProjectDetail({ project }) {
                   key={s.label}
                   className="flex flex-col gap-1 sm:gap-1.5 px-3 xs:px-4 sm:px-5 md:px-6 py-4 xs:py-5 sm:py-6 md:py-8"
                 >
-                  <span className="font-body text-[8px] xs:text-[9px] md:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#C18A35] font-medium">
+                  <span className="font-body text-[8px] xs:text-[9px] md:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#dba343] font-medium">
                     {s.label}
                   </span>
                   <span className="font-heading text-[#593719] text-sm xs:text-base md:text-lg font-normal break-words">
@@ -368,8 +368,8 @@ export default function ProjectDetail({ project }) {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-              <span className="w-6 sm:w-8 h-px bg-[#C18A35]" />
-              <p className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#C18A35] font-medium">
+              <span className="w-6 sm:w-8 h-px bg-[#dba343]" />
+              <p className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#dba343] font-medium">
                 About This Project
               </p>
             </div>
@@ -380,15 +380,15 @@ export default function ProjectDetail({ project }) {
 
           {project.highlights?.length > 0 && (
             <motion.div
-              className="bg-[#FFFFFF] border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] rounded-sm p-5 xs:p-6 sm:p-7 md:p-9 shadow-sm"
+              className="bg-[#FFFFFF] border border-[#E8DED0] border-l-[3px] border-l-[#dba343] rounded-sm p-5 xs:p-6 sm:p-7 md:p-9 shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-7">
-                <span className="w-6 sm:w-8 h-px bg-[#C18A35]" />
-                <p className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#C18A35] font-medium">
+                <span className="w-6 sm:w-8 h-px bg-[#dba343]" />
+                <p className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#dba343] font-medium">
                   Project Highlights
                 </p>
               </div>
@@ -402,7 +402,7 @@ export default function ProjectDetail({ project }) {
                     transition={{ duration: 0.5, delay: i * 0.08 }}
                     viewport={{ once: true }}
                   >
-                    <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#C18A35]" />
+                    <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#dba343]" />
                     <span>{h}</span>
                   </motion.li>
                 ))}
@@ -415,9 +415,9 @@ export default function ProjectDetail({ project }) {
         {allImages.length > 1 && (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-16 pb-12 xs:pb-16 sm:pb-20 md:pb-28">
             <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-10">
-              <span className="w-6 sm:w-8 h-px bg-[#C18A35]" />
+              <span className="w-6 sm:w-8 h-px bg-[#dba343]" />
               <motion.p
-                className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#C18A35] font-medium"
+                className="font-body text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#dba343] font-medium"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -486,7 +486,7 @@ export default function ProjectDetail({ project }) {
 
             <motion.button
               onClick={() => openLightbox(0)}
-              className="font-body mt-6 sm:mt-8 flex items-center gap-2.5 sm:gap-3 text-[#593719]/60 hover:text-[#C18A35] text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-colors font-light"
+              className="font-body mt-6 sm:mt-8 flex items-center gap-2.5 sm:gap-3 text-[#593719]/60 hover:text-[#dba343] text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-colors font-light"
               whileHover={{ x: 8 }}
             >
               <span>View All {allImages.length} Photos</span>
@@ -500,7 +500,7 @@ export default function ProjectDetail({ project }) {
           <section className="border-y border-[#E8DED0] bg-[#E8DED0]/40">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-16 py-14 xs:py-16 sm:py-20 md:py-28 text-center">
               <motion.div
-                className="font-heading text-[#C18A35]/30 text-[64px] xs:text-[80px] sm:text-[100px] md:text-[140px] leading-none mb-2 -mt-4 xs:-mt-6 sm:-mt-8 md:-mt-12 select-none"
+                className="font-heading text-[#dba343]/30 text-[64px] xs:text-[80px] sm:text-[100px] md:text-[140px] leading-none mb-2 -mt-4 xs:-mt-6 sm:-mt-8 md:-mt-12 select-none"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
@@ -524,7 +524,7 @@ export default function ProjectDetail({ project }) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <span className="w-8 sm:w-10 md:w-12 h-px bg-gradient-to-r from-[#C18A35] to-transparent" />
+                <span className="w-8 sm:w-10 md:w-12 h-px bg-gradient-to-r from-[#dba343] to-transparent" />
                 <div className="text-center">
                   <p className="font-body text-[#593719] text-xs sm:text-sm font-medium tracking-wider">
                     {project.clientQuote.author}
@@ -535,7 +535,7 @@ export default function ProjectDetail({ project }) {
                     </p>
                   )}
                 </div>
-                <span className="w-8 sm:w-10 md:w-12 h-px bg-gradient-to-l from-[#C18A35] to-transparent" />
+                <span className="w-8 sm:w-10 md:w-12 h-px bg-gradient-to-l from-[#dba343] to-transparent" />
               </motion.div>
             </div>
           </section>
@@ -566,7 +566,7 @@ export default function ProjectDetail({ project }) {
 
           <div className="relative z-10 w-full px-4 xs:px-6 sm:px-10 md:px-16 py-14 xs:py-16 sm:py-20 md:py-0 text-center">
             <motion.p
-              className="font-body text-[#C18A35] text-[10px] sm:text-[11px] md:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-3 sm:mb-5 font-medium"
+              className="font-body text-[#dba343] text-[10px] sm:text-[11px] md:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-3 sm:mb-5 font-medium"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -583,7 +583,7 @@ export default function ProjectDetail({ project }) {
             >
               Love What You See?
               <br />
-              <span className="text-[#C18A35]">Let's Create Yours.</span>
+              <span className="text-[#dba343]">Let's Create Yours.</span>
             </motion.h2>
             <motion.p
               className="font-body text-[#FFFFFF]/75 max-w-md mx-auto mb-8 sm:mb-10 leading-relaxed text-xs sm:text-sm font-light"
@@ -605,7 +605,7 @@ export default function ProjectDetail({ project }) {
             >
               <Link href="/contact" className="w-full sm:w-auto">
                 <motion.div
-                  className="font-body inline-flex items-center justify-center rounded-md gap-3 bg-[#C18A35] text-[#292622] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 active:scale-95 shadow-lg shadow-black/20 hover:bg-[#FFFFFF] hover:shadow-[0_0_40px_rgba(193,138,53,0.45)] w-full sm:w-auto"
+                  className="font-body inline-flex items-center justify-center rounded-md gap-3 bg-[#dba343] text-[#292622] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 active:scale-95 shadow-lg shadow-black/20 hover:bg-[#FFFFFF] hover:shadow-[0_0_40px_rgba(193,138,53,0.45)] w-full sm:w-auto"
                   whileHover={{ y: -2 }}
                 >
                   Book Consultation
@@ -613,7 +613,7 @@ export default function ProjectDetail({ project }) {
               </Link>
               <Link
                 href="/portfolio"
-                className="font-body text-[#FFFFFF]/75 hover:text-[#C18A35] text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-colors inline-flex items-center gap-2 font-light group"
+                className="font-body text-[#FFFFFF]/75 hover:text-[#dba343] text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-colors inline-flex items-center gap-2 font-light group"
               >
                 <motion.svg
                   width="14"

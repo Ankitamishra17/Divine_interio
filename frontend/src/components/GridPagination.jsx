@@ -12,7 +12,7 @@ export default function GridPagination({ basePath, pagination }) {
         className={`px-4 py-2 text-xs tracking-widest uppercase border rounded-sm transition-colors ${
           page <= 1
             ? "pointer-events-none opacity-30 border-[#3D1F0D]/15"
-            : "border-[#C8972B]/30 hover:border-[#C8972B] text-[#3D1F0D]"
+            : "border-[#dba343]/30 hover:border-[#dba343] text-[#3D1F0D]"
         }`}
       >
         Prev
@@ -26,7 +26,7 @@ export default function GridPagination({ basePath, pagination }) {
         className={`px-4 py-2 text-xs tracking-widest uppercase border rounded-sm transition-colors ${
           page >= pages
             ? "pointer-events-none opacity-30 border-[#3D1F0D]/15"
-            : "border-[#C8972B]/30 hover:border-[#C8972B] text-[#3D1F0D]"
+            : "border-[#dba343]/30 hover:border-[#dba343] text-[#3D1F0D]"
         }`}
       >
         Next

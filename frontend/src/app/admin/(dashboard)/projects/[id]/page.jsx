@@ -28,7 +28,7 @@ export default function AdminProjectDetailPage() {
         <div className="min-w-0">
           <Link
             href="/admin/projects"
-            className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-[#3D1F0D]/45 hover:text-[#C8972B] transition-colors mb-3"
+            className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-[#3D1F0D]/45 hover:text-[#dba343] transition-colors mb-3"
           >
             <ArrowLeft className="w-3 h-3" />
             Back to Projects
@@ -51,7 +51,7 @@ export default function AdminProjectDetailPage() {
         {project && (
           <button
             onClick={() => router.push(`/admin/projects?edit=${project.id}`)}
-            className="flex items-center justify-center gap-1.5 bg-[#C8972B] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)] w-full sm:w-auto shrink-0"
+            className="flex items-center justify-center gap-1.5 bg-[#dba343] text-[#1A0F08] px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-semibold hover:bg-[#D9A93A] transition-colors shadow-[0_8px_20px_-8px_rgba(200,151,43,0.5)] w-full sm:w-auto shrink-0"
           >
             <Pencil className="w-3.5 h-3.5" />
             Edit

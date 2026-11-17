@@ -39,7 +39,7 @@ export default function RoomItem({ room, formData, setFormData }) {
         ${
           selected
             ? "border-[#8B6B4A] bg-[#000000]/60 shadow-lg shadow-[#8B6B4A]/10"
-            : "border-[#E5D8C7] bg-white hover:border-[#C8972B] hover:shadow-md"
+            : "border-[#E5D8C7] bg-white hover:border-[#dba343] hover:shadow-md"
         }
       `}
     >
@@ -88,7 +88,7 @@ export default function RoomItem({ room, formData, setFormData }) {
             ${
               selected
                 ? "bg-[#8B6B4A] border-[#8B6B4A] text-white"
-                : "border-[#D8CFC4] text-transparent group-hover:border-[#C8972B]"
+                : "border-[#D8CFC4] text-transparent group-hover:border-[#dba343]"
             }
           `}
         >

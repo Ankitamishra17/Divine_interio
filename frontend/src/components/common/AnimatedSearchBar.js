@@ -50,7 +50,7 @@ export const AnimatedSearchBar = ({
     // >
 
     //     {/* Search Icon */}
-    //     <div className="text-[#C8972B] ml-8 flex-shrink-0 cursor-pointer hover:scale-110 transition-transform duration-200">
+    //     <div className="text-[#dba343] ml-8 flex-shrink-0 cursor-pointer hover:scale-110 transition-transform duration-200">
     //       <Search size={14} />
     //     </div>
 
@@ -61,7 +61,7 @@ export const AnimatedSearchBar = ({
     //         value={searchQuery}
     //         onChange={(e) => setSearchQuery(e.target.value)}
     //         placeholder="Search for"
-    //         className="w-full bg-transparent text-[12px] text-[#F7F3ED] placeholder-[#F7F3ED]/40 focus:outline-none border-b border-[#F7F3ED]/30 focus:border-[#C8972B] pb-1 transition-all duration-300 font-light"
+    //         className="w-full bg-transparent text-[12px] text-[#F7F3ED] placeholder-[#F7F3ED]/40 focus:outline-none border-b border-[#F7F3ED]/30 focus:border-[#dba343] pb-1 transition-all duration-300 font-light"
     //       />
 
     //       {/* Animated Category Text */}
@@ -108,7 +108,7 @@ export const AnimatedSearchBar = ({
         {/* Search Icon */}
         <Search
           size={16}
-          className="absolute left-0 top-1/2 -translate-y-1/2 text-[#C8972B]"
+          className="absolute left-0 top-1/2 -translate-y-1/2 text-[#dba343]"
         />
 
         {/* Input */}
@@ -125,7 +125,7 @@ export const AnimatedSearchBar = ({
         bg-transparent
         border-b
         border-[#3D1F0D]/20
-        focus:border-[#C8972B]
+        focus:border-[#dba343]
         outline-none
         text-[#3D1F0D]/75
         text-sm

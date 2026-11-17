@@ -53,8 +53,8 @@ function toArray(value) {
 function Eyebrow({ children }) {
   return (
     <div className="flex items-center gap-3 sm:gap-4">
-      <span className="w-6 sm:w-8 h-px bg-[#C18A35]" />
-      <p className="font-body text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#C18A35] font-medium">
+      <span className="w-6 sm:w-8 h-px bg-[#dba343]" />
+      <p className="font-body text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#dba343] font-medium">
         {children}
       </p>
     </div>
@@ -105,7 +105,7 @@ export default function BlogDetail({ post }) {
     <main className="font-body text-[#292622] min-h-screen bg-[#F7F3ED] overflow-x-clip">
       {/* Reading progress */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-[60] h-[3px] origin-left bg-[#C18A35]"
+        className="fixed top-0 left-0 right-0 z-[60] h-[3px] origin-left bg-[#dba343]"
         style={{ scaleX }}
       />
 
@@ -147,11 +147,11 @@ export default function BlogDetail({ post }) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#292622]/70 via-[#292622]/20 to-transparent" />
 
         {/* Decorative glows (visible mostly when there is no image) */}
-        <div className="pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-[#C18A35]/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-[#C18A35]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-[#dba343]/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-[#dba343]/10 blur-3xl" />
 
         {/* Gold hairline at bottom */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#C18A35]/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#dba343]/60 to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-32 sm:pt-36 md:pt-44 pb-12 sm:pb-16 md:pb-20">
@@ -163,13 +163,13 @@ export default function BlogDetail({ post }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Link href="/" className="hover:text-[#C18A35] transition-colors">
+              <Link href="/" className="hover:text-[#dba343] transition-colors">
                 Home
               </Link>
-              <span className="text-[#C18A35]">/</span>
+              <span className="text-[#dba343]">/</span>
               <Link
                 href="/blog"
-                className="hover:text-[#C18A35] transition-colors"
+                className="hover:text-[#dba343] transition-colors"
               >
                 Journal
               </Link>
@@ -183,8 +183,8 @@ export default function BlogDetail({ post }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.05 }}
               >
-                <span className="w-8 sm:w-10 h-px bg-[#C18A35]" />
-                <span className="font-body text-[10px] sm:text-[11px] md:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase font-medium text-[#C18A35]">
+                <span className="w-8 sm:w-10 h-px bg-[#dba343]" />
+                <span className="font-body text-[10px] sm:text-[11px] md:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase font-medium text-[#dba343]">
                   {post.category}
                 </span>
               </motion.div>
@@ -222,19 +222,19 @@ export default function BlogDetail({ post }) {
               >
                 {post.author && (
                   <span className="inline-flex items-center gap-2">
-                    <User size={14} className="text-[#C18A35]" />
+                    <User size={14} className="text-[#dba343]" />
                     {post.author}
                   </span>
                 )}
                 {post.publishedAt && (
                   <span className="inline-flex items-center gap-2">
-                    <CalendarDays size={14} className="text-[#C18A35]" />
+                    <CalendarDays size={14} className="text-[#dba343]" />
                     {formatDate(post.publishedAt)}
                   </span>
                 )}
                 {post.readTime && (
                   <span className="inline-flex items-center gap-2">
-                    <Clock size={14} className="text-[#C18A35]" />
+                    <Clock size={14} className="text-[#dba343]" />
                     {post.readTime}
                   </span>
                 )}
@@ -251,7 +251,7 @@ export default function BlogDetail({ post }) {
           <div className="flex flex-row flex-wrap items-center justify-between gap-4 border-y border-[#E8DED0] py-4 lg:flex-col lg:items-start lg:justify-start lg:gap-8 lg:border-y-0 lg:border-t lg:py-0 lg:pt-6">
             <Link
               href="/blog"
-              className="font-body group inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-medium text-[#593719]/70 transition-colors hover:text-[#C18A35]"
+              className="font-body group inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-medium text-[#593719]/70 transition-colors hover:text-[#dba343]"
             >
               <ArrowLeft
                 size={14}
@@ -261,27 +261,27 @@ export default function BlogDetail({ post }) {
             </Link>
 
             <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-3">
-              <p className="font-body text-[10px] tracking-[0.3em] uppercase text-[#C18A35] font-medium">
+              <p className="font-body text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-medium">
                 Share
               </p>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleCopy}
                   aria-label="Copy link"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] transition-all duration-300 hover:border-[#C18A35] hover:bg-[#C18A35] hover:text-[#FFFFFF]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] transition-all duration-300 hover:border-[#dba343] hover:bg-[#dba343] hover:text-[#FFFFFF]"
                 >
                   {copied ? <Check size={16} /> : <Link2 size={16} />}
                 </button>
                 <button
                   onClick={handleWhatsApp}
                   aria-label="Share on WhatsApp"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] transition-all duration-300 hover:border-[#C18A35] hover:bg-[#C18A35] hover:text-[#FFFFFF]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] transition-all duration-300 hover:border-[#dba343] hover:bg-[#dba343] hover:text-[#FFFFFF]"
                 >
                   <MessageCircle size={16} />
                 </button>
               </div>
               {copied && (
-                <span className="font-body text-[11px] text-[#C18A35]">
+                <span className="font-body text-[11px] text-[#dba343]">
                   Link copied
                 </span>
               )}
@@ -297,7 +297,7 @@ export default function BlogDetail({ post }) {
                 key={i}
                 className={`font-body text-[15px] sm:text-base md:text-[17px] leading-[1.85] sm:leading-[1.95] text-[#292622]/80 font-light ${
                   i === 0
-                    ? "first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-heading first-letter:text-5xl sm:first-letter:text-6xl first-letter:leading-[0.85] first-letter:text-[#C18A35]"
+                    ? "first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-heading first-letter:text-5xl sm:first-letter:text-6xl first-letter:leading-[0.85] first-letter:text-[#dba343]"
                     : ""
                 }`}
                 initial={{ opacity: 0, y: 16 }}
@@ -319,9 +319,9 @@ export default function BlogDetail({ post }) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent to-[#C18A35]" />
-              <span className="h-2 w-2 rotate-45 bg-[#C18A35]" />
-              <span className="h-px w-12 sm:w-16 bg-gradient-to-l from-transparent to-[#C18A35]" />
+              <span className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent to-[#dba343]" />
+              <span className="h-2 w-2 rotate-45 bg-[#dba343]" />
+              <span className="h-px w-12 sm:w-16 bg-gradient-to-l from-transparent to-[#dba343]" />
             </motion.div>
           )}
 
@@ -341,7 +341,7 @@ export default function BlogDetail({ post }) {
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[10px] sm:text-[11px] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] font-medium transition-colors hover:border-[#C18A35] hover:text-[#C18A35]"
+                    className="font-body text-[10px] sm:text-[11px] tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E8DED0] bg-[#FFFFFF] text-[#593719] font-medium transition-colors hover:border-[#dba343] hover:text-[#dba343]"
                   >
                     {tag}
                   </span>
@@ -353,17 +353,17 @@ export default function BlogDetail({ post }) {
           {/* Author */}
           {post.author && (
             <motion.div
-              className="mt-10 sm:mt-12 flex items-center gap-4 sm:gap-5 rounded-sm border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] bg-[#FFFFFF] p-5 sm:p-6 shadow-sm"
+              className="mt-10 sm:mt-12 flex items-center gap-4 sm:gap-5 rounded-sm border border-[#E8DED0] border-l-[3px] border-l-[#dba343] bg-[#FFFFFF] p-5 sm:p-6 shadow-sm"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <span className="font-heading flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full bg-[#593719] text-lg sm:text-xl text-[#C18A35]">
+              <span className="font-heading flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full bg-[#593719] text-lg sm:text-xl text-[#dba343]">
                 {post.author.trim().charAt(0).toUpperCase()}
               </span>
               <div>
-                <p className="font-body text-[10px] tracking-[0.3em] uppercase text-[#C18A35] font-medium">
+                <p className="font-body text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-medium">
                   Written by
                 </p>
                 <p className="font-heading mt-1 text-lg sm:text-xl text-[#593719]">
@@ -433,16 +433,16 @@ export default function BlogDetail({ post }) {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-[#C18A35]/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-[#C18A35]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-[#dba343]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-[#dba343]/15 blur-3xl" />
 
           <div className="relative">
-            <p className="font-body text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#C18A35] font-medium mb-4">
+            <p className="font-body text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#dba343] font-medium mb-4">
               Continue Exploring
             </p>
             <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-normal text-[#FFFFFF] leading-[1.15] max-w-xl mx-auto">
               Have a Space in Mind?
-              <span className="block  text-[#C18A35]">
+              <span className="block  text-[#dba343]">
                 Let&apos;s Talk Design.
               </span>
             </h2>
@@ -450,7 +450,7 @@ export default function BlogDetail({ post }) {
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
               <Link href="/contact" className="w-full sm:w-auto">
                 <motion.div
-                  className="font-body inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-md bg-[#C18A35] px-8 py-4 text-xs sm:text-sm tracking-[0.2em] uppercase font-medium text-[#292622] transition-colors duration-300 hover:bg-[#FFFFFF] active:scale-95"
+                  className="font-body inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-md bg-[#dba343] px-8 py-4 text-xs sm:text-sm tracking-[0.2em] uppercase font-medium text-[#292622] transition-colors duration-300 hover:bg-[#FFFFFF] active:scale-95"
                   whileHover={{ y: -2 }}
                 >
                   Book Consultation
@@ -460,7 +460,7 @@ export default function BlogDetail({ post }) {
 
               <Link
                 href="/blog"
-                className="font-body group inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.25em] uppercase font-light text-[#FFFFFF]/75 transition-colors hover:text-[#C18A35]"
+                className="font-body group inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.25em] uppercase font-light text-[#FFFFFF]/75 transition-colors hover:text-[#dba343]"
               >
                 <ArrowLeft
                   size={15}

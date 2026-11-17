@@ -6,7 +6,7 @@ export default function HoverButton({ children, primary = false }) {
   const [hovered, setHovered] = useState(false);
 
   const gold = "#B8882A";
-  const goldLight = "#C8972B";
+  const goldLight = "#dba343";
 
   const buttonStyle = primary
     ? {

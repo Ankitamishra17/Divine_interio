@@ -11,7 +11,7 @@ import LeadFormStep from "./LeadFormStep";
 import { kitchenShapes, packages } from "@/data/kitchenCalculatorData";
 
 /*
-  Palette: Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
+  Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
 
   What's better
   - The step bar is honest: if someone picks "Custom" size we skip Shape and Package, so the bar shows
@@ -41,7 +41,7 @@ const STEPS = [
 
 const EASE = [0.22, 1, 0.36, 1];
 const EMPTY = { dimension: "", shape: "", package: "", name: "", email: "", phone: "", pincode: "" };
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 export default function KitchenCostCalculator() {
   const reduce = useReducedMotion();
@@ -111,11 +111,11 @@ export default function KitchenCostCalculator() {
           transition={{ duration: 0.6, ease: EASE }}
           className="text-center"
         >
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.35em] text-[#C18A35]">Free estimate</p>
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.35em] text-[#dba343]">Free estimate</p>
           <h1 className="font-heading mt-4 text-4xl leading-[1.08] text-[#292622] md:text-5xl">
             Kitchen Cost <span className="text-[#593719]">Calculator</span>
           </h1>
-          <div className="mx-auto mt-5 h-px w-14 bg-[#C18A35]" aria-hidden="true" />
+          <div className="mx-auto mt-5 h-px w-14 bg-[#dba343]" aria-hidden="true" />
           <p className="font-body mx-auto mt-5 max-w-xl text-base font-light leading-8 text-[#292622]/75">
             Get an instant estimate for your dream kitchen in just a few steps.
           </p>
@@ -131,7 +131,7 @@ export default function KitchenCostCalculator() {
                 <span
                   className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition-colors duration-300 motion-reduce:transition-none sm:h-11 sm:w-11 ${
                     done
-                      ? "border-[#C18A35] bg-[#C18A35] text-[#292622]"
+                      ? "border-[#dba343] bg-[#dba343] text-[#292622]"
                       : now
                       ? "border-[#593719] bg-[#593719] text-[#F7F3ED]"
                       : "border-[#E8DED0] bg-white text-[#292622]/50"
@@ -154,7 +154,7 @@ export default function KitchenCostCalculator() {
                   </div>
                   {i < visible.length - 1 && (
                     <span aria-hidden="true" className="mx-1 mt-5 h-px flex-1 sm:mt-[22px]">
-                      <span className={`block h-px w-full transition-colors duration-500 motion-reduce:transition-none ${done ? "bg-[#C18A35]" : "bg-[#E8DED0]"}`} />
+                      <span className={`block h-px w-full transition-colors duration-500 motion-reduce:transition-none ${done ? "bg-[#dba343]" : "bg-[#E8DED0]"}`} />
                     </span>
                   )}
                 </li>
@@ -169,7 +169,7 @@ export default function KitchenCostCalculator() {
           className="relative mt-8 scroll-mt-4 overflow-hidden rounded-sm border border-[#E8DED0] bg-white shadow-[0_30px_70px_-40px_rgba(89,55,25,0.45)]"
         >
           <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#E8DED0]">
-            <span className="block h-full bg-[#C18A35] transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${progress}%` }} />
+            <span className="block h-full bg-[#dba343] transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${progress}%` }} />
           </span>
 
           <div className="px-5 pb-8 pt-8 sm:px-10 sm:pb-12 sm:pt-10 md:px-14">
@@ -179,7 +179,7 @@ export default function KitchenCostCalculator() {
                 <button
                   type="button"
                   onClick={handleBack}
-                  className={`font-body -ml-2 inline-flex min-h-11 items-center gap-2 rounded-sm px-2 text-sm font-medium text-[#593719] transition-colors hover:text-[#C18A35] ${ring}`}
+                  className={`font-body -ml-2 inline-flex min-h-11 items-center gap-2 rounded-sm px-2 text-sm font-medium text-[#593719] transition-colors hover:text-[#dba343] ${ring}`}
                 >
                   <ArrowLeft size={16} aria-hidden="true" />
                   Back
@@ -245,7 +245,7 @@ export default function KitchenCostCalculator() {
           <div className="mt-1 flex flex-wrap items-center justify-center gap-x-6">
             <a
               href={PHONE_TEL}
-              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#dba343] decoration-2 underline-offset-4 transition-colors hover:text-[#dba343] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
             >
               <Phone size={16} aria-hidden="true" />
               {PHONE_DISPLAY}
@@ -254,7 +254,7 @@ export default function KitchenCostCalculator() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-4 transition-colors hover:text-[#C18A35] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-medium text-[#593719] underline decoration-[#dba343] decoration-2 underline-offset-4 transition-colors hover:text-[#dba343] ${ring} focus-visible:ring-offset-[#F7F3ED]`}
             >
               <MessageCircle size={16} aria-hidden="true" />
               WhatsApp

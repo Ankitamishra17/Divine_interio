@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[##F7F3ED] p-4 sm:p-6 relative overflow-hidden">
       {/* Ambient background accents */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#C8972B]/[0.08] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#dba343]/[0.08] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-40 -right-20 w-[400px] h-[400px] bg-[#3D1F0D]/[0.05] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative w-full max-w-4xl grid md:grid-cols-[1.05fr_1fr] rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(26,15,8,0.35)] border border-[#3D1F0D]/8 animate-[fadeUp_0.6s_ease-out]">
@@ -46,18 +46,18 @@ export default function AdminLoginPage() {
 
           <div className="relative">
             {/* Monogram mark */}
-            <div className="w-10 h-10 rounded-full border border-[#C8972B]/40 flex items-center justify-center mb-9">
-              <span className="font-display text-[#C8972B] text-base leading-none">S</span>
+            <div className="w-10 h-10 rounded-full border border-[#dba343]/40 flex items-center justify-center mb-9">
+              <span className="font-display text-[#dba343] text-base leading-none">S</span>
             </div>
 
-            <p className="flex items-center gap-3 text-[10px] tracking-[0.35em] uppercase text-[#C8972B] font-semibold mb-7">
-              <span className="w-[22px] h-px bg-[#C8972B] inline-block" />
+            <p className="flex items-center gap-3 text-[10px] tracking-[0.35em] uppercase text-[#dba343] font-semibold mb-7">
+              <span className="w-[22px] h-px bg-[#dba343] inline-block" />
               Studio Admin
             </p>
             <h2 className="font-display text-[2.1rem] lg:text-[2.6rem] text-[##F7F3ED] leading-[1.1] mb-5">
               Manage your
               <br />
-              <span className="text-[#C8972B]">craft</span> with ease.
+              <span className="text-[#dba343]">craft</span> with ease.
             </h2>
             <p className="text-[13.5px] text-[##F7F3ED]/45 max-w-[240px] leading-relaxed">
               Curate portfolio projects, publish journal entries, and keep the studio's story current.
@@ -66,8 +66,8 @@ export default function AdminLoginPage() {
 
           <div className="relative flex items-center gap-2.5 text-[11px] tracking-wide text-[##F7F3ED]/40">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8972B]/60" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C8972B]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#dba343]/60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#dba343]" />
             </span>
             Secure admin access
           </div>
@@ -76,10 +76,10 @@ export default function AdminLoginPage() {
         {/* Right form panel */}
         <div className="bg-[##F7F3ED] p-6 sm:p-9 md:p-11 lg:p-12 flex flex-col justify-center">
           <div className="md:hidden flex items-center gap-3 mb-6 sm:mb-7">
-            <div className="w-8 h-8 rounded-full border border-[#C8972B]/40 flex items-center justify-center shrink-0">
-              <span className="font-display text-[#C8972B] text-sm leading-none">S</span>
+            <div className="w-8 h-8 rounded-full border border-[#dba343]/40 flex items-center justify-center shrink-0">
+              <span className="font-display text-[#dba343] text-sm leading-none">S</span>
             </div>
-            <p className="text-[9.5px] sm:text-[10px] tracking-[0.3em] uppercase text-[#C8972B] font-semibold">
+            <p className="text-[9.5px] sm:text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-semibold">
               Studio Admin
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function AdminLoginPage() {
               </label>
               <input
                 id="username"
-                className="autofill-fix w-full px-3.5 py-3 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/25 focus:outline-none focus:border-[#C8972B] focus:ring-[3px] focus:ring-[#C8972B]/12 transition-all"
+                className="autofill-fix w-full px-3.5 py-3 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/25 focus:outline-none focus:border-[#dba343] focus:ring-[3px] focus:ring-[#dba343]/12 transition-all"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="admin"
@@ -119,7 +119,7 @@ export default function AdminLoginPage() {
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  className="autofill-fix w-full px-3.5 py-3 pr-11 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/25 focus:outline-none focus:border-[#C8972B] focus:ring-[3px] focus:ring-[#C8972B]/12 transition-all"
+                  className="autofill-fix w-full px-3.5 py-3 pr-11 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/25 focus:outline-none focus:border-[#dba343] focus:ring-[3px] focus:ring-[#dba343]/12 transition-all"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
@@ -149,7 +149,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full flex items-center justify-center gap-2 bg-[#C8972B] text-[#1A0F08] py-3.5 rounded-lg text-xs tracking-[0.15em] uppercase font-semibold mt-6 hover:bg-[#D9A93A] active:bg-[#B8871F] disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-[0_8px_20px_-6px_rgba(200,151,43,0.5)]"
+              className="w-full flex items-center justify-center gap-2 bg-[#dba343] text-[#1A0F08] py-3.5 rounded-lg text-xs tracking-[0.15em] uppercase font-semibold mt-6 hover:bg-[#D9A93A] active:bg-[#B8871F] disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-[0_8px_20px_-6px_rgba(200,151,43,0.5)]"
             >
               {submitting ? (
                 "Signing in…"

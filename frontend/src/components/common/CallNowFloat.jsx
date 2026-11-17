@@ -74,7 +74,7 @@ export default function CallNowFloat() {
           top-1/2
           -translate-y-1/2
           whitespace-nowrap
-          bg-[#C8972B]
+          bg-[#dba343]
           text-white
           text-xs
           lg:text-sm

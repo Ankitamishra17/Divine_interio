@@ -22,7 +22,7 @@ import WorldMapPin from "./WorldMapPin";
 
 /*
   Palette
-  Charcoal #292622 (primary: form card, headings) | Warm Gold #C18A35 (accent, actions)
+  Charcoal #292622 (primary: form card, headings) | Warm Gold #dba343 (accent, actions)
   Ivory #F7F3ED | Beige #E8DED0 | Espresso #593719 (small accents) | White #FFFFFF
 
   Layout: light section (beige + ivory veil over an optional photo). Heading, benefits and direct contact on the left,
@@ -98,18 +98,18 @@ function validateField(field, v) {
   }
 }
 
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2";
+const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2";
 const ringLight = `${ring} focus-visible:ring-offset-[#F7F3ED]`;
 const ringCard = `${ring} focus-visible:ring-offset-[#292622]`;
 
 /* inputs on the dark card */
 const fieldClass = (err) =>
-  `w-full rounded-xl border bg-white/[0.06] px-4 py-3.5 text-base text-[#F7F3ED] placeholder-[#F7F3ED]/40 outline-none transition-colors focus:border-[#C18A35] focus:bg-white/[0.1] focus:ring-2 focus:ring-[#C18A35]/40 ${
+  `w-full rounded-xl border bg-white/[0.06] px-4 py-3.5 text-base text-[#F7F3ED] placeholder-[#F7F3ED]/40 outline-none transition-colors focus:border-[#dba343] focus:bg-white/[0.1] focus:ring-2 focus:ring-[#dba343]/40 ${
     err ? "border-red-400" : "border-[#F7F3ED]/20"
   }`;
 
 const goldText = {
-  backgroundImage: "linear-gradient(90deg,#C18A35 0%,#EBC882 50%,#C18A35 100%)",
+  backgroundImage: "linear-gradient(90deg,#dba343 0%,#EBC882 50%,#dba343 100%)",
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
@@ -130,9 +130,9 @@ function ContactRow({ href, icon: Icon, title, text, external }) {
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`group flex items-start gap-4 rounded-2xl border border-[#292622]/10 bg-white/70 p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#C18A35]/60 hover:bg-white hover:shadow-lg hover:shadow-[#292622]/10 ${ringLight}`}
+      className={`group flex items-start gap-4 rounded-2xl border border-[#292622]/10 bg-white/70 p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#dba343]/60 hover:bg-white hover:shadow-lg hover:shadow-[#292622]/10 ${ringLight}`}
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#292622] text-[#EBC882] transition-colors duration-300 group-hover:bg-[#C18A35] group-hover:text-[#292622]">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#292622] text-[#EBC882] transition-colors duration-300 group-hover:bg-[#dba343] group-hover:text-[#292622]">
         <Icon size={18} aria-hidden="true" />
       </span>
       <span className="min-w-0 flex-1">
@@ -142,7 +142,7 @@ function ContactRow({ href, icon: Icon, title, text, external }) {
       <ArrowRight
         size={16}
         aria-hidden="true"
-        className="mt-3.5 shrink-0 text-[#292622]/30 transition duration-300 group-hover:translate-x-1 group-hover:text-[#C18A35]"
+        className="mt-3.5 shrink-0 text-[#292622]/30 transition duration-300 group-hover:translate-x-1 group-hover:text-[#dba343]"
       />
     </a>
   );
@@ -307,15 +307,15 @@ export default function ContactSection() {
           className="absolute inset-0 -z-10 bg-gradient-to-b from-[#F7F3ED]/95 via-[#F7F3ED]/90 to-[#E8DED0]/95 lg:bg-gradient-to-r lg:from-[#F7F3ED]/97 lg:via-[#F7F3ED]/88 lg:to-[#E8DED0]/70"
         />
         {/* soft gold glows */}
-        <div className="pointer-events-none absolute -left-24 top-10 -z-10 h-72 w-72 rounded-md bg-[#C18A35]/20 blur-[110px]" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-80 w-80 rounded-md bg-[#C18A35]/15 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-24 top-10 -z-10 h-72 w-72 rounded-md bg-[#dba343]/20 blur-[110px]" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-80 w-80 rounded-md bg-[#dba343]/15 blur-[120px]" />
 
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8 xl:px-12">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
             {/* Left: heading, benefits, then direct contact on large screens */}
             <motion.div className="lg:col-span-5" {...enter(-30)}>
-              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#C18A35]">
-                <span className="h-px w-10 bg-[#C18A35]" />
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
+                <span className="h-px w-10 bg-[#dba343]" />
                 Free Consultation
               </p>
               <h2 className="mt-4 max-w-xl font-heading text-4xl font-normal leading-[1.12] tracking-wide text-[#292622] sm:text-5xl xl:text-6xl">
@@ -353,9 +353,9 @@ export default function ContactSection() {
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-1"
-                  style={{ backgroundImage: "linear-gradient(90deg,#C18A35,#EBC882,#C18A35)" }}
+                  style={{ backgroundImage: "linear-gradient(90deg,#dba343,#EBC882,#dba343)" }}
                 />
-                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-md bg-[#C18A35]/15 blur-3xl" />
+                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-md bg-[#dba343]/15 blur-3xl" />
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -365,7 +365,7 @@ export default function ContactSection() {
                 <div className="relative">
                   {status === "success" ? (
                     <motion.div role="status" {...fade}>
-                      <span className="flex h-16 w-16 items-center justify-center rounded-md bg-[#C18A35] text-[#292622] shadow-lg shadow-[#C18A35]/30">
+                      <span className="flex h-16 w-16 items-center justify-center rounded-md bg-[#dba343] text-[#292622] shadow-lg shadow-[#dba343]/30">
                         <Check size={28} aria-hidden="true" />
                       </span>
                       <h3
@@ -399,13 +399,13 @@ export default function ContactSection() {
                           href={WHATSAPP_URL}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#C18A35] px-6 text-[15px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${ringCard}`}
+                          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#dba343] px-6 text-[15px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${ringCard}`}
                         >
                           <MessageCircle size={18} aria-hidden="true" /> WhatsApp us
                         </a>
                         <a
                           href={PHONE_TEL}
-                          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-[#F7F3ED]/40 px-6 text-[15px] font-semibold text-[#F7F3ED] transition-colors hover:border-[#C18A35] hover:text-[#EBC882] ${ringCard}`}
+                          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-[#F7F3ED]/40 px-6 text-[15px] font-semibold text-[#F7F3ED] transition-colors hover:border-[#dba343] hover:text-[#EBC882] ${ringCard}`}
                         >
                           <Phone size={18} aria-hidden="true" /> Call us
                         </a>
@@ -429,7 +429,7 @@ export default function ContactSection() {
                               <span
                                 aria-hidden="true"
                                 className={`block h-1 rounded-md transition-colors duration-500 motion-reduce:transition-none ${
-                                  i <= step ? "bg-[#C18A35]" : "bg-[#F7F3ED]/15"
+                                  i <= step ? "bg-[#dba343]" : "bg-[#F7F3ED]/15"
                                 }`}
                               />
                               <span
@@ -438,9 +438,9 @@ export default function ContactSection() {
                                 }`}
                               >
                                 {done ? (
-                                  <Check size={13} className="text-[#C18A35]" aria-hidden="true" />
+                                  <Check size={13} className="text-[#dba343]" aria-hidden="true" />
                                 ) : (
-                                  <span className="text-xs tabular-nums text-[#C18A35]" aria-hidden="true">
+                                  <span className="text-xs tabular-nums text-[#dba343]" aria-hidden="true">
                                     0{i + 1}
                                   </span>
                                 )}
@@ -510,15 +510,15 @@ export default function ContactSection() {
                                       className="peer sr-only"
                                     />
                                     <span
-                                      className={`group flex h-full cursor-pointer items-center gap-4 rounded-2xl border px-4 py-4 transition duration-300 peer-focus-visible:ring-2 peer-focus-visible:ring-[#C18A35] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#292622] sm:flex-col sm:items-start sm:gap-3 ${
+                                      className={`group flex h-full cursor-pointer items-center gap-4 rounded-2xl border px-4 py-4 transition duration-300 peer-focus-visible:ring-2 peer-focus-visible:ring-[#dba343] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#292622] sm:flex-col sm:items-start sm:gap-3 ${
                                         on
-                                          ? "border-[#C18A35] bg-[#C18A35]/10 shadow-[0_10px_30px_-14px_rgba(193,138,53,0.6)]"
-                                          : "border-[#F7F3ED]/15 bg-white/[0.04] hover:-translate-y-0.5 hover:border-[#C18A35]/60 hover:bg-white/[0.07]"
+                                          ? "border-[#dba343] bg-[#dba343]/10 shadow-[0_10px_30px_-14px_rgba(193,138,53,0.6)]"
+                                          : "border-[#F7F3ED]/15 bg-white/[0.04] hover:-translate-y-0.5 hover:border-[#dba343]/60 hover:bg-white/[0.07]"
                                       }`}
                                     >
                                       <span
                                         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
-                                          on ? "bg-[#C18A35] text-[#292622]" : "bg-[#F7F3ED]/10 text-[#EBC882]"
+                                          on ? "bg-[#dba343] text-[#292622]" : "bg-[#F7F3ED]/10 text-[#EBC882]"
                                         }`}
                                       >
                                         <Icon size={20} aria-hidden="true" />
@@ -530,7 +530,7 @@ export default function ContactSection() {
                                       <span
                                         aria-hidden="true"
                                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors sm:absolute sm:right-3.5 sm:top-3.5 ${
-                                          on ? "border-[#C18A35] bg-[#C18A35] text-[#292622]" : "border-[#F7F3ED]/30"
+                                          on ? "border-[#dba343] bg-[#dba343] text-[#292622]" : "border-[#F7F3ED]/30"
                                         }`}
                                       >
                                         {on && <Check size={12} strokeWidth={3} />}
@@ -571,8 +571,8 @@ export default function ContactSection() {
                                   aria-pressed={data.city === c}
                                   className={`min-h-10 rounded-md border px-4 text-sm transition-colors ${ringCard} ${
                                     data.city === c
-                                      ? "border-[#C18A35] bg-[#C18A35] font-semibold text-[#292622]"
-                                      : "border-[#F7F3ED]/20 bg-white/[0.04] text-[#F7F3ED]/85 hover:border-[#C18A35]/70 hover:text-[#EBC882]"
+                                      ? "border-[#dba343] bg-[#dba343] font-semibold text-[#292622]"
+                                      : "border-[#F7F3ED]/20 bg-white/[0.04] text-[#F7F3ED]/85 hover:border-[#dba343]/70 hover:text-[#EBC882]"
                                   }`}
                                 >
                                   {c}
@@ -598,7 +598,7 @@ export default function ContactSection() {
                               <button
                                 type="button"
                                 onClick={() => setShowMsg(true)}
-                                className={`mt-6 inline-flex min-h-10 items-center gap-1.5 rounded-sm text-sm font-semibold text-[#EBC882] underline decoration-[#C18A35] decoration-2 underline-offset-4 hover:text-[#C18A35] ${ringCard}`}
+                                className={`mt-6 inline-flex min-h-10 items-center gap-1.5 rounded-sm text-sm font-semibold text-[#EBC882] underline decoration-[#dba343] decoration-2 underline-offset-4 hover:text-[#dba343] ${ringCard}`}
                               >
                                 <Plus size={15} aria-hidden="true" /> Add details (optional)
                               </button>
@@ -680,7 +680,7 @@ export default function ContactSection() {
                           type="submit"
                           disabled={submitting}
                           aria-busy={submitting}
-                          className={`group relative inline-flex min-h-14 flex-1 items-center justify-center gap-2.5 overflow-hidden rounded-md bg-[#C18A35] px-6 text-base font-semibold tracking-wide text-[#292622] shadow-xl shadow-black/30 transition duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 ${ringCard}`}
+                          className={`group relative inline-flex min-h-14 flex-1 items-center justify-center gap-2.5 overflow-hidden rounded-md bg-[#dba343] px-6 text-base font-semibold tracking-wide text-[#292622] shadow-xl shadow-black/30 transition duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 ${ringCard}`}
                         >
                           <span className="absolute inset-0 -translate-x-full bg-[#F7F3ED] transition-transform duration-500 group-hover:translate-x-0 motion-reduce:hidden" />
                           <span className="relative inline-flex items-center gap-2.5">
@@ -715,10 +715,10 @@ export default function ContactSection() {
                 role="status"
               >
                 <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                  {open && <span className="absolute inline-flex h-full w-full animate-ping roundeed-md bg-[#C18A35] opacity-60 motion-reduce:animate-none" />}
-                  <span className={`relative h-2 w-2 rounded-md ${open ? "bg-[#C18A35]" : "bg-[#292622]/30"}`} />
+                  {open && <span className="absolute inline-flex h-full w-full animate-ping roundeed-md bg-[#dba343] opacity-60 motion-reduce:animate-none" />}
+                  <span className={`relative h-2 w-2 rounded-md ${open ? "bg-[#dba343]" : "bg-[#292622]/30"}`} />
                 </span>
-                <Clock size={15} className="text-[#C18A35]" aria-hidden="true" />
+                <Clock size={15} className="text-[#dba343]" aria-hidden="true" />
                 {open === null
                   ? "Studio open every day, 10 AM to 7 PM"
                   : open

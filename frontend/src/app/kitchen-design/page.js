@@ -10,10 +10,10 @@ import FAQSection from "@/components/service/modular-kitchen/DesignIdeas/FAQSect
 import KitchenBudgetCalculator from "@/components/service/modular-kitchen/KitchenBudgetCalculator";
 
 export const metadata = {
-  title: "Modern Modular Kitchen Design Ideas | Living Space Decor",
+  title: "Modern Modular Kitchen Design Ideas | Divine Interio",
 
   description:
-    "Explore modern modular kitchen design ideas with L-shaped, U-shaped, island, parallel, and straight layouts by Living Space Decor in Noida & Greater Noida.",
+    "Explore modern modular kitchen design ideas with L-shaped, U-shaped, island, parallel, and straight layouts by Divine Interio in Noida & Greater Noida.",
   keywords: [
     "Modular Kitchen Design",
     "Modern Kitchen Design",
@@ -25,7 +25,7 @@ export const metadata = {
     "Straight Kitchen",
     "Kitchen Interior Design",
     "Modular Kitchen in  Greater Noida",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

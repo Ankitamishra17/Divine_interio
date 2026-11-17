@@ -5,10 +5,10 @@ import CTA from "@/components/service/architecture/CTA";
 import FAQ from "@/components/service/architecture/FAQ";
 
 export const metadata = {
-  title: "Architecture Design Services | Living Space Decor",
+  title: "Architecture Design Services | Divine Interio",
 
   description:
-    "Living Space Decor offers professional architecture design services for homes and commercial spaces, including planning, elevations, and construction drawings in Noida and Greater Noida.",
+    "Divine Interio offers professional architecture design services for homes and commercial spaces, including planning, elevations, and construction drawings in Noida and Greater Noida.",
   keywords: [
     "Architecture Design",
     "Architectural Services",
@@ -16,7 +16,7 @@ export const metadata = {
     "Commercial Architecture",
     "House Planning",
     "Architect in Noida",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

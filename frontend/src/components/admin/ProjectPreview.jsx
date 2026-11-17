@@ -18,8 +18,8 @@ function toArray(value) {
 
 function SectionLabel({ children }) {
   return (
-    <p className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[#C8972B] font-semibold mb-4">
-      <span className="w-[18px] h-px bg-[#C8972B] inline-block" />
+    <p className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-semibold mb-4">
+      <span className="w-[18px] h-px bg-[#dba343] inline-block" />
       {children}
     </p>
   );
@@ -58,7 +58,7 @@ export default function ProjectPreview({ project = {} }) {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-[#3D1F0D]/8 lg:divide-y-0">
             {specs.map((s) => (
               <div key={s.label} className="px-4 sm:px-5 py-4 sm:py-5 flex flex-col gap-1 min-w-0">
-                <span className="text-[9px] sm:text-[9.5px] tracking-[0.25em] uppercase text-[#C8972B] font-semibold">
+                <span className="text-[9px] sm:text-[9.5px] tracking-[0.25em] uppercase text-[#dba343] font-semibold">
                   {s.label}
                 </span>
                 <span className="font-display text-sm sm:text-base text-[#3D1F0D] truncate">{s.value}</span>
@@ -83,7 +83,7 @@ export default function ProjectPreview({ project = {} }) {
           <ul className="space-y-3">
             {highlights.map((h, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-[#3D1F0D]/70 font-light">
-                <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#C8972B]" />
+                <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#dba343]" />
                 <span>{h}</span>
               </li>
             ))}
@@ -108,7 +108,7 @@ export default function ProjectPreview({ project = {} }) {
 
       {/* Client quote */}
       {project.clientQuote?.text && (
-        <div className="bg-[#C8972B]/[0.06] border border-[#C8972B]/15 rounded-xl p-5 sm:p-6">
+        <div className="bg-[#dba343]/[0.06] border border-[#dba343]/15 rounded-xl p-5 sm:p-6">
           <SectionLabel>Client Quote</SectionLabel>
           <p className="font-display text-base sm:text-lg text-[#3D1F0D]/85 leading-relaxed mb-3">
             "{project.clientQuote.text}"

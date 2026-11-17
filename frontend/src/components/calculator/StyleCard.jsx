@@ -19,7 +19,7 @@ export default function StyleCard({ item, selected, onClick }) {
         ${
           selected
             ? "border-2 border-[#8B6B4A] shadow-xl shadow-[#8B6B4A]/20"
-            : "border border-[#E7DCCB] hover:border-[#C8972B] hover:shadow-lg"
+            : "border border-[#E7DCCB] hover:border-[#dba343] hover:shadow-lg"
         }
       `}
     >
@@ -92,7 +92,7 @@ export default function StyleCard({ item, selected, onClick }) {
             ${
               selected
                 ? "w-full bg-[#8B6B4A]"
-                : "w-12 bg-[#C8972B] group-hover:w-full"
+                : "w-12 bg-[#dba343] group-hover:w-full"
             }
           `}
         />

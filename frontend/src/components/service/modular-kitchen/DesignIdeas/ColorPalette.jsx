@@ -119,7 +119,7 @@ function KitchenPreview({ color, name }) {
       <path d="M134 336V306q0-12 14-12h8" stroke="#9EA4AA" strokeWidth="6" strokeLinecap="round" fill="none" />
 
       {/* Decor */}
-      <rect x="650" y="312" width="32" height="28" rx="5" fill="#C8972B" />
+      <rect x="650" y="312" width="32" height="28" rx="5" fill="#dba343" />
       <circle cx="666" cy="298" r="15" fill="#7A8450" />
       <circle cx="680" cy="290" r="10" fill="#8E9A60" />
       <rect x="700" y="318" width="22" height="22" rx="4" fill="#FFFFFF" stroke="rgba(0,0,0,0.12)" />
@@ -152,9 +152,9 @@ export default function ColorPalette() {
         {/* Heading */}
         <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
           <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[3px] text-[#8A6416]">
-            <span aria-hidden="true" className="h-px w-10 bg-[#C8972B]" />
+            <span aria-hidden="true" className="h-px w-10 bg-[#dba343]" />
             Color Inspiration
-            <span aria-hidden="true" className="h-px w-10 bg-[#C8972B]" />
+            <span aria-hidden="true" className="h-px w-10 bg-[#dba343]" />
           </p>
           <h2
             id="palette-heading"
@@ -176,7 +176,7 @@ export default function ColorPalette() {
               {/* Gold offset frame */}
               <div
                 aria-hidden="true"
-                className="absolute -bottom-3 -right-3 hidden h-full w-full rounded-[2rem] border-2 border-[#C8972B]/50 sm:block"
+                className="absolute -bottom-3 -right-3 hidden h-full w-full rounded-[2rem] border-2 border-[#dba343]/50 sm:block"
               />
 
               <div className="relative overflow-hidden rounded-[2rem] bg-[#F7F3ED] shadow-2xl shadow-[#3D1F0D]/20">
@@ -227,7 +227,7 @@ export default function ColorPalette() {
                       className={`group relative flex w-full flex-col items-start gap-3 rounded-2xl border p-4 text-left transition-all duration-300 ${focusRing} ${
                         isActive
                           ? "border-[#B8851F] bg-[#FBF7F2] shadow-lg shadow-[#3D1F0D]/10"
-                          : "border-stone-200 bg-white hover:-translate-y-1 hover:border-[#C8972B]/60 hover:shadow-md"
+                          : "border-stone-200 bg-white hover:-translate-y-1 hover:border-[#dba343]/60 hover:shadow-md"
                       }`}
                     >
                       <span

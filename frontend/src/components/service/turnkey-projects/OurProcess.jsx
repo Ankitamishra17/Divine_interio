@@ -87,7 +87,7 @@ export default function TurnkeyOverview() {
                   key={title}
                   className="flex items-start gap-4 rounded-2xl border border-[#E8D5BC] bg-white p-4 shadow-[0_2px_12px_rgba(61,31,13,0.06)]"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#C8972B]/12 text-[#C8972B]">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#dba343]/12 text-[#dba343]">
                     <Icon size={20} strokeWidth={1.6} />
                   </span>
                   <div>
@@ -100,7 +100,7 @@ export default function TurnkeyOverview() {
 
             <Link
               href="/contact"
-              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-[#C8972B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C8972B]"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-[#dba343] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#dba343]"
             >
               Book free consultation
               <ArrowRight
@@ -130,7 +130,7 @@ export default function TurnkeyOverview() {
                     {!isLast && (
                       <span
                         aria-hidden="true"
-                        className="absolute left-6 top-12 -ml-px h-[calc(100%-3rem)] border-l-2 border-dashed border-[#C8972B]/50"
+                        className="absolute left-6 top-12 -ml-px h-[calc(100%-3rem)] border-l-2 border-dashed border-[#dba343]/50"
                       />
                     )}
 
@@ -138,8 +138,8 @@ export default function TurnkeyOverview() {
                     <span
                       className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${
                         isLast
-                          ? "bg-[#C8972B] text-white shadow-md"
-                          : "border border-[#C8972B]/40 bg-[#FBF5EA] text-[#C8972B]"
+                          ? "bg-[#dba343] text-white shadow-md"
+                          : "border border-[#dba343]/40 bg-[#FBF5EA] text-[#dba343]"
                       }`}
                     >
                       <Icon size={20} strokeWidth={1.6} />
@@ -148,7 +148,7 @@ export default function TurnkeyOverview() {
                     {/* Text */}
                     <div className="pt-1">
                       <h4 className="font-semibold text-[#3D1F0D]">
-                        <span className="mr-2 text-sm font-medium text-[#C8972B]">
+                        <span className="mr-2 text-sm font-medium text-[#dba343]">
                           {index + 1}.
                         </span>
                         {step.title}

@@ -7,7 +7,7 @@ import ProcessCard from "./ProcessCard";
 import { steps } from "@/data/interiorData";
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8972B]";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343]";
 
 export default function Process() {
   const reduceMotion = useReducedMotion();
@@ -58,7 +58,7 @@ export default function Process() {
           </p>
           <Link
             href="/contact"
-            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#593719] px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-[#C8972B] hover:text-stone-950 ${focusRing}`}
+            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#593719] px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-[#dba343] hover:text-stone-950 ${focusRing}`}
           >
             Start your project
             <ArrowRight

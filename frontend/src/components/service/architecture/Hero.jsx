@@ -74,7 +74,7 @@ export default function ArchitectureHero() {
           h-40
           bg-gradient-to-b
           from-transparent
-          via-[#C8972B]
+          via-[#dba343]
           to-transparent
         "
       />
@@ -102,7 +102,7 @@ export default function ArchitectureHero() {
               sm:text-xs
               uppercase
               tracking-[0.25em]
-              text-[#C8972B]
+              text-[#dba343]
               mb-6
               -mt-20
             "
@@ -140,7 +140,7 @@ export default function ArchitectureHero() {
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="block text-[#C8972B]"
+                className="block text-[#dba343]"
               >
                 Design In Noida
               </motion.span>
@@ -154,7 +154,7 @@ export default function ArchitectureHero() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex items-center justify-center gap-3 mt-8"
           >
-            <div className="h-px w-10 sm:w-14 bg-gradient-to-r from-transparent to-[#C8972B]" />
+            <div className="h-px w-10 sm:w-14 bg-gradient-to-r from-transparent to-[#dba343]" />
 
             <motion.div
               animate={{ scale: [1, 1.3, 1] }}
@@ -162,10 +162,10 @@ export default function ArchitectureHero() {
                 duration: 2,
                 repeat: Infinity,
               }}
-              className="w-2 h-2 rounded-full bg-[#C8972B]"
+              className="w-2 h-2 rounded-full bg-[#dba343]"
             />
 
-            <div className="h-px w-10 sm:w-14 bg-gradient-to-l from-transparent to-[#C8972B]" />
+            <div className="h-px w-10 sm:w-14 bg-gradient-to-l from-transparent to-[#dba343]" />
           </motion.div>
 
           {/* Description */}
@@ -220,7 +220,7 @@ export default function ArchitectureHero() {
 
                 py-4
 
-                bg-[#C8972B]
+                bg-[#dba343]
                 text-white
 
                 rounded-md
@@ -261,9 +261,9 @@ export default function ArchitectureHero() {
                 py-4
 
                 border-2
-                border-[#C8972B]
+                border-[#dba343]
 
-                text-[#C8972B]
+                text-[#dba343]
 
                 rounded-md
 
@@ -272,7 +272,7 @@ export default function ArchitectureHero() {
                 text-xs
                 sm:text-sm
 
-                hover:bg-[#C8972B]/10
+                hover:bg-[#dba343]/10
                 transition-all
                 duration-300
               "
@@ -297,7 +297,7 @@ export default function ArchitectureHero() {
                     w-full sm:w-auto
                     px-8 md:px-10
                     py-3.5 md:py-4
-                    bg-[#C8972B]
+                    bg-[#dba343]
                     rounded-md
                     text-white
                     uppercase
@@ -332,14 +332,14 @@ export default function ArchitectureHero() {
                     px-8 md:px-10
                     py-3 md:py-3.5
                     border-2
-                    border-[#C8972B]
+                    border-[#dba343]
                     rounded-md
-                    text-[#C8972B]
+                    text-[#dba343]
                     uppercase
                     tracking-[0.12em]
                     md:tracking-[0.15em]
                     text-xs md:text-sm
-                    hover:bg-[#C8972B]/10
+                    hover:bg-[#dba343]/10
                     transition-all
                     duration-300
                   "

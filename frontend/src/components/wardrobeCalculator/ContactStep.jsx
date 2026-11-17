@@ -75,10 +75,10 @@ export default function ContactStep({
   };
 
   const inputClass =
-    "w-full h-14 pl-12 pr-4 rounded-xl border border-[#E8DED0] bg-[#F7F3ED] text-[#292622] placeholder:text-[#292622]/40 transition-all focus:outline-none focus:bg-[#FFFFFF] focus:border-[#C18A35] focus:ring-4 focus:ring-[#C18A35]/15";
+    "w-full h-14 pl-12 pr-4 rounded-xl border border-[#E8DED0] bg-[#F7F3ED] text-[#292622] placeholder:text-[#292622]/40 transition-all focus:outline-none focus:bg-[#FFFFFF] focus:border-[#dba343] focus:ring-4 focus:ring-[#dba343]/15";
 
   const iconClass =
-    "absolute left-4 top-1/2 -translate-y-1/2 text-[#C18A35]";
+    "absolute left-4 top-1/2 -translate-y-1/2 text-[#dba343]";
 
   return (
     <section className="max-w-4xl mx-auto">
@@ -90,7 +90,7 @@ export default function ContactStep({
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#C18A35]/40 bg-[#C18A35]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#dba343]/40 bg-[#dba343]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
           Step {CURRENT_STEP} of {TOTAL_STEPS}
         </span>
 
@@ -100,7 +100,7 @@ export default function ContactStep({
             <span
               key={i}
               className={`h-1 flex-1 rounded-full ${
-                i < CURRENT_STEP ? "bg-[#C18A35]" : "bg-[#E8DED0]"
+                i < CURRENT_STEP ? "bg-[#dba343]" : "bg-[#E8DED0]"
               }`}
             />
           ))}
@@ -187,7 +187,7 @@ export default function ContactStep({
           </div>
 
           {/* Selection Summary */}
-          <div className="mt-4 rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] bg-[#F7F3ED] p-6">
+          <div className="mt-4 rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#dba343] bg-[#F7F3ED] p-6">
             <h3 className="mb-4 font-serif text-xl font-semibold text-[#593719]">
               Your Selection
             </h3>
@@ -230,7 +230,7 @@ export default function ContactStep({
           onClick={handleSubmit}
           className={`flex items-center gap-2 rounded-xl px-8 py-3 transition-all duration-300 ${
             isValid && !isSubmitting
-              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#C18A35]"
+              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#dba343]"
               : "bg-[#E8DED0] text-[#292622]/40 cursor-not-allowed"
           }`}
         >

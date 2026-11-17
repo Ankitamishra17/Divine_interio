@@ -70,7 +70,7 @@ function StripDesign() {
             href="/portfolio"
             className="group flex items-center gap-4 border-b border-[#3D1F0D]/10 p-5 transition-colors hover:bg-[#F7F3ED] lg:border-b-0 lg:border-r lg:last:border-r-0"
           >
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-[#C8972B]/60">
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-[#dba343]/60">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -114,7 +114,7 @@ function StaggerDesign() {
               <span className="mt-5 block font-serif text-sm text-[#B8851F]">0{i + 1}</span>
               <h3 className="mt-1 font-serif text-lg text-[#3D1F0D] sm:text-xl">{item.title}</h3>
               <p className="mx-auto mt-1 max-w-[220px] text-sm text-gray-500">{item.subtitle}</p>
-              <div className="mx-auto mt-3 h-[2px] w-8 bg-[#C8972B] transition-all duration-300 group-hover:w-16" />
+              <div className="mx-auto mt-3 h-[2px] w-8 bg-[#dba343] transition-all duration-300 group-hover:w-16" />
             </Link>
           </motion.div>
         </div>
@@ -144,7 +144,7 @@ function RevealDesign() {
 
             {/* Default label */}
             <div className="absolute inset-x-0 bottom-0 p-4 transition-opacity duration-300 group-hover:opacity-0 sm:p-5">
-              <span className="font-serif text-sm text-[#C8972B]">0{i + 1}</span>
+              <span className="font-serif text-sm text-[#dba343]">0{i + 1}</span>
               <h3 className="font-serif text-lg leading-tight text-white sm:text-xl">{item.title}</h3>
             </div>
 

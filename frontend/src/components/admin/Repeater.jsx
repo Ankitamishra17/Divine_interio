@@ -25,7 +25,7 @@ export default function Repeater({ value = [], onChange, placeholder = "" }) {
       {lines.map((line, i) => (
         <div key={i} className="flex gap-2 mb-2">
           <input
-            className="flex-1 px-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#C8972B] focus:ring-[3px] focus:ring-[#C8972B]/12 transition-all"
+            className="flex-1 px-3.5 py-2.5 bg-white border border-[#3D1F0D]/12 rounded-lg text-sm text-[#3D1F0D] placeholder:text-[#3D1F0D]/30 focus:outline-none focus:border-[#dba343] focus:ring-[3px] focus:ring-[#dba343]/12 transition-all"
             value={line}
             placeholder={placeholder}
             onChange={(e) => update(i, e.target.value)}
@@ -45,7 +45,7 @@ export default function Repeater({ value = [], onChange, placeholder = "" }) {
       <button
         type="button"
         onClick={add}
-        className="flex items-center gap-1.5 text-xs uppercase tracking-wide font-semibold text-[#3D1F0D]/55 hover:text-[#C8972B] border border-[#3D1F0D]/12 hover:border-[#C8972B] rounded-lg px-3 py-1.5 mt-1 transition-colors"
+        className="flex items-center gap-1.5 text-xs uppercase tracking-wide font-semibold text-[#3D1F0D]/55 hover:text-[#dba343] border border-[#3D1F0D]/12 hover:border-[#dba343] rounded-lg px-3 py-1.5 mt-1 transition-colors"
       >
         <Plus className="w-3 h-3" />
         Add line

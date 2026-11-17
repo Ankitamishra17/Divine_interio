@@ -11,10 +11,10 @@ import FAQSection from "@/components/service/wardrobes/FAQSection";
 import Details from "@/components/service/wardrobes/Details";
 
 export const metadata = {
-  title: "Wardrobe Design Services | Living Space Decor",
+  title: "Wardrobe Design Services | Divine Interio",
 
-description:
-  "Discover custom wardrobe design services by Living Space Decor. Explore sliding, walk-in, hinged, and modular wardrobes with smart storage solutions in Noida and Greater Noida.",
+  description:
+    "Discover custom wardrobe design services by Divine Interio. Explore sliding, walk-in, hinged, and modular wardrobes with smart storage solutions in Noida and Greater Noida.",
   keywords: [
     "Wardrobe Design",
     "Custom Wardrobe",
@@ -25,7 +25,7 @@ description:
     "Bedroom Wardrobe",
     "Wardrobe Designer",
     "Wardrobe Design in Noida",
-    "Living Space Decor",
+    "Divine Interio",
   ],
 
   alternates: {

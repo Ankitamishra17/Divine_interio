@@ -6,9 +6,9 @@ export default function ProjectCard({ project }) {
   return (
     <Link
       href={`/portfolio/${project.slug}`}
-      className="group block bg-white/40 border border-[#C8972B]/15 rounded-sm overflow-hidden hover:border-[#C8972B]/40 transition-colors"
+      className="group block bg-white/40 border border-[#dba343]/15 rounded-sm overflow-hidden hover:border-[#dba343]/40 transition-colors"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#C8972B]/10">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#dba343]/10">
         {project.image ? (
           <Image
             src={resolveImageUrl(project.image)}
@@ -26,7 +26,7 @@ export default function ProjectCard({ project }) {
       </div>
       <div className="p-6">
         {project.type && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[#C8972B] font-semibold mb-2">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[#dba343] font-semibold mb-2">
             {project.type}
           </p>
         )}
