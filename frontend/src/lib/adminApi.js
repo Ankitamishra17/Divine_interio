@@ -61,6 +61,16 @@ export const adminApi = {
   updateBlog: (id, data) => request(`/blog/${id}`, { method: "PUT", body: data }),
   deleteBlog: (id) => request(`/blog/${id}`, { method: "DELETE" }),
 
+  // Upcoming projects ("New trending designs").
+  // Adjust the paths if your backend router uses different ones.
+  // create/update take a FormData (text fields + the image file).
+  listUpcoming: () => request("/upcoming-projects"),
+  createUpcoming: (formData) =>
+    request("/upcoming-projects", { method: "POST", body: formData, isForm: true }),
+  updateUpcoming: (id, formData) =>
+    request(`/upcoming-projects/${id}`, { method: "PUT", body: formData, isForm: true }),
+  deleteUpcoming: (id) => request(`/upcoming-projects/${id}`, { method: "DELETE" }),
+
   upload: (files) => {
     const form = new FormData();
     [...files].forEach((f) => form.append("images", f));

@@ -1,167 +1,267 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useReducedMotion,
+  animate,
+} from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-// Google Fonts Config for your layout.js / global.css:
-// Marcellus: serif
-// Poppins: sans-serif
+/*
+  Palette
+  Espresso #593719 | Warm Gold #C18A35 | Ivory #F7F3ED
+  Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
-const BRAND_STATS = [
+  Design idea (kept): architectural DIMENSION LINES  |-----label-----|  under each number,
+  like measurements on a floor plan. Numbers count up once when scrolled into view.
+
+  UX changes:
+  - One large photo instead of four static ones. Hover, focus or tap a stat and the
+    photo + caption change to match it, so every number is explained by an image.
+  - Stats are real buttons (keyboard + screen reader friendly, aria-pressed).
+  - Active stat gets a solid gold dimension line, so people can see what is selected.
+  - Dimension lines draw themselves once on scroll. Reduced motion is respected.
+*/
+
+const STATS = [
   {
-    number: "2014",
-    label: "The Foundation",
-    title: "A Decade of Spatial Mastery",
+    value: 2014,
+    count: false, // a year, so it doesn't count up
+    suffix: "",
+    label: "Founded",
+    title: "Full-service interior design",
     description:
-      "Living Space Decor operates as an uncompromising, full-service interior architectural firm, commanding transformations from blueprints to bespoke styling.",
+      "We design complete interiors, from the first plan to the final styling.",
     img: "/Design/image1.avif",
   },
   {
-    number: "12+",
-    label: "Refining the Craft",
-    title: "Years of Living Innovation",
+    value: 12,
+    count: true,
+    suffix: "+",
+    label: "Years of experience",
+    title: "Homes, kitchens and architecture",
     description:
-      "Ten years spent meticulously tailoring private residences, kitchens, and architectural suites, balancing strict geometry with soft livability.",
+      "More than a decade shaping private homes, kitchens and architectural spaces that balance clean geometry with comfortable living.",
     img: "/Design/contact_banner.avif",
   },
   {
-    number: "35+",
-    label: "The Collective",
-    title: "Master Craftsmen & Artisans",
+    value: 35,
+    count: true,
+    suffix: "+",
+    label: "People on the team",
+    title: "Designers and craftsmen",
     description:
-      "An elite, highly collaborative ecosystem of interior architects, project leaders, and artisan furniture makers refining every surface.",
+      "Interior architects, project leaders and furniture makers working together on every surface.",
     img: "/Design/collective.avif",
   },
   {
-    number: "18",
-    label: "Distinctions",
-    title: "Recognitions for Excellence",
+    value: 18,
+    count: true,
+    suffix: "",
+    label: "Awards won",
+    title: "Recognised for our work",
     description:
-      "Eighteen regional accolades celebrating groundbreaking structural planning, ambient lighting integration, and premium material curation.",
+      "Eighteen regional awards for structural planning, lighting design and material selection.",
     img: "/image/living_room13.webp",
   },
 ];
 
-function FeatureCard({ stat, index }) {
-  const cardRef = useRef(null);
-  const inView = useInView(cardRef, { once: true, margin: "-80px" });
+const EASE = [0.22, 1, 0.36, 1];
+
+function CountUp({ to, suffix = "" }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const reduce = useReducedMotion();
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduce) {
+      setN(to);
+      return;
+    }
+    const controls = animate(0, to, {
+      duration: 1.6,
+      ease: "easeOut",
+      onUpdate: (v) => setN(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, reduce, to]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {n}
+      {suffix}
+    </span>
+  );
+}
+
+// |------ label ------|  like a measurement on a floor plan
+function DimensionLine({ label, active, delay = 0 }) {
+  const reduce = useReducedMotion();
+  const line = active ? "bg-[#C18A35]" : "bg-[#C18A35]/40";
 
   return (
     <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-      className="group relative flex flex-col justify-between bg-[#FCFAF7] border border-[#3D1F0D]/5 p-6 md:p-8 rounded-none transition-all duration-500 hover:bg-white hover:shadow-2xl hover:shadow-[#3D1F0D]/5"
+      className="mt-4 flex items-center gap-3"
+      initial={reduce ? false : { scaleX: 0, opacity: 0 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.9, delay, ease: EASE }}
+      style={{ originX: 0 }}
     >
-      {/* Top Meta Line */}
-      <div className="flex items-center justify-between border-b border-[#3D1F0D]/5 pb-4 mb-6">
-        <span className="text-[10px] uppercase tracking-[0.25em] text-[#C8972B] font-medium">
-          {stat.label}
-        </span>
-        <span className="font-mono text-[11px] text-[#A89A90]">0{index + 1}</span>
-      </div>
-
-      {/* Asymmetrical Layout: Text & Image Interlocking */}
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center ">
-        {/* Left Side: Editorial Content */}
-        <div className="sm:col-span-7 order-2 sm:order-1 space-y-3">
-          <div className="flex items-baseline gap-2">
-            <h3 
-              className="text-4xl sm:text-5xl font-normal text-[#2A1B12] leading-none"
-              style={{ fontFamily: "'Marcellus', serif" }}
-            >
-              {stat.number}
-            </h3>
-            <span className="h-1 w-1 rounded-full bg-[#C8972B]" />
-          </div>
-
-          <h4 
-            className="text-lg font-normal text-[#2A1B12] tracking-tight leading-snug"
-            style={{ fontFamily: "'Marcellus', serif" }}
-          >
-            {stat.title}
-          </h4>
-
-          <p className="text-[13px] leading-relaxed text-[#6E5E54] font-light">
-            {stat.description}
-          </p>
-        </div>
-
-        {/* Right Side: Elegant Framed Image */}
-        <div className="sm:col-span-5 order-1 sm:order-2">
-          <div className="relative aspect-[16/11] sm:aspect-square w-full overflow-hidden bg-[#EADCC9] grayscale-[20%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 transition-all duration-700">
-            <Image
-              src={stat.img}
-              alt={stat.title}
-              fill
-              sizes="(max-width: 640px) 100vw, 200px"
-              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
-            {/* Soft Warm Filter Overlay */}
-            <div className="absolute inset-0 bg-[#3D1F0D]/5 mix-blend-multiply pointer-events-none" />
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Minimal Action Trigger */}
-      {/* <div className="mt-6 pt-4 border-t border-[#3D1F0D]/5 flex items-center justify-between text-[11px] font-medium tracking-widest uppercase text-[#2A1B12] opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-        <span>View Details</span>
-        <ArrowUpRight size={14} className="text-[#C8972B] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </div> */}
+      <span className={`h-3 w-px transition-colors duration-300 ${active ? "bg-[#C18A35]" : "bg-[#C18A35]/70"}`} aria-hidden="true" />
+      <span className={`h-px flex-1 transition-colors duration-300 ${line}`} aria-hidden="true" />
+      <span
+        className={`text-[13px] font-medium transition-colors duration-300 ${
+          active ? "text-[#593719]" : "text-[#593719]/70"
+        }`}
+      >
+        {label}
+      </span>
+      <span className={`h-px flex-1 transition-colors duration-300 ${line}`} aria-hidden="true" />
+      <span className={`h-3 w-px transition-colors duration-300 ${active ? "bg-[#C18A35]" : "bg-[#C18A35]/70"}`} aria-hidden="true" />
     </motion.div>
   );
 }
 
 export default function WhyChooseUs() {
-  const sectionRef = useRef(null);
-  const isSectionInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [active, setActive] = useState(0);
+  const reduce = useReducedMotion();
+  const current = STATS[active];
 
   return (
-    <section 
-      ref={sectionRef}
-      className="relative bg-[#F7F4F0] py-20 lg:py-24 overflow-hidden"
-      style={{ fontFamily: "'Poppins', sans-serif" }} // Base font for clean reading
-    >
-      {/* Subtle Luxury Watermark Lines */}
-      <div className="absolute inset-y-0 left-8 lg:left-16 w-px bg-[#3D1F0D]/[0.02] pointer-events-none" />
-      <div className="absolute inset-y-0 right-8 lg:right-16 w-px bg-[#3D1F0D]/[0.02] pointer-events-none" />
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        
-        {/* ─── LUXURY MINIMALIST HEADER ─── */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl mx-auto text-center mb-16 space-y-4"
-        >
-          <div className="inline-flex items-center gap-2">
-            <Sparkles className="h-3.5 w-3.5 text-[#C8972B]" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-[#C8972B]">
-              Studio Credentials
-            </span>
-          </div>
-
-          <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2A1B12] leading-[1.2] tracking-tight"
-            style={{ fontFamily: "'Marcellus', serif" }}
+    <section className="bg-[#F7F3ED] py-20 md:py-28" aria-labelledby="why-choose-us-heading">
+      <div className="mx-auto max-w-[1680px] px-5 sm:px-8 xl:px-12">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-24">
+          {/* ───────── Featured photo (changes with the selected stat) ───────── */}
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="lg:sticky lg:top-28 lg:col-span-5"
           >
-            Design that lives <span className=" text-[#C8972B] font-light">with you</span>, not just in it.
-          </h2>
-          
-          <div className="h-[1px] w-12 bg-[#C8972B]/50 mx-auto pt-1" />
-        </motion.div>
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[#E8DED0] shadow-[0_24px_60px_-28px_rgba(41,38,34,0.45)]">
+              {/* All photos stay mounted and fade, so switching never flickers or reloads */}
+              {STATS.map((s, i) => (
+                <Image
+                  key={s.img}
+                  src={s.img}
+                  alt={i === active ? s.title : ""}
+                  aria-hidden={i !== active}
+                  fill
+                  priority={i === 0}
+                  sizes="(max-width:1024px) 92vw, 40vw"
+                  className={`object-cover transition-opacity duration-700 ease-out ${
+                    i === active ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
 
-        {/* ─── PRESTIGE LOOKBOOK GRID ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 ">
-          {BRAND_STATS.map((stat, i) => (
-            <FeatureCard key={stat.label} stat={stat} index={i} />
-          ))}
+              {/* Caption */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#292622]/85 via-[#292622]/45 to-transparent px-5 pb-5 pt-20 sm:px-7 sm:pb-7">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                    aria-live="polite"
+                  >
+                    <p className="font-heading text-2xl leading-tight text-[#F7F3ED] sm:text-3xl">
+                      {current.value}
+                      {current.suffix}{" "}
+                      <span className="text-[#C18A35]">{current.label.toLowerCase()}</span>
+                    </p>
+                    <p className="mt-1 text-sm text-[#F7F3ED]/80">{current.title}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Progress ticks: show which of the four is selected, and let people jump */}
+              <div className="absolute right-4 top-4 flex gap-1.5 sm:right-5 sm:top-5">
+                {STATS.map((s, i) => (
+                  <span
+                    key={s.label}
+                    aria-hidden="true"
+                    className={`h-1 rounded-full transition-all duration-500 ${
+                      i === active ? "w-7 bg-[#C18A35]" : "w-3 bg-[#FFFFFF]/60"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ───────── Heading + stats ───────── */}
+          <div className="lg:col-span-7">
+            <motion.h2
+              id="why-choose-us-heading"
+              initial={reduce ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="max-w-2xl font-heading text-4xl font-medium leading-[1.1] text-[#593719] sm:text-5xl xl:text-6xl"
+            >
+              Design that lives with you, not just in it.
+            </motion.h2>
+
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#292622]/70">
+              Hover or tap a number to see the work behind it.
+            </p>
+
+            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12">
+              {STATS.map((stat, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={stat.label}
+                    type="button"
+                    aria-pressed={isActive}
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    className={`group rounded-sm p-5 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] xl:p-6 ${
+                      isActive
+                        ? "bg-[#FFFFFF] shadow-[0_18px_40px_-26px_rgba(89,55,25,0.55)]"
+                        : "bg-transparent hover:bg-[#E8DED0]/45"
+                    }`}
+                  >
+                    <p
+                      className={`font-heading text-6xl leading-none transition-colors duration-300 xl:text-7xl ${
+                        isActive ? "text-[#593719]" : "text-[#593719]/55"
+                      }`}
+                    >
+                      {stat.count ? <CountUp to={stat.value} suffix={stat.suffix} /> : stat.value}
+                    </p>
+
+                    <DimensionLine label={stat.label} active={isActive} delay={i * 0.12} />
+
+                    <h3 className="mt-5 font-heading text-xl text-[#292622]">{stat.title}</h3>
+                    <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-[#292622]/70">
+                      {stat.description}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            <Link
+              href="/portfolio"
+              className="group mt-12 inline-flex items-center gap-2 rounded-sm bg-[#593719] px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+            >
+              See our work
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
-
       </div>
     </section>
   );

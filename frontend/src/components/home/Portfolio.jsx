@@ -3,223 +3,198 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-const IMAGE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ||
-  "http://localhost:5000";
+/*
+  Palette
+  Ivory #F7F3ED | Charcoal #292622 | Warm Gold #C18A35 | Espresso #593719 | Beige #E8DED0
 
-export default function Portfolio({ portfolio }) {
-  const [hoveredId, setHoveredId] = useState(null);
-  // Prevent errors if no projects are returned
-  if (!portfolio || portfolio.length === 0) {
+  New layout: STICKY INTRO + STAGGERED GALLERY.
+  - Left: the heading, short text and the "view all" button stay pinned while you scroll
+    through the projects (desktop). The button is always in reach.
+  - Right: two columns of tall photos. The second column sits lower, so the photos zigzag
+    like pictures hung on a gallery wall instead of a rigid grid.
+  - Captions sit under each photo (name, then category and location), never on top of it,
+    so they are always easy to read. Small screens show one column, in order.
+  - Same props and data as before: { portfolio, limit }, project.name / slug / image,
+    optional project.category and project.location. Shows up to 6 projects.
+*/
+
+const IMAGE_URL =
+  process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") || "http://localhost:5000";
+
+const PLACEHOLDER = "/image/placeholder.webp";
+const EASE = [0.22, 1, 0.36, 1];
+
+const subline = (p) => [p.category, p.location].filter(Boolean).join(", ");
+
+function ProjectImage({ src, alt, sizes, priority }) {
+  const [failed, setFailed] = useState(false);
+
+  // Full URL from the API, or the placeholder if there is no image / it failed to load
+  let url = PLACEHOLDER;
+  if (!failed && src) {
+    url = src.startsWith("http") ? src : `${IMAGE_URL}${src.startsWith("/") ? "" : "/"}${src}`;
+  }
+  const remote = url !== PLACEHOLDER;
+
   return (
-    <section className="py-24 text-center">
-      <h2 className="text-2xl font-semibold">
-        No Projects Available
-      </h2>
-      
-    </section>
+    <Image
+      src={url}
+      alt={alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      // Images come from your API server, so skip Next's image optimizer for them.
+      // (No next.config.js "images.remotePatterns" setup needed.)
+      unoptimized={remote}
+      onError={() => setFailed(true)}
+      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 motion-reduce:transition-none"
+    />
   );
 }
 
+function Card({ project, index }) {
   return (
-    <section className="px-6 lg:px-14 py-32 bg-gradient-to-b from-[#F5EBE0]/20 to-transparent">
-      {/* Header */}
-      <motion.div
-        className="mb-20"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
+    <li className={index % 2 === 1 ? "sm:translate-y-16" : ""}>
+      <Link
+        href={`/portfolio/${project.slug}`}
+        className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]"
       >
-        <p className="flex items-center gap-3 text-[10px] tracking-[.28em] uppercase text-[#C8972B] font-medium mb-4">
-          <span className="w-8 h-px bg-gradient-to-r from-[#C8972B] to-transparent" />
-          Portfolio Selection
-        </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <h2 className="font-[Cormorant_Garamond,serif] text-4xl md:text-[56px] font-medium leading-[1.15] text-[#2A1506]">
-            Transforming Spaces Into Legacies
-          </h2>
-          <p className="text-[#3D1F0D]/70 text-sm leading-relaxed">
-            Each project represents our commitment to blending timeless elegance
-            with contemporary sophistication, creating interiors that tell your
-            story.
-          </p>
-        </div>
-      </motion.div>
-
-      {/* Two Column Layout with Alternating */}
-      <div className="space-y-6">
-        {/* Featured Large Image - Row 1 */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          {/* Left - Large Featured Image */}
-          <motion.div
-            className="group relative overflow-hidden rounded-lg h-[380px] md:h-[440px] cursor-pointer md:col-span-2 md:row-span-1"
-            onMouseEnter={() => setHoveredId(portfolio[0].id)}
-            onMouseLeave={() => setHoveredId(null)}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5 }}
+        <span className="relative block aspect-[4/5] overflow-hidden rounded-sm bg-[#E8DED0]">
+          <ProjectImage
+            src={project.image}
+            alt={project.name}
+            priority={index < 2}
+            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 34vw"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#F7F3ED] text-[#292622] shadow-sm transition-colors duration-300 group-hover:bg-[#C18A35]"
           >
-            <Link
-              href={`/portfolio/${portfolio[0].slug}`}
-              className="block h-full"
-            >
-              <Image
-                src={
-                  portfolio[0].image
-                    ? `${IMAGE_URL}${portfolio[0].image}`
-                    : "/image/placeholder.webp"
-                }
-                alt={portfolio[0].name}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* gradient overlay - always visible so text stays readable */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#140802]/80 via-[#140802]/30 to-transparent" />
-
-              {/* text - always visible */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between">
-                <div className="flex-1">
-                  <span className="inline-block px-3 py-1.5 bg-[#C8972B] text-white text-[9px] uppercase tracking-[.2em] font-semibold rounded-full mb-4">
-                    Featured
-                  </span>
-                  <p className="font-heading text-[32px] md:text-[40px] font-medium text-white mb-2">
-                    {portfolio[0].name}
-                  </p>
-                </div>
-                <motion.div
-                  animate={{
-                    scale: hoveredId === portfolio[0].id ? 1.1 : 1,
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="w-12 h-12 rounded-full bg-[#C8972B] flex items-center justify-center flex-shrink-0 ml-4"
-                >
-                  <ArrowUpRight size={18} className="text-white" />
-                </motion.div>
-              </div>
-
-              <div className="absolute top-6 right-6">
-                <div className="w-16 h-16 rounded-full border-2 border-[#C8972B] flex items-center justify-center">
-                  <span className="font-heading text-[#C8972B] text-2xl font-semibold">
-                    01
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Remaining 4 Images in 2x2 Grid */}
-        <motion.div
-          className="grid grid-cols-2  md:grid-cols-2  lg:grid-cols-2  gap-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          {portfolio.slice(1).map((p, i) => (
-            <motion.div
-              key={p.id}
-              className="group relative overflow-hidden rounded-lg h-[320px] cursor-pointer"
-              onMouseEnter={() => setHoveredId(p.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-            >
-              <Link href={`/portfolio/${p.slug}`} className="block h-full">
-                <Image
-                  src={
-                    p.image
-                      ? `${IMAGE_URL}${p.image}`
-                      : "/image/placeholder.webp"
-                  }
-                  alt={p.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* gradient overlay - always visible so text stays readable */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#140802]/80 via-[#140802]/20 to-transparent" />
-
-                {/* text - always visible */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-                  <div className="flex-1">
-                    <p className="font-heading text-[22px] font-medium text-white mb-1">
-                      {p.name}
-                    </p>
-                  </div>
-                  <motion.div
-                    animate={{
-                      x: hoveredId === p.id ? 5 : 0,
-                    }}
-                    className="flex-shrink-0"
-                  >
-                    <ArrowUpRight size={14} className="text-white" />
-                  </motion.div>
-                </div>
-
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[#C8972B] flex items-center justify-center text-white font-semibold text-sm">
-                  {String(p.id).padStart(2, "0")}
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* CTA Section */}
-      <motion.div
-        className="mt-14 sm:mt-20 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <Link
-          href="/portfolio"
-          className="group relative overflow-hidden
-      px-5 sm:px-10
-      py-3 sm:py-4
-      bg-[#3D1F0D]
-      text-white
-      uppercase
-      text-[10px] sm:text-xs
-      tracking-[0.08em] sm:tracking-[0.15em]
-      font-semibold
-      inline-flex
-      items-center
-      gap-2 sm:gap-3
-      rounded-md
-      shadow-[0_10px_30px_rgba(61,31,13,0.25)]"
-        >
-          <span className="relative z-10 whitespace-nowrap transition-all duration-300 group-hover:tracking-[0.12em]">
-            Explore Full Portfolio
+            <ArrowUpRight size={19} />
           </span>
+        </span>
 
-          <motion.div
-            className="relative z-10 flex items-center justify-center
-        w-6 h-6 sm:w-8 sm:h-8
-        rounded-full
-        bg-[#C8972B]
-        text-[#3D1F0D]"
-            whileHover={{ rotate: 45 }}
-            transition={{ duration: 0.3 }}
-          >
-            <ArrowUpRight size={14} className="sm:w-4 sm:h-4" />
-          </motion.div>
+        <span className="mt-5 block font-heading text-2xl leading-tight text-[#292622] xl:text-[28px]">
+          {project.name}
+        </span>
+        {subline(project) && (
+          <span className="mt-1.5 block text-sm text-[#292622]/65">{subline(project)}</span>
+        )}
+        <span
+          aria-hidden="true"
+          className="mt-4 block h-[3px] w-8 bg-[#C18A35] transition-all duration-500 group-hover:w-16"
+        />
+      </Link>
+    </li>
+  );
+}
+
+export default function Portfolio({ portfolio, limit = 2 }) {
+  const reduce = useReducedMotion();
+
+  // Nothing to show: say so, and give people somewhere to go
+  if (!portfolio || portfolio.length === 0) {
+    return (
+      <section className="bg-[#F7F3ED] px-5 py-24 text-center sm:px-8">
+        <h2 className="font-heading text-3xl font-medium text-[#292622] sm:text-4xl">
+          Our portfolio is being updated
+        </h2>
+        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#292622]/70">
+          New projects are on the way. Talk to our design team to see recent work.
+        </p>
+        <Link
+          href="/contact"
+          className="mt-7 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#593719] px-7 text-sm font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+        >
+          Talk to our design team
         </Link>
+      </section>
+    );
+  }
+
+  const total = portfolio.length;
+  const shown = portfolio.slice(0, Math.min(limit, 6));
+  const hasMore = total > shown.length;
+
+  return (
+    <section
+      className="overflow-hidden bg-[#F7F3ED] px-5 py-20 sm:px-8 md:py-28 lg:px-14"
+      aria-labelledby="portfolio-heading"
+    >
+      <motion.div
+        className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[4fr_8fr] lg:gap-20"
+        initial={reduce ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.8, ease: EASE }}
+      >
+        {/* Sticky intro */}
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <h2
+            id="portfolio-heading"
+            className="font-heading text-[40px] font-medium leading-[1.05] text-[#292622] sm:text-6xl lg:text-5xl xl:text-[56px]"
+          >
+            Transforming spaces into legacies
+          </h2>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-[#292622]/70 sm:text-lg">
+            Each project blends timeless elegance with contemporary sophistication, creating
+            interiors that tell your story.
+          </p>
+
+          <div className="mt-8 hidden lg:block">
+            <Link
+              href="/portfolio"
+              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
+            >
+              {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+            {hasMore && (
+              <p className="mt-3 text-sm text-[#292622]/65">
+                Showing {shown.length} of {total}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Staggered gallery */}
+        <div>
+          <ul
+            aria-label="Featured projects"
+            className="grid gap-x-6 gap-y-12 sm:grid-cols-2 sm:pb-16 xl:gap-x-8"
+          >
+            {shown.map((project, i) => (
+              <Card key={project.id ?? project.slug ?? i} project={project} index={i} />
+            ))}
+          </ul>
+
+          {/* Phones and tablets: button after the gallery */}
+          <div className="mt-12 lg:hidden">
+            <Link
+              href="/portfolio"
+              className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#593719] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C18A35] hover:text-[#292622] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED] sm:w-auto"
+            >
+              {hasMore ? `View all ${total} projects` : "Explore full portfolio"}
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </Link>
+            {hasMore && (
+              <p className="mt-3 text-sm text-[#292622]/65">
+                Showing {shown.length} of {total}
+              </p>
+            )}
+          </div>
+        </div>
       </motion.div>
     </section>
   );

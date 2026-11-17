@@ -321,7 +321,7 @@ export default function Footer() {
 
       <footer
         style={{
-          background: "#3D1F0D",
+          background: "#292622",
           color: "#F5EBE0",
           fontFamily: "'Sync', Poppins",
           position: "relative",
@@ -346,12 +346,12 @@ export default function Footer() {
               className="flex items-center gap-3 group flex-shrink-0"
             >
               <Image
-                src="/footer-logo.png"
+                src="/divine_logo.png"
                 alt="Living Space Decor"
                 width={300}
                 height={80}
                 priority
-                className="h-30 w-auto object-contain -mt-15"
+                className="h-50 w-auto object-contain -mt-15"
               />
             </Link>
 
@@ -363,7 +363,8 @@ export default function Footer() {
                 color: "rgba(245,235,224,0.62)",
                 lineHeight: 1.85,
                 margin: "0 0 28px",
-              }}
+
+              }} className="-mt-15"
             >
               Crafting elevated living environments across Noida & Delhi NCR.
               Every project is a synthesis of artisan craft, precise execution,
