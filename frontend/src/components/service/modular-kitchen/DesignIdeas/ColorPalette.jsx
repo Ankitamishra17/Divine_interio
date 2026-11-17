@@ -179,7 +179,7 @@ export default function ColorPalette() {
                 className="absolute -bottom-3 -right-3 hidden h-full w-full rounded-[2rem] border-2 border-[#C8972B]/50 sm:block"
               />
 
-              <div className="relative overflow-hidden rounded-[2rem] bg-[#F5EBE0] shadow-2xl shadow-[#3D1F0D]/20">
+              <div className="relative overflow-hidden rounded-[2rem] bg-[#F7F3ED] shadow-2xl shadow-[#3D1F0D]/20">
                 <KitchenPreview color={current.color} name={current.name} />
 
                 {/* Floating caption */}

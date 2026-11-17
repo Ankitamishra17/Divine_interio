@@ -68,7 +68,7 @@ function StripDesign() {
           <Link
             key={item.title}
             href="/portfolio"
-            className="group flex items-center gap-4 border-b border-[#3D1F0D]/10 p-5 transition-colors hover:bg-[#F5EBE0] lg:border-b-0 lg:border-r lg:last:border-r-0"
+            className="group flex items-center gap-4 border-b border-[#3D1F0D]/10 p-5 transition-colors hover:bg-[#F7F3ED] lg:border-b-0 lg:border-r lg:last:border-r-0"
           >
             <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-[#C8972B]/60">
               <Image

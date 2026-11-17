@@ -58,46 +58,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Floating Cards */}
-      {/* <div className=" bg-[#F5EBE0] relative z-20 ">
-        <div className="container mx-auto px-4 ">
-          <div className="grid gap-6 md:grid-cols-3 mt-2">
-            {wardrobeTypes.map((item, index) => {
-              const Icon = icons[index];
-
-              return (
-                <div
-                  key={index}
-                  className="overflow-hidden  -mt-16  rounded-[10px] bg-[#F5EBE0] shadow-md hover:shadow-2xl transition-shadow"
-                >
-                  <div className="relative h-[260px] ">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="relative px-6 pb-2 pt-12 text-center">
-                    <div className="absolute left-1/2 top-0 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#B88A5A] text-white shadow-lg">
-                      <Icon size={28} />
-                    </div>
-
-                    <h3 className="text-xl md:text-2xl font-serif text-[#3D1F0D]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm md:text-base text-gray-500 leading-relaxed">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div> */}
+     
     </section>
   );
 }

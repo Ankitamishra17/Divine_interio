@@ -322,7 +322,7 @@ export default function Footer() {
       <footer
         style={{
           background: "#292622",
-          color: "#F5EBE0",
+          color: "#F7F3ED",
           fontFamily: "'Sync', Poppins",
           position: "relative",
           overflow: "hidden",

@@ -9,8 +9,8 @@ export default function Drawer({ open, eyebrow, title, onClose, children }) {
       className="fixed inset-0 bg-[#1A0F08]/45 backdrop-blur-[2px] flex justify-end z-[200]"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="w-full max-w-xl bg-[#F5EBE0] h-screen overflow-y-auto shadow-2xl animate-[slideIn_0.25s_ease-out]">
-        <div className="sticky top-0 bg-[#F5EBE0]/95 backdrop-blur-sm px-8 pt-7 pb-5 border-b border-[#3D1F0D]/10 z-10 relative">
+      <div className="w-full max-w-xl bg-[#F7F3ED] h-screen overflow-y-auto shadow-2xl animate-[slideIn_0.25s_ease-out]">
+        <div className="sticky top-0 bg-[#F7F3ED]/95 backdrop-blur-sm px-8 pt-7 pb-5 border-b border-[#3D1F0D]/10 z-10 relative">
           <p className="flex items-center gap-3 text-[10px] tracking-[0.35em] uppercase text-[#C8972B] font-semibold mb-2.5">
             <span className="w-[22px] h-px bg-[#C8972B] inline-block" />
             {eyebrow}

@@ -106,7 +106,7 @@ export default function BlogsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F5EBE0]">
+    <div className="min-h-screen bg-[#F7F3ED]">
       <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-5 sm:px-8 lg:px-11 pt-7 sm:pt-9 pb-5 sm:pb-6 border-b border-[#3D1F0D]/10">
         <div>
           <p className="flex items-center gap-2.5 sm:gap-3 text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] uppercase text-[#C8972B] font-semibold mb-2">

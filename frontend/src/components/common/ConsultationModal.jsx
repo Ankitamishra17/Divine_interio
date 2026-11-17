@@ -95,7 +95,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
             whileHover={{ scale: 1.1, rotate: 90 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleClose}
-            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#F5EBE0] flex items-center justify-center hover:bg-[#C8972B] hover:text-white transition-all duration-300"
+            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#F7F3ED] flex items-center justify-center hover:bg-[#C8972B] hover:text-white transition-all duration-300"
           >
             <X size={16} />
           </motion.button>

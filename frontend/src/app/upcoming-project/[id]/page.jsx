@@ -91,7 +91,7 @@
 //   };
 
 //   return (
-//     <main className="min-h-screen bg-[#F5EBE0] pt-28 pb-20 px-6 sm:px-10 lg:px-16">
+//     <main className="min-h-screen bg-[##F7F3ED] pt-28 pb-20 px-6 sm:px-10 lg:px-16">
 //       <div className="mx-auto max-w-7xl">
 //         {/* =====================================================
 //             BACK TO HOME
@@ -394,7 +394,7 @@ export default async function UpcomingProjectDetails({ params, searchParams }) {
   // =========================================================
 
   return (
-    <main className="min-h-screen bg-[#F5EBE0] px-4 pb-20 pt-28 sm:px-6 lg:px-10 xl:px-16">
+    <main className="min-h-screen bg-[##F7F3ED] px-4 pb-20 pt-28 sm:px-6 lg:px-10 xl:px-16">
       <div className="mx-auto max-w-[1600px]">
         {/* =====================================================
             BACK TO HOME

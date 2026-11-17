@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F5EBE0] p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[##F7F3ED] p-4 sm:p-6 relative overflow-hidden">
       {/* Ambient background accents */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#C8972B]/[0.08] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-40 -right-20 w-[400px] h-[400px] bg-[#3D1F0D]/[0.05] rounded-full blur-[100px] pointer-events-none" />
@@ -54,17 +54,17 @@ export default function AdminLoginPage() {
               <span className="w-[22px] h-px bg-[#C8972B] inline-block" />
               Studio Admin
             </p>
-            <h2 className="font-display text-[2.1rem] lg:text-[2.6rem] text-[#F5EBE0] leading-[1.1] mb-5">
+            <h2 className="font-display text-[2.1rem] lg:text-[2.6rem] text-[##F7F3ED] leading-[1.1] mb-5">
               Manage your
               <br />
               <span className="text-[#C8972B]">craft</span> with ease.
             </h2>
-            <p className="text-[13.5px] text-[#F5EBE0]/45 max-w-[240px] leading-relaxed">
+            <p className="text-[13.5px] text-[##F7F3ED]/45 max-w-[240px] leading-relaxed">
               Curate portfolio projects, publish journal entries, and keep the studio's story current.
             </p>
           </div>
 
-          <div className="relative flex items-center gap-2.5 text-[11px] tracking-wide text-[#F5EBE0]/40">
+          <div className="relative flex items-center gap-2.5 text-[11px] tracking-wide text-[##F7F3ED]/40">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8972B]/60" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C8972B]" />
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
         </div>
 
         {/* Right form panel */}
-        <div className="bg-[#F5EBE0] p-6 sm:p-9 md:p-11 lg:p-12 flex flex-col justify-center">
+        <div className="bg-[##F7F3ED] p-6 sm:p-9 md:p-11 lg:p-12 flex flex-col justify-center">
           <div className="md:hidden flex items-center gap-3 mb-6 sm:mb-7">
             <div className="w-8 h-8 rounded-full border border-[#C8972B]/40 flex items-center justify-center shrink-0">
               <span className="font-display text-[#C8972B] text-sm leading-none">S</span>

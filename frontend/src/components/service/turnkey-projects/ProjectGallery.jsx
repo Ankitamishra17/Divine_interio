@@ -93,7 +93,7 @@ export default function ProjectGallery() {
   };
 
   return (
-    <section className="bg-[#F5EBE0] py-16 lg:py-28">
+    <section className="bg-[#F7F3ED] py-16 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Heading */}
         <div className="mb-10 max-w-2xl lg:mb-14">
@@ -229,7 +229,7 @@ export default function ProjectGallery() {
           </p>
           <Link
             href="/contact"
-            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F5EBE0] transition-colors duration-300 hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
+            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#C8972B] hover:text-[#3D1F0D] ${focusRing}`}
           >
             Start your project
             <ArrowRight
@@ -250,7 +250,7 @@ export default function ProjectGallery() {
           document.body.style.overflow = "";
         }}
         onKeyDown={onDialogKeyDown}
-        className="m-0 h-full max-h-none w-full max-w-none bg-transparent p-0 text-[#F5EBE0] backdrop:bg-[#1E0F06]/92 backdrop:backdrop-blur-sm"
+        className="m-0 h-full max-h-none w-full max-w-none bg-transparent p-0 text-[#F7F3ED] backdrop:bg-[#1E0F06]/92 backdrop:backdrop-blur-sm"
       >
         {viewerOpen && (
           <div
@@ -260,7 +260,7 @@ export default function ProjectGallery() {
             {/* Top bar */}
             <div className="flex items-center justify-between">
               <span
-                className="text-sm tabular-nums text-[#F5EBE0]/80"
+                className="text-sm tabular-nums text-[#F7F3ED]/80"
                 aria-live="polite"
               >
                 {pad(selected + 1)} / {pad(total)}

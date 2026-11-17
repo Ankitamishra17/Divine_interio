@@ -179,7 +179,7 @@ export default function DesignIdeas() {
 
             <Link
               href="/portfolio"
-              className={`group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F5EBE0] transition-colors duration-300 hover:bg-[#B8851F] hover:text-white ${focusRing}`}
+              className={`group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#B8851F] hover:text-white ${focusRing}`}
             >
               View full portfolio
               <ArrowRight

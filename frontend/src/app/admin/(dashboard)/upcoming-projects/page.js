@@ -334,7 +334,7 @@ export default function UpcomingProjectsPage() {
   // =========================================================
 
   return (
-    <div className="min-h-screen bg-[#F5EBE0] p-4 sm:p-5 md:p-8 lg:p-10">
+    <div className="min-h-screen bg-[#F7F3ED] p-4 sm:p-5 md:p-8 lg:p-10">
       {/* HEADER */}
       <div className="mb-6 border-b border-[#3D1F0D]/10 pb-5 sm:mb-8 sm:pb-7">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -407,7 +407,7 @@ export default function UpcomingProjectsPage() {
               type="button"
               onClick={resetForm}
               aria-label="Close form"
-              className="shrink-0 rounded-lg p-2 text-[#777] transition hover:bg-[#F5EBE0] hover:text-[#3D1F0D]"
+              className="shrink-0 rounded-lg p-2 text-[#777] transition hover:bg-[##F7F3ED] hover:text-[#3D1F0D]"
             >
               <X size={20} />
             </button>
@@ -556,7 +556,7 @@ export default function UpcomingProjectsPage() {
                         {detailPreviews.map((src, index) => (
                           <div
                             key={`${src}-${index}`}
-                            className="group relative aspect-square overflow-hidden rounded-xl border border-[#3D1F0D]/10 bg-[#F5EBE0]"
+                            className="group relative aspect-square overflow-hidden rounded-xl border border-[#3D1F0D]/10 bg-[##F7F3ED]"
                           >
                             <img
                               src={src}
@@ -596,7 +596,7 @@ export default function UpcomingProjectsPage() {
                         {existingDetailImages.map((img, index) => (
                           <div
                             key={`${img}-${index}`}
-                            className="relative aspect-square overflow-hidden rounded-xl border border-[#3D1F0D]/10 bg-[#F5EBE0]"
+                            className="relative aspect-square overflow-hidden rounded-xl border border-[#3D1F0D]/10 bg-[##F7F3ED]"
                           >
                             <img
                               src={getImageUrl(img)}
@@ -662,7 +662,7 @@ export default function UpcomingProjectsPage() {
                 type="button"
                 onClick={resetForm}
                 disabled={saving}
-                className="flex-1 rounded-xl border border-[#3D1F0D]/15 px-6 py-3 text-sm font-medium text-[#3D1F0D] transition hover:bg-[#F5EBE0] disabled:opacity-60 sm:flex-none"
+                className="flex-1 rounded-xl border border-[#3D1F0D]/15 px-6 py-3 text-sm font-medium text-[#3D1F0D] transition hover:bg-[##F7F3ED] disabled:opacity-60 sm:flex-none"
               >
                 Cancel
               </button>

@@ -109,7 +109,7 @@ function FAQItem({ faq, isOpen, onToggle, baseId }) {
 }
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState();
   const uid = useId();
 
   const schema = {

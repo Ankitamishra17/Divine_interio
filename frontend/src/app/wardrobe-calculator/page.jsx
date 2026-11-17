@@ -25,7 +25,7 @@ export default function WardrobeCalculatorPage() {
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <main className="min-h-screen bg-[#F5EBE0] py-16">
+    <main className="min-h-screen bg-[#F7F3ED] py-16">
       <div className="container mx-auto px-4">
 
         {step === 1 && (

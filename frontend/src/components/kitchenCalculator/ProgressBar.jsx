@@ -13,7 +13,7 @@ export default function ProgressBar({ step }) {
       {/* Step Circles */}
       <div className="flex justify-between items-center relative">
         {/* Line */}
-        <div className="absolute top-5 left-0 w-full h-1 bg-[#F5EBE0] rounded-full">
+        <div className="absolute top-5 left-0 w-full h-1 bg-[#F7F3ED] rounded-full">
           <div
             className="h-full bg-[#C8972B] rounded-full transition-all duration-500"
             style={{
