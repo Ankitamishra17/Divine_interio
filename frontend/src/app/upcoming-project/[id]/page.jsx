@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import Link from "next/link";
 // import { notFound } from "next/navigation";
 
@@ -275,9 +274,6 @@
 // }
 
 // New Design Feature
-=======
-// app/upcoming-project/[id]/page.jsx
->>>>>>> fe92ff18702a4c44b1382eaacb4e9feef64592d2
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -361,13 +357,6 @@ export default async function UpcomingProjectDetails({ params }) {
   const photoCount = new Set([heroUrl, ...galleryUrls]).size;
 
   return (
-<<<<<<< HEAD
-    <main className="min-h-screen bg-[##F7F3ED] px-4 pb-20 pt-28 sm:px-6 lg:px-10 xl:px-16">
-      <div className="mx-auto max-w-[1600px]">
-        {/* =====================================================
-            BACK TO HOME
-        ===================================================== */}
-=======
     <main className="bg-[#F7F3ED] selection:bg-[#593719] selection:text-[#F7F3ED]">
       <div className="mx-auto max-w-[1400px] px-5 pb-20 pt-28 sm:px-8 md:pb-28 xl:px-12">
         {/* Back link */}
@@ -382,7 +371,6 @@ export default async function UpcomingProjectDetails({ params }) {
           />
           Back to home
         </Link>
->>>>>>> fe92ff18702a4c44b1382eaacb4e9feef64592d2
 
         {/* Title block: title left, description right */}
         <header className="mt-8 grid gap-6 md:mt-10 md:grid-cols-[1.3fr_1fr] md:items-end md:gap-16">
