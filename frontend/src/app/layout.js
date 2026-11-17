@@ -22,7 +22,7 @@ export const metadata = {
   metadataBase: new URL("https://livingspacedecor.in"),
 
   title: {
-    default: "Living Space Decor | Interior Designers in Noida & Greater Noida",
+    default: "Divine Interior | Interior Designers in Delhi NCR",
     template: "%s",
   },
 
