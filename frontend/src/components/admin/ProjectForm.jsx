@@ -206,7 +206,7 @@ export default function ProjectForm({ project, onSaved, onCancel }) {
         </p>
       )}
 
-      <div className="sticky bottom-0 -mx-8 px-8 pt-4 pb-6 mt-7 border-t border-[#3D1F0D]/10 bg-[#F5EBE0]/95 backdrop-blur-sm flex gap-2.5">
+      <div className="sticky bottom-0 -mx-8 px-8 pt-4 pb-6 mt-7 border-t border-[#3D1F0D]/10 bg-[#F7F3ED]/95 backdrop-blur-sm flex gap-2.5">
         <button
           type="submit"
           disabled={saving}

@@ -60,7 +60,7 @@ export default function DesignHero({ data }) {
                         ) : (
                           <Link
                             href={crumb.href}
-                            className="text-[#F5EBE0]/75 hover:text-[#C8972B] transition-colors duration-300"
+                            className="text-[#F7F3ED]/75 hover:text-[#C8972B] transition-colors duration-300"
                           >
                             {crumb.label}
                           </Link>
@@ -68,7 +68,7 @@ export default function DesignHero({ data }) {
                         {!isLast && (
                           <ChevronRight
                             size={12}
-                            className="text-[#F5EBE0]/40"
+                            className="text-[#F7F3ED]/40"
                           />
                         )}
                       </li>
@@ -77,15 +77,15 @@ export default function DesignHero({ data }) {
                 </ol>
               </nav>
 
-              <p className="text-[#F5EBE0] uppercase tracking-[2px] text-xs md:text-sm mb-4">
+              <p className="text-[#F7F3ED] uppercase tracking-[2px] text-xs md:text-sm mb-4">
                 Interior Design Studio
               </p>
 
-              <h1 className="text-[#F5EBE0] font-heading text-3xl md:text-4xl lg:text-5xl leading-tight">
+              <h1 className="text-[#F7F3ED] font-heading text-3xl md:text-4xl lg:text-5xl leading-tight">
                 {data.title}
               </h1>
 
-              <p className="text-[#F5EBE0]/90 mt-4 text-sm md:text-lg font-serif  tracking-[1.5px]">
+              <p className="text-[#F7F3ED]/90 mt-4 text-sm md:text-lg font-serif  tracking-[1.5px]">
                 {data.subtitle}
               </p>
             </div>

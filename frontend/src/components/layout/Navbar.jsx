@@ -57,7 +57,7 @@ const navLinks = [
   { name: "Portfolio", href: "/portfolio" },
   { name: "Contact", href: "/contact" },
   { name: "Blog", href: "/blog" },
-  // { name: "About", href: "/about" },
+  { name: "About", href: "/about" },
 ];
 
 // Shortcuts shown under the search box

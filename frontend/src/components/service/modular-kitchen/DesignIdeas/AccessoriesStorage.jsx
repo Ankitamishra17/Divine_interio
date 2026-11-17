@@ -83,7 +83,7 @@ export default function AccessoriesStorage() {
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-16 rounded-3xl bg-[#F5EBE0] p-8 md:p-12">
+        <div className="mt-16 rounded-3xl bg-[#F7F3ED] p-8 md:p-12">
           <div className="grid gap-8 lg:grid-cols-2 items-center">
             <div>
               <h3 className="text-3xl font-semibold text-[#3D1F0D]">

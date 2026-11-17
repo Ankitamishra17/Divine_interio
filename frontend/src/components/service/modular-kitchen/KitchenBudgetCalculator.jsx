@@ -64,7 +64,7 @@ export default function KitchenBudgetCalculator() {
       aria-labelledby="budget-heading"
       className="px-4 py-12 sm:px-6 md:py-16 lg:py-20"
     >
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#F5EBE0] md:rounded-[32px] lg:rounded-[40px]">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#F7F3ED] md:rounded-[32px] lg:rounded-[40px]">
    
 
         <div className="relative grid items-center gap-12 p-6 md:p-10 lg:grid-cols-2 lg:gap-10 lg:p-14">

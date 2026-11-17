@@ -107,7 +107,7 @@ function WardrobeCard({ item, index }) {
             reversed ? "lg:order-2" : ""
           }`}
         >
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#F5EBE0] text-sm font-medium text-[#B8851F]">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#F7F3ED] text-sm font-medium text-[#B8851F]">
             {item.id}
           </span>
 
@@ -157,7 +157,7 @@ function WardrobeCard({ item, index }) {
         >
           {/* Viewer */}
           <div
-            className="group/viewer relative min-h-[300px] flex-1 overflow-hidden rounded-2xl bg-[#F5EBE0] sm:min-h-[360px] lg:min-h-[340px]"
+            className="group/viewer relative min-h-[300px] flex-1 overflow-hidden rounded-2xl bg-[#F7F3ED] sm:min-h-[360px] lg:min-h-[340px]"
             onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
             onTouchEnd={onTouchEnd}
           >
@@ -373,7 +373,7 @@ function WardrobeCard({ item, index }) {
             className="w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl bg-[#F5EBE0] md:h-[72vh]">
+            <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl bg-[#F7F3ED] md:h-[72vh]">
               <Image
                 key={previews[active].src}
                 src={previews[active].src}
@@ -424,7 +424,7 @@ export default function WardrobeShowcase() {
                 key={item.id}
                 type="button"
                 onClick={() => (item.id)}
-                className="shrink-0 rounded-full border border-[#B8851F]/40 bg-white/60 px-4 py-2 text-sm text-[#3D1F0D] transition-colors hover:bg-[#B8851F] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5EBE0]"
+                className="shrink-0 rounded-full border border-[#B8851F]/40 bg-white/60 px-4 py-2 text-sm text-[#3D1F0D] transition-colors hover:bg-[#B8851F] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
               >
                 {item.title}
               </button>

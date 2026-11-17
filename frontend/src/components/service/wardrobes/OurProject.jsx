@@ -68,7 +68,7 @@ export default function RecentProjects() {
   };
 
   return (
-    <section className="bg-[#F5EBE0] py-16 md:py-20">
+    <section className="bg-[#F7F3ED] py-16 md:py-20">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between md:mb-10">
@@ -84,7 +84,7 @@ export default function RecentProjects() {
 
           <Link
             href={ALL_PROJECTS_HREF}
-            className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#B8851F]/40 px-5 py-2.5 text-sm font-medium text-[#B8851F] transition-colors hover:bg-[#B8851F] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5EBE0]"
+            className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#B8851F]/40 px-5 py-2.5 text-sm font-medium text-[#B8851F] transition-colors hover:bg-[#B8851F] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
           >
             View All Projects
             <ArrowRight
@@ -107,7 +107,7 @@ export default function RecentProjects() {
                   type="button"
                   onClick={(e) => openProject(index, e)}
                   aria-label={`View ${project.title}`}
-                  className="group relative block h-full w-full overflow-hidden rounded-2xl bg-white text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5EBE0]"
+                  className="group relative block h-full w-full overflow-hidden rounded-2xl bg-white text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
                 >
                   <Image
                     src={project.image}
@@ -192,7 +192,7 @@ export default function RecentProjects() {
             className="w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-[60vh] w-full overflow-hidden rounded-2xl bg-[#F5EBE0] md:h-[70vh]">
+            <div className="relative h-[60vh] w-full overflow-hidden rounded-2xl bg-[#F7F3ED] md:h-[70vh]">
               <Image
                 key={projects[active].image}
                 src={projects[active].image}

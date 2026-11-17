@@ -59,7 +59,7 @@ export default function FAQSection() {
               pricing, installation timelines and warranties.
             </p>
 
-            <div className="mt-8 rounded-2xl bg-[#F5EBE0] p-6">
+            <div className="mt-8 rounded-2xl bg-[#F7F3ED] p-6">
               <h3 className="text-base font-semibold text-[#3D1F0D]">
                 Need More Help?
               </h3>
@@ -107,7 +107,7 @@ export default function FAQSection() {
                       className={`flex h-10 w-10 items-center justify-center rounded-full transition ${
                         active === index
                           ? "bg-[#B8851F] text-white"
-                          : "bg-[#F5EBE0] text-[#B8851F]"
+                          : "bg-[#F7F3ED] text-[#B8851F]"
                       }`}
                     >
                       {active === index ? (

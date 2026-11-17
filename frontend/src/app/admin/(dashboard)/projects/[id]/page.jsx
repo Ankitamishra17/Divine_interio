@@ -23,7 +23,7 @@ export default function AdminProjectDetailPage() {
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-[#F5EBE0]">
+    <div className="min-h-screen bg-[#F7F3ED]">
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-5 sm:px-8 lg:px-11 pt-7 sm:pt-9 pb-5 sm:pb-6 border-b border-[#3D1F0D]/10">
         <div className="min-w-0">
           <Link

@@ -29,7 +29,7 @@ const projects = [
 
 export default function RecentProjects() {
   return (
-    <section className="bg-[#F5EBE0] py-20">
+    <section className="bg-[#F7F3ED] py-20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Heading */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between">

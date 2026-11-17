@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTASection({ data }) {
   return (
-    <section className="bg-[#F5EBE0] py-20 md:py-24">
+    <section className="bg-[#F7F3ED] py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}

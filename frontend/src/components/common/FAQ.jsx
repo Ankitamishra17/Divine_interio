@@ -16,7 +16,7 @@ export default function FAQ({ data }) {
   const rightFaqs = faqs.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section className="py-16 md:py-20 bg-[#F5EBE0]">
+    <section className="py-16 md:py-20 bg-[#F7F3ED]">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
         {/* Heading */}
         <div className="text-center mb-12 md:mb-16">

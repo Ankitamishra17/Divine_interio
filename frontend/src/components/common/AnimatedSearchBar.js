@@ -61,7 +61,7 @@ export const AnimatedSearchBar = ({
     //         value={searchQuery}
     //         onChange={(e) => setSearchQuery(e.target.value)}
     //         placeholder="Search for"
-    //         className="w-full bg-transparent text-[12px] text-[#F5EBE0] placeholder-[#F5EBE0]/40 focus:outline-none border-b border-[#F5EBE0]/30 focus:border-[#C8972B] pb-1 transition-all duration-300 font-light"
+    //         className="w-full bg-transparent text-[12px] text-[#F7F3ED] placeholder-[#F7F3ED]/40 focus:outline-none border-b border-[#F7F3ED]/30 focus:border-[#C8972B] pb-1 transition-all duration-300 font-light"
     //       />
 
     //       {/* Animated Category Text */}
@@ -73,7 +73,7 @@ export const AnimatedSearchBar = ({
     //         }}
     //       >
     //         <span
-    //           className={`inline-block whitespace-nowrap text-[#F5EBE0]/60 font-light text-[12px] transition-all duration-300 ${
+    //           className={`inline-block whitespace-nowrap text-[#F7F3ED]/60 font-light text-[12px] transition-all duration-300 ${
     //             isAnimating ? "opacity-100" : "opacity-0"
     //           }`}
     //           style={{

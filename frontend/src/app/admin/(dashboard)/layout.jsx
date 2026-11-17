@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }) {
   if (!admin) return null; // redirecting to /admin/login
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#F5EBE0]">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#F7F3ED]">
       <Sidebar />
       <main className="flex-1 min-w-0 w-full">
         <div className="p-4 sm:p-6 lg:p-8">{children}</div>

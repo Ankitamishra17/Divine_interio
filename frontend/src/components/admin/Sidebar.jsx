@@ -44,14 +44,14 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile/tablet top bar — sirf lg se neeche dikhega */}
-      <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-[#1A0F08] text-[#F5EBE0] px-4 py-3 border-b border-white/10">
+      <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-[#1A0F08] text-[#F7F3ED] px-4 py-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <span className="w-[16px] h-px bg-[#C8972B] inline-block" />
           <span className="font-display text-lg">Admin Panel</span>
         </div>
         <button
           onClick={() => setOpen(true)}
-          className="p-1.5 text-[#F5EBE0]/80 hover:text-[#F5EBE0]"
+          className="p-1.5 text-[#F7F3ED]/80 hover:text-[#F7F3ED]"
           aria-label="Open menu"
         >
           <Menu className="w-6 h-6" />
@@ -69,7 +69,7 @@ export default function Sidebar() {
       {/* Sidebar: mobile/tablet pe drawer (slide in/out), lg+ pe fixed rail */}
       <aside
         className={`
-          w-72 sm:w-80 shrink-0 bg-[#1A0F08] text-[#F5EBE0] flex flex-col p-6 sm:p-7
+          w-72 sm:w-80 shrink-0 bg-[#1A0F08] text-[#F7F3ED] flex flex-col p-6 sm:p-7
           fixed inset-y-0 left-0 z-50 h-screen transition-transform duration-300 ease-in-out
           lg:sticky lg:top-0 lg:translate-x-0 lg:z-auto
           ${open ? "translate-x-0" : "-translate-x-full"}
@@ -81,14 +81,14 @@ export default function Sidebar() {
               <span className="w-[22px] h-px bg-[#C8972B] inline-block" />
               Interior Decor
             </p>
-            <h2 className="font-display text-2xl text-[#F5EBE0]">
+            <h2 className="font-display text-2xl text-[#F7F3ED]">
               Admin Panel
             </h2>
           </div>
           {/* Close button — sirf drawer mode me dikhega */}
           <button
             onClick={() => setOpen(false)}
-            className="lg:hidden text-[#F5EBE0]/60 hover:text-[#F5EBE0] p-1 -mr-1"
+            className="lg:hidden text-[#F7F3ED]/60 hover:text-[#F7F3ED] p-1 -mr-1"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -110,7 +110,7 @@ export default function Sidebar() {
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] transition-colors ${
                   active
                     ? "bg-[#C8972B]/12 text-[#C8972B]"
-                    : "text-[#F5EBE0]/60 hover:bg-white/5 hover:text-[#F5EBE0]"
+                    : "text-[#F7F3ED]/60 hover:bg-white/5 hover:text-[#F7F3ED]"
                 }`}
               >
                 {active && (
@@ -131,17 +131,17 @@ export default function Sidebar() {
               </span>
             </div>
             <div className="min-w-0">
-              <p className="text-[13px] text-[#F5EBE0]/85 truncate capitalize leading-tight">
+              <p className="text-[13px] text-[#F7F3ED]/85 truncate capitalize leading-tight">
                 {name}
               </p>
-              <p className="text-[10.5px] text-[#F5EBE0]/35 leading-tight">
+              <p className="text-[10.5px] text-[#F7F3ED]/35 leading-tight">
                 Administrator
               </p>
             </div>
           </div>
           <button
             onClick={logout}
-            className="flex items-center gap-5 ml-2 mt-10 text-sm uppercase tracking-wide text-[#F5EBE0]/85 hover:text-[#C8972B] transition-colors"
+            className="flex items-center gap-5 ml-2 mt-10 text-sm uppercase tracking-wide text-[#F7F3ED]/85 hover:text-[#C8972B] transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             Sign out

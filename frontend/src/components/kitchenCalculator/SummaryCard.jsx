@@ -2,7 +2,7 @@
 
 // export default function SummaryCard({ data }) {
 //   return (
-//     <div className="bg-[#F5EBE0] border border-[#C8972B]/20 rounded-3xl p-6 shadow-sm">
+//     <div className="bg-[#F7F3ED] border border-[#C8972B]/20 rounded-3xl p-6 shadow-sm">
 //       <div className="flex items-center justify-between mb-5">
 //         <h3 className="text-xl font-bold text-[#3D1F0D]">
 //           Kitchen Summary
@@ -109,7 +109,7 @@ export default function SummaryCard({ data }) {
       </div>
 
       {/* Card */}
-      <div className="relative bg-gradient-to-br from-[#F5EBE0] to-[#F5EBE0]/70 border-2 border-[#C8972B]/20 rounded-3xl p-6 md:p-8 shadow-lg shadow-[#C8972B]/10 backdrop-blur-sm">
+      <div className="relative bg-gradient-to-br from-[#F7F3ED] to-[#F7F3ED]/70 border-2 border-[#C8972B]/20 rounded-3xl p-6 md:p-8 shadow-lg shadow-[#C8972B]/10 backdrop-blur-sm">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}

@@ -31,7 +31,7 @@ export default function ServiceConsultation() {
             {" "}
             {/* Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-[#C8972B]/30 bg-[#C8972B]/10 px-4 py-2 backdrop-blur-md">
-              <span className="text-[8px] md:text-xs tracking-[0.25em] uppercase text-[#F5EBE0]">
+              <span className="text-[8px] md:text-xs tracking-[0.25em] uppercase text-[#F7F3ED]">
                 Premium Interior Solutions
               </span>
             </div>
@@ -44,7 +44,7 @@ export default function ServiceConsultation() {
               <span className="block text-[#C8972B]">Your Lifestyle</span>
             </h2>
             {/* Description */}
-            <p className="mt-5 max-w-2xl text-[12px] sm:text-base md:text-sm leading-relaxed text-[#F5EBE0]/90">
+            <p className="mt-5 max-w-2xl text-[12px] sm:text-base md:text-sm leading-relaxed text-[#F7F3ED]/90">
               From concept to completion, we design beautiful interiors,
               architectural spaces, turnkey projects and modular kitchens
               tailored to your vision, lifestyle and budget.

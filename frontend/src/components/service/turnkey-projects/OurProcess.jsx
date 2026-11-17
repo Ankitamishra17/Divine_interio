@@ -65,7 +65,7 @@ const benefits = [
 
 export default function TurnkeyOverview() {
   return (
-    <section className="bg-[#F5EBE0] py-20 lg:py-28">
+    <section className="bg-[#F7F3ED] py-20 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           {/* Left: content */}

@@ -44,7 +44,7 @@ const features = [
 
 export default function SmartFeatures() {
   return (
-    <section className="bg-[#F5EBE0] py-20">
+    <section className="bg-[#F7F3ED] py-20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-14">
@@ -72,7 +72,7 @@ export default function SmartFeatures() {
                 key={index}
                 className="group rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#F5EBE0] text-[#B8851F] transition-all duration-300 group-hover:bg-[#B8851F] group-hover:text-white">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#F7F3ED] text-[#B8851F] transition-all duration-300 group-hover:bg-[#B8851F] group-hover:text-white">
                   <Icon size={24} />
                 </div>
 

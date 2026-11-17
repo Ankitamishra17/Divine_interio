@@ -55,10 +55,10 @@ export default function DesignGallery({ data }) {
   });
 
   const archBtn =
-    "group relative block h-full w-full overflow-hidden rounded-t-[999px] rounded-b-2xl bg-[#e8dfd5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F5EBE0]";
+    "group relative block h-full w-full overflow-hidden rounded-t-[999px] rounded-b-2xl bg-[#e8dfd5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F7F3ED]";
 
   return (
-    <section className="bg-[#F5EBE0] py-14 md:py-24">
+    <section className="bg-[#F7F3ED] py-14 md:py-24">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="grid grid-cols-2 items-center gap-x-4 gap-y-10 lg:grid-cols-[1fr_minmax(0,1.05fr)_1fr] lg:gap-x-12">
           {/* Center content: mobile par sabse upar */}
@@ -78,7 +78,7 @@ export default function DesignGallery({ data }) {
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href={`${CONTACT_HREF}?design=${encodeURIComponent(data.title ?? "")}`}
-                className="group/cta inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#B8851F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5EBE0]"
+                className="group/cta inline-flex items-center gap-2 rounded-full bg-[#3D1F0D] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#B8851F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8851F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F3ED]"
               >
                 Enquire about this design
                 <ArrowRight
@@ -176,7 +176,7 @@ export default function DesignGallery({ data }) {
           ))}
 
           <figure className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-            <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl bg-[#F5EBE0] md:h-[72vh]">
+            <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl bg-[#F7F3ED] md:h-[72vh]">
               <Image
                 key={images[active].src}
                 src={images[active].src}
