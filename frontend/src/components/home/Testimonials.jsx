@@ -6,15 +6,16 @@ import { ChevronLeft, ChevronRight, X, Phone, MessageCircle, Clock } from "lucid
 
 /*
   Palette (unchanged)
-  Charcoal #292622 (wall) | Espresso #593719 (contact panel) | Warm Gold #C18A35 (accents)
-  Ivory #F7F3ED (featured card, reading window) | Beige #E8DED0
+  Charcoal #292622 (wall) | Espresso #593719 (progress track, buttons) | Warm Gold #C18A35 (accents)
+  Ivory #F7F3ED (review cards, reading sheet) | Beige #E8DED0
 
-  New layout: list + featured review.
-  - Desktop: a vertical list of client names on the left, one large ivory review on the right.
-    Pick a name (or use the arrows) and the review changes. A gold line marks the selected name.
-  - Phones: the names become a swipeable strip above the review.
-  - Read: "Read full review" opens the same ivory reading sheet. Esc closes, arrows step through reviews.
-  - Act: contact panel below, with live open/closed status.
+  Layout v8: a swipeable row of review cards.
+  - Heading and a one-line rating on the left, previous / next arrows on the right.
+  - Cards sit in a native scroll-snap row: swipe on phones, arrows or trackpad on desktop.
+    The next card always peeks in, so it is clear there is more. A thin gold bar shows where you are.
+  - Each card: a big opening line, a short excerpt, the client, "Read full review" (opens the reading sheet:
+    Esc closes, arrows step, focus is trapped).
+  - Contact is a slim row at the bottom with live open/closed status.
 */
 
 const testimonials = [
@@ -158,10 +159,9 @@ function isOpenNow() {
 const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2";
 const ringWall = `${ring} focus-visible:ring-offset-[#292622]`;
 const ringIvory = `${ring} focus-visible:ring-offset-[#F7F3ED]`;
-const ringEspresso = `${ring} focus-visible:ring-offset-[#593719]`;
 
-const Stars = ({ className = "text-sm" }) => (
-  <span className={`tracking-[0.15em] text-[#C18A35] ${className}`} role="img" aria-label="5 out of 5 stars">
+const Stars = ({ className = "text-sm", color = "text-[#C18A35]" }) => (
+  <span className={`tracking-[0.15em] ${color} ${className}`} role="img" aria-label="5 out of 5 stars">
     <span aria-hidden="true">★★★★★</span>
   </span>
 );
@@ -179,14 +179,14 @@ export default function Testimonials() {
   const reduce = useReducedMotion();
   const total = testimonials.length;
 
-  const listRef = useRef(null);
+  const trackRef = useRef(null);
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const opener = useRef(null);
 
-  const [sel, setSel] = useState(0); // review shown in the featured card
   const [reading, setReading] = useState(null); // index of the open review, or null
   const [open, setOpen] = useState(null);
+  const [pos, setPos] = useState({ start: 0, size: 100, canPrev: false, canNext: true });
 
   useEffect(() => {
     setOpen(isOpenNow());
@@ -194,20 +194,28 @@ export default function Testimonials() {
     return () => clearInterval(t);
   }, []);
 
-  /* Keep the selected name in view inside the list (scrolls the list only, never the page) */
+  /* Scroll position -> progress bar and arrow states */
+  const measure = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const size = Math.min(100, (el.clientWidth / el.scrollWidth) * 100);
+    const start = max > 0 ? (el.scrollLeft / max) * (100 - size) : 0;
+    setPos({ start, size, canPrev: el.scrollLeft > 4, canNext: el.scrollLeft < max - 4 });
+  };
   useEffect(() => {
-    const list = listRef.current;
-    const btn = list?.children[sel]?.firstElementChild;
-    if (!list || !btn) return;
-    const li = list.children[sel];
-    list.scrollTo({
-      left: li.offsetLeft - (list.clientWidth - li.clientWidth) / 2,
-      top: li.offsetTop - (list.clientHeight - li.clientHeight) / 2,
-      behavior: reduce ? "auto" : "smooth",
-    });
-  }, [sel, reduce]);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
-  const go = (d) => setSel((s) => (s + d + total) % total);
+  const slide = (d) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector("li");
+    const by = (card ? card.getBoundingClientRect().width : el.clientWidth * 0.8) + 20;
+    el.scrollBy({ left: d * by, behavior: reduce ? "auto" : "smooth" });
+  };
 
   /* Reading sheet */
   const openReview = (i, el) => {
@@ -215,7 +223,6 @@ export default function Testimonials() {
     setReading(i);
   };
   const closeReview = () => {
-    if (reading !== null) setSel(reading);
     setReading(null);
     opener.current?.focus?.();
   };
@@ -241,7 +248,6 @@ export default function Testimonials() {
     if (e.key === "ArrowRight") return step(1);
     if (e.key === "ArrowLeft") return step(-1);
     if (e.key === "Tab") {
-      // keep focus inside the sheet
       const f = dialogRef.current.querySelectorAll("button, a[href]");
       const a = f[0];
       const z = f[f.length - 1];
@@ -258,160 +264,97 @@ export default function Testimonials() {
   const r = reading !== null ? testimonials[reading] : null;
   const paras = r ? r.review.split("\n\n") : [];
 
-  const cur = testimonials[sel];
-  const curLead = firstSentence(cur.review);
-  const curRest = cur.review.split("\n\n")[0].slice(curLead.length).trim();
+  const iconBtn = "flex h-11 w-11 items-center justify-center rounded-full border border-[#593719]/40 text-[#593719] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED]";
+  const arrowBtn = `flex h-12 w-12 items-center justify-center rounded-full border border-[#F7F3ED]/35 text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] disabled:pointer-events-none disabled:opacity-30 ${ringWall}`;
 
   return (
     <section className="bg-[#292622] py-16 md:py-20 lg:py-28" aria-labelledby="testimonials-heading">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
-        {/* Heading */}
-        <div>
-          <h2
-            id="testimonials-heading"
-            className="max-w-2xl font-heading text-4xl font-normal leading-[1.12] tracking-wide text-[#F7F3ED] sm:text-5xl lg:text-6xl"
-          >
-            Loved by homeowners across NCR
-          </h2>
-          <p className="mt-5 flex items-center gap-3 text-[15px] text-[#F7F3ED]/70">
-            <Stars />
-            Rated 5 out of 5 by {total} clients
-          </p>
+        {/* Heading + arrows */}
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <h2
+              id="testimonials-heading"
+              className="max-w-3xl font-heading text-4xl font-normal leading-[1.1] tracking-wide text-[#F7F3ED] sm:text-5xl lg:text-6xl"
+            >
+              Loved by homeowners across NCR
+            </h2>
+            <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-[#F7F3ED]/75">
+              <span className="font-heading text-2xl text-[#F7F3ED]">5.0</span>
+              <Stars className="text-base" />
+              <span>from {total} client reviews</span>
+            </p>
+          </div>
+          <div className="hidden shrink-0 gap-3 md:flex">
+            <button type="button" aria-label="Previous reviews" onClick={() => slide(-1)} disabled={!pos.canPrev} className={arrowBtn}>
+              <ChevronLeft size={20} aria-hidden="true" />
+            </button>
+            <button type="button" aria-label="Next reviews" onClick={() => slide(1)} disabled={!pos.canNext} className={arrowBtn}>
+              <ChevronRight size={20} aria-hidden="true" />
+            </button>
+          </div>
         </div>
 
-        {/* List + featured review */}
-        <div className="mt-10 grid gap-5 lg:mt-14 lg:grid-cols-12 lg:gap-8">
-          {/* Names */}
+        {/* Swipeable row */}
+        <div className="mt-10 lg:mt-14" role="region" aria-roledescription="carousel" aria-label="Client reviews">
           <ul
-            ref={listRef}
-            aria-label="Choose a client review"
-            className="relative -mx-5 flex gap-3 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:order-1 lg:col-span-4 lg:mx-0 lg:max-h-[600px] lg:flex-col lg:gap-0 lg:overflow-y-auto lg:overflow-x-hidden lg:border-b lg:border-[#F7F3ED]/15 lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+            ref={trackRef}
+            onScroll={measure}
+            className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-2 [scrollbar-width:none] motion-reduce:scroll-auto sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
           >
             {testimonials.map((t, i) => {
-              const active = i === sel;
+              const lead = firstSentence(t.review);
+              const rest = t.review.split("\n\n")[0].slice(lead.length).trim();
               return (
-                <li key={t.name} className="shrink-0 lg:shrink">
-                  <button
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setSel(i)}
-                    className={`group relative flex w-[210px] items-center gap-3 overflow-hidden rounded-sm border px-4 py-3.5 text-left transition-colors duration-300 lg:w-full lg:rounded-none lg:border-0 lg:border-t lg:border-[#F7F3ED]/15 lg:px-6 lg:py-5 ${
-                      active
-                        ? "border-[#C18A35]/70 bg-[#F7F3ED]/[0.07]"
-                        : "border-[#F7F3ED]/15 hover:bg-[#F7F3ED]/[0.04]"
-                    } ${ringWall}`}
-                  >
-                    {/* gold line: along the bottom on phones, down the left edge on desktop */}
-                    <span
-                      aria-hidden="true"
-                      className={`absolute inset-x-0 bottom-0 hidden h-[3px] bg-[#C18A35] lg:inset-x-auto lg:inset-y-0 lg:left-0 lg:block lg:h-auto lg:w-[3px] origin-top transition-transform duration-500 ease-out motion-reduce:transition-none ${
-                        active ? "scale-y-100" : "scale-y-0"
-                      }`}
-                    />
-                    <Avatar
-                      name={t.name}
-                      size="h-10 w-10 text-lg"
-                      tone={active ? "bg-[#C18A35] text-[#292622]" : "bg-[#F7F3ED]/10 text-[#F7F3ED]"}
-                    />
-                    <span className="min-w-0">
-                      <span
-                        className={`block truncate text-[15px] font-medium transition-colors duration-300 ${
-                          active ? "text-[#F7F3ED]" : "text-[#F7F3ED]/65 group-hover:text-[#F7F3ED]"
-                        }`}
-                      >
-                        {titleCase(t.name)}
-                      </span>
-                      <span className="mt-0.5 block text-[13px] text-[#F7F3ED]/50">{readMinutes(t.review)} min read</span>
-                    </span>
-                  </button>
+                <li
+                  key={t.name}
+                  className="flex w-[86%] shrink-0 snap-start scroll-ml-5 flex-col rounded-sm bg-[#F7F3ED] p-7 text-[#292622] sm:w-[calc(50%-10px)] sm:scroll-ml-8 sm:p-8 lg:w-[calc(33.333%-14px)] lg:scroll-ml-0"
+                >
+                  <span aria-hidden="true" className="block h-8 select-none font-heading text-[64px] leading-[0.8] text-[#C18A35]">
+                    “
+                  </span>
+                  <p className="mt-4 font-heading text-[23px] font-normal leading-[1.3] sm:text-[25px]">{lead}</p>
+                  {rest && <p className="mt-4 line-clamp-4 text-[15px] leading-[1.75] text-[#292622]/75">{rest}</p>}
+
+                  <div className="mt-auto pt-8">
+                    <div className="flex items-center gap-3 border-t border-[#593719]/20 pt-5">
+                      <Avatar name={t.name} size="h-11 w-11 text-xl" />
+                      <div className="min-w-0">
+                        <p className="truncate text-[15px] font-medium">{titleCase(t.name)}</p>
+                        <Stars className="text-[13px]" color="text-[#8a5a1c]" />
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={(e) => openReview(i, e.currentTarget)}
+                      aria-label={`Read full review by ${titleCase(t.name)}`}
+                      className={`mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-[6px] transition-colors hover:text-[#8a5a1c] ${ringIvory}`}
+                    >
+                      Read full review
+                      <span className="font-normal text-[#292622]/65 no-underline">{readMinutes(t.review)} min read</span>
+                    </button>
+                  </div>
                 </li>
               );
             })}
           </ul>
 
-          {/* Featured review */}
-          <div className="relative flex min-h-[460px] flex-col overflow-hidden rounded-sm bg-[#F7F3ED] p-7 text-[#292622] sm:p-10 lg:order-2 lg:col-span-8 lg:min-h-[600px] lg:p-14">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-8 top-2 select-none font-heading text-[160px] leading-none text-[#C18A35]/25 sm:text-[200px]"
-            >
-              ”
-            </span>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={sel}
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.3, ease: EASE }}
-                className="relative flex flex-1 flex-col"
-              >
-                <Stars />
-                <p className="mt-6 max-w-[26ch] font-heading text-[28px] font-normal leading-[1.25] sm:text-[34px] lg:text-[40px]">
-                  {curLead}
-                </p>
-                {curRest && (
-                  <p className="mt-6 line-clamp-5 max-w-[62ch] text-base leading-[1.8] text-[#292622]/75 sm:text-[17px]">
-                    {curRest}
-                  </p>
-                )}
-
-                <div className="mt-auto pt-10">
-                  <div className="flex items-center gap-3 border-t border-[#593719]/20 pt-6">
-                    <Avatar name={cur.name} size="h-12 w-12 text-xl" />
-                    <p className="min-w-0 truncate text-base font-medium">{titleCase(cur.name)}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* controls (outside the swap so they never flicker) */}
-            <div className="relative mt-5 flex flex-wrap items-center justify-between gap-4">
-              <button
-                type="button"
-                onClick={(e) => openReview(sel, e.currentTarget)}
-                aria-label={`Read full review by ${titleCase(cur.name)}`}
-                className={`inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-[#593719] underline decoration-[#C18A35] decoration-2 underline-offset-[6px] transition-colors hover:text-[#C18A35] ${ringIvory}`}
-              >
-                Read full review
-                <span className="font-normal text-[#292622]/55 no-underline">{readMinutes(cur.review)} min read</span>
-              </button>
-
-              <div className="flex items-center gap-3">
-                <p className="text-sm tabular-nums text-[#292622]/60" aria-live="polite">
-                  {sel + 1} of {total}
-                </p>
-                {[
-                  { label: "Previous review", dir: -1, Icon: ChevronLeft },
-                  { label: "Next review", dir: 1, Icon: ChevronRight },
-                ].map(({ label, dir, Icon }) => (
-                  <button
-                    key={label}
-                    type="button"
-                    aria-label={label}
-                    onClick={() => go(dir)}
-                    className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#593719]/40 text-[#593719] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] ${ringIvory}`}
-                  >
-                    <Icon size={18} aria-hidden="true" />
-                  </button>
-                ))}
-              </div>
-            </div>
+          {/* Progress */}
+          <div className="mt-6 h-[2px] w-full bg-[#F7F3ED]/15" aria-hidden="true">
+            <div
+              className="h-full bg-[#C18A35] transition-[margin] duration-150 motion-reduce:transition-none"
+              style={{ width: `${pos.size}%`, marginLeft: `${pos.start}%` }}
+            />
           </div>
         </div>
 
-        {/* Contact panel */}
-        <div className="mt-16 grid gap-8 rounded-sm bg-[#593719] px-6 py-9 sm:px-10 sm:py-11 md:mt-20 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-14">
+        {/* Contact: slim row */}
+        <div className="mt-16 flex flex-col gap-6 border-t border-[#F7F3ED]/15 pt-10 md:mt-20 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h3 className="max-w-xl font-heading text-3xl font-normal leading-[1.2] tracking-wide text-[#F7F3ED] sm:text-4xl">
+            <h3 className="font-heading text-2xl font-normal leading-[1.2] tracking-wide text-[#F7F3ED] sm:text-3xl">
               Looking for interior designers in Noida?
             </h3>
-            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#F7F3ED]/80">
-              Book a free consultation and we will plan your home with you, room by room.
-            </p>
-            <p className="mt-6 flex items-center gap-2.5 text-sm text-[#F7F3ED]/80" role="status">
+            <p className="mt-3 flex items-center gap-2.5 text-sm text-[#F7F3ED]/75" role="status">
               <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
                 {open && (
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C18A35] opacity-60 motion-reduce:animate-none" />
@@ -420,17 +363,16 @@ export default function Testimonials() {
               </span>
               <Clock size={15} className="text-[#C18A35]" aria-hidden="true" />
               {open === null
-                ? "Open every day, 10 AM to 7 PM"
+                ? "Free consultation. Open every day, 10 AM to 7 PM"
                 : open
-                ? "Open now, until 7 PM"
-                : "Closed now. Open every day, 10 AM to 7 PM"}
+                ? "Free consultation. Open now, until 7 PM"
+                : "Free consultation. Closed now, open every day 10 AM to 7 PM"}
             </p>
           </div>
-
-          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={`tel:${PHONE_TEL}`}
-              className={`inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm bg-[#C18A35] px-7 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ringEspresso}`}
+              className={`inline-flex min-h-12 items-center justify-center gap-2.5 rounded-sm bg-[#C18A35] px-6 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#F7F3ED] ${ringWall}`}
             >
               <Phone size={17} aria-hidden="true" />
               Call {PHONE_DISPLAY}
@@ -439,7 +381,7 @@ export default function Testimonials() {
               href={`https://wa.me/${WHATSAPP}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex min-h-14 items-center justify-center gap-2.5 rounded-sm border border-[#F7F3ED]/50 px-7 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] ${ringEspresso}`}
+              className={`inline-flex min-h-12 items-center justify-center gap-2.5 rounded-sm border border-[#F7F3ED]/50 px-6 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:border-[#C18A35] hover:text-[#C18A35] ${ringWall}`}
             >
               <MessageCircle size={17} aria-hidden="true" />
               WhatsApp us
@@ -474,25 +416,17 @@ export default function Testimonials() {
             >
               <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#C18A35]" />
 
-              {/* Header */}
               <div className="flex items-center gap-4 border-b border-[#593719]/15 px-6 pb-5 pt-8 sm:px-10">
                 <Avatar name={r.name} size="h-12 w-12 text-xl" />
                 <div className="min-w-0">
                   <p className="truncate text-base font-medium">{titleCase(r.name)}</p>
                   <Stars />
                 </div>
-                <button
-                  ref={closeRef}
-                  type="button"
-                  onClick={closeReview}
-                  aria-label="Close review"
-                  className={`ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#593719]/40 text-[#593719] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] ${ringIvory}`}
-                >
+                <button ref={closeRef} type="button" onClick={closeReview} aria-label="Close review" className={`ml-auto shrink-0 ${iconBtn} ${ringIvory}`}>
                   <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
-              {/* Review text, one comfortable column */}
               <div data-scroll className="flex-1 overflow-y-auto px-6 py-8 sm:px-10">
                 <p className="font-heading text-[26px] font-normal leading-[1.25] sm:text-[32px]">{firstSentence(paras[0])}</p>
                 <div className="mt-7 max-w-[62ch] space-y-5 text-base leading-[1.85] text-[#292622]/85 sm:text-[17px]">
@@ -505,23 +439,12 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              {/* Footer */}
               <div className="flex items-center justify-between gap-4 border-t border-[#593719]/15 px-6 py-4 sm:px-10">
                 <div className="flex gap-2">
-                  <button
-                    type="button"
-                    aria-label="Previous review"
-                    onClick={() => step(-1)}
-                    className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#593719]/40 text-[#593719] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] ${ringIvory}`}
-                  >
+                  <button type="button" aria-label="Previous review" onClick={() => step(-1)} className={`${iconBtn} ${ringIvory}`}>
                     <ChevronLeft size={18} aria-hidden="true" />
                   </button>
-                  <button
-                    type="button"
-                    aria-label="Next review"
-                    onClick={() => step(1)}
-                    className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#593719]/40 text-[#593719] transition-colors hover:bg-[#593719] hover:text-[#F7F3ED] ${ringIvory}`}
-                  >
+                  <button type="button" aria-label="Next review" onClick={() => step(1)} className={`${iconBtn} ${ringIvory}`}>
                     <ChevronRight size={18} aria-hidden="true" />
                   </button>
                 </div>

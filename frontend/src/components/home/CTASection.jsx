@@ -70,24 +70,17 @@ export default function CTABanner() {
             aria-hidden="true"
             className="absolute inset-0 -z-10 h-full w-full object-cover"
           >
-            <source src="/bg_consult_video.mp4" type="video/mp4" />
+            <source src="/video.mp4" type="video/mp4" />
           </video>
 
           {/* Bottom-heavy scrim keeps the headline readable on any frame */}
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-[#292622] via-[#292622]/55 to-[#292622]/20"
-            aria-hidden="true"
-          />
+     
 
-          <div className="relative flex min-h-[420px] flex-col justify-end px-6 pb-28 pt-24 sm:min-h-[480px] sm:px-10 sm:pb-32 lg:min-h-[540px] lg:px-14 lg:pb-36">
-            <h2 className="max-w-3xl font-[Cormorant_Garamond,serif] text-[38px] font-medium leading-[1.05] text-[#F7F3ED] sm:text-5xl lg:text-[68px]">
-              What will your dream home interior cost?
-            </h2>
-            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-[#F7F3ED]/85 sm:text-base">
-              Get an instant estimate for elegant, modern interiors planned around
-              your home and your taste.
-            </p>
-          </div>
+   <div className="relative flex min-h-[420px] flex-col items-end justify-end px-6 pb-28 pt-24 text-right sm:min-h-[480px] sm:px-10 sm:pb-32 lg:min-h-[540px] lg:px-14 lg:pb-36">
+
+
+
+</div>
         </div>
 
         {/* Quote slip, overlapping the video */}
