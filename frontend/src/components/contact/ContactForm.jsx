@@ -45,9 +45,9 @@ import WorldMapPin from "./WorldMapPin";
 const BG_IMAGE = "/image/contact-bg.webp";
 
 const ENDPOINT = "https://livingspacedecor.in/api/send-quote";
-const PHONE_DISPLAY = "+91 9876543210";
-const PHONE_TEL = "tel:+919876543210";
-const WHATSAPP_URL = "https://wa.me/919876543210";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 const ADDRESS =
   "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009";
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
@@ -76,7 +76,6 @@ function isOpenNow() {
   return hour >= 10 && hour < 19;
 }
 
-/* Accepts 98765 43210, +91 98765 43210, 091...; returns the 10 digits or null */
 function parsePhone(raw) {
   let d = raw.replace(/\D/g, "");
   if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
@@ -96,7 +95,7 @@ function validateField(field, v) {
       return v.name.trim() ? "" : "Enter your name.";
     case "phone":
       if (!v.phone.trim()) return "Enter your phone number.";
-      return parsePhone(v.phone) ? "" : "Enter a 10 digit mobile number, for example 98765 43210.";
+      return parsePhone(v.phone) ? "" : "Enter a 10 digit mobile number, for example 9911066420.";
     default:
       return "";
   }
@@ -560,7 +559,7 @@ export default function ContactSection() {
                                 type="tel"
                                 inputMode="tel"
                                 autoComplete="tel"
-                                placeholder="98765 43210"
+                                placeholder="9911066420"
                                 value={data.phone}
                                 onChange={(e) => set("phone", e.target.value)}
                                 onBlur={() => blur("phone")}

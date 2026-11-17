@@ -21,9 +21,9 @@ import { AlertCircle, ArrowRight, Check, Loader2, MessageCircle, Phone } from "l
 */
 
 const ENDPOINT = "https://livingspacedecor.in/api/send-quote";
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "tel:+918826606869";
-const WHATSAPP_URL = "https://wa.me/918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 
 const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C18A35] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 

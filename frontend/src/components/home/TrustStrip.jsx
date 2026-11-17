@@ -22,8 +22,8 @@ import { ArrowRight, Phone, MessageCircle } from "lucide-react";
 */
 
 // Fill these in to show Call / WhatsApp buttons. Leave "" to hide them.
-const PHONE = ""; // e.g. "+919876543210"
-const WHATSAPP = ""; // digits only, with country code, e.g. "919876543210"
+const PHONE = ""; // e.g. "+919911066420"
+const WHATSAPP = ""; // digits only, with country code, e.g. "919911066420"
 const WHATSAPP_TEXT = "Hi, I'd like to talk about a home interior project in Noida.";
 
 const stats = [

@@ -19,9 +19,9 @@ import { ArrowDown, ChevronRight, Phone, MessageCircle } from "lucide-react";
 const HEADING = "font-[family-name:var(--font-philosopher)]";
 const BODY = "font-[family-name:var(--font-jost)]";
 
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "tel:+918826606869";
-const WHATSAPP_URL = "https://wa.me/918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 const ADDRESS_SHORT = "Galaxy Diamond Plaza, Greater Noida West";
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   "Shop-LGB 28, Galaxy Diamond Plaza, Sector 4, Greater Noida West, Greater Noida, Uttar Pradesh 201009"

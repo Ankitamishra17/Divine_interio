@@ -78,7 +78,7 @@ export default function ServiceConsultation() {
               </Link>
 
               <Link
-                href="tel:+918826606869"
+                href="tel:+919911066420"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white px-6 md:px-8 py-4 text-sm md:text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#3D1F0D]"
               >
                 <Phone size={18} />

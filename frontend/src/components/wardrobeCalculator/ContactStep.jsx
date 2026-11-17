@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, User, Phone, Mail } from "lucide-react";
+
+const TOTAL_STEPS = 6;
+const CURRENT_STEP = 5;
 
 export default function ContactStep({
   formData,
@@ -70,38 +74,65 @@ export default function ContactStep({
     }
   };
 
+  const inputClass =
+    "w-full h-14 pl-12 pr-4 rounded-xl border border-[#E8DED0] bg-[#F7F3ED] text-[#292622] placeholder:text-[#292622]/40 transition-all focus:outline-none focus:bg-[#FFFFFF] focus:border-[#C18A35] focus:ring-4 focus:ring-[#C18A35]/15";
+
+  const iconClass =
+    "absolute left-4 top-1/2 -translate-y-1/2 text-[#C18A35]";
+
   return (
     <section className="max-w-4xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-12">
-        <span className="inline-flex items-center gap-2 bg-[#C8972B]/10 text-[#C8972B] px-4 py-2 rounded-full text-sm font-medium">
-          Step 5 of 6
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#C18A35]/40 bg-[#C18A35]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#593719]">
+          Step {CURRENT_STEP} of {TOTAL_STEPS}
         </span>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-[#3D1F0D] mt-4 mb-4">
+        {/* Progress */}
+        <div className="mx-auto mt-5 flex max-w-xs gap-1.5">
+          {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+            <span
+              key={i}
+              className={`h-1 flex-1 rounded-full ${
+                i < CURRENT_STEP ? "bg-[#C18A35]" : "bg-[#E8DED0]"
+              }`}
+            />
+          ))}
+        </div>
+
+        <h2 className="mt-6 mb-4 font-serif text-4xl font-semibold tracking-tight text-[#593719] md:text-5xl">
           Get Your Cost Estimate
         </h2>
 
-        <p className="text-[#6B6B6B] max-w-2xl mx-auto">
+        <p className="text-[#292622]/70 max-w-2xl mx-auto">
           Enter your details and receive a personalized wardrobe cost estimate
           along with a free design consultation.
         </p>
-      </div>
+      </motion.div>
 
       {/* Form */}
-      <div className="bg-white rounded-[32px] border border-[#F0E6D8] shadow-lg p-8 md:p-12">
+      <motion.div
+        className="bg-[#FFFFFF] rounded-3xl border border-[#E8DED0] shadow-xl shadow-[#593719]/5 p-8 md:p-12"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
         <div className="grid gap-6">
           {/* Name */}
           <div>
-            <label className="block mb-2 text-[#3D1F0D] font-medium">
+            <label className="block mb-2 text-sm font-medium text-[#593719]">
               Full Name
             </label>
 
             <div className="relative">
-              <User
-                size={20}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C8972B]"
-              />
+              <User size={20} className={iconClass} />
 
               <input
                 type="text"
@@ -109,22 +140,19 @@ export default function ContactStep({
                 value={formData.name || ""}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full h-14 pl-12 pr-4 rounded-2xl border border-[#F0E6D8] focus:outline-none focus:border-[#C8972B]"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block mb-2 text-[#3D1F0D] font-medium">
+            <label className="block mb-2 text-sm font-medium text-[#593719]">
               Phone Number
             </label>
 
             <div className="relative">
-              <Phone
-                size={20}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C8972B]"
-              />
+              <Phone size={20} className={iconClass} />
 
               <input
                 type="tel"
@@ -133,22 +161,19 @@ export default function ContactStep({
                 value={formData.phone || ""}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
-                className="w-full h-14 pl-12 pr-4 rounded-2xl border border-[#F0E6D8] focus:outline-none focus:border-[#C8972B]"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block mb-2 text-[#3D1F0D] font-medium">
+            <label className="block mb-2 text-sm font-medium text-[#593719]">
               Email Address
             </label>
 
             <div className="relative">
-              <Mail
-                size={20}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C8972B]"
-              />
+              <Mail size={20} className={iconClass} />
 
               <input
                 type="email"
@@ -156,45 +181,45 @@ export default function ContactStep({
                 value={formData.email || ""}
                 onChange={handleChange}
                 placeholder="Enter your email address"
-                className="w-full h-14 pl-12 pr-4 rounded-2xl border border-[#F0E6D8] focus:outline-none focus:border-[#C8972B]"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Selection Summary */}
-          <div className="bg-[#F5EBE0] rounded-3xl p-6 mt-4">
-            <h3 className="text-xl font-semibold text-[#3D1F0D] mb-4">
+          <div className="mt-4 rounded-2xl border border-[#E8DED0] border-l-[3px] border-l-[#C18A35] bg-[#F7F3ED] p-6">
+            <h3 className="mb-4 font-serif text-xl font-semibold text-[#593719]">
               Your Selection
             </h3>
 
-            <div className="space-y-3 text-[#6B6B6B]">
+            <div className="space-y-3 text-[#292622]/70">
               <p>
-                <span className="font-semibold text-[#3D1F0D]">
+                <span className="font-semibold text-[#593719]">
                   Wardrobe Type:
                 </span>{" "}
                 {formData.type}
               </p>
 
               <p>
-                <span className="font-semibold text-[#3D1F0D]">Size:</span>{" "}
+                <span className="font-semibold text-[#593719]">Size:</span>{" "}
                 {formData.dimension}
               </p>
 
               <p>
-                <span className="font-semibold text-[#3D1F0D]">Finish:</span>{" "}
+                <span className="font-semibold text-[#593719]">Finish:</span>{" "}
                 {formData.finish}
               </p>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Buttons */}
       <div className="flex justify-between mt-10">
         <button
           onClick={prevStep}
           disabled={isSubmitting}
-          className="flex items-center gap-2 border border-[#3D1F0D] text-[#3D1F0D] px-6 py-3 rounded-md hover:bg-[#3D1F0D] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 rounded-xl border border-[#593719] px-6 py-3 text-[#593719] transition-all hover:bg-[#593719] hover:text-[#FFFFFF] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ArrowLeft size={18} />
           Back
@@ -203,10 +228,10 @@ export default function ContactStep({
         <button
           disabled={!isValid || isSubmitting}
           onClick={handleSubmit}
-          className={`flex items-center gap-2 px-8 py-3 rounded-md transition-all duration-300 ${
+          className={`flex items-center gap-2 rounded-xl px-8 py-3 transition-all duration-300 ${
             isValid && !isSubmitting
-              ? "bg-[#3D1F0D] text-white hover:bg-[#C8972B]"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              ? "bg-[#593719] text-[#FFFFFF] hover:bg-[#C18A35]"
+              : "bg-[#E8DED0] text-[#292622]/40 cursor-not-allowed"
           }`}
         >
           {isSubmitting ? "Submitting..." : "Get Estimate"}

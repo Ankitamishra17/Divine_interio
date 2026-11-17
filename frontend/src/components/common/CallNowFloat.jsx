@@ -4,7 +4,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export default function CallNowFloat() {
-  const phoneNumber = "918826606869";
+  const phoneNumber = "919911066420";
 
   return (
     <motion.a

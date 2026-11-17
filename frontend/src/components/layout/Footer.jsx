@@ -471,8 +471,8 @@ export default function Footer() {
 
             <ContactRow
               label="Call"
-              value="+91 9876543210"
-              href="tel:+919876543210"
+              value="+91 9911066420"
+              href="tel:+919911066420"
               icon={
                 <svg
                   width="16"

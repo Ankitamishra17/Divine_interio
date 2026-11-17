@@ -15,9 +15,9 @@ import { ArrowRight, MessageCircle, Pause, Phone, Play } from "lucide-react";
   - The video is framed in the site's arch shape on a white card; no dark overlays anywhere.
 */
 
-const PHONE_DISPLAY = "+91 88266 06869";
-const PHONE_TEL = "tel:+918826606869";
-const WHATSAPP_URL = "https://wa.me/918826606869";
+const PHONE_DISPLAY = "+91 9911066420";
+const PHONE_TEL = "tel:+919911066420";
+const WHATSAPP_URL = "https://wa.me/919911066420";
 
 const STATS = [
   { value: "20+", label: "Projects" },

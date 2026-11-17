@@ -2,15 +2,7 @@ import { notFound } from "next/navigation";
 import { getBlog } from "@/lib/serverApi";
 import BlogDetail from "@/components/BlogDetail";
 
-// export async function generateMetadata({ params }) {
-//   const { slug } = await params;
-//   try {
-//     const { data: post } = await getBlog(slug);
-//     return { title: `${post.title} — Studio Journal`, description: post.excerpt };
-//   } catch {
-//     return { title: "Blogs - Interior Design Studio" };
-//   }
-// }
+
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
