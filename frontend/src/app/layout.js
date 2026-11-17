@@ -22,8 +22,8 @@ export const metadata = {
   metadataBase: new URL("https://divineinterio.in"),
 
   title: {
-    default: "Divine Interior | Interior Designers in Delhi NCR",
-    template: "%s",
+    default: "Divine Interio | Interior Designers in Noida & Greater Noida",
+    template: "%s | Divine Interio",
   },
 
   description:
