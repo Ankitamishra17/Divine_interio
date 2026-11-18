@@ -15,7 +15,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.livingspacedecor.in",
+        hostname: "api.divineintrio.in",
       },
       {
         protocol: "https",

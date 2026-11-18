@@ -39,7 +39,7 @@ import WorldMapPin from "./WorldMapPin";
 
 const BG_IMAGE = "/image/contact-bg.webp";
 
-const ENDPOINT = "https://livingspacedecor.in/api/send-quote";
+const ENDPOINT = "https://divineintrio.in/api/send-quote";
 const PHONE_DISPLAY = "+91 9911066420";
 const PHONE_TEL = "tel:+919911066420";
 const WHATSAPP_URL = "https://wa.me/919911066420";
@@ -48,9 +48,21 @@ const ADDRESS =
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
 const PROJECTS = [
-  { value: "Interior Design", icon: Sofa, note: "Living spaces, bedrooms, offices" },
-  { value: "Modular Kitchen", icon: ChefHat, note: "Layouts, storage, finishes" },
-  { value: "Turnkey Project", icon: KeyRound, note: "Design through to handover" },
+  {
+    value: "Interior Design",
+    icon: Sofa,
+    note: "Living spaces, bedrooms, offices",
+  },
+  {
+    value: "Modular Kitchen",
+    icon: ChefHat,
+    note: "Layouts, storage, finishes",
+  },
+  {
+    value: "Turnkey Project",
+    icon: KeyRound,
+    note: "Design through to handover",
+  },
   { value: "Architecture", icon: Ruler, note: "Plans and structure" },
 ];
 const CITIES = ["Noida", "Greater Noida", "Ghaziabad", "Delhi"];
@@ -58,17 +70,29 @@ const CITIES = ["Noida", "Greater Noida", "Ghaziabad", "Delhi"];
 const STEPS = [
   { label: "Project", title: "What are you planning?", fields: ["project"] },
   { label: "Location", title: "Where is the property?", fields: ["city"] },
-  { label: "Contact", title: "How can we reach you?", fields: ["name", "phone"] },
+  {
+    label: "Contact",
+    title: "How can we reach you?",
+    fields: ["name", "phone"],
+  },
 ];
 
-const BENEFITS = ["Free design consultation", "Takes under a minute", "No obligation to proceed"];
+const BENEFITS = [
+  "Free design consultation",
+  "Takes under a minute",
+  "No obligation to proceed",
+];
 
 const EMPTY = { project: "", city: "", message: "", name: "", phone: "" };
 const EASE = [0.22, 1, 0.36, 1];
 
 /* Studio hours in Indian time, so it is right for visitors anywhere */
 function isOpenNow() {
-  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "numeric", hour12: false }).formatToParts(new Date());
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    hour: "numeric",
+    hour12: false,
+  }).formatToParts(new Date());
   const hour = Number(parts.find((p) => p.type === "hour").value) % 24;
   return hour >= 10 && hour < 19;
 }
@@ -92,13 +116,16 @@ function validateField(field, v) {
       return v.name.trim() ? "" : "Enter your name.";
     case "phone":
       if (!v.phone.trim()) return "Enter your phone number.";
-      return parsePhone(v.phone) ? "" : "Enter a 10 digit mobile number, for example 9911066420.";
+      return parsePhone(v.phone)
+        ? ""
+        : "Enter a 10 digit mobile number, for example 9911066420.";
     default:
       return "";
   }
 }
 
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2";
+const ring =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2";
 const ringLight = `${ring} focus-visible:ring-offset-[#F7F3ED]`;
 const ringCard = `${ring} focus-visible:ring-offset-[#292622]`;
 
@@ -136,8 +163,12 @@ function ContactRow({ href, icon: Icon, title, text, external }) {
         <Icon size={18} aria-hidden="true" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-xs font-semibold uppercase tracking-wider text-[#292622]/55">{title}</span>
-        <span className="mt-0.5 block text-[15px] leading-snug text-[#292622]">{text}</span>
+        <span className="block text-xs font-semibold uppercase tracking-wider text-[#292622]/55">
+          {title}
+        </span>
+        <span className="mt-0.5 block text-[15px] leading-snug text-[#292622]">
+          {text}
+        </span>
       </span>
       <ArrowRight
         size={16}
@@ -156,7 +187,12 @@ export default function ContactSection() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success
   const [serverError, setServerError] = useState("");
-  const [summary, setSummary] = useState({ name: "", project: "", city: "", phone: "" });
+  const [summary, setSummary] = useState({
+    name: "",
+    project: "",
+    city: "",
+    phone: "",
+  });
   const [open, setOpen] = useState(null);
   const [trap, setTrap] = useState("");
   const [bgOk, setBgOk] = useState(true);
@@ -175,8 +211,14 @@ export default function ContactSection() {
       mounted.current = true;
       return;
     }
-    if (status === "idle" && step === 1) return document.getElementById("contact-city")?.focus({ preventScroll: true });
-    if (status === "idle" && step === 2) return document.getElementById("contact-name")?.focus({ preventScroll: true });
+    if (status === "idle" && step === 1)
+      return document
+        .getElementById("contact-city")
+        ?.focus({ preventScroll: true });
+    if (status === "idle" && step === 2)
+      return document
+        .getElementById("contact-name")
+        ?.focus({ preventScroll: true });
     headingRef.current?.focus({ preventScroll: true });
   }, [step, status]);
 
@@ -197,7 +239,10 @@ export default function ContactSection() {
   };
 
   const focusField = (field) => {
-    const el = field === "project" ? document.querySelector('input[name="project"]') : document.getElementById(`contact-${field}`);
+    const el =
+      field === "project"
+        ? document.querySelector('input[name="project"]')
+        : document.getElementById(`contact-${field}`);
     el?.focus();
   };
 
@@ -230,12 +275,20 @@ export default function ContactSection() {
       });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.success) {
-        setSummary({ name: data.name.trim().split(" ")[0], project: data.project, city: data.city.trim(), phone: formatPhone(ten) });
+        setSummary({
+          name: data.name.trim().split(" ")[0],
+          project: data.project,
+          city: data.city.trim(),
+          phone: formatPhone(ten),
+        });
         setData(EMPTY);
         setShowMsg(false);
         setStatus("success");
       } else {
-        setServerError(json.error || "We couldn't send your enquiry. Please try again, or call us.");
+        setServerError(
+          json.error ||
+            "We couldn't send your enquiry. Please try again, or call us.",
+        );
         setStatus("idle");
       }
     } catch (err) {
@@ -243,7 +296,7 @@ export default function ContactSection() {
       setServerError(
         err.name === "AbortError"
           ? "This is taking too long. Please try again, or message us on WhatsApp."
-          : "We couldn't reach the server. Check your connection and try again, or message us on WhatsApp."
+          : "We couldn't reach the server. Check your connection and try again, or message us on WhatsApp.",
       );
       setStatus("idle");
     } finally {
@@ -262,7 +315,12 @@ export default function ContactSection() {
     if (step < STEPS.length - 1) return setStep(step + 1);
     if (trap) {
       // a bot filled the hidden field: pretend it worked, send nothing
-      setSummary({ name: data.name.trim().split(" ")[0], project: data.project, city: data.city.trim(), phone: formatPhone(parsePhone(data.phone)) });
+      setSummary({
+        name: data.name.trim().split(" ")[0],
+        project: data.project,
+        city: data.city.trim(),
+        phone: formatPhone(parsePhone(data.phone)),
+      });
       return setStatus("success");
     }
     submit();
@@ -276,7 +334,13 @@ export default function ContactSection() {
 
   const isLast = step === STEPS.length - 1;
   const submitting = status === "submitting";
-  const fade = reduce ? {} : { initial: { opacity: 0, y: 8 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.4, ease: EASE } };
+  const fade = reduce
+    ? {}
+    : {
+        initial: { opacity: 0, y: 8 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.4, ease: EASE },
+      };
   const enter = (x) =>
     reduce
       ? {}
@@ -290,7 +354,10 @@ export default function ContactSection() {
 
   return (
     <>
-      <section id="contact" className="relative isolate overflow-hidden bg-[#E8DED0] py-16 md:py-24 lg:py-28">
+      <section
+        id="contact"
+        className="relative isolate overflow-hidden bg-[#E8DED0] py-16 md:py-24 lg:py-28"
+      >
         {/* Photo + veil */}
         {bgOk && (
           <img
@@ -319,18 +386,19 @@ export default function ContactSection() {
                 Free Consultation
               </p>
               <h2 className="mt-4 max-w-xl font-heading text-4xl font-normal leading-[1.12] tracking-wide text-[#292622] sm:text-5xl xl:text-6xl">
-                Let&rsquo;s plan your{" "}
-                <span style={goldText}>
-                  space
-                </span>
+                Let&rsquo;s plan your <span style={goldText}>space</span>
               </h2>
               <p className="mt-5 max-w-md text-base leading-7 text-[#292622]/75">
-                Answer three quick questions and our design team will call you to book a free consultation.
+                Answer three quick questions and our design team will call you
+                to book a free consultation.
               </p>
 
               <ul className="mt-6 space-y-2.5">
                 {BENEFITS.map((b) => (
-                  <li key={b} className="flex items-center gap-3 text-[15px] text-[#292622]">
+                  <li
+                    key={b}
+                    className="flex items-center gap-3 text-[15px] text-[#292622]"
+                  >
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#292622] text-[#EBC882]">
                       <Check size={13} strokeWidth={3} aria-hidden="true" />
                     </span>
@@ -340,26 +408,53 @@ export default function ContactSection() {
               </ul>
 
               <div className="mt-9 hidden max-w-md space-y-3 lg:block">
-                <ContactRow href={PHONE_TEL} icon={Phone} title="Call us" text={PHONE_DISPLAY} />
-                <ContactRow href={WHATSAPP_URL} icon={MessageCircle} title="WhatsApp" text="Chat with our team" external />
-                <ContactRow href={MAPS_URL} icon={MapPin} title="Visit our studio" text={ADDRESS} external />
+                <ContactRow
+                  href={PHONE_TEL}
+                  icon={Phone}
+                  title="Call us"
+                  text={PHONE_DISPLAY}
+                />
+                <ContactRow
+                  href={WHATSAPP_URL}
+                  icon={MessageCircle}
+                  title="WhatsApp"
+                  text="Chat with our team"
+                  external
+                />
+                <ContactRow
+                  href={MAPS_URL}
+                  icon={MapPin}
+                  title="Visit our studio"
+                  text={ADDRESS}
+                  external
+                />
               </div>
             </motion.div>
 
             {/* Right: form card */}
-            <motion.div className="lg:col-span-7 xl:col-span-6 xl:col-start-7" {...enter(30)}>
+            <motion.div
+              className="lg:col-span-7 xl:col-span-6 xl:col-start-7"
+              {...enter(30)}
+            >
               <div className="relative overflow-hidden rounded-3xl border border-[#F7F3ED]/10 bg-[#292622] px-6 py-8 text-[#F7F3ED] shadow-[0_40px_90px_-30px_rgba(41,38,34,0.7)] sm:px-9 sm:py-10">
                 {/* gold top edge + inner glow */}
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-1"
-                  style={{ backgroundImage: "linear-gradient(90deg,#dba343,#EBC882,#dba343)" }}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(90deg,#dba343,#EBC882,#dba343)",
+                  }}
                 />
                 <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-md bg-[#dba343]/15 blur-3xl" />
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 opacity-[0.04]"
-                  style={{ backgroundImage: "radial-gradient(#F7F3ED 1px, transparent 1px)", backgroundSize: "22px 22px" }}
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(#F7F3ED 1px, transparent 1px)",
+                    backgroundSize: "22px 22px",
+                  }}
                 />
 
                 <div className="relative">
@@ -388,7 +483,9 @@ export default function ContactSection() {
                           ["Call on", summary.phone],
                         ].map(([k, v]) => (
                           <div key={k} className="flex gap-4 px-5 py-3.5">
-                            <dt className="w-20 shrink-0 text-[#F7F3ED]/55">{k}</dt>
+                            <dt className="w-20 shrink-0 text-[#F7F3ED]/55">
+                              {k}
+                            </dt>
                             <dd className="min-w-0 text-[#F7F3ED]">{v}</dd>
                           </div>
                         ))}
@@ -401,7 +498,8 @@ export default function ContactSection() {
                           rel="noopener noreferrer"
                           className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#dba343] px-6 text-[15px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${ringCard}`}
                         >
-                          <MessageCircle size={18} aria-hidden="true" /> WhatsApp us
+                          <MessageCircle size={18} aria-hidden="true" />{" "}
+                          WhatsApp us
                         </a>
                         <a
                           href={PHONE_TEL}
@@ -434,23 +532,38 @@ export default function ContactSection() {
                               />
                               <span
                                 className={`mt-2 flex items-center gap-1.5 text-sm ${
-                                  i === step ? "font-semibold text-[#F7F3ED]" : "text-[#F7F3ED]/55"
+                                  i === step
+                                    ? "font-semibold text-[#F7F3ED]"
+                                    : "text-[#F7F3ED]/55"
                                 }`}
                               >
                                 {done ? (
-                                  <Check size={13} className="text-[#dba343]" aria-hidden="true" />
+                                  <Check
+                                    size={13}
+                                    className="text-[#dba343]"
+                                    aria-hidden="true"
+                                  />
                                 ) : (
-                                  <span className="text-xs tabular-nums text-[#dba343]" aria-hidden="true">
+                                  <span
+                                    className="text-xs tabular-nums text-[#dba343]"
+                                    aria-hidden="true"
+                                  >
                                     0{i + 1}
                                   </span>
                                 )}
                                 {s.label}
                               </span>
-                              <span className="block h-5 truncate text-[13px] text-[#EBC882]">{done ? answers[i] : ""}</span>
+                              <span className="block h-5 truncate text-[13px] text-[#EBC882]">
+                                {done ? answers[i] : ""}
+                              </span>
                             </>
                           );
                           return (
-                            <li key={s.label} aria-current={i === step ? "step" : undefined} className="min-w-0">
+                            <li
+                              key={s.label}
+                              aria-current={i === step ? "step" : undefined}
+                              className="min-w-0"
+                            >
                               {done ? (
                                 <button
                                   type="button"
@@ -478,24 +591,52 @@ export default function ContactSection() {
                       </h3>
 
                       {serverError && (
-                        <div role="alert" className="mt-5 flex items-start gap-3 rounded-xl border border-red-400/40 bg-red-500/10 p-4 text-sm text-red-200">
-                          <AlertCircle size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+                        <div
+                          role="alert"
+                          className="mt-5 flex items-start gap-3 rounded-xl border border-red-400/40 bg-red-500/10 p-4 text-sm text-red-200"
+                        >
+                          <AlertCircle
+                            size={18}
+                            className="mt-0.5 shrink-0"
+                            aria-hidden="true"
+                          />
                           <div>
                             <p>{serverError}</p>
                             <p className="mt-1.5">
-                              <a href={PHONE_TEL} className="font-semibold underline underline-offset-2">Call {PHONE_DISPLAY}</a>
+                              <a
+                                href={PHONE_TEL}
+                                className="font-semibold underline underline-offset-2"
+                              >
+                                Call {PHONE_DISPLAY}
+                              </a>
                               {" or "}
-                              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">WhatsApp us</a>.
+                              <a
+                                href={WHATSAPP_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-semibold underline underline-offset-2"
+                              >
+                                WhatsApp us
+                              </a>
+                              .
                             </p>
                           </div>
                         </div>
                       )}
 
-                      <motion.div key={step} {...fade} className="mt-6 min-h-[250px]">
+                      <motion.div
+                        key={step}
+                        {...fade}
+                        className="mt-6 min-h-[250px]"
+                      >
                         {/* STEP 1 */}
                         {step === 0 && (
                           <div>
-                            <div role="radiogroup" aria-labelledby="contact-step-title" className="grid gap-3 sm:grid-cols-2">
+                            <div
+                              role="radiogroup"
+                              aria-labelledby="contact-step-title"
+                              className="grid gap-3 sm:grid-cols-2"
+                            >
                               {PROJECTS.map(({ value, icon: Icon, note }) => {
                                 const on = data.project === value;
                                 return (
@@ -506,7 +647,11 @@ export default function ContactSection() {
                                       value={value}
                                       checked={on}
                                       onChange={() => set("project", value)}
-                                      aria-describedby={errors.project ? "contact-project-error" : undefined}
+                                      aria-describedby={
+                                        errors.project
+                                          ? "contact-project-error"
+                                          : undefined
+                                      }
                                       className="peer sr-only"
                                     />
                                     <span
@@ -518,36 +663,53 @@ export default function ContactSection() {
                                     >
                                       <span
                                         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
-                                          on ? "bg-[#dba343] text-[#292622]" : "bg-[#F7F3ED]/10 text-[#EBC882]"
+                                          on
+                                            ? "bg-[#dba343] text-[#292622]"
+                                            : "bg-[#F7F3ED]/10 text-[#EBC882]"
                                         }`}
                                       >
                                         <Icon size={20} aria-hidden="true" />
                                       </span>
                                       <span className="min-w-0 flex-1">
-                                        <span className="block text-base font-medium text-[#F7F3ED]">{value}</span>
-                                        <span className="block text-sm leading-5 text-[#F7F3ED]/60">{note}</span>
+                                        <span className="block text-base font-medium text-[#F7F3ED]">
+                                          {value}
+                                        </span>
+                                        <span className="block text-sm leading-5 text-[#F7F3ED]/60">
+                                          {note}
+                                        </span>
                                       </span>
                                       <span
                                         aria-hidden="true"
                                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors sm:absolute sm:right-3.5 sm:top-3.5 ${
-                                          on ? "border-[#dba343] bg-[#dba343] text-[#292622]" : "border-[#F7F3ED]/30"
+                                          on
+                                            ? "border-[#dba343] bg-[#dba343] text-[#292622]"
+                                            : "border-[#F7F3ED]/30"
                                         }`}
                                       >
-                                        {on && <Check size={12} strokeWidth={3} />}
+                                        {on && (
+                                          <Check size={12} strokeWidth={3} />
+                                        )}
                                       </span>
                                     </span>
                                   </label>
                                 );
                               })}
                             </div>
-                            <FieldError id="contact-project-error">{errors.project}</FieldError>
+                            <FieldError id="contact-project-error">
+                              {errors.project}
+                            </FieldError>
                           </div>
                         )}
 
                         {/* STEP 2 */}
                         {step === 1 && (
                           <div>
-                            <label htmlFor="contact-city" className="mb-2 block text-sm font-medium text-[#F7F3ED]">City</label>
+                            <label
+                              htmlFor="contact-city"
+                              className="mb-2 block text-sm font-medium text-[#F7F3ED]"
+                            >
+                              City
+                            </label>
                             <input
                               id="contact-city"
                               type="text"
@@ -557,12 +719,20 @@ export default function ContactSection() {
                               onChange={(e) => set("city", e.target.value)}
                               onBlur={() => blur("city")}
                               aria-invalid={!!errors.city}
-                              aria-describedby={errors.city ? "contact-city-error" : undefined}
+                              aria-describedby={
+                                errors.city ? "contact-city-error" : undefined
+                              }
                               className={fieldClass(errors.city)}
                             />
-                            <FieldError id="contact-city-error">{errors.city}</FieldError>
+                            <FieldError id="contact-city-error">
+                              {errors.city}
+                            </FieldError>
 
-                            <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Common cities">
+                            <div
+                              className="mt-3 flex flex-wrap gap-2"
+                              role="group"
+                              aria-label="Common cities"
+                            >
                               {CITIES.map((c) => (
                                 <button
                                   key={c}
@@ -582,7 +752,10 @@ export default function ContactSection() {
 
                             {showMsg ? (
                               <div className="mt-6">
-                                <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-[#F7F3ED]">
+                                <label
+                                  htmlFor="contact-message"
+                                  className="mb-2 block text-sm font-medium text-[#F7F3ED]"
+                                >
                                   Anything we should know?
                                 </label>
                                 <textarea
@@ -590,7 +763,9 @@ export default function ContactSection() {
                                   rows={3}
                                   placeholder="Property type, size, timeline, budget range"
                                   value={data.message}
-                                  onChange={(e) => set("message", e.target.value)}
+                                  onChange={(e) =>
+                                    set("message", e.target.value)
+                                  }
                                   className={`${fieldClass(false)} resize-y`}
                                 />
                               </div>
@@ -600,7 +775,8 @@ export default function ContactSection() {
                                 onClick={() => setShowMsg(true)}
                                 className={`mt-6 inline-flex min-h-10 items-center gap-1.5 rounded-sm text-sm font-semibold text-[#EBC882] underline decoration-[#dba343] decoration-2 underline-offset-4 hover:text-[#dba343] ${ringCard}`}
                               >
-                                <Plus size={15} aria-hidden="true" /> Add details (optional)
+                                <Plus size={15} aria-hidden="true" /> Add
+                                details (optional)
                               </button>
                             )}
                           </div>
@@ -610,7 +786,12 @@ export default function ContactSection() {
                         {step === 2 && (
                           <div className="space-y-5">
                             <div>
-                              <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-[#F7F3ED]">Your name</label>
+                              <label
+                                htmlFor="contact-name"
+                                className="mb-2 block text-sm font-medium text-[#F7F3ED]"
+                              >
+                                Your name
+                              </label>
                               <input
                                 id="contact-name"
                                 type="text"
@@ -620,15 +801,27 @@ export default function ContactSection() {
                                 onChange={(e) => set("name", e.target.value)}
                                 onBlur={() => blur("name")}
                                 aria-invalid={!!errors.name}
-                                aria-describedby={errors.name ? "contact-name-error" : undefined}
+                                aria-describedby={
+                                  errors.name ? "contact-name-error" : undefined
+                                }
                                 className={fieldClass(errors.name)}
                               />
-                              <FieldError id="contact-name-error">{errors.name}</FieldError>
+                              <FieldError id="contact-name-error">
+                                {errors.name}
+                              </FieldError>
                             </div>
                             <div>
-                              <label htmlFor="contact-phone" className="mb-2 block text-sm font-medium text-[#F7F3ED]">Mobile number</label>
+                              <label
+                                htmlFor="contact-phone"
+                                className="mb-2 block text-sm font-medium text-[#F7F3ED]"
+                              >
+                                Mobile number
+                              </label>
                               <div className="relative">
-                                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 border-r border-[#F7F3ED]/20 pr-3 text-base text-[#F7F3ED]/70" aria-hidden="true">
+                                <span
+                                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 border-r border-[#F7F3ED]/20 pr-3 text-base text-[#F7F3ED]/70"
+                                  aria-hidden="true"
+                                >
                                   +91
                                 </span>
                                 <input
@@ -641,23 +834,42 @@ export default function ContactSection() {
                                   onChange={(e) => set("phone", e.target.value)}
                                   onBlur={() => blur("phone")}
                                   aria-invalid={!!errors.phone}
-                                  aria-describedby={errors.phone ? "contact-phone-error" : "contact-phone-hint"}
+                                  aria-describedby={
+                                    errors.phone
+                                      ? "contact-phone-error"
+                                      : "contact-phone-hint"
+                                  }
                                   className={`${fieldClass(errors.phone)} pl-[4.25rem]`}
                                 />
                               </div>
                               {!errors.phone && (
-                                <p id="contact-phone-hint" className="mt-2 text-sm text-[#F7F3ED]/55">
+                                <p
+                                  id="contact-phone-hint"
+                                  className="mt-2 text-sm text-[#F7F3ED]/55"
+                                >
                                   Used only to call you about this enquiry.
                                 </p>
                               )}
-                              <FieldError id="contact-phone-error">{errors.phone}</FieldError>
+                              <FieldError id="contact-phone-error">
+                                {errors.phone}
+                              </FieldError>
                             </div>
 
                             {/* spam trap: hidden from people and screen readers */}
-                            <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                            <div
+                              aria-hidden="true"
+                              className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                            >
                               <label>
                                 Company
-                                <input type="text" name="company" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+                                <input
+                                  type="text"
+                                  name="company"
+                                  tabIndex={-1}
+                                  autoComplete="off"
+                                  value={trap}
+                                  onChange={(e) => setTrap(e.target.value)}
+                                />
                               </label>
                             </div>
                           </div>
@@ -686,7 +898,11 @@ export default function ContactSection() {
                           <span className="relative inline-flex items-center gap-2.5">
                             {submitting ? (
                               <>
-                                <Loader2 size={18} className="motion-safe:animate-spin" aria-hidden="true" />
+                                <Loader2
+                                  size={18}
+                                  className="motion-safe:animate-spin"
+                                  aria-hidden="true"
+                                />
                                 Sending
                               </>
                             ) : isLast ? (
@@ -714,24 +930,52 @@ export default function ContactSection() {
                 className="mt-5 inline-flex items-center gap-2.5 rounded-md border border-[#292622]/10 bg-white/70 px-4 py-2 text-sm text-[#292622]/80 backdrop-blur-sm"
                 role="status"
               >
-                <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                  {open && <span className="absolute inline-flex h-full w-full animate-ping roundeed-md bg-[#dba343] opacity-60 motion-reduce:animate-none" />}
-                  <span className={`relative h-2 w-2 rounded-md ${open ? "bg-[#dba343]" : "bg-[#292622]/30"}`} />
+                <span
+                  className="relative flex h-2 w-2 shrink-0"
+                  aria-hidden="true"
+                >
+                  {open && (
+                    <span className="absolute inline-flex h-full w-full animate-ping roundeed-md bg-[#dba343] opacity-60 motion-reduce:animate-none" />
+                  )}
+                  <span
+                    className={`relative h-2 w-2 rounded-md ${open ? "bg-[#dba343]" : "bg-[#292622]/30"}`}
+                  />
                 </span>
-                <Clock size={15} className="text-[#dba343]" aria-hidden="true" />
+                <Clock
+                  size={15}
+                  className="text-[#dba343]"
+                  aria-hidden="true"
+                />
                 {open === null
                   ? "Studio open every day, 10 AM to 7 PM"
                   : open
-                  ? "Studio open now, until 7 PM"
-                  : "Studio closed now. Open every day, 10 AM to 7 PM"}
+                    ? "Studio open now, until 7 PM"
+                    : "Studio closed now. Open every day, 10 AM to 7 PM"}
               </p>
             </motion.div>
 
             {/* Direct contact on phones and tablets, after the form */}
             <div className="space-y-3 lg:hidden">
-              <ContactRow href={PHONE_TEL} icon={Phone} title="Call us" text={PHONE_DISPLAY} />
-              <ContactRow href={WHATSAPP_URL} icon={MessageCircle} title="WhatsApp" text="Chat with our team" external />
-              <ContactRow href={MAPS_URL} icon={MapPin} title="Visit our studio" text={ADDRESS} external />
+              <ContactRow
+                href={PHONE_TEL}
+                icon={Phone}
+                title="Call us"
+                text={PHONE_DISPLAY}
+              />
+              <ContactRow
+                href={WHATSAPP_URL}
+                icon={MessageCircle}
+                title="WhatsApp"
+                text="Chat with our team"
+                external
+              />
+              <ContactRow
+                href={MAPS_URL}
+                icon={MapPin}
+                title="Visit our studio"
+                text={ADDRESS}
+                external
+              />
             </div>
           </div>
         </div>

@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, ArrowRight, Check, Loader2, MessageCircle, Phone } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  Check,
+  Loader2,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 
 /*
   Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
@@ -20,18 +27,39 @@ import { AlertCircle, ArrowRight, Check, Loader2, MessageCircle, Phone } from "l
   New props from the wrapper: onSubmitted() and onRestart().
 */
 
-const ENDPOINT = "https://livingspacedecor.in/api/send-quote";
+const ENDPOINT = "https://divineintrio.in/api/send-quote";
 const PHONE_DISPLAY = "+91 9911066420";
 const PHONE_TEL = "tel:+919911066420";
 const WHATSAPP_URL = "https://wa.me/919911066420";
 
-const ring = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+const ring =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dba343] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const validators = {
-  name: (v) => (!v.trim() ? "Enter your name." : v.trim().length < 2 ? "Name must be at least 2 characters." : ""),
-  phone: (v) => (!v ? "Enter your mobile number." : /^[6-9]\d{9}$/.test(v) ? "" : "Enter a valid 10-digit mobile number."),
-  email: (v) => (!v.trim() ? "Enter your email." : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : "Enter a valid email, like name@example.com."),
-  pincode: (v) => (!v ? "Enter your pincode." : /^\d{6}$/.test(v) ? "" : "Enter a valid 6-digit pincode."),
+  name: (v) =>
+    !v.trim()
+      ? "Enter your name."
+      : v.trim().length < 2
+        ? "Name must be at least 2 characters."
+        : "",
+  phone: (v) =>
+    !v
+      ? "Enter your mobile number."
+      : /^[6-9]\d{9}$/.test(v)
+        ? ""
+        : "Enter a valid 10-digit mobile number.",
+  email: (v) =>
+    !v.trim()
+      ? "Enter your email."
+      : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
+        ? ""
+        : "Enter a valid email, like name@example.com.",
+  pincode: (v) =>
+    !v
+      ? "Enter your pincode."
+      : /^\d{6}$/.test(v)
+        ? ""
+        : "Enter a valid 6-digit pincode.",
 };
 const FIELDS = ["name", "phone", "email", "pincode"];
 
@@ -43,23 +71,45 @@ const inputClass = (err) =>
 function Field({ id, label, error, hint, children }) {
   return (
     <div>
-      <label htmlFor={id} className="font-body mb-2 block text-sm font-medium text-[#292622]">
+      <label
+        htmlFor={id}
+        className="font-body mb-2 block text-sm font-medium text-[#292622]"
+      >
         {label}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="font-body mt-2 flex items-start gap-1.5 text-sm text-red-700">
-          <AlertCircle size={15} className="mt-0.5 shrink-0" aria-hidden="true" />
+        <p
+          id={`${id}-error`}
+          className="font-body mt-2 flex items-start gap-1.5 text-sm text-red-700"
+        >
+          <AlertCircle
+            size={15}
+            className="mt-0.5 shrink-0"
+            aria-hidden="true"
+          />
           {error}
         </p>
       ) : (
-        hint && <p id={`${id}-hint`} className="font-body mt-2 text-sm text-[#292622]/60">{hint}</p>
+        hint && (
+          <p
+            id={`${id}-hint`}
+            className="font-body mt-2 text-sm text-[#292622]/60"
+          >
+            {hint}
+          </p>
+        )
       )}
     </div>
   );
 }
 
-export default function LeadFormStep({ formData, setFormData, onSubmitted, onRestart }) {
+export default function LeadFormStep({
+  formData,
+  setFormData,
+  onSubmitted,
+  onRestart,
+}) {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -67,13 +117,16 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
 
   const set = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((e) => ({ ...e, [name]: validators[name](value) })); // re-check once an error is showing
+    if (errors[name])
+      setErrors((e) => ({ ...e, [name]: validators[name](value) })); // re-check once an error is showing
     if (serverError) setServerError("");
   };
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (name === "phone") return set(name, value.replace(/\D/g, "").slice(0, 10));
-    if (name === "pincode") return set(name, value.replace(/\D/g, "").slice(0, 6));
+    if (name === "phone")
+      return set(name, value.replace(/\D/g, "").slice(0, 10));
+    if (name === "pincode")
+      return set(name, value.replace(/\D/g, "").slice(0, 6));
     set(name, value);
   };
   const onBlur = (e) => {
@@ -116,11 +169,18 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
         setDone(true);
         onSubmitted?.();
       } else {
-        setServerError(result.error || "We couldn't send your enquiry. Please try again, or call us.");
+        setServerError(
+          result.error ||
+            "We couldn't send your enquiry. Please try again, or call us.",
+        );
       }
     } catch (err) {
       console.error(err);
-      setServerError(err.name === "AbortError" ? "This is taking too long. Please try again, or message us on WhatsApp." : "We couldn't reach the server. Check your connection and try again, or message us on WhatsApp.");
+      setServerError(
+        err.name === "AbortError"
+          ? "This is taking too long. Please try again, or message us on WhatsApp."
+          : "We couldn't reach the server. Check your connection and try again, or message us on WhatsApp.",
+      );
     } finally {
       clearTimeout(timer);
       setSubmitting(false);
@@ -135,10 +195,12 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
           <Check size={30} aria-hidden="true" />
         </span>
         <p className="font-body mx-auto mt-6 max-w-lg text-base font-light leading-8 text-[#292622]/80">
-          Thank you! Our kitchen design experts will review your details and contact you within 24 hours with a personalized cost estimate.
+          Thank you! Our kitchen design experts will review your details and
+          contact you within 24 hours with a personalized cost estimate.
         </p>
         <p className="font-body mx-auto mt-4 max-w-lg rounded-sm bg-[#F7F3ED] px-5 py-4 text-sm leading-6 text-[#292622]/75">
-          Check your email ({formData.email}) for a confirmation. You can also track your request on WhatsApp.
+          Check your email ({formData.email}) for a confirmation. You can also
+          track your request on WhatsApp.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <a
@@ -166,18 +228,39 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
   return (
     <form onSubmit={handleSubmit} noValidate>
       <p className="font-body max-w-xl text-[15px] font-light leading-7 text-[#292622]/75">
-        Share your details and our expert team will send a personalized cost estimate within 24 hours.
+        Share your details and our expert team will send a personalized cost
+        estimate within 24 hours.
       </p>
 
       {serverError && (
-        <div role="alert" className="font-body mt-6 flex items-start gap-3 rounded-sm border border-red-300 bg-red-50 p-4 text-sm text-red-800">
-          <AlertCircle size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+        <div
+          role="alert"
+          className="font-body mt-6 flex items-start gap-3 rounded-sm border border-red-300 bg-red-50 p-4 text-sm text-red-800"
+        >
+          <AlertCircle
+            size={18}
+            className="mt-0.5 shrink-0"
+            aria-hidden="true"
+          />
           <div>
             <p>{serverError}</p>
             <p className="mt-1.5">
-              <a href={PHONE_TEL} className="font-semibold underline underline-offset-2">Call {PHONE_DISPLAY}</a>
+              <a
+                href={PHONE_TEL}
+                className="font-semibold underline underline-offset-2"
+              >
+                Call {PHONE_DISPLAY}
+              </a>
               {" or "}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2">WhatsApp us</a>.
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline underline-offset-2"
+              >
+                WhatsApp us
+              </a>
+              .
             </p>
           </div>
         </div>
@@ -185,22 +268,85 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <Field id="lead-name" label="Full name" error={errors.name}>
-          <input id="lead-name" name="name" type="text" autoComplete="name" placeholder="Your full name" value={formData.name} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.name} aria-describedby={errors.name ? "lead-name-error" : undefined} className={inputClass(errors.name)} />
+          <input
+            id="lead-name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            placeholder="Your full name"
+            value={formData.name}
+            onChange={onChange}
+            onBlur={onBlur}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "lead-name-error" : undefined}
+            className={inputClass(errors.name)}
+          />
         </Field>
 
-        <Field id="lead-phone" label="Mobile number" error={errors.phone} hint="We'll only use it to share your estimate.">
+        <Field
+          id="lead-phone"
+          label="Mobile number"
+          error={errors.phone}
+          hint="We'll only use it to share your estimate."
+        >
           <div className="relative">
-            <span className="font-body pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 border-r border-[#292622]/20 pr-3 text-base text-[#292622]/70" aria-hidden="true">+91</span>
-            <input id="lead-phone" name="phone" type="tel" inputMode="numeric" autoComplete="tel-national" placeholder="98765 43210" value={formData.phone} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "lead-phone-error" : "lead-phone-hint"} className={`${inputClass(errors.phone)} pl-[4.25rem]`} />
+            <span
+              className="font-body pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 border-r border-[#292622]/20 pr-3 text-base text-[#292622]/70"
+              aria-hidden="true"
+            >
+              +91
+            </span>
+            <input
+              id="lead-phone"
+              name="phone"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel-national"
+              placeholder="98765 43210"
+              value={formData.phone}
+              onChange={onChange}
+              onBlur={onBlur}
+              aria-invalid={!!errors.phone}
+              aria-describedby={
+                errors.phone ? "lead-phone-error" : "lead-phone-hint"
+              }
+              className={`${inputClass(errors.phone)} pl-[4.25rem]`}
+            />
           </div>
         </Field>
 
         <Field id="lead-email" label="Email address" error={errors.email}>
-          <input id="lead-email" name="email" type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" value={formData.email} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.email} aria-describedby={errors.email ? "lead-email-error" : undefined} className={inputClass(errors.email)} />
+          <input
+            id="lead-email"
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder="name@example.com"
+            value={formData.email}
+            onChange={onChange}
+            onBlur={onBlur}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "lead-email-error" : undefined}
+            className={inputClass(errors.email)}
+          />
         </Field>
 
         <Field id="lead-pincode" label="Pincode" error={errors.pincode}>
-          <input id="lead-pincode" name="pincode" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="6-digit pincode" value={formData.pincode} onChange={onChange} onBlur={onBlur} aria-invalid={!!errors.pincode} aria-describedby={errors.pincode ? "lead-pincode-error" : undefined} className={inputClass(errors.pincode)} />
+          <input
+            id="lead-pincode"
+            name="pincode"
+            type="text"
+            inputMode="numeric"
+            autoComplete="postal-code"
+            placeholder="6-digit pincode"
+            value={formData.pincode}
+            onChange={onChange}
+            onBlur={onBlur}
+            aria-invalid={!!errors.pincode}
+            aria-describedby={errors.pincode ? "lead-pincode-error" : undefined}
+            className={inputClass(errors.pincode)}
+          />
         </Field>
       </div>
 
@@ -212,13 +358,21 @@ export default function LeadFormStep({ formData, setFormData, onSubmitted, onRes
       >
         {submitting ? (
           <>
-            <Loader2 size={17} className="motion-safe:animate-spin" aria-hidden="true" />
+            <Loader2
+              size={17}
+              className="motion-safe:animate-spin"
+              aria-hidden="true"
+            />
             Sending
           </>
         ) : (
           <>
             Get my estimate
-            <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
+            <ArrowRight
+              size={16}
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+            />
           </>
         )}
       </button>

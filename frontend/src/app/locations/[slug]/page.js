@@ -48,7 +48,7 @@ export async function generateMetadata({ params }) {
         "Interior Design",
       ],
       alternates: {
-        canonical: `https://livingspacedecor.in/locations/${slug}`,
+        canonical: `https://divineintrio.in/locations/${slug}`,
       },
       robots: { index: true, follow: true },
     };
@@ -174,7 +174,7 @@ export default async function LocationPage({ params }) {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     name: "Divine Interio - Divine Interior",
-    url: `https://livingspacedecor.in/locations/${slug}`,
+    url: `https://divineintrio.in/locations/${slug}`,
     telephone: PHONE,
     areaServed: location.city,
     description: location.description,

@@ -17,7 +17,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://livingspacedecor.in/kitchen-calculator",
+    canonical: "https://divineintrio.in/kitchen-calculator",
   },
 
   robots: {

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       ],
 
       alternates: {
-        canonical: `https://livingspacedecor.in/blog/${slug}`,
+        canonical: `https://divineintrio.in/blog/${slug}`,
       },
 
       robots: {

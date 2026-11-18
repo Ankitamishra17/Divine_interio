@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const API_ENDPOINT = "https://livingspacedecor.in/api/send-quote";
+const API_ENDPOINT = "https://divineintrio.in/api/send-quote";
 
 const INITIAL_FORM = {
   formType: "Modal Form",
