@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
 const projects = [
-  { title: "Sliding Wardrobe", image: "/image/wardrobe_design9.webp" },
+  { title: "Sliding Wardrobe", image: "https://i.pinimg.com/736x/52/b5/3b/52b53bdf6624e8f3506012d903492572.jpg" },
   { title: "Walk-in Closet", image: "/image/wardrobe_design17.webp" },
   { title: "Luxury Bedroom Wardrobe", image: "/image/wardrobe_design8.webp" },
   { title: "Glass Wardrobe", image: "/image/wardrobe_design.webp" },

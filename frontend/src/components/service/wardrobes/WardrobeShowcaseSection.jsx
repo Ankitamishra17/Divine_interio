@@ -53,16 +53,9 @@ function WardrobeCard({ item, index }) {
     [total]
   );
 
-  // Active thumbnail ko scroll row mein visible rakho
-  // useEffect(() => {
-  //   thumbRefs.current[active]?.scrollIntoView({
-  //     block: "nearest",
-  //     inline: "center",
-  //     behavior: "smooth",
-  //   });
-  // }, [active]);
+  
 
-  // Lightbox: keyboard + scroll lock
+  // Lightbox: 
   useEffect(() => {
     if (!lightbox) return;
     const onKey = (e) => {
