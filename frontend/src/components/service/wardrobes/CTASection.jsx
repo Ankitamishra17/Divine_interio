@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import Link from "next/link";
@@ -30,18 +27,13 @@ export default function CTASection({ data }) {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="bg-[#B8851F] text-white text-sm md:text-base px-7 py-3 inline-flex items-center gap-2 hover:opacity-85 transition duration-300"
+                className="bg-[#B8851F] text-white rounded-md text-sm md:text-base px-7 py-3 inline-flex items-center gap-2 hover:opacity-85 transition duration-300"
               >
                 Book Consultation
                 <ArrowRight size={16} />
               </Link>
 
-              {/* <Link
-                href="/portfolio"
-                className="border border-[#3D1F0D] text-[#3D1F0D] text-sm md:text-base px-7 py-3 hover:bg-white/10 transition duration-300"
-              >
-                View Portfolio
-              </Link> */}
+             
             </div>
           </div>
 

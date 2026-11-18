@@ -1,7 +1,7 @@
 import { designIdeas } from "@/data/designIdeas";
 import { getBlogs, getProjects, getLocations } from "@/lib/serverApi";
 
-const BASE_URL = "https://livingspacedecor.in";
+const BASE_URL = "https://divineintrio.in";
 
 export default async function sitemap() {
   // Static Pages
@@ -77,7 +77,7 @@ export default async function sitemap() {
     console.error("Blog Sitemap Error:", error);
   }
 
-  // Portfolio 
+  // Portfolio
 
   let portfolioPages = [];
 

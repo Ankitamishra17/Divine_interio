@@ -17,7 +17,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://livingspacedecor.in/cost-calculator",
+    canonical: "https://divineintrio.in/cost-calculator",
   },
 
   robots: {

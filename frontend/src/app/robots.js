@@ -4,7 +4,7 @@ export default function robots() {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://livingspacedecor.in/sitemap.xml",
-    host: "https://livingspacedecor.in",
+    sitemap: "https://divineintrio.in/sitemap.xml",
+    host: "https://divineintrio.in",
   };
 }

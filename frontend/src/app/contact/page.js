@@ -19,7 +19,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://livingspacedecor.in/contact",
+    canonical: "https://divineintrio.in/contact",
   },
 
   robots: {

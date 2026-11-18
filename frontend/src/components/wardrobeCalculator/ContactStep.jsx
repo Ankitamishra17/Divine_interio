@@ -43,7 +43,7 @@ export default function ContactStep({
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("https://livingspacedecor.in/api/send-quote", {
+      const res = await fetch("https://divineintrio.in/api/send-quote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,8 +77,7 @@ export default function ContactStep({
   const inputClass =
     "w-full h-14 pl-12 pr-4 rounded-xl border border-[#E8DED0] bg-[#F7F3ED] text-[#292622] placeholder:text-[#292622]/40 transition-all focus:outline-none focus:bg-[#FFFFFF] focus:border-[#dba343] focus:ring-4 focus:ring-[#dba343]/15";
 
-  const iconClass =
-    "absolute left-4 top-1/2 -translate-y-1/2 text-[#dba343]";
+  const iconClass = "absolute left-4 top-1/2 -translate-y-1/2 text-[#dba343]";
 
   return (
     <section className="max-w-4xl mx-auto">

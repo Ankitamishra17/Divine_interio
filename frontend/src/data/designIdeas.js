@@ -172,7 +172,7 @@ export const designIdeas = [
         "kids room design, children's bedroom design, kids room interior design, modern kids room ideas, study room design for kids, kids bedroom furniture, creative kids room interiors",
     },
 
-    ctaVideo: "/image/kids_room_interior_design.mp4",
+    ctaVideo: "/kids_room_interior_design.mp4",
   },
   {
     slug: "mandir-design",
@@ -339,7 +339,7 @@ export const designIdeas = [
       keywords:
         "bedroom design, bedroom interiors, modern bedroom, master bedroom design",
     },
-    ctaVideo: "https://www.pexels.com/download/video/33946643/",
+    ctaVideo: "/bedroom.mp4",
   },
   {
     slug: "bathroom-design",
@@ -458,14 +458,14 @@ export const designIdeas = [
     detailType: "homeOffice",
     subtitle: "Productive Spaces For Modern Professionals",
 
-    heroImage: "/image/office_design5.webp",
+    heroImage: "https://i.pinimg.com/736x/42/d7/6f/42d76fffc32f2e0644eb25b3593d51d6.jpg",
 
     leftImage: "/image/office_design2.webp",
     rightImage: "/image/office_design8.webp",
 
     moodboard: [
       {
-        src: "/image/office_design.webp",
+        src: "https://i.pinimg.com/1200x/c4/4e/8e/c44e8e953c3f8a2dd2f7022ff0115218.jpg",
         title: "Modern Home Office Design",
         description:
           "An ergonomic modern home office design with clean lines and ample natural light for enhanced productivity.",
@@ -559,7 +559,7 @@ export const designIdeas = [
         "Explore home office design ideas with ergonomic furniture, smart storage, and productive workspace layouts.",
       keywords: "home office design, workspace design, office interiors",
     },
-    ctaVideo: "https://www.pexels.com/download/video/11140919/",
+    ctaVideo: "/office_video.mp4",
   },
   {
     slug: "balcony-terrace-design",
