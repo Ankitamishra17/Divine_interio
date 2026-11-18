@@ -14,30 +14,30 @@ export const wardrobeData = [
 
     buttonText: "View Designs",
 
-    image: "/image/wardrobe_design9.webp",
+    image: "https://i.pinimg.com/736x/8a/8e/9e/8a8e9e1d5e7f17e8fedac4b8a95550ac.jpg",
 
     sectionType: "variations",
 
     variations: [
       {
         title: "Glass Sliding",
-        image: "/image/wardrobe_design8.webp",
+        image: "https://i.pinimg.com/1200x/cf/1f/db/cf1fdb3ee587d43f75738d4535130768.jpg",
       },
       {
         title: "Wood Finish",
-        image: "/image/wardrobe_design11.webp",
+        image: "https://i.pinimg.com/1200x/8e/db/00/8edb00afadffbef6f80cca8874c6c0c5.jpg",
       },
       {
         title: "Mirror Sliding",
-        image: "/image/wardrobe_design10.webp",
+        image: "https://i.pinimg.com/736x/30/2a/20/302a20dc8a9dc0cfde520a0b8693594a.jpg",
       },
       {
         title: "Fluted Panels",
-        image: "/image/wardrobe_design6.webp",
+        image: "https://i.pinimg.com/736x/87/12/53/871253d73a7129a47c2ff3f990595f9f.jpg",
       },
       {
         title: "High Gloss",
-        image: "/image/wardrobe_design.webp",
+        image: "https://i.pinimg.com/736x/67/7b/26/677b26f53835a6a21f6b1649dafe6292.jpg",
       },
       {
         title: "Matte Finish",
@@ -65,7 +65,7 @@ export const wardrobeData = [
     buttonText: "View Designs",
 
     image:
-      "https://images.pexels.com/photos/35189675/pexels-photo-35189675.jpeg",
+      "https://i.pinimg.com/1200x/40/78/1e/40781e81677c005ab9e7dcf1c5b6f76d.jpg",
 
     sectionType: "accessories",
 
@@ -116,17 +116,17 @@ export const wardrobeData = [
 
     buttonText: "View Designs",
 
-    image: "/image/wardrobe_design5.webp",
+    image: "https://i.pinimg.com/1200x/cd/73/ed/cd73ed8e43ea793566f43cba260848de.jpg",
 
     sectionType: "gallery",
 
     gallery: [
       {
         image:
-          "https://images.pexels.com/photos/34964418/pexels-photo-34964418.jpeg",
+          "https://i.pinimg.com/1200x/87/93/88/879388544390c15e88c818fb75855d5e.jpg",
       },
       {
-        image: "/image/wardrobe_design8.webp",
+        image: "https://i.pinimg.com/736x/27/08/77/270877cf9abffbe30a76bbf1afc73184.jpg",
       },
       {
         image:
