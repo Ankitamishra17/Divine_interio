@@ -71,7 +71,7 @@ export const designIdeas = [
     detailType: "kidsRoom",
     subtitle: "Creative Spaces For Growing Minds",
 
-    heroImage: "https://i.pinimg.com/736x/2f/36/ef/2f36ef7927aea4383117f4aa0b1c4aa6.jpg",
+    heroImage: "https://i.pinimg.com/1200x/01/73/74/017374702ebb27cf23b277c1bc8c22fb.jpg",
 
     description:
       "Discover inspiring kids room interior design ideas that combine creativity, comfort, safety, and functionality. From playful themes to smart storage solutions, create a space where children can learn, play, and grow.",
@@ -88,49 +88,49 @@ export const designIdeas = [
 
     moodboard: [
       {
-        src: "/image/kids.webp",
+        src: "https://i.pinimg.com/1200x/01/73/74/017374702ebb27cf23b277c1bc8c22fb.jpg",
         title: "Playful Kids Room Design Theme",
         description:
           "A vibrant, theme-based kids bedroom design that sparks imagination while keeping the space functional for daily use.",
       },
       {
-        src: "/image/kidss.webp",
+        src: "https://i.pinimg.com/736x/bc/2a/9a/bc2a9af13b8cad37aed73a1c27cbe30e.jpg",
         title: "Modern Children's Bedroom Design",
         description:
           "Bright colors and child-friendly furniture combine to create a modern, comfortable, and safe children's bedroom.",
       },
       {
-        src: "/image/kids_room_design.webp",
+        src: "https://i.pinimg.com/1200x/fb/a7/7c/fba77ce99d9f107a4ffc595a801f02a5.jpg",
         title: "Kids Study And Play Room Design",
         description:
           "A smartly zoned kids room design that balances a dedicated study corner with an open play area.",
       },
       {
-        src: "/image/kids_room_design3.webp",
+        src: "https://i.pinimg.com/1200x/7f/c4/3f/7fc43fcfbf23376cfe77b776891901c8.jpg",
         title: "Kids Bedroom Storage Solutions",
         description:
           "Custom wardrobes and toy storage keep this kids bedroom design organized, clutter-free, and easy to maintain.",
       },
       {
-        src: "/image/kids_room_interior.webp",
+        src: "https://i.pinimg.com/1200x/8c/d6/cc/8cd6cc285e0c11eca052308923d98014.jpg",
         title: "Creative Kids Room Interior Design",
         description:
           "Soft furnishings and playful accents make this kids room interior design both cozy and inspiring for young minds.",
       },
       {
-        src: "/image/kids_room2.webp",
+        src: "https://i.pinimg.com/736x/21/a8/5c/21a85cf6a362aeda600f07ce7e41f939.jpg",
         title: "Kids Bedroom Furniture Ideas",
         description:
           "Rounded-edge, child-safe furniture creates a secure and stylish foundation for this kids bedroom design.",
       },
       {
-        src: "/image/kids_room6.webp",
+        src: "https://i.pinimg.com/736x/b2/63/de/b263dec8e29490f2be190758c3444094.jpg",
         title: "Themed Kids Room Interior",
         description:
           "A cheerful, personalized kids room interior design that grows with your child's evolving interests.",
       },
       {
-        src: "/image/kids_room7.webp",
+        src: "https://i.pinimg.com/736x/d9/67/05/d96705e876a37ea8f589c8145be4b2f9.jpg",
         title: "Functional Kids Bedroom Layout",
         description:
           "An efficient kids bedroom layout with smart zoning for sleep, study, and play in a compact footprint.",
@@ -181,13 +181,13 @@ export const designIdeas = [
     detailType: "mandir",
     subtitle: "Sacred Spaces For Peace & Spirituality",
 
-    heroImage: "/image/mandir_design5.webp",
+    heroImage: "https://i.pinimg.com/1200x/a2/4d/89/a24d892731b04ba2e1cb571d9a32c4df.jpg",
 
     description:
       "Explore elegant mandir design ideas for modern homes. From traditional wooden temples to contemporary pooja room interiors, create a peaceful and spiritual space that blends beautifully with your home décor.",
 
-    leftImage: "/image/mandir_interior_design.webp",
-    rightImage: "/image/mandir_design6.webp",
+    leftImage: "https://i.pinimg.com/736x/9b/75/15/9b7515ae055a15d8e83f993a01c38b6f.jpg",
+    rightImage: "https://i.pinimg.com/1200x/b7/ac/c8/b7acc8fdc8b38a8a33b3576a9874b9e4.jpg",
 
     galleryTitle:
       "Thoughtfully Crafted Pooja Rooms For Daily Worship And Serenity",
@@ -228,25 +228,25 @@ export const designIdeas = [
     ctaVideo: "/mandir.mp4",
     moodboard: [
       {
-        src: "/image/mandir_design4.webp",
+        src: "https://i.pinimg.com/736x/95/8a/ed/958aed90b65105f5e68ac6666683fbda.jpg",
         title: "Modern Wooden Mandir Design",
         description:
           "A warm wooden mandir design with intricate carvings that brings traditional charm to a contemporary pooja room.",
       },
       {
-        src: "/image/mandir_design5.webp",
+        src: "https://i.pinimg.com/736x/97/0d/04/970d04319e1a8b70a6a1af84a8ff02cc.jpg",
         title: "Elegant Pooja Room Interior Design",
         description:
           "Backlit marble panels and soft ambient lighting create a serene, elegant pooja room interior for daily worship.",
       },
       {
-        src: "/image/mandir_design7.webp",
+        src: "https://i.pinimg.com/736x/05/8d/99/058d999c4b5c871298d89e2aa2379563.jpg",
         title: "Compact Mandir Design For Apartments",
         description:
           "A space-saving mandir unit designed for apartments, combining functionality with a peaceful spiritual aesthetic.",
       },
       {
-        src: "/image/mandir_design6.webp",
+        src: "https://i.pinimg.com/736x/dd/d3/00/ddd300c4ed0963087460b437074923f6.jpg",
         title: "Contemporary Home Temple Design",
         description:
           "CNC-cut panels and minimalist detailing define this contemporary home temple design, ideal for modern interiors.",
@@ -259,10 +259,10 @@ export const designIdeas = [
     title: "BEDROOM DESIGN",
     detailType: "bedroom",
     subtitle: "Comfort Meets Luxury",
-    heroImage: "/image/bedroom_design7.webp",
+    heroImage: "https://i.pinimg.com/1200x/1b/5e/23/1b5e2305ac1fb5c974644bc0da845c3c.jpg",
 
-    leftImage: "/image/bedroom_interior_design.webp",
-    rightImage: "/image/bedroom_design2.webp",
+    leftImage: "https://i.pinimg.com/736x/f2/53/82/f253824c27cacb369a36c2f9f4c8459d.jpg",
+    rightImage: "https://i.pinimg.com/736x/a3/1f/a6/a31fa65dfc4ff27ef74f861354a6f00c.jpg",
 
     description:
       "Discover modern bedroom interior design ideas that combine comfort, elegance, and functionality. Create a relaxing retreat with customized wardrobes, stylish furniture, and smart storage solutions.",
@@ -307,25 +307,25 @@ export const designIdeas = [
     ],
     moodboard: [
       {
-        src: "/image/bedroom_design3.webp",
+        src: "https://i.pinimg.com/1200x/27/66/b0/2766b00f7cf768b133ea63e3ef2bda6f.jpg",
         title: "Modern Master Bedroom Design",
         description:
           "A luxurious master bedroom design featuring plush textures, ambient lighting, and a calming neutral palette.",
       },
       {
-        src: "/image/bedroom_design6.webp",
+        src: "https://i.pinimg.com/736x/a3/4f/a3/a34fa3a93cb417b8b1dad26ffeaa840f.jpg",
         title: "Custom Wardrobe Bedroom Interior",
         description:
           "Sleek custom wardrobes and smart storage define this functional yet elegant bedroom interior design.",
       },
       {
-        src: "/image/bedroom_design12.webp",
+        src: "https://i.pinimg.com/736x/74/5e/ee/745eeee3d53de6221800afdcf1dcc500.jpg",
         title: "Minimalist Bedroom Design Ideas",
         description:
           "Clean lines and soft earthy tones bring a relaxing, minimalist feel to this modern bedroom interior.",
       },
       {
-        src: "/image/bedroom_design.jpeg",
+        src: "https://i.pinimg.com/736x/d8/92/67/d89267fc1acadcb6aa8c5e7b4708cf6b.jpg",
         title: "Luxury Bedroom Interior Inspiration",
         description:
           "Layered lighting and premium furnishings come together for a truly restful luxury bedroom design.",
