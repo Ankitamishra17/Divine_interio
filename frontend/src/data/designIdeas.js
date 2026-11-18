@@ -71,14 +71,14 @@ export const designIdeas = [
     detailType: "kidsRoom",
     subtitle: "Creative Spaces For Growing Minds",
 
-    heroImage: "",
+    heroImage: "https://i.pinimg.com/736x/2f/36/ef/2f36ef7927aea4383117f4aa0b1c4aa6.jpg",
 
     description:
       "Discover inspiring kids room interior design ideas that combine creativity, comfort, safety, and functionality. From playful themes to smart storage solutions, create a space where children can learn, play, and grow.",
 
-    leftImage: "/image/kids_room5.webp",
+    leftImage: "https://i.pinimg.com/1200x/ac/c2/03/acc20365ce8186ec6e35784f002578bc.jpg",
 
-    rightImage: "/image/kids_room4.webp",
+    rightImage: "https://i.pinimg.com/1200x/a2/b2/dc/a2b2dc681bfc0ea1603d4075effe1d03.jpg",
 
     galleryTitle:
       "Thoughtfully Designed Kids Rooms That Inspire Learning And Creativity",
@@ -567,35 +567,35 @@ export const designIdeas = [
     title: "BALCONY & TERRACE DESIGN",
     detailType: "balconyTerrace",
     subtitle: "Outdoor Spaces Designed To Inspire",
-    heroImage: "/image/balcony_design1.webp",
+    heroImage: "https://i.pinimg.com/1200x/11/84/03/1184036ae5fa721cb28abf936ed0bb93.jpg",
     moodboard: [
       {
-        src: "/image/balcony_design.webp",
+        src: "https://i.pinimg.com/736x/17/f8/47/17f847af7fe0adec5c04fddf9eb3529f.jpg",
         title: "Modern Balcony Design Ideas",
         description:
           "Compact seating and vertical greenery transform this modern balcony design into a relaxing outdoor retreat.",
       },
       {
-        src: "/image/balcony_design1.webp",
+        src: "https://i.pinimg.com/736x/c8/c3/3c/c8c33cc9930987320084bc74e770e2aa.jpg",
         title: "Cozy Terrace Interior Design",
         description:
           "Ambient string lighting and comfortable furniture make this terrace design perfect for evening gatherings.",
       },
       {
-        src: "/image/balcony_interior_design2.webp",
+        src: "https://i.pinimg.com/736x/ae/94/ee/ae94ee838de37945a7d77a4d999311a0.jpg",
         title: "Balcony Garden Design Inspiration",
         description:
           "Planters and low-maintenance greenery create a serene balcony garden design for outdoor living.",
       },
       {
-        src: "/Design/balcony3.avif",
+        src: "https://i.pinimg.com/736x/02/d5/77/02d577985428d10e363b58652ad190a0.jpg",
         title: "Rooftop Terrace Lounge Design",
         description:
           "Weather-resistant furniture and stylish decor turn this rooftop terrace into an inviting outdoor lounge.",
       },
     ],
-    leftImage: "/image/balcony_design.webp",
-    rightImage: "/image/balcony_design1.webp",
+    leftImage: "https://i.pinimg.com/736x/6d/5f/06/6d5f06f70af26ed60b8e5453d289ed4d.jpg",
+    rightImage: "https://i.pinimg.com/736x/c5/28/67/c528679a82cc2ea65dd269ea45e678b4.jpg",
 
     description:
       "Transform your balcony or terrace into a beautiful outdoor retreat with modern seating, greenery, lighting, and customized décor solutions.",
@@ -645,7 +645,7 @@ export const designIdeas = [
       keywords:
         "balcony design, terrace design, outdoor living space, rooftop terrace",
     },
-    ctaVideo: "https://www.pexels.com/download/video/5031783/",
+    ctaVideo: "https://www.pexels.com/download/video/13023865/",
   },
   {
     slug: "dining-room-design",
