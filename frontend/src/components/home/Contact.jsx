@@ -228,7 +228,7 @@ export default function Contact() {
             Share a few details in the chat and a designer will call you back.
           </p>
 
-          {/* What happens next */}
+         
           <ol className="mt-9 grid grid-cols-3 gap-4 border-y border-[#F7F3ED]/10 py-5">
             {NEXT_STEPS.map((item, i) => (
               <li key={item.title} className="min-w-0">
@@ -264,10 +264,10 @@ export default function Contact() {
                 <Phone size={19} aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-[13px] text-[#292622]/75">Call us now</span>
-                <span className="block text-lg font-semibold text-[#292622]">{PHONE_DISPLAY}</span>
+                <span className="block text-[13px] text-nowrap text-[#292622]/75">Call us now</span>
+                <span className="block text-md font-semibold text-nowrap text-[#292622]">{PHONE_DISPLAY}</span>
               </span>
-              <ArrowRight size={18} aria-hidden="true" className="ml-auto shrink-0 text-[#292622] transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight size={18} aria-hidden="true" className="ml-auto -mr-2 mt-4 shrink-0 text-[#292622] transition-transform duration-300 group-hover:translate-x-1" />
             </a>
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">

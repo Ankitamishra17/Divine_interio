@@ -42,7 +42,7 @@ export default function CTA() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
               <Link
                 href="/contact"
-                className={`group inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#dba343] px-8 text-base font-semibold text-[#1E0F06] transition-colors duration-300 hover:bg-[#E3B352] ${focusRing}`}
+                className={`group inline-flex min-h-14 text-nowrap items-center justify-center gap-3 rounded-full bg-[#dba343] px-8 text-base font-semibold text-[#1E0F06] transition-colors duration-300 hover:bg-[#E3B352] ${focusRing}`}
               >
                 Book a free consultation
                 <ArrowRight

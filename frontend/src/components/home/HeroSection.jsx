@@ -154,7 +154,7 @@ export default function HomePage() {
                 >
                   <Link
                     href={activeSlide.href}
-                    className="group/cta inline-flex items-center gap-3 rounded-sm bg-[#593719] px-8 py-4 text-[15px] font-semibold text-[#fff] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+                    className="group/cta inline-flex items-center text-nowrap gap-3 rounded-sm bg-[#593719] px-8 py-4 text-[15px] font-semibold text-[#fff] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
                   >
                     Explore {activeSlide.title}
                     <ArrowRight

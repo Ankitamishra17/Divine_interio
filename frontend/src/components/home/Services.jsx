@@ -20,49 +20,49 @@ const services = [
     title: "Living Room",
     description:
       "Transform your living room with luxury interior design solutions in Noida, Greater Noida, and Ghaziabad.",
-    image: "/image/living_room6.webp",
+    image: "/images/living_room.jpg",
     link: "/services/design-ideas/living-room-design",
   },
   {
     title: "Modular Kitchen",
     description:
       "Get stylish and functional kitchen interiors for homes in Noida, Greater Noida, and Ghaziabad.",
-    image: "/image/kitchen_design5.webp",
+    image: "/images/kitchen_design.jpg",
     link: "/services/design-ideas/kitchen-design-ideas",
   },
   {
     title: "Bedroom Design",
     description:
       "Create a comfortable and luxurious bedroom with custom interior design solutions.",
-    image: "/image/bedroom_design6.webp",
+    image: "/images/bedroom_design.jpg",
     link: "/services/design-ideas/bedroom-design",
   },
   {
     title: "Bathroom Design",
     description:
       "Modern bathroom interior designs featuring premium fittings, elegant layouts, and space-efficient solutions.",
-    image: "/image/bathroom_design.webp",
+    image: "/images/bathroom_design.jpg",
     link: "/services/design-ideas/bathroom-design",
   },
   {
     title: "Architecture",
     description:
       "Professional architectural design for residential and commercial projects, with modern elevations and sustainable planning.",
-    image: "/Home/architecture.avif",
+    image: "/images/architecture.jpg",
     link: "/services/architecture",
   },
   {
     title: "Dining Room Design",
     description:
       "Elegant dining room interior designs that enhance comfort, functionality, and style.",
-    image: "/image/dining_room5.webp",
+    image: "/images/dining_room.jpg",
     link: "/services/design-ideas/dining-room-design",
   },
   {
     title: "Office Design",
     description:
       "Modern office interior design solutions that improve productivity, comfort, and brand identity.",
-    image: "/image/office_design8.webp",
+    image: "/images/office_design.jpg",
     link: "/services/design-ideas/home-office-design",
   },
 ];
@@ -80,7 +80,6 @@ export default function ServicesSection() {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
 
-  // One orchestrated moment: the doorways rise in, one after another, the first time you see them
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
