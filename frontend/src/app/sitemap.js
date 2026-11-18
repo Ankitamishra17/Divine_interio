@@ -77,7 +77,7 @@ export default async function sitemap() {
     console.error("Blog Sitemap Error:", error);
   }
 
-  // Portfolio (Database)
+  // Portfolio 
 
   let portfolioPages = [];
 
