@@ -11,7 +11,7 @@ export default function HeroSection() {
       {/* Hero Banner */}
       <div className="relative h-[750px] overflow-hidden">
         <Image
-          src="/image/banner.webp"
+          src="/banner/kitchen.png"
           alt="Luxury Modular Kitchen"
           fill
           priority

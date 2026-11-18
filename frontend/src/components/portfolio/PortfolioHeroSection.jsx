@@ -31,7 +31,7 @@ export default function PortfolioHeroSection() {
       {/* Background Image */}
       <motion.div className="absolute inset-0 scale-110" style={{ y: imageY }}>
         <Image
-          src="/banner/12.png"
+          src="/banner/9.png"
           alt="Portfolio hero"
           fill
           priority

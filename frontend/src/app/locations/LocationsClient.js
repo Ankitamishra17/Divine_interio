@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -17,47 +16,58 @@ export default function LocationsClient({ locations = [] }) {
       .filter(Boolean)
       .join(" ")
       .toLowerCase()
-      .includes(search.toLowerCase().trim())
+      .includes(search.toLowerCase().trim()),
   );
 
   return (
     <main className="min-h-screen bg-[#F7F3ED] text-[#292622]">
-
       {/* HERO SECTION */}
-      <section className="relative isolate overflow-hidden bg-[#292622] px-5 py-24 text-center sm:py-32">
+      <section className="relative isolate min-h-[600px] h-[75vh] max-h-[820px] w-full overflow-hidden bg-[#292622]">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/banner/locations.png')",
+            backgroundPosition: "center center",
+          }}
+        />
 
-        {/* Decorative background */}
-        <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#dba343]/15 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-[#dba343]/10 blur-[120px]" />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-[#292622]/60" />
 
-        <div className="relative mx-auto max-w-4xl">
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#292622]/30 via-transparent to-[#292622]/70" />
 
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#dba343]/40 bg-white/5 px-5 py-2">
+       
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex min-h-[600px] h-full flex-col items-center justify-center px-6 py-24 text-center">
+          <div className="mb-6 inline-flex items-center gap-3   px-5 py-2 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#dba343]" />
+
             <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#EBC882]">
               Our Presence
             </span>
           </div>
 
-          <h1 className="font-heading text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-heading text-4xl leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Beautiful Spaces,
-            <span className="mt-2 block text-[#dba343]">
+            <span className="mt-2 block text-[#dba343] ">
               Across Every Location
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl font-body text-base leading-8 text-[#E8DED0]/80 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl font-body text-sm leading-8 text-white/85 sm:text-base md:text-lg">
             Discover thoughtfully designed interiors and premium home
             transformation services available in your city.
           </p>
 
           {/* SEARCH BAR */}
-          <div className="mx-auto mt-10 max-w-2xl">
-            <div className="group relative flex items-center rounded-full border border-white/15 bg-white px-3 py-2 shadow-2xl transition-all duration-300 focus-within:border-[#dba343] focus-within:ring-4 focus-within:ring-[#dba343]/15">
-
+          <div className="mx-auto mt-10 w-full max-w-2xl">
+            <div className="group relative flex items-center rounded-full border border-white/20 bg-white px-3 py-2 shadow-2xl transition-all duration-300 focus-within:border-[#dba343] focus-within:ring-4 focus-within:ring-[#dba343]/20">
               <Search
                 size={21}
-                className="ml-3 shrink-0 text-[#292622]/50 transition-colors group-focus-within:text-[#dba343]"
+                className="ml-3 shrink-0 text-[#292622]/50 group-focus-within:text-[#dba343]"
               />
 
               <input
@@ -85,7 +95,7 @@ export default function LocationsClient({ locations = [] }) {
             </div>
           </div>
 
-          <p className="mt-5 font-body text-xs tracking-wide text-[#E8DED0]/60">
+          <p className="mt-5 font-body text-xs tracking-wide text-white/70">
             Find your city and explore our interior design expertise
           </p>
         </div>
@@ -93,10 +103,8 @@ export default function LocationsClient({ locations = [] }) {
 
       {/* LOCATIONS SECTION */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-
         {/* Section heading */}
         <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-
           <div>
             <p className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#dba343]">
               <span className="h-px w-9 bg-[#dba343]" />
@@ -108,8 +116,8 @@ export default function LocationsClient({ locations = [] }) {
             </h2>
 
             <p className="mt-4 max-w-xl font-body text-sm leading-7 text-[#292622]/65 sm:text-base">
-              From modern apartments to luxurious homes, discover
-              interior design solutions tailored to your location.
+              From modern apartments to luxurious homes, discover interior
+              design solutions tailored to your location.
             </p>
           </div>
 
@@ -123,7 +131,6 @@ export default function LocationsClient({ locations = [] }) {
         {/* LOCATION CARDS */}
         {filteredLocations.length === 0 ? (
           <div className="rounded-2xl border border-[#292622]/10 bg-white px-5 py-20 text-center">
-
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F7F3ED] text-[#dba343]">
               <Compass size={30} />
             </div>
@@ -145,17 +152,14 @@ export default function LocationsClient({ locations = [] }) {
           </div>
         ) : (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-
             {filteredLocations.map((location) => (
               <Link
                 key={location.id}
                 href={`/locations/${location.slug}`}
                 className="group overflow-hidden rounded-xl border border-[#292622]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:border-[#dba343]/50 hover:shadow-2xl hover:shadow-[#292622]/10"
               >
-
                 {/* Card Image */}
                 <div className="relative h-64 overflow-hidden bg-[#E8DED0]">
-
                   <img
                     src={
                       location.heroImage
@@ -183,7 +187,6 @@ export default function LocationsClient({ locations = [] }) {
 
                 {/* Card Content */}
                 <div className="p-6">
-
                   {location.service && (
                     <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#dba343]">
                       {location.service}
@@ -211,13 +214,9 @@ export default function LocationsClient({ locations = [] }) {
                 </div>
               </Link>
             ))}
-
           </div>
         )}
       </section>
-
-     
-
     </main>
   );
 }

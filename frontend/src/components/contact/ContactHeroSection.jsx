@@ -44,7 +44,7 @@ export default function ContactHeroSection() {
     >
       {/* Background image: next/image so it loads early and at the right size */}
       <Image
-        src="/banner/14.png"
+        src="/banner/contact.png"
         alt=""
         fill
         priority
@@ -128,30 +128,8 @@ export default function ContactHeroSection() {
         </motion.div>
 
         {/* Quick facts */}
-        <ul className="mt-14 grid gap-5 border-t border-white/20 pt-6 sm:grid-cols-3 sm:gap-8">
-          {/* {facts.map(({ icon: Icon, label, value, href }) => (
-            <li key={label} className="flex items-center gap-4">
-              <span
-                aria-hidden="true"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#dba343]/60 text-[#E3B352]"
-              >
-                <Icon size={18} strokeWidth={1.6} />
-              </span>
-              <div>
-                <p className="text-sm text-white/65">{label}</p>
-                {href ? (
-                  <a
-                    href={href}
-                    className={`rounded-sm text-base font-medium text-white underline decoration-[#dba343] decoration-1 underline-offset-4 transition-colors hover:text-[#E3B352] ${ring}`}
-                  >
-                    {value}
-                  </a>
-                ) : (
-                  <p className="text-base font-medium text-white">{value}</p>
-                )}
-              </div>
-            </li>
-          ))} */}
+        <ul className="mt-14 grid gap-5   pt-6 sm:grid-cols-3 sm:gap-8">
+       
         </ul>
       </div>
     </section>
