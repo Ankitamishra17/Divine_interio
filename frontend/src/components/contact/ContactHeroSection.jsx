@@ -53,7 +53,7 @@ export default function ContactHeroSection() {
       />
 
       {/* Darker at the bottom where the text sits, lighter at the top so the photo still shows */}
-   <div
+      <div
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-gradient-to-t from-[#292622] via-[#292622]/80 via-45% to-[#292622]/10 md:bg-gradient-to-r md:from-[#292622]/90 md:via-[#292622]/60 md:to-[#292622]/10"
       />
