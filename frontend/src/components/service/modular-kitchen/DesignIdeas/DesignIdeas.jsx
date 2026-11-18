@@ -9,22 +9,22 @@ const kitchenIdeas = [
   {
     title: "Modern Kitchens",
     description: "Clean lines & minimal aesthetics",
-    image: "/image/kitchen_design11.webp",
+    image: "https://i.pinimg.com/1200x/47/25/a6/4725a66addba4620106fb85e05c64ec7.jpg",
   },
   {
     title: "Contemporary Kitchens",
     description: "Elegant & functional designs",
-    image: "/image/kitchen_design4.webp",
+    image: "https://i.pinimg.com/1200x/85/ff/bf/85ffbfc6fe8222aced4072e245ace658.jpg",
   },
   {
     title: "Luxury Kitchens",
     description: "Premium finishes & high-end fittings",
-    image: "/image/kitchen_design8.webp",
+    image: "https://i.pinimg.com/736x/d3/e2/54/d3e254782962c42b40e38837583ccce7.jpg",
   },
   {
     title: "Classic Kitchens",
     description: "Timeless designs that never age",
-    image: "/image/kitchen_design15.webp",
+    image: "https://i.pinimg.com/1200x/e0/47/f5/e047f5ccc1647d5e3175963bc28c9718.jpg",
   },
 ];
 
