@@ -32,7 +32,7 @@ const STATS = [
     title: "Full-service interior design",
     description:
       "We design complete interiors, from the first plan to the final styling.",
-    img: "/Design/image1.avif",
+    img: "https://i.pinimg.com/736x/bd/f0/f7/bdf0f7d1f5ced471d0f81e4b4ddf33cc.jpg",
   },
   {
     value: 12,
@@ -42,7 +42,7 @@ const STATS = [
     title: "Homes, kitchens and architecture",
     description:
       "More than a decade shaping private homes, kitchens and architectural spaces that balance clean geometry with comfortable living.",
-    img: "/Design/contact_banner.avif",
+    img: "https://i.pinimg.com/736x/08/90/a8/0890a8ec7d17d00629470a98028f9757.jpg",
   },
   {
     value: 35,
@@ -52,7 +52,7 @@ const STATS = [
     title: "Designers and craftsmen",
     description:
       "Interior architects, project leaders and furniture makers working together on every surface.",
-    img: "/Design/collective.avif",
+    img: "https://i.pinimg.com/1200x/2a/7b/ff/2a7bff4efa1d199a108e9348537dbeca.jpg",
   },
   {
     value: 18,
@@ -62,7 +62,7 @@ const STATS = [
     title: "Recognised for our work",
     description:
       "Eighteen regional awards for structural planning, lighting design and material selection.",
-    img: "/image/living_room13.webp",
+    img: "https://i.pinimg.com/736x/b8/cd/83/b8cd83cd45cdee277ca658837677415f.jpg",
   },
 ];
 

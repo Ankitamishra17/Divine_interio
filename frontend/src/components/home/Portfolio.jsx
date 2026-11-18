@@ -10,15 +10,7 @@ import { ArrowUpRight } from "lucide-react";
   Palette
   Ivory #F7F3ED | Charcoal #292622 | Warm Gold #dba343 | Espresso #593719 | Beige #E8DED0
 
-  New layout: STICKY INTRO + STAGGERED GALLERY.
-  - Left: the heading, short text and the "view all" button stay pinned while you scroll
-    through the projects (desktop). The button is always in reach.
-  - Right: two columns of tall photos. The second column sits lower, so the photos zigzag
-    like pictures hung on a gallery wall instead of a rigid grid.
-  - Captions sit under each photo (name, then category and location), never on top of it,
-    so they are always easy to read. Small screens show one column, in order.
-  - Same props and data as before: { portfolio, limit }, project.name / slug / image,
-    optional project.category and project.location. Shows up to 6 projects.
+  
 */
 
 const IMAGE_URL =
@@ -46,8 +38,6 @@ function ProjectImage({ src, alt, sizes, priority }) {
       fill
       sizes={sizes}
       priority={priority}
-      // Images come from your API server, so skip Next's image optimizer for them.
-      // (No next.config.js "images.remotePatterns" setup needed.)
       unoptimized={remote}
       onError={() => setFailed(true)}
       className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 motion-reduce:transition-none"

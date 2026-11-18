@@ -108,7 +108,7 @@ export default function OurMissionVision() {
                   aria-controls={`panel-${item.id}`}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveIndex(index)}
-                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343] sm:flex-none sm:px-8 ${
+                  className={`flex flex-1 items-center text-nowrap justify-center gap-2 rounded-full px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#dba343] sm:flex-none sm:px-8 ${
                     isActive
                       ? "bg-[#593719] text-white shadow-sm"
                       : "text-[#593719]/70 hover:text-[#593719]"

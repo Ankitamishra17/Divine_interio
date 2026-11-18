@@ -12,7 +12,7 @@ const materials = [
     short: "Acrylic",
     description:
       "High-gloss premium finish with a seamless modern appearance and luxurious shine.",
-    image: "/kitchen/Acrylic.avif",
+    image: "https://i.pinimg.com/736x/f9/b4/52/f9b452d7c3a683394d7ab4e6dbf589bf.jpg",
     durability: 4,
     upkeep: "Wipe clean",
     bestFor: "Modern, bright spaces",
@@ -22,7 +22,7 @@ const materials = [
     short: "Laminate",
     description:
       "Durable, stylish and available in hundreds of colors, textures and patterns.",
-    image: "/kitchen/Laminate.avif",
+    image: "https://i.pinimg.com/1200x/3a/d6/07/3ad60786aa510999d3fbf4abb81f317d.jpg",
     durability: 4,
     upkeep: "Very low",
     bestFor: "Busy family kitchens",
@@ -32,7 +32,7 @@ const materials = [
     short: "PU",
     description:
       "Smooth painted finish offering elegance, durability and timeless beauty.",
-    image: "/image/kitchen_design6.webp",
+    image: "https://i.pinimg.com/1200x/31/29/f2/3129f27e129f91cfd8c91d1cab6ac220.jpg",
     durability: 5,
     upkeep: "Low",
     bestFor: "Premium, custom looks",
@@ -42,7 +42,7 @@ const materials = [
     short: "Veneer",
     description:
       "Natural wood grains that bring warmth and sophistication to interiors.",
-    image: "/kitchen/Veneer.avif",
+    image: "https://i.pinimg.com/736x/12/38/3e/12383e32e3ec87fd11109c3aae0febd1.jpg",
     durability: 4,
     upkeep: "Moderate",
     bestFor: "Warm, natural interiors",
@@ -52,7 +52,7 @@ const materials = [
     short: "Glass",
     description:
       "Reflective modern surfaces perfect for contemporary luxury spaces.",
-    image: "/image/kitchen_design7.webp",
+    image: "https://i.pinimg.com/1200x/d0/d8/db/d0d8db9dbc4a657cf6f9223386b34e4c.jpg",
     durability: 5,
     upkeep: "Wipe clean",
     bestFor: "Contemporary luxury",
@@ -62,7 +62,7 @@ const materials = [
     short: "Membrane",
     description:
       "Flexible and stylish finish with seamless edges and rich aesthetics.",
-    image: "/kitchen/Membrane.avif",
+    image: "https://i.pinimg.com/1200x/22/7b/3a/227b3aa23a1c86a6edb1d46fc45e280c.jpg",
     durability: 3,
     upkeep: "Low",
     bestFor: "Budget-friendly style",

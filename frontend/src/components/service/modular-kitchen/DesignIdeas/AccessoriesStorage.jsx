@@ -8,32 +8,32 @@ const accessories = [
   {
     title: "Pull-Out Pantry",
     description: "Maximize storage with easy access to groceries.",
-    image: "/kitchen/Pull-Out.avif",
+    image: "https://i.pinimg.com/736x/7e/0f/b6/7e0fb641d24290f6b75cce70fa9958d4.jpg",
   },
   {
     title: "Corner Carousel",
     description: "Utilize corner spaces efficiently.",
-    image: "/kitchen/Corner.avif",
+    image: "https://i.pinimg.com/736x/be/84/a1/be84a1b7681783ee6a8c522caa2935c7.jpg",
   },
   {
     title: "Tandem Drawers",
     description: "Smooth sliding drawers with large capacity.",
-    image: "/kitchen/Tandem.avif",
+    image: "https://i.pinimg.com/1200x/3e/c9/a1/3ec9a1df9c347e1256f80ffbfdc32be4.jpg",
   },
   {
     title: "Cutlery Organizer",
     description: "Keep utensils neatly arranged and accessible.",
-    image: "/kitchen/Cutlery.avif",
+    image: "https://i.pinimg.com/736x/38/3f/2e/383f2ecd5d1998b2e5edf47f44163177.jpg",
   },
   {
     title: "Bottle Pull-Out",
     description: "Dedicated storage for bottles and jars.",
-    image: "/kitchen/Bottel_Pull_Out.webp",
+    image: "https://i.pinimg.com/736x/4d/3b/b5/4d3bb51e670093923f16b7bed7f4a938.jpg",
   },
   {
     title: "Dish Rack Unit",
     description: "Organized drying and storage solution.",
-    image: "/kitchen/Dish_Rack.avif",
+    image: "https://i.pinimg.com/736x/3a/ef/05/3aef05617676a9ae968e5fdc861267df.jpg",
   },
 ];
 

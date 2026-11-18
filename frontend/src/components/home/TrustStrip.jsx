@@ -158,7 +158,6 @@ export default function StatsMarquee() {
   return (
     <section className="bg-[#292622]" aria-label="Our track record">
       <div className="mx-auto max-w-[1280px]">
-        {/* gap-px on a tinted wrapper = clean 1px dividers at every breakpoint */}
         <ul className="grid grid-cols-2 gap-px bg-[#dba343]/25 lg:grid-cols-4">
           {stats.map((s, i) => (
             <StatCell key={s.title} stat={s} index={i} />

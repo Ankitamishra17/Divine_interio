@@ -251,7 +251,7 @@ export default function Navbar() {
                 height={300}
                 priority
                 className={`w-auto object-contain transition-all duration-300 ${
-                  scrolled ? "h-9 sm:h-10 lg:h-24" : "h-10 sm:h-11 lg:h-24 lg:w-25"
+                  scrolled ? "h-18 sm:h-18 lg:h-24" : "h-16 sm:h-16 lg:h-24 lg:w-25"
                 }`}
               />
             </Link>
@@ -391,14 +391,14 @@ export default function Navbar() {
             </div>
 
             {/* MOBILE / TABLET ACTIONS: primary CTA stays visible */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
+            <div className="lg:hidden  flex items-center gap-2">
+              {/* <button
                 type="button"
                 onClick={() => setShowConsultationModal(true)}
                 className={`whitespace-nowrap rounded-sm bg-[#dba343] px-3.5 h-10 text-[13px] font-semibold text-[#292622] transition-colors hover:bg-[#F7F3ED] ${focusRing}`}
               >
                 Book now
-              </button>
+              </button> */}
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
@@ -472,11 +472,11 @@ export default function Navbar() {
             >
               <div className="flex h-[72px] flex-shrink-0 items-center justify-between bg-[#292622] px-4">
                 <Image
-                  src="/divine_logo_trimmed.png"
+                  src="/divine_logo_trimmed1.png"
                   alt="Divine Interio"
                   width={804}
                   height={253}
-                  className="h-9 w-auto object-contain"
+                  className="h-18 w-auto object-contain"
                 />
                 <button
                   type="button"

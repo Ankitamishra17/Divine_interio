@@ -10,15 +10,6 @@ import { ArrowRight, MapPin } from "lucide-react";
   Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
-  New layout: a stacked "film still + quote slip".
-  - A wide cinematic video panel carries the headline at its bottom-left.
-  - A white quote slip overlaps the bottom edge of the video. It is the single
-    interactive moment: pick your home size, then go straight to the calculator
-    with that choice already made (one tap fewer than before).
-  - Video plays only while visible and never for reduced-motion users.
-  - One entrance reveal for the slip, nothing else animates on its own.
-
-  Calculator side: read `home` from the query string, e.g. /cost-calculator?home=3bhk
 */
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -49,7 +40,7 @@ export default function CTABanner() {
         if (entry.isIntersecting) video.play().catch(() => {});
         else video.pause();
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     observer.observe(video);
     return () => observer.disconnect();
@@ -58,8 +49,11 @@ export default function CTABanner() {
   return (
     <section className="bg-[#F7F3ED] px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-[1280px]">
+        
+
         {/* Video panel */}
         <div className="relative isolate overflow-hidden rounded-sm bg-[#292622]">
+          {/* Desktop Video */}
           <video
             ref={videoRef}
             autoPlay
@@ -68,19 +62,25 @@ export default function CTABanner() {
             playsInline
             preload="metadata"
             aria-hidden="true"
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
+            className="absolute inset-0 -z-10 hidden h-full w-full object-cover md:block"
           >
             <source src="/video.mp4" type="video/mp4" />
           </video>
 
-          {/* Bottom-heavy scrim keeps the headline readable on any frame */}
-     
+          {/* Mobile Video */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 h-full w-full object-cover md:hidden"
+          >
+            <source src="/mobile-video.mp4" type="video/mp4" />
+          </video>
 
-   <div className="relative flex min-h-[420px] flex-col items-end justify-end px-6 pb-28 pt-24 text-right sm:min-h-[480px] sm:px-10 sm:pb-32 lg:min-h-[540px] lg:px-14 lg:pb-36">
-
-
-
-</div>
+          <div className="relative flex min-h-[420px] flex-col items-end justify-end px-6 pb-28 pt-24 text-right sm:min-h-[480px] sm:px-10 sm:pb-32 lg:min-h-[540px] lg:px-14 lg:pb-36"></div>
         </div>
 
         {/* Quote slip, overlapping the video */}
@@ -128,7 +128,7 @@ export default function CTABanner() {
             <div className="mt-6 flex flex-col gap-3 lg:mt-0 lg:w-[300px]">
               <Link
                 href={`/cost-calculator?home=${home}`}
-                className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#dba343] px-6 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
+                className="group inline-flex min-h-14 w-full items-center text-nowrap justify-center gap-3 rounded-sm bg-[#dba343] px-6 text-[15px] font-semibold text-[#292622] transition-colors duration-300 hover:bg-[#593719] hover:text-[#F7F3ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593719] focus-visible:ring-offset-2"
               >
                 Calculate my estimate
                 <ArrowRight
@@ -146,7 +146,11 @@ export default function CTABanner() {
           </div>
 
           <p className="mt-5 flex items-center justify-center gap-2 text-center text-[13px] text-[#292622]/70">
-            <MapPin size={14} className="shrink-0 text-[#dba343]" aria-hidden="true" />
+            <MapPin
+              size={14}
+              className="shrink-0 text-[#dba343]"
+              aria-hidden="true"
+            />
             Luxury projects delivered across Noida, Greater Noida and Ghaziabad
           </p>
         </motion.div>

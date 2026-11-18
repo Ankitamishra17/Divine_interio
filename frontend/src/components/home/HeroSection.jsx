@@ -16,8 +16,7 @@ import "swiper/css/effect-fade";
   Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige #E8DED0    | Charcoal #292622  | White #FFFFFF
 
-  Cinematic, centered banner: one clear message in the middle,
-  arrows on the sides, and a quiet progress row at the bottom.
+  
 */
 
 const AUTOPLAY_DELAY = 5000;
@@ -26,21 +25,21 @@ const categories = [
   {
     title: "Living Room",
     tab: "Living Room",
-    image: "/image/living_room8.webp",
+    image: "/images/living_banner.png",
     href: "/services/design-ideas/living-room-design",
     desc: "Where luxury meets lifestyle.",
   },
   {
     title: "Modular Kitchen",
     tab: "Kitchen",
-    image: "/image/9.webp",
+    image: "/images/kitchen_banner.png",
     href: "/kitchen-design",
     desc: "Crafted for modern homes.",
   },
   {
     title: "Modular Wardrobes",
     tab: "Wardrobes",
-    image: "/image/8.webp",
+    image: "/images/wardrobe_banner.png",
     href: "/services/wardrobes",
     desc: "Style meets smart storage.",
   },
@@ -154,7 +153,7 @@ export default function HomePage() {
                 >
                   <Link
                     href={activeSlide.href}
-                    className="group/cta inline-flex items-center gap-3 rounded-sm bg-[#593719] px-8 py-4 text-[15px] font-semibold text-[#fff] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
+                    className="group/cta inline-flex items-center text-nowrap gap-3 rounded-sm bg-[#593719] px-8 py-4 text-[15px] font-semibold text-[#fff] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#292622]"
                   >
                     Explore {activeSlide.title}
                     <ArrowRight

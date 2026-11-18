@@ -27,7 +27,7 @@ export default function CTASection({ data }) {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="bg-[#B8851F] text-white text-sm md:text-base px-7 py-3 inline-flex items-center gap-2 hover:opacity-85 transition duration-300"
+                className="bg-[#B8851F] text-white rounded-md text-sm md:text-base px-7 py-3 inline-flex items-center gap-2 hover:opacity-85 transition duration-300"
               >
                 Book Consultation
                 <ArrowRight size={16} />
