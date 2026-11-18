@@ -458,7 +458,7 @@ export const designIdeas = [
     detailType: "homeOffice",
     subtitle: "Productive Spaces For Modern Professionals",
 
-    heroImage: "https://i.pinimg.com/736x/42/d7/6f/42d76fffc32f2e0644eb25b3593d51d6.jpg",
+    heroImage: "/images/office.png",
 
     leftImage: "/image/office_design2.webp",
     rightImage: "/image/office_design8.webp",
@@ -471,47 +471,24 @@ export const designIdeas = [
           "An ergonomic modern home office design with clean lines and ample natural light for enhanced productivity.",
       },
       {
-        src: "/image/office_design1.webp",
+        src: "https://i.pinimg.com/1200x/6e/93/4d/6e934de26f19fb53df6bc567e95069c3.jpg",
         title: "Compact Home Office Layout",
         description:
           "A space-efficient home office layout with smart storage, ideal for small rooms and apartments.",
       },
       {
-        src: "/image/office_design4.webp",
+        src: "https://i.pinimg.com/736x/86/2d/df/862ddf24983ecbe580eaf412e4b9de01.jpg",
         title: "Home Office Storage Solutions",
         description:
           "Custom shelving and cabinets keep this home office interior organized, clutter-free, and efficient.",
       },
       {
-        src: "/image/office_interior1.webp",
+        src: "https://i.pinimg.com/736x/0d/69/0f/0d690fad7e163384a23a0111f6fd398b.jpg",
         title: "Contemporary Workspace Interior Design",
         description:
           "A contemporary workspace design combining ergonomic furniture with a calm, focus-friendly color palette.",
       },
-      {
-        src: "/image/office_design7.webp",
-        title: "Home Office Furniture Ideas",
-        description:
-          "Sleek desks and ergonomic seating define this functional home office furniture arrangement.",
-      },
-      {
-        src: "/image/office_design5.webp",
-        title: "Productive Home Workspace Design",
-        description:
-          "Layered task and ambient lighting create a comfortable, productive home workspace design.",
-      },
-      {
-        src: "/image/office_design10.webp",
-        title: "Multi-User Home Office Design",
-        description:
-          "A shared home office design with separate workstations for multiple users in an organized layout.",
-      },
-      {
-        src: "/image/office_design11.webp",
-        title: "Home Office Design For Remote Work",
-        description:
-          "A focus-driven home office setup with efficient layouts tailored for remote work and daily meetings.",
-      },
+     
     ],
     description:
       "Create a functional and inspiring home office with ergonomic furniture, smart storage, and modern workspace design solutions.",
