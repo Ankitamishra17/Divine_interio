@@ -20,13 +20,15 @@ const categories = [
     title: "Bedroom",
     slug: "bedroom",
     count: 27,
-    image: "https://i.pinimg.com/736x/50/2c/c4/502cc42d58e9702fb36e08c4fbb4f972.jpg",
+    image:
+      "https://i.pinimg.com/736x/50/2c/c4/502cc42d58e9702fb36e08c4fbb4f972.jpg",
   },
   {
     title: "Wardrobe",
     slug: "wardrobe",
     count: 19,
-    image: "https://i.pinimg.com/736x/5e/8e/5b/5e8e5b37c381a5b62da7b3d9d6e65e63.jpg",
+    image:
+      "https://i.pinimg.com/736x/5e/8e/5b/5e8e5b37c381a5b62da7b3d9d6e65e63.jpg",
   },
 ];
 
@@ -47,11 +49,7 @@ export default function CategorySection() {
         {/* Equal cards */}
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {categories.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/category/${item.slug}`}
-              className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B88A5A]"
-            >
+            <div key={item.slug} className="group block">
               {/* Image */}
               <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-[#E8DDD0]">
                 <Image
@@ -61,20 +59,6 @@ export default function CategorySection() {
                   sizes="(min-width: 1024px) 25vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
-
-                {/* Arrow badge */}
-                {/* <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#3D1F0D] shadow-md backdrop-blur transition-colors duration-300 group-hover:bg-[#B88A5A] group-hover:text-white">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-5 w-5 -rotate-45 transition-transform duration-300 group-hover:rotate-0 motion-reduce:transition-none"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    aria-hidden="true"
-                  >
-                    <path d="M4 12h16m-6-6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span> */}
               </div>
 
               {/* Text */}
@@ -86,8 +70,10 @@ export default function CategorySection() {
                   {item.count} products
                 </span>
               </div>
+
+              {/* Hover underline */}
               <span className="mt-2 block h-px w-full origin-left scale-x-0 bg-[#B88A5A] transition-transform duration-500 group-hover:scale-x-100 motion-reduce:transition-none" />
-            </Link>
+            </div>
           ))}
         </div>
       </div>

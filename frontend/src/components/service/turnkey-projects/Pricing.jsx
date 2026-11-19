@@ -55,7 +55,7 @@ const processSteps = [
   },
   {
     title: "Handover",
-    image: "https://i.pinimg.com/1200x/14/f2/22/14f222f5187751ce31fefc65deee6536.jp",
+    image: "https://i.pinimg.com/1200x/14/f2/22/14f222f5187751ce31fefc65deee6536.jpg",
     description:
       "Final walkthrough and delivery of your fully completed dream home.",
   },
