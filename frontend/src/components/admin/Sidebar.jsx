@@ -44,7 +44,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile/tablet top bar — sirf lg se neeche dikhega */}
-      <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-[#1A0F08] text-[#F7F3ED] px-4 py-3 border-b border-white/10">
+      <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-[#292622] text-[#F7F3ED] px-4 py-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <span className="w-[16px] h-px bg-[#dba343] inline-block" />
           <span className="font-display text-lg">Admin Panel</span>
@@ -69,7 +69,7 @@ export default function Sidebar() {
       {/* Sidebar: mobile/tablet pe drawer (slide in/out), lg+ pe fixed rail */}
       <aside
         className={`
-          w-72 sm:w-80 shrink-0 bg-[#1A0F08] text-[#F7F3ED] flex flex-col p-6 sm:p-7
+          w-72 sm:w-80 shrink-0 bg-[#292622] text-[#F7F3ED] flex flex-col p-6 sm:p-7
           fixed inset-y-0 left-0 z-50 h-screen transition-transform duration-300 ease-in-out
           lg:sticky lg:top-0 lg:translate-x-0 lg:z-auto
           ${open ? "translate-x-0" : "-translate-x-full"}
