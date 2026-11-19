@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 const kitchenTypes = [
   { title: "Straight Kitchen", subtitle: "Sleek and space-efficient", image: "/Straight-shape.png" },
   { title: "L-Shaped Kitchen", subtitle: "Smart corners, easy workflow", image: "/L-shape.png" },
-  { title: "U-Shaped Kitchen", subtitle: "Maximum storage and counters", image: "/image/u-kitchenDesign.webp" },
-  { title: "Island Kitchen", subtitle: "A centrepiece for open homes", image: "/image/island_kitchen.avif" },
+  { title: "U-Shaped Kitchen", subtitle: "Maximum storage and counters", image: "https://i.pinimg.com/736x/72/18/a2/7218a2f53d2f4c8cf37033d4d9e3c067.jpg" },
+  { title: "Island Kitchen", subtitle: "A centrepiece for open homes", image: "https://i.pinimg.com/1200x/1f/31/83/1f31830af41a3563fb012b04247f1f96.jpg" },
 ];
 
 const fade = (i) => ({
