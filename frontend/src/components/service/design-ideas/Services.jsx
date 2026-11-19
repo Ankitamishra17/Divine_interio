@@ -9,56 +9,56 @@ const services = [
   {
     id: "living-spaces",
     title: "Living Spaces",
-    image: "/image/living_room1.webp",
+    image: "https://i.pinimg.com/736x/52/f5/00/52f5000a8a5e8cc730b35ce03d1d0da5.jpg",
     description:
       "Curated living rooms blending comfort with timeless elegance, tailored to your lifestyle.",
   },
   {
     id: "bedroom-sanctuaries",
     title: "Bedroom Sanctuaries",
-    image: "/image/bedroom_design7.webp",
+    image: "https://i.pinimg.com/736x/9e/7a/82/9e7a82f7b2d7a0ef42aab80ed3b3f6f1.jpg",
     description:
       "Restful retreats designed with layered textures, ambient lighting, and bespoke furniture.",
   },
   {
     id: "kitchen-dining",
     title: "Kitchen & Dining",
-    image: "/image/kitchen_design13.webp",
+    image: "https://i.pinimg.com/736x/03/83/64/0383642cb9c0e709af48731ae5db5eae.jpg",
     description:
       "Functional yet stunning culinary spaces that become the heart of your home.",
   },
   {
     id: "bespoke-furniture",
     title: "Bespoke Furniture",
-    image: "/lsd_images/45.jpg",
+    image: "https://i.pinimg.com/1200x/08/02/31/080231f4afe9c3a5a9c1d816f2c5ecd2.jpg",
     description:
       "Custom-crafted pieces designed exclusively for your space and sensibilities.",
   },
   {
     id: "lighting-design",
     title: "Lighting Design",
-    image: "/lsd_images/2.jpg",
+    image: "https://i.pinimg.com/736x/02/07/e5/0207e5f95f5b6999eca4dc0d1dcef47c.jpg",
     description:
       "Atmospheric lighting schemes that sculpt mood and highlight architectural features.",
   },
   {
     id: "material-sourcing",
     title: "Material Sourcing",
-    image: "/lsd_images/32.jpg",
+    image: "https://i.pinimg.com/1200x/3e/fb/07/3efb07677ff52b372a986025c35102e9.jpg",
     description:
       "Premium materials sourced globally to elevate every surface in your home.",
   },
   {
     id: "space-planning",
     title: "Space Planning",
-    image: "/lsd_images/42.jpg",
+    image: "https://i.pinimg.com/736x/11/9c/11/119c11759d0ca6b5f0c57724d7f24cf0.jpg",
     description:
       "Intelligent layouts that optimize flow and functionality without sacrificing style.",
   },
   {
     id: "color-consultation",
     title: "Color Consultation",
-    image: "/image/color_consultation.webp",
+    image: "https://i.pinimg.com/736x/68/b2/7f/68b27fc0c58cd0cb8ca558b6b57f301d.jpg",
     description:
       "Harmonious palettes that reflect your personality and enhance your space.",
   },
