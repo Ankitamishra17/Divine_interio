@@ -7,10 +7,10 @@ import { ArrowRight, ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
 const projects = [
   { title: "Sliding Wardrobe", image: "https://i.pinimg.com/736x/52/b5/3b/52b53bdf6624e8f3506012d903492572.jpg" },
-  { title: "Walk-in Closet", image: "/image/wardrobe_design17.webp" },
-  { title: "Luxury Bedroom Wardrobe", image: "/image/wardrobe_design8.webp" },
-  { title: "Glass Wardrobe", image: "/image/wardrobe_design.webp" },
-  { title: "Modern White Wardrobe", image: "/image/wardrobe_design2.webp" },
+  { title: "Walk-in Closet", image: "https://i.pinimg.com/736x/bf/7e/90/bf7e90531522b19c2d6a45bfa4d39e7c.jpg" },
+  { title: "Luxury Bedroom Wardrobe", image: "https://i.pinimg.com/736x/2c/80/60/2c80601b73349372daaa6eda3f680795.jpg" },
+  { title: "Glass Wardrobe", image: "https://i.pinimg.com/736x/0d/c0/fe/0dc0fe6d345d655d7be798530d5b9e27.jpg" },
+  { title: "Modern White Wardrobe", image: "https://i.pinimg.com/736x/bf/f1/85/bff185491004db2e167062e94eb03a0d.jpg" },
 ];
 
 // Apni routes yahan change kar lena

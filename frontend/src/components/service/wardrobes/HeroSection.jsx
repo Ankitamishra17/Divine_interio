@@ -13,7 +13,7 @@ export default function HeroSection() {
       {/* Hero Banner */}
       <div className="  relative h-[750px] overflow-hidden">
         <Image
-          src="/image/wardrobeHero.avif"
+          src="/banner/wardrobeHero.png"
           alt="Luxury Wardrobe"
           fill
           priority
@@ -25,7 +25,7 @@ export default function HeroSection() {
         <div className="absolute inset-0">
           <div className="container mx-auto flex h-full items-center justify-center px-4">
             <div className="max-w-2xl lg:-mt-56 text-center text-white">
-              <span className="inline-block text-sm uppercase tracking-[3px] text-[#B8851F]">
+              <span className="inline-block text-sm uppercase tracking-[3px] text-[#ffffff]">
                 Designed Around You
               </span>
 
