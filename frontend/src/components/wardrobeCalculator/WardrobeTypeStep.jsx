@@ -9,8 +9,8 @@ import { wardrobeType } from "@/data/wardrobeData";
   Palette
   Charcoal #292622 (primary) | Warm Gold #C18A35 (accent) | Ivory #F7F3ED | Beige #E8DED0 | Espresso #593719 | White #FFFFFF
 
-  Layout: big photo cards with the text on the image. Pick one and a charcoal summary bar slides up
-  at the bottom with a thumbnail of your choice and the Continue button.
+  Layout: clean product cards. Photo on top, text on a white panel below so it is always easy to read.
+  Pick one and a charcoal summary bar at the bottom shows your choice with the Continue button.
   Props, data and behaviour are unchanged.
 */
 
@@ -91,43 +91,44 @@ export default function WardrobeTypeStep({ formData, setFormData, nextStep }) {
               aria-pressed={selected}
               {...rise(index * 0.1)}
               onClick={() => setFormData({ ...formData, type: item.id })}
-              className={`group relative isolate h-[420px] overflow-hidden rounded-3xl text-left transition-all duration-500 sm:h-[460px] lg:h-[500px] ${ring} ${
+              className={`group flex h-full flex-col overflow-hidden rounded-3xl bg-white text-left transition-all duration-500 ${ring} ${
                 selected
-                  ? "-translate-y-1 shadow-[0_30px_60px_-20px_rgba(193,138,53,0.55)] ring-2 ring-[#C18A35] ring-offset-4 ring-offset-[#F7F3ED]"
-                  : "shadow-xl shadow-[#292622]/15 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#292622]/25"
+                  ? "-translate-y-1 shadow-[0_28px_55px_-22px_rgba(193,138,53,0.6)] ring-2 ring-[#C18A35]"
+                  : "shadow-lg shadow-[#292622]/10 ring-1 ring-[#292622]/10 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#292622]/20"
               }`}
             >
               {/* Photo */}
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="-z-20 object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
-              />
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8DED0]">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                />
 
-              {/* Charcoal overlay */}
-              <div
-                className="absolute inset-0 -z-10"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to top, rgba(41,38,34,.95) 0%, rgba(41,38,34,.65) 38%, rgba(41,38,34,.05) 70%)",
-                }}
-              />
-              {selected && <div className="absolute inset-0 -z-10 bg-[#C18A35]/10" />}
+                {/* Soft fade at the bottom of the photo */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-0 h-1/3"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to top, rgba(41,38,34,.35), rgba(41,38,34,0))",
+                  }}
+                />
 
-              {/* Top row: number + check */}
-              <div className="absolute inset-x-0 top-0 flex items-start justify-between p-5">
-                <span className="rounded-full border border-white/30 bg-[#292622]/40 px-3 py-1 text-xs font-semibold tracking-widest text-white backdrop-blur-md">
+                {/* Number */}
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold tracking-widest text-[#292622] shadow-sm backdrop-blur-md">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
+                {/* Check badge */}
                 <span
                   aria-hidden="true"
-                  className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
+                  className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
                     selected
-                      ? "scale-100 border-[#C18A35] bg-[#C18A35] text-[#292622] shadow-lg"
-                      : "scale-90 border-white/40 bg-[#292622]/30 text-transparent backdrop-blur-md group-hover:scale-100"
+                      ? "scale-100 bg-[#C18A35] text-[#292622] shadow-lg"
+                      : "scale-75 bg-white/90 text-transparent opacity-0 group-hover:scale-100 group-hover:opacity-100"
                   }`}
                 >
                   <Check size={18} strokeWidth={3} />
@@ -135,27 +136,43 @@ export default function WardrobeTypeStep({ formData, setFormData, nextStep }) {
               </div>
 
               {/* Content */}
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <span className="mb-4 block h-0.5 w-10 rounded bg-[#C18A35] transition-all duration-500 group-hover:w-20" />
-                <h3 className="font-heading text-2xl font-bold leading-tight text-white sm:text-[28px]">{item.title}</h3>
-                <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-white/75">{item.description}</p>
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <span className="mb-4 block h-0.5 w-10 rounded bg-[#C18A35] transition-all duration-500 group-hover:w-16" />
 
-                <div className="mt-5 flex items-center justify-between border-t border-white/15 pt-4">
+                <h3 className="font-heading text-2xl font-bold leading-tight text-[#292622]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 line-clamp-3 flex-1 text-[15px] leading-relaxed text-[#292622]/70">
+                  {item.description}
+                </p>
+
+                {/* Footer */}
+                <div className="mt-6 flex items-center justify-between border-t border-[#E8DED0] pt-4">
                   <span
-                    className={`inline-flex items-center rounded-full px-4 py-1.5 text-sm font-semibold transition-colors duration-300 ${
-                      selected
-                        ? "bg-[#C18A35] text-[#292622]"
-                        : "bg-white/10 text-white group-hover:bg-[#C18A35] group-hover:text-[#292622]"
+                    className={`text-sm font-semibold transition-colors duration-300 ${
+                      selected ? "text-[#593719]" : "text-[#292622] group-hover:text-[#593719]"
                     }`}
                   >
-                    {selected ? "Selected" : "Select Style"}
+                    {selected ? "Selected" : "Select style"}
                   </span>
 
-                  <ArrowRight
-                    size={20}
+                  <span
                     aria-hidden="true"
-                    className="text-[#EBC882] transition-transform duration-300 group-hover:translate-x-2"
-                  />
+                    className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
+                      selected
+                        ? "bg-[#C18A35] text-[#292622]"
+                        : "bg-[#292622]/[0.06] text-[#292622] group-hover:bg-[#C18A35]"
+                    }`}
+                  >
+                    {selected ? (
+                      <Check size={16} strokeWidth={3} />
+                    ) : (
+                      <ArrowRight
+                        size={16}
+                        className="transition-transform duration-300 group-hover:translate-x-0.5"
+                      />
+                    )}
+                  </span>
                 </div>
               </div>
             </motion.button>

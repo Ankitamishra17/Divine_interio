@@ -327,21 +327,29 @@ export const wardrobeType = [
     title: "Hinged Wardrobe",
     description:
       "Classic wardrobe with shutter doors offering full accessibility.",
+<<<<<<< HEAD
     image: "https://i.pinimg.com/736x/45/6e/77/456e7734d1f5a681646e8965d9451048.jpg",
+=======
+    image: "https://i.pinimg.com/1200x/a5/60/25/a56025ec973ed942d75526c5fcd8ce88.jpg",
+>>>>>>> 970639bd7c39a506e9460c0c78fbba981e9e2f5c
   },
 
   {
     id: "sliding",
     title: "Sliding Wardrobe",
     description: "Space-saving modern wardrobe with elegant sliding shutters.",
+<<<<<<< HEAD
     image: "https://i.pinimg.com/736x/4e/64/a9/4e64a91aae5999ba5bb5ff5a709c7805.jpg",
+=======
+    image: "https://i.pinimg.com/1200x/98/98/bb/9898bbe8fdf30aeba5dba30a8abf0b82.jpg",
+>>>>>>> 970639bd7c39a506e9460c0c78fbba981e9e2f5c
   },
 
   {
     id: "walkin",
     title: "Walk-In Wardrobe",
     description: "Luxury dressing area with premium storage and organization.",
-    image: "/image/wardrobe_design5.webp",
+    image: "https://i.pinimg.com/1200x/5a/ef/6d/5aef6d0b3e962160a8952062f9dd3d14.jpg",
   },
 ];
 
