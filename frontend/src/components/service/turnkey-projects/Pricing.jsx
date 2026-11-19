@@ -64,8 +64,6 @@ const processSteps = [
 const total = processSteps.length;
 const pad = (n) => String(n).padStart(2, "0");
 
-// Which step is centred on load. Math.floor(8 / 2) = 4 → "Manufacturing".
-// Use 0 to start from the first step, or any number from 0 to 7.
 const START_INDEX = Math.floor(total / 2);
 
 const focusRing =

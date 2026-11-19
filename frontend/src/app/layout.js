@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Script from "next/script";
@@ -27,8 +26,7 @@ export const metadata = {
   },
 
   description:
-    "Divine Interio creates elegant residential and commercial spaces with premium interior design, modular kitchens, custom wardrobes, and turnkey interior solutions across Noida, Greater Noida, Ghaziabad, and Delhi NCR.",
-
+"Divine Interio designs elegant homes and offices with premium interiors, modular kitchens, wardrobes, and turnkey solutions across Delhi NCR.",
   keywords: [
     "Divine Interio",
     "Interior Designers in Noida",
