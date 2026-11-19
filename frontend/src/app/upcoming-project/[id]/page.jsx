@@ -448,7 +448,7 @@ export default async function UpcomingProjectDetails({ params }) {
         )}
 
         {/* Contact band */}
-        <section className="mt-20 rounded-sm bg-[#593719] px-6 py-12 text-[#F7F3ED] md:mt-28 md:px-14 md:py-16">
+        <section className="mt-20 rounded-sm bg-[#292622]/60 px-6 py-12 text-[#F7F3ED] md:mt-28 md:px-14 md:py-16">
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="font-heading text-3xl font-medium leading-tight md:text-4xl">
