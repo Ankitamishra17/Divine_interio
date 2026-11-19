@@ -35,16 +35,7 @@ I really appreciate the hardwork and making some people dream cum true on their 
 
 Thank you team divine keep up the good work.`,
   },
-  {
-    name: "Aakanksha Singh",
-    review: `I recently chose Living Space Decor for my home interior project, and I am genuinely impressed with the quality of their work. From the very first meeting, the team listened carefully to my ideas, understood my requirements, and suggested practical solutions that perfectly suited my home and budget. They were professional, polite, and always willing to answer my questions throughout the project.
 
-The planning and execution were handled with great attention to detail. Every stage of the work was completed systematically, and the team ensured that the final outcome matched the design discussed during the consultation. The quality of materials, finishing, and craftsmanship was excellent, making every room look elegant and well organised. Their commitment to quality was visible in every detail, and they never compromised on workmanship.
-
-One thing I appreciated the most was their transparency and timely communication. They kept me informed about the progress, respected the agreed timeline, and completed the work without unnecessary delays. The entire experience was smooth, stress-free, and enjoyable.
-
-Now that the project is complete, my home looks modern, stylish, and much more functional than before. Friends and family have appreciated the beautiful interiors, and I am delighted with the transformation. Living Space Decor truly exceeded my expectations with their professionalism, creativity, and dedication. I would confidently recommend them to anyone looking for reliable home interior services. If you are planning to renovate or design your home, you can choose this company without a second thought because they genuinely care about delivering quality and customer satisfaction.`,
-  },
   {
     name: "Jyoti Yadav",
     review: `They have made our home very beautiful and elegant they have given us the handover on time as per commitment, I do recommend please take their service they are excellent, thankyou so much Divine Interio for this best experience. Truly Appreciable!!!!!!!!!!!!!!`,
@@ -192,15 +183,15 @@ const TONES = {
     ring: `${ringLight} focus-visible:ring-offset-[#292622]`,
   },
   espresso: {
-    bg: "bg-[#1B1916]",
+ bg: "bg-[#292622]",
     text: "text-[#F5F5F4]",
-    sub: "text-[#F5F5F4]/80",
-    line: "border-[#F5F5F4]/25",
+    sub: "text-[#F5F5F4]/75",
+    line: "border-[#F5F5F4]/20",
     star: "text-[#F5F5F4]",
     mark: "text-[#F5F5F4]/40",
     avatar: "bg-[#F5F5F4] text-[#292622]",
     link: "text-[#F5F5F4] decoration-[#F5F5F4]/50 hover:decoration-[#F5F5F4]",
-    ring: `${ringLight} focus-visible:ring-offset-[#1B1916]`,
+    ring: `${ringLight} focus-visible:ring-offset-[#292622]`,
   },
 };
 /* (the "espresso" tone key is just the deepest charcoal, kept so the featured tile call is unchanged) */
@@ -374,7 +365,7 @@ export default function Testimonials() {
     "flex h-11 w-11 items-center justify-center rounded-full border border-[#292622]/40 text-[#292622] transition-colors duration-300 hover:bg-[#292622] hover:text-[#F5F5F4]";
 
   return (
-    <section ref={sectionRef} className="scroll-mt-4 bg-[#E7E6E4] py-16 md:py-20 lg:py-28" aria-labelledby="testimonials-heading">
+    <section ref={sectionRef} className="scroll-mt-4 bg-[#fff] py-16 md:py-20 lg:py-28" aria-labelledby="testimonials-heading">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
         <h2
           id="testimonials-heading"
