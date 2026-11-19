@@ -34,7 +34,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/image/office_design10.webp"
+          src="https://images.pexels.com/photos/30816311/pexels-photo-30816311.jpeg"
           alt="Interior furniture"
           fill
           priority

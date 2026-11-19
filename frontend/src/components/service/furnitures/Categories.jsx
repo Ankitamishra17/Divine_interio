@@ -3,30 +3,30 @@ import Link from "next/link";
 
 const categories = [
   {
-    title: "Sofa",
-    slug: "sofa",
+    title: "Kitchen",
+    slug: "kitchen-design-ideas",
     count: 48,
     image:
-      "https://i.pinimg.com/1200x/ba/ec/d5/baecd59c765562016d8f793a3cdf98b9.jpg",
+      "https://i.pinimg.com/1200x/1f/31/83/1f31830af41a3563fb012b04247f1f96.jpg",
   },
   {
     title: "Dining",
     slug: "dining",
     count: 32,
     image:
-      "https://i.pinimg.com/736x/4b/0d/b4/4b0db4c1ffe80956662e6bfb7720d45a.jpg",
+      "https://i.pinimg.com/736x/8f/e0/c4/8fe0c48eb8990ebd784d10b29643bd84.jpg",
   },
   {
     title: "Bedroom",
     slug: "bedroom",
     count: 27,
-    image: "/image/bedroom_interior_design.webp",
+    image: "https://i.pinimg.com/736x/50/2c/c4/502cc42d58e9702fb36e08c4fbb4f972.jpg",
   },
   {
     title: "Wardrobe",
     slug: "wardrobe",
     count: 19,
-    image: "/image/wardrobe_design8.webp",
+    image: "https://i.pinimg.com/736x/5e/8e/5b/5e8e5b37c381a5b62da7b3d9d6e65e63.jpg",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function CategorySection() {
                 />
 
                 {/* Arrow badge */}
-                <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#3D1F0D] shadow-md backdrop-blur transition-colors duration-300 group-hover:bg-[#B88A5A] group-hover:text-white">
+                {/* <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#3D1F0D] shadow-md backdrop-blur transition-colors duration-300 group-hover:bg-[#B88A5A] group-hover:text-white">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-5 w-5 -rotate-45 transition-transform duration-300 group-hover:rotate-0 motion-reduce:transition-none"
@@ -74,7 +74,7 @@ export default function CategorySection() {
                   >
                     <path d="M4 12h16m-6-6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </span>
+                </span> */}
               </div>
 
               {/* Text */}

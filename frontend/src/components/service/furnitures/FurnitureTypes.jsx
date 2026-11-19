@@ -12,22 +12,86 @@ const tabs = [
 ];
 
 const images = [
-  { category: "Living Room", image: "/image/living_room2.webp" },
-  { category: "Home Office", image: "/image/office_design4.webp" },
-  { category: "Bedroom", image: "/image/bedroom_design2.webp" },
-  { category: "Living Room", image: "/image/living_room1.webp" },
-  { category: "Bedroom", image: "/image/bedroom_design3.webp" },
-  { category: "Dining Room", image: "/image/dining_room2.webp" },
-  { category: "Bedroom", image: "/image/bedroom_design6.webp" },
-  { category: "Dining Room", image: "/image/dining_room3.webp" },
-  { category: "Living Room", image: "/image/living_room5.webp" },
-  { category: "Home Office", image: "/image/office_design5.webp" },
-  { category: "Dining Room", image: "/image/dining_room5.webp" },
-  { category: "Living Room", image: "/image/living_room13.webp" },
-  { category: "Bedroom", image: "/image/bedroom_design7.webp" },
-  { category: "Home Office", image: "/image/office_design6.webp" },
-  { category: "Dining Room", image: "/image/dining_room6.webp" },
-  { category: "Home Office", image: "/image/office_design8.webp" },
+  {
+    category: "Living Room",
+    image:
+      "https://i.pinimg.com/736x/5c/98/2f/5c982ffcc085ab35f082a6094a6f90b4.jpg",
+  },
+  {
+    category: "Home Office",
+    image:
+      "https://i.pinimg.com/736x/3a/5d/7a/3a5d7a332b5eccd0280f60369fa2ed4a.jpg",
+  },
+  {
+    category: "Bedroom",
+    image:
+      "https://i.pinimg.com/736x/8f/e4/c9/8fe4c9dd8569c3e0adf031b3a1d0f581.jpg",
+  },
+  {
+    category: "Living Room",
+    image:
+      "https://i.pinimg.com/736x/0b/06/92/0b0692a09d3c876a08d88acf8fb6fa50.jpg",
+  },
+  {
+    category: "Bedroom",
+    image:
+      "https://i.pinimg.com/1200x/39/19/8b/39198bfcec8f0adfc8f1418be0b966f3.jpg",
+  },
+  {
+    category: "Dining Room",
+    image:
+      "https://i.pinimg.com/736x/69/9e/3a/699e3acf385b6fb619e27540e6e655b7.jpg",
+  },
+  {
+    category: "Bedroom",
+    image:
+      "https://i.pinimg.com/736x/9a/f6/f8/9af6f8bf5b017be0942ca5d053dad53a.jpg",
+  },
+  {
+    category: "Dining Room",
+    image:
+      "https://i.pinimg.com/736x/82/60/e1/8260e15d7d48e93f3ceabcc8441f7b56.jpg",
+  },
+  {
+    category: "Living Room",
+    image:
+      "https://i.pinimg.com/736x/71/c6/27/71c627fb354d3d37fb4d0704fb22a355.jpg",
+  },
+  {
+    category: "Home Office",
+    image:
+      "https://i.pinimg.com/1200x/f8/45/d5/f845d54de2fc57ab1b7b4378fe33cec9.jpg",
+  },
+  {
+    category: "Dining Room",
+    image:
+      "https://i.pinimg.com/736x/4c/a0/9b/4ca09b4005768cdf704173b31d96eaed.jpg",
+  },
+  {
+    category: "Living Room",
+    image:
+      "https://i.pinimg.com/736x/9d/e6/71/9de671c35fbde8986bba8ef0f327b83f.jpg",
+  },
+  {
+    category: "Bedroom",
+    image:
+      "https://i.pinimg.com/736x/e0/6a/4f/e06a4f66dd7d8b8a70d67d04d32c3cdf.jpg",
+  },
+  {
+    category: "Home Office",
+    image:
+      "https://i.pinimg.com/1200x/e1/cd/91/e1cd91295b0a9952032b802f8d2bd79b.jpg",
+  },
+  {
+    category: "Dining Room",
+    image:
+      "https://i.pinimg.com/736x/91/fa/30/91fa30fe97938900e82992fed66561ec.jpg",
+  },
+  {
+    category: "Home Office",
+    image:
+      "https://i.pinimg.com/736x/72/cc/de/72ccde625726011d9c652dee8c235b2d.jpg",
+  },
 ];
 
 const countFor = (tab) =>

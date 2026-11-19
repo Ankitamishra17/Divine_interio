@@ -9,32 +9,32 @@ const projects = [
   {
     title: "Luxury Villa",
     category: "Residential",
-    image: "/Design/luxury_villa.jpg",
+    image: "https://i.pinimg.com/1200x/35/28/21/352821671da0aa6403f487d5a6328395.jpg",
   },
   {
     title: "Master Bedroom",
     category: "Bedroom",
-    image: "/image/bedroom_design3.webp",
+    image: "https://i.pinimg.com/736x/d3/92/a8/d392a8d3edf4e16f639503b0dbc187a3.jpg",
   },
   {
     title: "Living Lounge",
     category: "Interior",
-    image: "/image/living_room10.webp",
+    image: "https://i.pinimg.com/1200x/34/04/2a/34042aa98b39466a8ac591cf8c1a594e.jpg",
   },
   {
     title: "Modern Kitchen",
     category: "Kitchen",
-    image: "/image/kitchen_design7.webp",
+    image: "https://i.pinimg.com/736x/b4/2f/34/b42f34fbfcf3120521aea4b39ed5d4c6.jpg",
   },
   {
     title: "Office Space",
     category: "Commercial",
-    image: "/image/office_design11.webp",
+    image: "https://i.pinimg.com/736x/de/7f/7e/de7f7e52bca215a439c3ffb6d8ff8e55.jpg",
   },
   {
     title: "Dining Area",
     category: "Luxury",
-    image: "/image/dining_room2.webp",
+    image: "https://i.pinimg.com/736x/cd/1e/0c/cd1e0c03772fb46af5334857cf324d0d.jpg",
   },
 ];
 
@@ -229,7 +229,7 @@ export default function ProjectGallery() {
           </p>
           <Link
             href="/contact"
-            className={`group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
+            className={`group inline-flex min-h-12 items-center gap-3 rounded-md bg-[#3D1F0D] px-8 text-[15px] font-semibold text-[#F7F3ED] transition-colors duration-300 hover:bg-[#dba343] hover:text-[#3D1F0D] ${focusRing}`}
           >
             Start your project
             <ArrowRight

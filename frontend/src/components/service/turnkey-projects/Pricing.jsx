@@ -14,19 +14,19 @@ const AUTOPLAY_DELAY = 4500; // ms per step (was 2500: too fast to read)
 const processSteps = [
   {
     title: "Consultation",
-    image: "/Design/tunkey_consultation.avif",
+    image: "https://i.pinimg.com/736x/1c/51/88/1c51884992ce16d56b6b197e75ff6cdb.jpg",
     description:
       "Discuss requirements, lifestyle, budget, and design vision with our experts.",
   },
   {
     title: "Design",
-    image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+    image: "https://i.pinimg.com/736x/f0/36/ce/f036ce056f5cb8d33a5b24662d042191.jpg",
     description:
       "Space planning, layouts, mood boards, and concept development.",
   },
   {
     title: "3D Visualization",
-    image: "/Design/tunkey_visualization.avif",
+    image: "https://i.pinimg.com/736x/4a/e6/1d/4ae61d607e0b16e6143ccd6eff0fc9fb.jpg",
     description:
       "Photorealistic 3D renders to visualize your future home before execution.",
   },
@@ -38,24 +38,24 @@ const processSteps = [
   },
   {
     title: "Manufacturing",
-    image: "https://images.pexels.com/photos/5691626/pexels-photo-5691626.jpeg",
+    image: "https://i.pinimg.com/736x/d1/a2/9b/d1a29b71535e5cc92b0ec69a604bad63.jpg",
     description: "Precision manufacturing of furniture and modular components.",
   },
   {
     title: "Execution",
-    image: "https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg",
+    image: "https://i.pinimg.com/736x/44/c1/99/44c1996c95cf99183d1faaea31d0c716.jpg",
     description:
       "On-site installation and execution managed by experienced professionals.",
   },
   {
     title: "Quality Check",
-    image: "https://images.pexels.com/photos/8961300/pexels-photo-8961300.jpeg",
+    image: "https://i.pinimg.com/1200x/5e/98/83/5e98838146d4dca3049331ce5b997716.jpg",
     description:
       "Multiple quality inspections ensure flawless finishing and durability.",
   },
   {
     title: "Handover",
-    image: "https://images.pexels.com/photos/7578860/pexels-photo-7578860.jpeg",
+    image: "https://i.pinimg.com/1200x/14/f2/22/14f222f5187751ce31fefc65deee6536.jp",
     description:
       "Final walkthrough and delivery of your fully completed dream home.",
   },

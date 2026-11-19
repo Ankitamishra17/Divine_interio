@@ -7,13 +7,7 @@ import Link from "next/link";
 /*
   Palette: Espresso #593719 | Warm Gold #dba343 | Ivory #F7F3ED | Soft Beige #E8DED0 | Charcoal #292622 | White
 
-  New layout: pick a service on the left, the photo on the right changes with it.
-  - Only one service is open at a time, so the section stays short and easy to scan.
-  - Works with tap, click and the Up / Down arrow keys. Nothing changes on hover or on a timer.
-  - All photos are loaded once and fade into each other, so switching never flashes.
-  - On phones the photo sits on top and the list follows.
-  - Change `href` per service when you have pages for them (all go to /contact for now).
-*/
+  */
 
 const howWeHelp = [
   {
@@ -22,7 +16,7 @@ const howWeHelp = [
     title: "Luxury Residential Design",
     description:
       "Custom-designed homes that blend elegance, functionality, and comfort while reflecting your unique lifestyle.",
-    image: "/image/office_design.webp",
+    image: "https://i.pinimg.com/736x/0c/73/c2/0c73c26214924c8b46a71f334ff46dcd.jpg",
     href: "/contact",
   },
   {
@@ -31,7 +25,7 @@ const howWeHelp = [
     title: "Commercial Architecture",
     description:
       "Innovative office spaces, retail environments, and business facilities designed to enhance productivity and brand identity.",
-    image: "https://images.pexels.com/photos/13073718/pexels-photo-13073718.jpeg",
+    image: "https://i.pinimg.com/736x/54/2a/cd/542acd14168f2fb2e705f1283b213e8c.jpg",
     href: "/contact",
   },
   {
@@ -40,7 +34,7 @@ const howWeHelp = [
     title: "Master Planning",
     description:
       "Strategic planning solutions that create sustainable communities, public spaces, and future-ready developments.",
-    image: "/image/living_room5.webp",
+    image: "https://i.pinimg.com/1200x/76/b9/74/76b9746a8a4a2859ab031e88d3741162.jpg",
     href: "/contact",
   },
 ];

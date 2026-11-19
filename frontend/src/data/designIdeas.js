@@ -460,8 +460,8 @@ export const designIdeas = [
 
     heroImage: "/images/office.png",
 
-    leftImage: "/image/office_design2.webp",
-    rightImage: "/image/office_design8.webp",
+    leftImage: "https://i.pinimg.com/736x/aa/26/3c/aa263c2c1f9051cc35102c627e202603.jpg",
+    rightImage: "https://i.pinimg.com/736x/41/cb/ab/41cbab503c91ee5a6cd3f00612f06568.jpg",
 
     moodboard: [
       {
