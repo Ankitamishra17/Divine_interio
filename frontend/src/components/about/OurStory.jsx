@@ -166,7 +166,7 @@ className="object-cover transition-transform duration-1000 hover:scale-105 shado
           >
             <Link
               href="/services"
-              className="group inline-flex items-center gap-4 rounded-full bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#dba343] hover:text-[#292622] hover:shadow-lg"
+              className="group inline-flex items-center gap-4 rounded-md bg-[#593719] px-7 py-4 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#dba343] hover:text-[#292622] hover:shadow-lg"
             >
               Explore Our Services
               <ArrowRight

@@ -13,8 +13,6 @@ import ConsultationModal from "@/components/common/ConsultationModal";
   Espresso Brown #593719 | Warm Gold #dba343 | Ivory Cream #F7F3ED
   Soft Beige #E8DED0     | Charcoal #292622  | White #FFFFFF
 
-  Logo has WHITE lettering -> bar sits on Charcoal.
-  Gold = interactive accent. Ivory/Beige = dropdown + drawer surfaces.
 */
 
 // How long (ms) before the consultation popup appears (once per session).
@@ -568,7 +566,7 @@ export default function Navbar() {
                         className="flex min-h-[52px] items-center gap-2.5 px-3 text-[15px] font-medium text-[#292622] transition-colors hover:text-[#593719]"
                       >
                         <MapPin size={18} className="text-[#dba343]" />
-                        Find a showroom
+                         Location
                       </Link>
                     </li>
                   </ul>

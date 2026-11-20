@@ -7,12 +7,7 @@ import { getLocation, getLocations } from "@/lib/serverApi";
   Charcoal #292622 | Warm Gold #dba343 | Ivory #F7F3ED
   Beige    #E8DED0 | Espresso #593719  | White #FFFFFF
 
-  Colour roles
-  - Charcoal  → PRIMARY: hero overlay, dark sections, headings, main buttons
-  - Gold      → accent: highlights, eyebrow labels, hover states, key actions
-  - Ivory     → main page background
-  - Beige     → soft surfaces, frames, borders
-  - Espresso  → small warm accent only (kept out of large surfaces)
+
 */
 
 const API =
